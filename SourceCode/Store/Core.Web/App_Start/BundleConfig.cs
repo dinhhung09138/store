@@ -26,6 +26,28 @@ namespace Core.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/Content/angular").Include(
+                "~/Content/angularjs/angular.min.js",
+                "~/Content/angularjs/angular-animate.min.js",
+                "~/Content/angularjs/angular-loader.min.js",
+                "~/Content/angularjs/angular-cookies.min.js",
+                "~/Content/angularjs/angular-messages.min.js",
+                "~/Content/angularjs/angular-message-format.min.js",
+                "~/Content/angularjs/angular-mocks.min.js",
+                "~/Content/angularjs/angular-scenario.min.js"));
+
+            #region " User "
+
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
+                "~/Content/bootstrap/bootstrap.css"));
+            bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
+                "~/Scripts/jquery-{version}.js",
+                "~/Content/bootstrap/bootstrap.js"));
+
+            #endregion
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

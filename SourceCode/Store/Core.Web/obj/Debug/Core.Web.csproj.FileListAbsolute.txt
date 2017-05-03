@@ -77,6 +77,11 @@ E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\Microsoft.Owin.Secu
 E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\Microsoft.Owin.Security.Google.xml
 E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\Microsoft.Owin.Security.Twitter.xml
 E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\obj\Debug\Core.Web.csprojResolveAssemblyReference.cache
 E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\obj\Debug\Core.Web.dll
 E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\obj\Debug\Core.Web.pdb
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Net.Http.Formatting.dll
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Web.Http.dll
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Web.Http.WebHost.dll
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Net.Http.Formatting.xml
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Web.Http.xml
+E:\hungtd\workspace\hung\store\SourceCode\Store\Core.Web\bin\System.Web.Http.WebHost.xml
