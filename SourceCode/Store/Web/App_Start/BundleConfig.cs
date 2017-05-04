@@ -29,9 +29,10 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/Content/angular").Include(
                 "~/Content/angularjs/angular.min.js",
+                "~/Content/angularjs/angular-cookies.min.js",
+                "~/Content/angularjs/angular-ui-router.min.js",
                 "~/Content/angularjs/angular-animate.min.js",
                 "~/Content/angularjs/angular-loader.min.js",
-                "~/Content/angularjs/angular-cookies.min.js",
                 "~/Content/angularjs/angular-messages.min.js",
                 "~/Content/angularjs/angular-message-format.min.js",
                 "~/Content/angularjs/angular-mocks.min.js",
