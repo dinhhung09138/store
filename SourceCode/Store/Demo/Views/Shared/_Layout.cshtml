@@ -1,11 +1,39 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+            @Scripts.Render("~/bundles/modernizr")
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Content/angularjs/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+        app.service('loginSrv', ['$http', function ($http) {
+            return {
+                login: function () {
+                    return $http.get('/api/user/login').then(function (response) {
+                        return response;
+                    });
+                }
+            }
+        }]);
+        app.controller('loginController', ['$scope', '$http', 'loginSrv', function ($scope, $http, loginSrv) {
+            $scope.login = function () {
+                console.log('login');
+                var data = loginSrv.login();
+                data.then(function (response) {
+                    console.log('service');
+                    console.log(response);
+                });
+                $http.get('/api/dashboard/login').then(function (response) {
+                    console.log(response);
+                });
+                console.log('login done');
+            }
+        }]);
+    </script>
 
 </head>
 <body>
@@ -30,6 +58,9 @@
         </div>
     </div>
     <div class="container body-content">
+        <div ng-controller="loginController">
+            <button ng-click="login()" value="Login">Login</button>
+        </div>
         @RenderBody()
         <hr />
         <footer>

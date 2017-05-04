@@ -5,12 +5,29 @@ using System.Threading.Tasks;
 
 namespace Model.User
 {
-    // This project can output the Class library as a NuGet Package.
-    // To enable this option, right-click on the project and select the Properties menu item. In the Build tab select "Produce outputs on build".
+    /// <summary>
+    /// User login model
+    /// </summary>
     public class UserLogin
     {
-        public UserLogin()
-        {
-        }
+        /// <summary>
+        /// User Name
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Password
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Token id
+        /// </summary>
+        public string Token { get; set; }
+
+        /// <summary>
+        /// Device ID, login from mobile
+        /// </summary>
+        public string DeviceID { get; set; }
     }
 }

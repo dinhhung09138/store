@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{80BC9A11-91FC-43D6-9100-B7DBAB080286}</ProjectGuid>
+    <ProjectGuid>{06263CB0-4FF8-4C98-93BA-A5D4FFDEB616}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -199,6 +199,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\DashboardAPIController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,6 +220,22 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\angularjs\angular-animate.min.js" />
+    <Content Include="Content\angularjs\angular-cookies.min.js" />
+    <Content Include="Content\angularjs\angular-loader.min.js" />
+    <Content Include="Content\angularjs\angular-message-format.min.js" />
+    <Content Include="Content\angularjs\angular-messages.min.js" />
+    <Content Include="Content\angularjs\angular-mocks.js" />
+    <Content Include="Content\angularjs\angular-parse-ext.min.js" />
+    <Content Include="Content\angularjs\angular-resource.min.js" />
+    <Content Include="Content\angularjs\angular-route.min.js" />
+    <Content Include="Content\angularjs\angular-sanitize.min.js" />
+    <Content Include="Content\angularjs\angular-scenario.js" />
+    <Content Include="Content\angularjs\angular-touch.min.js" />
+    <Content Include="Content\angularjs\angular.min.js" />
+    <Content Include="Content\angularjs\i18n\angular-locale_en-us.js" />
+    <Content Include="Content\angularjs\i18n\angular-locale_en-vi.js" />
+    <Content Include="Content\angularjs\i18n\angular-locale_vi-vn.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -303,7 +321,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>36886</DevelopmentServerPort>
+          <DevelopmentServerPort>2736</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:36886/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
