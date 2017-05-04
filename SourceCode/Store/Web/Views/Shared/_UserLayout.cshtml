@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="app">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css/bootstrap")
+    @Scripts.Render("~/Content/js/bootstrap")
+        @Scripts.Render("~/Content/angular")
+        <script src="~/app/app.js"></script>
+    @RenderSection("header", required: false)
+</head>
+<body class="container-fluid">
+    @RenderBody()
+    @RenderSection("script", required: false)
+</body>
+</html>
