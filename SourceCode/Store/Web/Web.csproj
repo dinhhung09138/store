@@ -200,21 +200,44 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\UserController.cs" />
+    <Compile Include="App_GlobalResources\Login.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Login.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Notification.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Notification.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\CashFlow\CashFlowAreaRegistration.cs" />
+    <Compile Include="Areas\Dashboard\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
+    <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
+    <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
+    <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
+    <Compile Include="Areas\Sale\SaleAreaRegistration.cs" />
+    <Compile Include="Areas\Setting\SettingAreaRegistration.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\APIAuthorizationRequiredFilters.cs" />
+    <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Filters\SkipAuthorizeFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HandleErrorInfoViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -242,20 +265,40 @@
     <Content Include="Content\angularjs\i18n\angular-locale_en-us.js" />
     <Content Include="Content\angularjs\i18n\angular-locale_en-vi.js" />
     <Content Include="Content\angularjs\i18n\angular-locale_vi-vn.js" />
+    <Content Include="Content\base.js" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.js" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\chartjs\Chart.bundle.js" />
+    <Content Include="Content\chartjs\Chart.bundle.min.js" />
+    <Content Include="Content\chartjs\Chart.js" />
+    <Content Include="Content\chartjs\Chart.min.js" />
+    <Content Include="Content\gritter\jquery.gritter.css" />
+    <Content Include="Content\gritter\jquery.gritter.js" />
+    <Content Include="Content\gritter\jquery.gritter.min.js" />
     <Content Include="Content\parsley\parsley.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\clear.png" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\Sale\Views\web.config" />
+    <Content Include="Areas\Dashboard\Views\web.config" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Partner\Views\web.config" />
+    <Content Include="Areas\Setting\Views\web.config" />
+    <Content Include="Areas\CashFlow\Views\web.config" />
+    <Content Include="Areas\Goods\Views\web.config" />
+    <Content Include="Areas\Internal\Views\web.config" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -303,10 +346,38 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\CashFlow\Controllers\" />
+    <Folder Include="Areas\CashFlow\Models\" />
+    <Folder Include="Areas\CashFlow\Views\Shared\" />
+    <Folder Include="Areas\Dashboard\Models\" />
+    <Folder Include="Areas\Dashboard\Views\Shared\" />
+    <Folder Include="Areas\Goods\Controllers\" />
+    <Folder Include="Areas\Goods\Models\" />
+    <Folder Include="Areas\Goods\Views\Shared\" />
+    <Folder Include="Areas\Internal\Controllers\" />
+    <Folder Include="Areas\Internal\Models\" />
+    <Folder Include="Areas\Internal\Views\Shared\" />
+    <Folder Include="Areas\Partner\Controllers\" />
+    <Folder Include="Areas\Partner\Models\" />
+    <Folder Include="Areas\Partner\Views\Shared\" />
+    <Folder Include="Areas\Report\Controllers\" />
+    <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\Report\Views\Shared\" />
+    <Folder Include="Areas\Sale\Controllers\" />
+    <Folder Include="Areas\Sale\Models\" />
+    <Folder Include="Areas\Sale\Views\Shared\" />
+    <Folder Include="Areas\Setting\Controllers\" />
+    <Folder Include="Areas\Setting\Models\" />
+    <Folder Include="Areas\Setting\Views\Shared\" />
+    <Folder Include="Areas\User\Controllers\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\Shared\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -325,6 +396,18 @@
       <Project>{57efe4fc-6a66-43d8-891b-59be491a2108}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Login.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\Notification.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>Notification.Designer.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model.User
 {
@@ -12,13 +9,20 @@ namespace Model.User
     public class UserLogin
     {
         /// <summary>
+        /// User ID
+        /// </summary>
+        public Guid ID { get; set; }
+
+        /// <summary>
         /// User Name
         /// </summary>
+        [Required(ErrorMessage = "Tên đăng nhập không được rỗng")]
         public string UserName { get; set; }
 
         /// <summary>
         /// Password
         /// </summary>
+        [Required(ErrorMessage = "Mật khẩu không được rỗng")]
         public string Password { get; set; }
 
         /// <summary>

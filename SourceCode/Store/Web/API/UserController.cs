@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Web.Filters;
+using Common.Security;
 
 namespace Web.API
 {
@@ -18,7 +19,8 @@ namespace Web.API
         {
             if(UserName == "admin" && PassWord == "pass")
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                var token = TokenSecurity.GenerateToken(UserName, PassWord, DateTime.Now.Ticks);
+                return Request.CreateResponse(HttpStatusCode.OK, token);
             }
             return Request.CreateResponse(HttpStatusCode.NotAcceptable, "Tên đăng nhập hoặc mật khẩu không đúng");
         }

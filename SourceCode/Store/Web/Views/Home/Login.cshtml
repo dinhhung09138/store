@@ -1,0 +1,73 @@
+﻿@model Model.User.UserLogin
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+@section header{
+    <style>
+        .form-title {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+}
+
+<div class="row mrg-top-50">
+    <div class="col-lg-4 col-md-4 col-sm-3"></div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+        @using (Html.BeginForm("login", "user", FormMethod.Post, new { @id = "loginForm" }))
+        {
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2>Đăng nhập</h2>
+                </div>
+            </div>
+            if (TempData["message"] != null)
+            {
+                <div class="alert alert-danger">
+                    <label> @TempData["message"]</label>
+                </div>
+            }
+            <div class="row">
+                <div class="col-md-12">
+                    Tên đăng nhập
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    Mật khẩu
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @required = true })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary" value="Đăng nhập" />
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-3"></div>
+</div>
+
+@section script{
+
+    <script>
+        $(document).ready(function () {
+            notification('Title here', 'message here theremessage here there message here there', '@Resources.Notification.TypeWarning');
+        });
+
+    </script>
+}
+

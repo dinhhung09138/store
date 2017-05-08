@@ -1,5 +1,5 @@
 ﻿//Login services
-app.service('loginSrv', ['$http', function ($http) {
+app.service('loginSrv', ['$http', 'cookiesSrv', function ($http, cookiesSrv) {
     return {
         login: function (user) {
             console.log('login service');
@@ -37,7 +37,7 @@ app.service('loginSrv', ['$http', function ($http) {
                 url: '/api/user/token',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;',
-                    'token': 'token',
+                    'token': cookiesSrv.get('token'),
                 }
             };
             return $http(req).then(function (success) { return success; }, function (ex) { return ex; });

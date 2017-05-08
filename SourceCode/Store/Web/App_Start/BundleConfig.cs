@@ -41,10 +41,13 @@ namespace Web
             #region " User "
 
             bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
-                "~/Content/bootstrap/bootstrap.css"));
+                "~/Content/bootstrap/bootstrap.css",
+                "~/Content/gritter/jquery.gritter.css"));
             bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Content/bootstrap/bootstrap.js"));
+                "~/Content/bootstrap/bootstrap.js",
+                "~/Content/gritter/jquery.gritter.min.js",
+                "~/Content/base.js"));
 
             #endregion
 
