@@ -6,7 +6,7 @@ namespace Model.User
     /// <summary>
     /// User Login Model
     /// </summary>
-    public class UserLogin
+    public class UserLoginModel
     {
         /// <summary>
         /// User ID

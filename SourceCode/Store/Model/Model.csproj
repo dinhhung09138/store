@@ -41,9 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Base.cs" />
+    <Compile Include="CustomerModel.cs" />
+    <Compile Include="CustomerGroupModel.cs" />
+    <Compile Include="DeliverModel.cs" />
+    <Compile Include="DeliverGroupModel.cs" />
+    <Compile Include="ProductGroupModel.cs" />
+    <Compile Include="ProductModel.cs" />
+    <Compile Include="ProductTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierModel.cs" />
+    <Compile Include="SupplierGroupModel.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="UnitModel.cs" />
     <Compile Include="User.UserLogin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
