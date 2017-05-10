@@ -56,7 +56,7 @@ namespace Web.Filters
                 SetRedirect(httpContext);
                 return false;
             }
-            var user = httpContext.Session["user"] as UserLogin;
+            var user = httpContext.Session["user"] as UserLoginModel;
             if(user != null && user.ID != null)
             {
                 SetRedirect(httpContext);

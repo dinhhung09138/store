@@ -25,7 +25,7 @@ namespace Web
         }
 
         protected void Application_Error(object sender, EventArgs e)
-        {
+       {
 
             Exception exce = Server.GetLastError().GetBaseException();
             
@@ -107,5 +107,6 @@ namespace Web
         void Session_Start(object sender, EventArgs e)
         {
         }
+        
     }
 }

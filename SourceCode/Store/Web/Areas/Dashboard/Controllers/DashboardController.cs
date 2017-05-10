@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace Web.Areas.Dashboard.Controllers
 {
-    public class HomeController : Controller
+    //[RoutePrefix("home")]
+    public class DashboardController : Controller
     {
-        // GET: Dashboard/Home
+        // GET: Dashboard/Dashboard
         public ActionResult Index()
         {
             return View();

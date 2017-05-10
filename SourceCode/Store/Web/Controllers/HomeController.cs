@@ -20,10 +20,10 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            UserLogin model = new UserLogin();
+            UserLoginModel model = new UserLoginModel();
             if (TempData["model"] != null)
             {
-                model = TempData["model"] as UserLogin;
+                model = TempData["model"] as UserLoginModel;
                 TempData["message"] = TempData["message"];
             }
             return View(model);
@@ -31,7 +31,7 @@ namespace Web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult Login(UserLogin model)
+        public ActionResult Login(UserLoginModel model)
         {
             if (model.UserName == "admin" || model.Password != "pass")
             {
@@ -39,6 +39,25 @@ namespace Web.Controllers
                 TempData["message"] = Resources.Login.msgWrongLogin;
             }
             return View("login");
+        }
+
+        [AllowAnonymous]
+        public ActionResult Demo()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Test01()
+        {
+            return PartialView();
+        }
+
+        [AllowAnonymous]
+        
+        public ActionResult Test02()
+        {
+            return PartialView();
         }
     }
 }

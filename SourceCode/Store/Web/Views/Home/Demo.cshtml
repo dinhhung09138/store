@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Demo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Demo</h2>
+
+<button id="btnTest01" value="Test 01" type="button">Test 01</button>
+<br/>
+<button id="btnTest02" value="Test 02" type="button">Test 02</button>
+<br/>
+<br/>
+<br/>
+<br />
+<br />
+<div id="result">
+
+</div>
+@section script{
+    <script>
+        $(document).on('click', '#btnTest01', function (e) {
+            $.ajax({
+                url: '/home/test01',
+                success: function (result) {
+                    $('#result').html(result);
+                }
+            });
+        });
+
+        $(document).on('click', '#btnTest02', function (e) {
+            $.ajax({
+                url: '/home/test02',
+                contentType: 'html',
+                success: function (result) {
+                    $('#result').html(result);
+                }
+            });
+        });
+    </script>
+}

@@ -85,3 +85,4 @@ E:\hungtd\workspace\hung\store\SourceCode\Store\Demo\bin\Microsoft.Owin.Security
 E:\hungtd\workspace\hung\store\SourceCode\Store\Demo\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\hungtd\workspace\hung\store\SourceCode\Store\Demo\obj\Debug\Demo.dll
 E:\hungtd\workspace\hung\store\SourceCode\Store\Demo\obj\Debug\Demo.pdb
+E:\hungtd\workspace\hung\store\SourceCode\Store\Demo\obj\Debug\Demo.csprojResolveAssemblyReference.cache
