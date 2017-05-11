@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="BranchEmployeeModel.cs" />
+    <Compile Include="BranchModel.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="CustomerGroupModel.cs" />
     <Compile Include="DeliverModel.cs" />
