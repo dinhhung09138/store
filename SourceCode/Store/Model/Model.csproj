@@ -44,10 +44,16 @@
     <Compile Include="Base.cs" />
     <Compile Include="BranchEmployeeModel.cs" />
     <Compile Include="BranchModel.cs" />
+    <Compile Include="ContractTypeModel.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="CustomerGroupModel.cs" />
     <Compile Include="DeliverModel.cs" />
     <Compile Include="DeliverGroupModel.cs" />
+    <Compile Include="DeliveryStatusModel.cs" />
+    <Compile Include="DepartmentModel.cs" />
+    <Compile Include="EmployeeModel.cs" />
+    <Compile Include="FunctionModel.cs" />
+    <Compile Include="InventoryModel.cs" />
     <Compile Include="ProductGroupModel.cs" />
     <Compile Include="ProductModel.cs" />
     <Compile Include="ProductTypeModel.cs" />

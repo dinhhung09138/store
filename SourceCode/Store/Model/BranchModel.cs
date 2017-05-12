@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -44,14 +40,30 @@ namespace Model
         [StringLength(15, ErrorMessage = "Số điện thoại không vượt quá 15 ký tự")]
         public string Hotline { get; set; }
 
+        /// <summary>
+        /// Number of employees
+        /// </summary>
         public int EmployeeNumber { get; set; }
 
+        /// <summary>
+        /// Open date
+        /// </summary>
         public DateTime OpenDate { get; set; }
 
+        /// <summary>
+        /// Notes
+        /// </summary>
         [StringLength(255, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
         public string Notes { get; set; }
 
+        /// <summary>
+        /// Location's id
+        /// </summary>
         public Guid LocationID { get; set; }
-        
+
+        /// <summary>
+        /// Location's name
+        /// </summary>
+        public string LocationName { get; set; }
     }
 }

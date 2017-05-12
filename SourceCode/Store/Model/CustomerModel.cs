@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -77,8 +73,8 @@ namespace Model
         /// <summary>
         /// Map position (longtitude, latitude)
         /// </summary>
-        [StringLength(30, ErrorMessage = "Tọa độ không vượt quá 30 ký tự")]
-        public string MapPosition { get; set; }
+        [StringLength(500, ErrorMessage = "Đường đẫn bản đồ không vượt quá 500 ký tự")]
+        public string Maps { get; set; }
 
         /// <summary>
         /// Tax code
@@ -93,7 +89,7 @@ namespace Model
         public bool Gender { get; set; }
 
         /// <summary>
-        /// Company or personal
+        /// true: Company, false: personal
         /// </summary>
         [Required]
         public bool IsCompany { get; set; }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -22,7 +18,7 @@ namespace Model
         /// Code
         /// </summary>
         [Required(ErrorMessage = "Mã không được rỗng")]
-        [StringLength(20, ErrorMessage = "Mã KH không vượt quá 20 ký tự")]
+        [StringLength(20, ErrorMessage = "Mã không vượt quá 20 ký tự")]
         public string Code { get; set; }
 
         /// <summary>
@@ -51,6 +47,27 @@ namespace Model
         /// </summary>
         [StringLength(50, ErrorMessage = "Địa chỉ không vượt quá 50 ký tự")]
         public string Address { get; set; }
+
+        /// <summary>
+        /// true: Company, false: individual
+        /// </summary>
+        public bool IsCompanyUser { get; set; }
+
+        /// <summary>
+        /// group's id
+        /// </summary>
+        public Guid GroupID { get; set; }
+
+        /// <summary>
+        /// group's name
+        /// </summary>
+        public string GroupName { get; set; }
+
+        /// <summary>
+        /// Notes
+        /// </summary>
+        [StringLength(255, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
+        public string Notes { get; set; }
 
     }
 }

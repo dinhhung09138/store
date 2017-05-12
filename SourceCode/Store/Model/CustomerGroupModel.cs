@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -17,11 +13,16 @@ namespace Model
         /// </summary>
         [Required(ErrorMessage = "ID nhóm không được rỗng")]
         public Guid ID { get; set; }
-
+        /// <summary>
+        /// Code
+        /// </summary>
+        [Required(ErrorMessage = "mã nhóm không được rỗng")]
+        [StringLength(20, ErrorMessage = "mã nhóm không vượt quá 20 ký tự")]
+        public string Code { get; set; }
         /// <summary>
         /// Name
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Tên nhóm không được rỗng")]
         [StringLength(50, ErrorMessage = "Tên nhóm không vượt quá 50 ký tự")]
         public string Name { get; set; }
 
