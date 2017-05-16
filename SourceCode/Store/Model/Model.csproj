@@ -58,6 +58,12 @@
     <Compile Include="ProductModel.cs" />
     <Compile Include="ProductTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StockInDetailModel.cs" />
+    <Compile Include="StockInModel.cs" />
+    <Compile Include="StockOutDetailModel.cs" />
+    <Compile Include="StockOutModel.cs" />
+    <Compile Include="StockTranferDetailModel.cs" />
+    <Compile Include="StockTranferModel.cs" />
     <Compile Include="SupplierModel.cs" />
     <Compile Include="SupplierGroupModel.cs" />
     <Compile Include="Token.cs" />
