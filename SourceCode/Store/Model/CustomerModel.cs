@@ -31,7 +31,7 @@ namespace Model
         /// <summary>
         /// Birthday
         /// </summary>
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         /// <summary>
         /// Phone
@@ -62,7 +62,7 @@ namespace Model
         /// <summary>
         /// Location's id
         /// </summary>
-        public Guid LocationID { get; set; }
+        public Guid? LocationID { get; set; }
 
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Model
         /// <summary>
         /// Group of customer's id
         /// </summary>
-        public Guid GroupID { get; set; }
+        public Guid? GroupID { get; set; }
 
         /// <summary>
         /// groups of customer's name

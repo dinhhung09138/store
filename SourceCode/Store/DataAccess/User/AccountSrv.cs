@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.User
 {
-    public class Account
+    public class AccountSrv
     {
 
         public bool Login(string userName, string passWord)

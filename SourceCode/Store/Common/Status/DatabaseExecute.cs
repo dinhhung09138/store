@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess
+namespace Common.Status
 {
-    public class Class1
+    public enum DatabaseExecute
     {
+        Error = -1,
+        Warning = 0,
+        Success = 1
     }
 }

@@ -43,8 +43,10 @@
     <Compile Include="ErrorLog.cs" />
     <Compile Include="Extension.cs" />
     <Compile Include="JqueryDataTable.cs" />
+    <Compile Include="Message\DatabaseMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security.cs" />
+    <Compile Include="Status\DatabaseExecute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

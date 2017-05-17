@@ -46,5 +46,10 @@ namespace Model
         /// Time when delete
         /// </summary>
         public DateTime DeletedDate { get; set; }
+
+        /// <summary>
+        /// true: Insert, false: update
+        /// </summary>
+        public bool Insert { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace Model
         /// <summary>
         /// Open date
         /// </summary>
-        public DateTime OpenDate { get; set; }
+        public DateTime? OpenDate { get; set; }
 
         /// <summary>
         /// Notes
@@ -59,7 +59,7 @@ namespace Model
         /// <summary>
         /// Location's id
         /// </summary>
-        public Guid LocationID { get; set; }
+        public Guid? LocationID { get; set; }
 
         /// <summary>
         /// Location's name

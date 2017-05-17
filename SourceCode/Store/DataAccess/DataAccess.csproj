@@ -54,22 +54,27 @@
     <Compile Include="branch.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="BranchSrv.cs" />
     <Compile Include="branch_employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="contract_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CustomerGroupSrv.cs" />
+    <Compile Include="CustomerSrv.cs" />
     <Compile Include="customer_group.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="deliver.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DeliverGroupSrv.cs" />
+    <Compile Include="DeliverSrv.cs" />
+    <Compile Include="DeliverStatusSrv.cs" />
     <Compile Include="delivery_status.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -79,12 +84,15 @@
     <Compile Include="department.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DepartmentSrv.cs" />
     <Compile Include="employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeSrv.cs" />
     <Compile Include="function.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="FunctionSrv.cs" />
     <Compile Include="inventory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -179,7 +187,7 @@
     <Compile Include="user.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="User\Account.cs" />
+    <Compile Include="User\AccountSrv.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model.edmx">
