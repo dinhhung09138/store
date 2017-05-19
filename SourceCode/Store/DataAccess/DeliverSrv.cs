@@ -8,7 +8,10 @@ using System.Linq;
 
 namespace DataAccess
 {
-    class DeliverSrv
+    /// <summary>
+    /// Deliver service
+    /// </summary>
+    public class DeliverSrv
     {
         /// <summary>
         /// Get list item
@@ -21,12 +24,12 @@ namespace DataAccess
             try
             {
                 //Declare response data to json object
-                JqueryDataTableResponse<BranchModel> itemResponse = new JqueryDataTableResponse<BranchModel>();
+                JqueryDataTableResponse<DeliverModel> itemResponse = new JqueryDataTableResponse<DeliverModel>();
                 //List of data
-                List<BranchModel> _list = new List<BranchModel>();
+                List<DeliverModel> _list = new List<DeliverModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.customers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    var l = (from a in context.delivers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
@@ -40,7 +43,7 @@ namespace DataAccess
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new BranchModel()
+                        _list.Add(new DeliverModel()
                         {
                             ID = item.id,
                             Name = item.name,
@@ -49,7 +52,7 @@ namespace DataAccess
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
-                    IOrderedEnumerable<BranchModel> _sortList = null;
+                    IOrderedEnumerable<DeliverModel> _sortList = null;
                     foreach (var col in request.order)
                     {
                         switch (col.ColumnName)
@@ -90,18 +93,48 @@ namespace DataAccess
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
-                BranchModel _item = new BranchModel() { ID = Guid.NewGuid() };
+                DeliverModel _item = new DeliverModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
-                    var item = context.branches.First(m => m.id == id);
-                    if (item == null)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
+                    var item = (from m in context.delivers
+                                join g in context.deliver_group on m.group_id equals g.id
+                                join l in context.locations on m.location_id equals l.id
+                                where m.id == id
+                                select new
+                                {
+                                    m.id,
+                                    m.code,
+                                    m.name,
+                                    m.birthdate,
+                                    m.phone,
+                                    m.email,
+                                    m.address,
+                                    m.avatar,
+                                    m.location_id,
+                                    LocationName = l.name,
+                                    m.taxcode,
+                                    m.is_company,
+                                    m.gender,
+                                    m.group_id,
+                                    GroupName = g.name,
+                                    m.notes
+                                }).First();
+                    _item.ID = item.id;
+                    _item.Code = item.code;
+                    _item.Name = item.name;
+                    _item.Birthdate = item.birthdate;
+                    _item.Phone = item.phone;
+                    _item.Email = item.email;
+                    _item.Address = item.address;
+                    _item.Avatar = item.avatar;
+                    _item.LocationID = item.location_id;
+                    _item.LocationName = item.LocationName;
+                    _item.TaxCode = item.taxcode;
+                    _item.IsCompany = item.is_company;
+                    _item.Gender = item.gender;
+                    _item.GroupID = item.group_id;
+                    _item.GroupName = item.GroupName;
+                    _item.Notes = item.notes;
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("data", _item);
@@ -121,14 +154,54 @@ namespace DataAccess
         /// </summary>
         /// <param name="model">Motel</param>
         /// <returns>Dictionary</returns>
-        public Dictionary<string, object> Save(BranchModel model)
+        public Dictionary<string, object> Save(DeliverModel model)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
                 using (var context = new StoreEntities())
                 {
-
+                    deliver md = new deliver();
+                    if (model.Insert)
+                    {
+                        md.id = Guid.NewGuid();
+                        md.name = model.Name;
+                        md.code = model.Code;
+                        md.birthdate = model.Birthdate;
+                        md.phone = model.Phone;
+                        md.address = model.Address;
+                        md.avatar = model.Avatar;
+                        md.location_id = model.LocationID;
+                        md.taxcode = model.TaxCode;
+                        md.is_company = model.IsCompany;
+                        md.gender = model.Gender;
+                        md.notes = model.Notes;
+                        md.create_by = model.CreateBy;
+                        md.create_date = DateTime.Now;
+                        md.deleted = false;
+                        context.delivers.Add(md);
+                        context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                    }
+                    else
+                    {
+                        md = context.delivers.FirstOrDefault(m => m.id == model.ID);
+                        md.name = model.Name;
+                        md.code = model.Code;
+                        md.birthdate = model.Birthdate;
+                        md.phone = model.Phone;
+                        md.address = model.Address;
+                        md.avatar = model.Avatar;
+                        md.location_id = model.LocationID;
+                        md.taxcode = model.TaxCode;
+                        md.is_company = model.IsCompany;
+                        md.gender = model.Gender;
+                        md.notes = model.Notes;
+                        md.update_by = model.UpdatedBy;
+                        md.update_date = DateTime.Now;
+                        context.delivers.Attach(md);
+                        context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    context.SaveChanges();
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("message", DatabaseMessage.SAVE_SUCCESS);
@@ -156,7 +229,13 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-
+                    var md = context.delivers.First(m => m.id == id);
+                    md.deleted = true;
+                    md.delete_by = userID;
+                    md.delete_date = DateTime.Now;
+                    context.delivers.Attach(md);
+                    context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("message", DatabaseMessage.DELETE_SUCCESS);

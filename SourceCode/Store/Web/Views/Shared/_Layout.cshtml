@@ -2,16 +2,226 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/Content/css/bootstrap")
-    @Scripts.Render("~/Content/js/bootstrap")*@
+    @Styles.Render("~/Content/css/bootstrap")
     @RenderSection("header", required: false)
 
 </head>
 <body class="container-fluid">
-    @*@Html.Partial("_LoginPartial")*@
-    @RenderBody()
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12"></div>
+        </div>
+        <div class="row section-navbar">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <a class="toggleMenu" href="#">Menu</a>
+                <ul class="nav">
+                    <li class="test">
+                        <a href="#">Shoes</a>
+                        <ul>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">Sandals</a></li>
+                                    <li><a href="#">Sneakers</a></li>
+                                    <li><a href="#">Wedges</a></li>
+                                    <li><a href="#">Heels</a></li>
+                                    <li><a href="#">Loafers</a></li>
+                                    <li><a href="#">Flats</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">Loafers</a></li>
+                                    <li><a href="#">Sneakers</a></li>
+                                    <li><a href="#">Formal</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Shirts</a>
+                        <ul>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">T-Shirts</a></li>
+                                    <li><a href="#">Dress Shirts</a></li>
+                                    <li><a href="#">Tank Tops</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">T-Shirts</a></li>
+                                    <li><a href="#">Blouses</a></li>
+                                    <li><a href="#">Dress Shirts</a></li>
+                                    <li><a href="#">Tunics</a></li>
+                                    <li><a href="#">Camisoles</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Pants</a>
+                        <ul>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">Trousers</a></li>
+                                    <li><a href="#">Slacks</a></li>
+                                    <li><a href="#">Jeans</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">Trousers</a></li>
+                                    <li><a href="#">Slacks</a></li>
+                                    <li><a href="#">Jeans</a></li>
+                                    <li><a href="#">Leggings</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Skirts</a>
+                        <ul>
+                            <li>
+                                <a href="#">Long</a>
+                                <ul>
+                                    <li><a href="#">Denim</a></li>
+                                    <li><a href="#">Knits</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Short</a>
+                                <ul>
+                                    <li><a href="#">Denim</a></li>
+                                    <li><a href="#">Knits</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Mini</a>
+                                <ul>
+                                    <li><a href="#">Denim</a></li>
+                                    <li><a href="#">Knits</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Dresses</a>
+                        <ul>
+                            <li>
+                                <a href="#">Casual</a>
+                            </li>
+                            <li>
+                                <a href="#">Formal</a>
+                                <ul>
+                                    <li><a href="#">Wedding</a></li>
+                                    <li><a href="#">Party</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Sweaters</a>
+                        <ul>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">Wool</a></li>
+                                    <li><a href="#">Knitwear</a></li>
+                                    <li><a href="#">Light Sweaters</a></li>
+                                    <li><a href="#">Cardigans</a></li>
+                                    <li><a href="#">Hoodies</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">Wool</a></li>
+                                    <li><a href="#">Knitwear</a></li>
+                                    <li><a href="#">Light Sweaters</a></li>
+                                    <li><a href="#">Cardigans</a></li>
+                                    <li><a href="#">Hoodies</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Accessories</a>
+                        <ul>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">Belts</a></li>
+                                    <li><a href="#">Bags</a></li>
+                                    <li><a href="#">Jewelery</a></li>
+                                    <li><a href="#">Hats</a></li>
+                                    <li><a href="#">Eyewear</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">Belts</a></li>
+                                    <li><a href="#">Hats</a></li>
+                                    <li><a href="#">Eyewear</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Outerwear</a>
+                        <ul>
+                            <li>
+                                <a href="#">Womens</a>
+                                <ul>
+                                    <li><a href="#">Winter</a></li>
+                                    <li><a href="#">Spring/Fall</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">Mens</a>
+                                <ul>
+                                    <li><a href="#">Winter</a></li>
+                                    <li><a href="#">Spring/Fall</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Shipping Info</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <button id="load">Loading</button><br /><br />
+                <button id="showModel">Show model</button>
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row section-footer">
+            <div class="col-md-12 col-sm-12 col-xs-12"></div>
+        </div>
+
+    @Html.Partial("_Loading")
+    @Html.Partial("_MultipleModel")
+    @Scripts.Render("~/Content/js/bootstrap")
+    <script>
+        $(document).on('click', '#load', function (e) {
+            $('#loadingModel').modal('show');
+        });
+        $(document).on('click', '#showModel', function (e) {
+            $('#model01').modal('show');
+        });
+    </script>
     @RenderSection("script", required: false)
 </body>
 </html>

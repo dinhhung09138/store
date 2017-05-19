@@ -81,9 +81,12 @@ namespace Common.JqueryDataTable
         /// <returns></returns>
         public static CustomJqueryDataTableRequest SetOrderingColumnName(this CustomJqueryDataTableRequest item)
         {
-            for (int i = 0; i < item.order.Count; i++)
+            if (item.order != null)
             {
-                item.order[i].ColumnName = item.columns[item.order[i].Column].Data;
+                for (int i = 0; i < item.order.Count; i++)
+                {
+                    item.order[i].ColumnName = item.columns[item.order[i].Column].Data;
+                }
             }
             return item;
         }

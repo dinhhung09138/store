@@ -17,10 +17,15 @@ namespace DataAccess
         public System.Guid id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
-        public string phone { get; set; }
+        public Nullable<System.DateTime> birthdate { get; set; }
+        public bool gender { get; set; }
         public string address { get; set; }
+        public string phone { get; set; }
         public string email { get; set; }
+        public string avatar { get; set; }
         public bool is_company { get; set; }
+        public string taxcode { get; set; }
+        public Nullable<System.Guid> location_id { get; set; }
         public Nullable<System.Guid> group_id { get; set; }
         public string notes { get; set; }
         public System.Guid create_by { get; set; }
@@ -32,5 +37,6 @@ namespace DataAccess
         public Nullable<System.DateTime> delete_date { get; set; }
     
         public virtual deliver_group deliver_group { get; set; }
+        public virtual location location { get; set; }
     }
 }

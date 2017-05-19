@@ -19,6 +19,7 @@ namespace DataAccess
         {
             this.branches = new HashSet<branch>();
             this.customers = new HashSet<customer>();
+            this.delivers = new HashSet<deliver>();
             this.employees = new HashSet<employee>();
         }
     
@@ -29,6 +30,8 @@ namespace DataAccess
         public virtual ICollection<branch> branches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<customer> customers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<deliver> delivers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employee> employees { get; set; }
     }

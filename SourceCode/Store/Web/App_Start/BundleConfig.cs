@@ -42,7 +42,8 @@ namespace Web
 
             bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
                 "~/Content/bootstrap/bootstrap.css",
-                "~/Content/gritter/jquery.gritter.css"));
+                "~/Content/gritter/jquery.gritter.css",
+                "~/Content/site.css"));
             bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Content/bootstrap/bootstrap.js",

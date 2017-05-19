@@ -12,7 +12,7 @@ namespace Model
         /// ID
         /// </summary>
         [Required(ErrorMessage = "ID không được rỗng")]
-        public Guid ID { get; set; }
+        public byte ID { get; set; }
         
         /// <summary>
         /// Name

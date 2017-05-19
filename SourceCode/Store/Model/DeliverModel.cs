@@ -29,6 +29,17 @@ namespace Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Birthdate
+        /// </summary>
+        public DateTime? Birthdate { get; set; }
+
+        /// <summary>
+        /// Gender true: Male, false: Female
+        /// </summary>
+        [Required]
+        public bool Gender { get; set; }
+        
+        /// <summary>
         /// Phone
         /// </summary>
         [Required(ErrorMessage = "Số điện thoại không được rỗng")]
@@ -49,14 +60,37 @@ namespace Model
         public string Address { get; set; }
 
         /// <summary>
+        /// Avatar
+        /// </summary>
+        [StringLength(100, ErrorMessage = "Đường dẫn ảnh không vượt quá 100 ký tự")]
+        public string Avatar { get; set; }
+
+        /// <summary>
+        /// Location's id
+        /// </summary>
+        public Guid? LocationID { get; set; }
+
+
+        /// <summary>
+        /// Location's name
+        /// </summary>
+        public string LocationName { get; set; }
+
+        /// <summary>
         /// true: Company, false: individual
         /// </summary>
-        public bool IsCompanyUser { get; set; }
+        public bool IsCompany { get; set; }
+
+        /// <summary>
+        /// Tax code
+        /// </summary>
+        [StringLength(20, ErrorMessage = "Mã số thuế không vượt quá 20 ký tự")]
+        public string TaxCode { get; set; }
 
         /// <summary>
         /// group's id
         /// </summary>
-        public Guid GroupID { get; set; }
+        public Guid? GroupID { get; set; }
 
         /// <summary>
         /// group's name

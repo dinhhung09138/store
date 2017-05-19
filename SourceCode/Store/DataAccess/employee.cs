@@ -26,7 +26,7 @@ namespace DataAccess
         public string phone { get; set; }
         public string email { get; set; }
         public bool gender { get; set; }
-        public Nullable<System.DateTime> birthday { get; set; }
+        public Nullable<System.DateTime> birthdate { get; set; }
         public byte[] image { get; set; }
         public string address { get; set; }
         public string id_card { get; set; }

@@ -31,7 +31,7 @@ namespace Model
         /// <summary>
         /// Birthday
         /// </summary>
-        public DateTime? Birthday { get; set; }
+        public DateTime? Birthdate { get; set; }
 
         /// <summary>
         /// Phone

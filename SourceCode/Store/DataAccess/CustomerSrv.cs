@@ -30,6 +30,7 @@ namespace DataAccess
                 using (var context = new StoreEntities())
                 {
                     var l = (from a in context.customers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
@@ -104,7 +105,7 @@ namespace DataAccess
                                     m.id,
                                     m.code,
                                     m.name,
-                                    m.birthday,
+                                    m.birthdate,
                                     m.phone,
                                     m.email,
                                     m.address,
@@ -122,7 +123,7 @@ namespace DataAccess
                     _item.ID = item.id;
                     _item.Code = item.code;
                     _item.Name = item.name;
-                    _item.Birthday = item.birthday;
+                    _item.Birthdate = item.birthdate;
                     _item.Phone = item.phone;
                     _item.Email = item.email;
                     _item.Address = item.address;
@@ -169,7 +170,7 @@ namespace DataAccess
                         md.id = Guid.NewGuid();
                         md.name = model.Name;
                         md.code = model.Code;
-                        md.birthday = model.Birthday;
+                        md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
@@ -190,7 +191,7 @@ namespace DataAccess
                         md = context.customers.FirstOrDefault(m => m.id == model.ID);
                         md.name = model.Name;
                         md.code = model.Code;
-                        md.birthday = model.Birthday;
+                        md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;

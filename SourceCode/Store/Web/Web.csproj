@@ -287,6 +287,29 @@
     <Content Include="Content\chartjs\Chart.bundle.min.js" />
     <Content Include="Content\chartjs\Chart.js" />
     <Content Include="Content\chartjs\Chart.min.js" />
+    <Content Include="Content\datatable\buttons.colVis.min.js" />
+    <Content Include="Content\datatable\buttons.dataTables.min.css" />
+    <Content Include="Content\datatable\dataTable.custom.css" />
+    <Content Include="Content\datatable\dataTable.custom.js" />
+    <Content Include="Content\datatable\dataTables.bootstrap.min.css" />
+    <Content Include="Content\datatable\dataTables.bootstrap.min.js" />
+    <Content Include="Content\datatable\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\datatable\dataTables.bootstrap4.min.js" />
+    <Content Include="Content\datatable\dataTables.buttons.min.js" />
+    <Content Include="Content\datatable\dataTables.foundation.min.css" />
+    <Content Include="Content\datatable\dataTables.foundation.min.js" />
+    <Content Include="Content\datatable\dataTables.responsive.min.js" />
+    <Content Include="Content\datatable\foundation.min.css" />
+    <Content Include="Content\datatable\jquery.dataTables.min.css" />
+    <Content Include="Content\datatable\jquery.dataTables.min.js" />
+    <Content Include="Content\datatable\responsive.bootstrap.min.css" />
+    <Content Include="Content\datatable\responsive.bootstrap.min.js" />
+    <Content Include="Content\datatable\responsive.bootstrap4.min.css" />
+    <Content Include="Content\datatable\responsive.bootstrap4.min.js" />
+    <Content Include="Content\datatable\responsive.dataTables.min.css" />
+    <Content Include="Content\datatable\responsive.foundation.min.css" />
+    <Content Include="Content\datatable\responsive.foundation.min.js" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\gritter\jquery.gritter.css" />
     <Content Include="Content\gritter\jquery.gritter.js" />
     <Content Include="Content\gritter\jquery.gritter.min.js" />
@@ -296,7 +319,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\clear.png" />
+    <Content Include="Images\downArrow.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\upArrow.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -312,6 +337,11 @@
     <Content Include="Areas\Internal\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -367,6 +397,11 @@
     <Content Include="Views\Home\Test01.cshtml" />
     <Content Include="Views\Home\Test02.cshtml" />
     <Content Include="Views\Home\Chat.cshtml" />
+    <Content Include="Views\Home\GoogleChart.cshtml" />
+    <Content Include="Views\Shared\_Loading.cshtml" />
+    <Content Include="Views\Shared\_MultipleModel.cshtml" />
+    <Content Include="Views\Home\SetInterval.cshtml" />
+    <Content Include="Views\Home\DataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -411,6 +446,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{7ea1be8d-819e-4a82-a53b-ffc1c6d9877f}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{a4f44d3b-057a-476d-b3fe-5f71bae89396}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{57efe4fc-6a66-43d8-891b-59be491a2108}</Project>

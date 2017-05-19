@@ -17,7 +17,7 @@ namespace DataAccess
         public System.Guid id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
-        public Nullable<System.DateTime> birthday { get; set; }
+        public Nullable<System.DateTime> birthdate { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
         public string address { get; set; }

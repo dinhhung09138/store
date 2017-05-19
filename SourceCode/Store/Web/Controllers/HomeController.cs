@@ -8,16 +8,53 @@ using Web.Filters;
 //
 using Microsoft.AspNet.SignalR.Client;
 using System.Threading.Tasks;
+using Common.JqueryDataTable;
+using DataAccess;
+using Common.Status;
+using Model;
 
 namespace Web.Controllers
 {
     
     public class HomeController : Controller
     {
-        [CustomAuthorize]
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult GoogleChart()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult SetInterval()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult DataTable()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult GetData(CustomJqueryDataTableRequest requestData)
+        {
+            requestData = requestData.SetOrderingColumnName();
+            CustomerSrv _api = new CustomerSrv();
+            Dictionary<string, object> _return = _api.List(requestData);
+            if ((DatabaseExecute)_return["status"] == DatabaseExecute.Success)
+            {
+                JqueryDataTableResponse<CustomerModel> itemResponse = _return["data"] as JqueryDataTableResponse<CustomerModel>;
+                return this.Json(itemResponse, JsonRequestBehavior.AllowGet);
+            }
+            return this.Json(new JqueryDataTableResponse<CustomerModel>(), JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]

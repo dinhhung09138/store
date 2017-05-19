@@ -28,13 +28,10 @@ namespace DataAccess
         public virtual DbSet<branch> branches { get; set; }
         public virtual DbSet<branch_employee> branch_employee { get; set; }
         public virtual DbSet<contract_type> contract_type { get; set; }
-        public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<customer_group> customer_group { get; set; }
-        public virtual DbSet<deliver> delivers { get; set; }
         public virtual DbSet<deliver_group> deliver_group { get; set; }
         public virtual DbSet<delivery_status> delivery_status { get; set; }
         public virtual DbSet<department> departments { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<function> functions { get; set; }
         public virtual DbSet<inventory> inventories { get; set; }
         public virtual DbSet<invoice> invoices { get; set; }
@@ -62,5 +59,8 @@ namespace DataAccess
         public virtual DbSet<token> tokens { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<customer> customers { get; set; }
+        public virtual DbSet<deliver> delivers { get; set; }
+        public virtual DbSet<employee> employees { get; set; }
     }
 }

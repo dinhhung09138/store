@@ -8,7 +8,10 @@ using System.Linq;
 
 namespace DataAccess
 {
-    class DeliverGroupSrv
+    /// <summary>
+    /// Delivery group service
+    /// </summary>
+    public class DeliverGroupSrv
     {
         /// <summary>
         /// Get list item
@@ -21,47 +24,37 @@ namespace DataAccess
             try
             {
                 //Declare response data to json object
-                JqueryDataTableResponse<BranchModel> itemResponse = new JqueryDataTableResponse<BranchModel>();
+                JqueryDataTableResponse<DeliverGroupModel> itemResponse = new JqueryDataTableResponse<DeliverGroupModel>();
                 //List of data
-                List<BranchModel> _list = new List<BranchModel>();
+                List<DeliverGroupModel> _list = new List<DeliverGroupModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.customers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    var l = (from a in context.deliver_group where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
                     if (!string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
-                                    m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                        l = l.Where(m => m.name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new BranchModel()
+                        _list.Add(new DeliverGroupModel()
                         {
                             ID = item.id,
-                            Name = item.name,
-                            Address = item.address,
-                            Phone = item.phone
+                            Name = item.name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
-                    IOrderedEnumerable<BranchModel> _sortList = null;
+                    IOrderedEnumerable<DeliverGroupModel> _sortList = null;
                     foreach (var col in request.order)
                     {
                         switch (col.ColumnName)
                         {
                             case "Name":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
-                                break;
-                            case "Address":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
-                                break;
-                            case "Phone":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
                                 break;
                         }
                     }
@@ -90,18 +83,13 @@ namespace DataAccess
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
-                BranchModel _item = new BranchModel() { ID = Guid.NewGuid() };
+                DeliverGroupModel _item = new DeliverGroupModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
-                    var item = context.branches.First(m => m.id == id);
-                    if (item == null)
-                    {
-
-                    }
-                    else
-                    {
-
-                    }
+                    var item = context.deliver_group.First(m => m.id == id);
+                    _item.ID = item.id;
+                    _item.Name = item.name;
+                    _item.Notes = item.notes;
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("data", _item);
@@ -121,14 +109,36 @@ namespace DataAccess
         /// </summary>
         /// <param name="model">Motel</param>
         /// <returns>Dictionary</returns>
-        public Dictionary<string, object> Save(BranchModel model)
+        public Dictionary<string, object> Save(DeliverGroupModel model)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
                 using (var context = new StoreEntities())
                 {
-
+                    deliver_group md = new deliver_group();
+                    if (model.Insert)
+                    {
+                        md.id = Guid.NewGuid();
+                        md.name = model.Name;
+                        md.notes = model.Notes;
+                        md.create_by = model.CreateBy;
+                        md.create_date = DateTime.Now;
+                        md.deleted = false;
+                        context.deliver_group.Add(md);
+                        context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                    }
+                    else
+                    {
+                        md = context.deliver_group.FirstOrDefault(m => m.id == model.ID);
+                        md.name = model.Name;
+                        md.notes = model.Notes;
+                        md.update_by = model.UpdatedBy;
+                        md.update_date = DateTime.Now;
+                        context.deliver_group.Attach(md);
+                        context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    context.SaveChanges();
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("message", DatabaseMessage.SAVE_SUCCESS);
@@ -156,7 +166,13 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-
+                    var md = context.deliver_group.First(m => m.id == id);
+                    md.deleted = true;
+                    md.delete_by = userID;
+                    md.delete_date = DateTime.Now;
+                    context.deliver_group.Attach(md);
+                    context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                    context.SaveChanges();
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("message", DatabaseMessage.DELETE_SUCCESS);

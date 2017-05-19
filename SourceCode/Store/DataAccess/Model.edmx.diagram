@@ -8,13 +8,10 @@
         <EntityTypeShape EntityType="StoreModel.branch" Width="1.5" PointX="3" PointY="26.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.branch_employee" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.contract_type" Width="1.5" PointX="0.75" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.customer" Width="1.5" PointX="6" PointY="32.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.customer_group" Width="1.5" PointX="3.75" PointY="43.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.deliver" Width="1.5" PointX="15" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.deliver_group" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.delivery_status" Width="1.5" PointX="9" PointY="38.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.department" Width="1.5" PointX="3" PointY="33.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.employee" Width="1.5" PointX="3" PointY="19.25" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.function" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.inventory" Width="1.5" PointX="8.25" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
@@ -51,15 +48,8 @@
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_from" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_to" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_department" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_branch_employee_employee" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_position" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_employee_contract_type" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_customer_customer_group" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_customer_location" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_deliver_deliver_group" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_order_delivery_status" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_employee_location" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_user_employee" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_role_detail_function" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_inventory_product" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_leave_leave_type" ManuallyRouted="false" />
@@ -86,6 +76,17 @@
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_user" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_supplier_supplier_group" ManuallyRouted="false" />
         <AssociationConnector Association="StoreModel.FK_token_user" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="StoreModel.customer" Width="1.5" PointX="9" PointY="40.625" />
+        <EntityTypeShape EntityType="StoreModel.deliver" Width="1.5" PointX="15" PointY="15.75" />
+        <EntityTypeShape EntityType="StoreModel.employee" Width="1.5" PointX="3" PointY="19" />
+        <AssociationConnector Association="StoreModel.FK_branch_employee_employee" />
+        <AssociationConnector Association="StoreModel.FK_employee_contract_type" />
+        <AssociationConnector Association="StoreModel.FK_customer_customer_group" />
+        <AssociationConnector Association="StoreModel.FK_customer_location" />
+        <AssociationConnector Association="StoreModel.FK_deliver_deliver_group" />
+        <AssociationConnector Association="StoreModel.FK_deliver_location" />
+        <AssociationConnector Association="StoreModel.FK_employee_location" />
+        <AssociationConnector Association="StoreModel.FK_user_employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
