@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "SetInterval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SetInterval</h2>
+
+@section script{
+    <script>
+        var interval;
+        var increeCount;
+        var count = 0;
+        
+        $(document).ready(function () {
+            count = 0;
+            $('#loadingModel').modal('show');
+            startCheckCount();
+            startCount();
+        });
+
+        function startCount() {
+            console.log('start increement');
+            increeCount = setInterval(count, 2000);
+        }
+
+        function count() {
+            console.log('setTimeout');
+            count++;
+            if (count == 5) {
+                console.log('count = 5');
+                clearInterval(increeCount);
+            }
+        }
+
+        function startCheckCount() {
+            console.log('start check');
+            interval = setInterval(checkCount, 1000);
+        }
+
+        function checkCount() {
+            console.log('check ' + count);
+            if (count == 5) {
+                $('#loadingModel').modal('hide');
+                clearInterval(interval);
+            }
+        }
+
+    </script>
+}

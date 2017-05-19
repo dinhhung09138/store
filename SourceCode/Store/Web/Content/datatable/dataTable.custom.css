@@ -1,0 +1,108 @@
+﻿.pagination>.active>a, 
+.pagination>.active>span, 
+.pagination>.active>a:hover, 
+.pagination>.active>span:hover, 
+.pagination>.active>a:focus, 
+.pagination>.active>span:focus {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: rgb(0, 150, 136);
+    border-color: rgb(0, 150, 136);
+}
+
+.pagination>li>a:hover, 
+.pagination>li>span:hover, 
+.pagination>li>a:focus, 
+.pagination>li>span:focus {
+    background: rgb(0, 150, 136);
+    color:white;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: rgb(0, 150, 136);
+}
+
+/*Button*/
+
+div.dt-button-collection button.dt-button:active:not(.disabled), 
+div.dt-button-collection button.dt-button.active:not(.disabled), 
+div.dt-button-collection div.dt-button:active:not(.disabled), 
+div.dt-button-collection div.dt-button.active:not(.disabled), 
+div.dt-button-collection a.dt-button:active:not(.disabled), 
+div.dt-button-collection a.dt-button.active:not(.disabled) {
+    background: rgb(0, 150, 136);
+    color:white;
+    box-shadow: none;
+}
+
+button.dt-button, div.dt-button, a.dt-button {
+    
+    border: 1px solid #999;
+    border-radius: 2px;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    background: rgb(0, 150, 136);
+    background-image: none;
+    filter: unset;
+}
+
+button.dt-button:hover:not(.disabled), 
+div.dt-button:hover:not(.disabled), 
+a.dt-button:hover:not(.disabled) {
+    border: 1px solid #666;
+    background-color: #e0e0e0;
+    background-image: none;
+    filter: unset;
+}
+
+@media screen and (max-width: 767px){
+    #example_filter > label {
+        float:right;
+    }
+}
+@media screen and (max-width: 640px){
+    .dt-buttons > a{
+        float: left;
+    }
+}
+
+@media screen and (max-width: 382px){
+    .dt-buttons > a{
+        margin-bottom:5px;
+        float: right;
+    }
+    #example_filter > label {
+        float: right;
+    }
+}
+
+/*Table*/
+
+.table thead > tr > th {
+    background: rgb(0, 150, 136);
+    color:white;
+    font-weight:bold;
+}
+
+.table caption+thead tr:first-child th, 
+.table colgroup+thead tr:first-child th, 
+.table thead:first-child tr:first-child th, 
+.table caption+thead tr:first-child td, 
+.table colgroup+thead tr:first-child td, 
+.table thead:first-child tr:first-child td {
+    text-align: center;
+}
+
+table.dataTable thead .sorting_asc:after, 
+table.dataTable thead .sorting_desc:after, 
+table.dataTable thead .sorting_asc_disabled:after, 
+table.dataTable thead .sorting_desc_disabled:after {
+    opacity: 1;
+}
+
+table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before, 
+table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+    background: rgb(0, 150, 136);
+}
