@@ -29,15 +29,29 @@ namespace DataAccess
                 List<CustomerModel> _list = new List<CustomerModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.customers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
-                    
+                    var l = (from a in context.customers
+                             where !a.deleted
+                             orderby a.name
+                             select new
+                             {
+                                 a.id,
+                                 a.code,
+                                 a.gender,
+                                 genderString = a.gender == true ? "Nam" : "Nữ",
+                                 a.name,
+                                 a.address,
+                                 a.phone
+                             }).ToList();
+
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
-                    if (!string.IsNullOrWhiteSpace(request.search.Value))
+                    if (request.search != null && !string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
+                        l = l.Where(m => m.code.ToLower().Contains(searchValue) ||
+                                    m.name.ToLower().Contains(searchValue) ||
+                                    m.genderString.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
                                     m.phone.ToLower().Contains(searchValue)).ToList();
                     }
@@ -47,29 +61,44 @@ namespace DataAccess
                         _list.Add(new CustomerModel()
                         {
                             ID = item.id,
+                            Code = item.code,
                             Name = item.name,
+                            GenderString = item.genderString,
                             Address = item.address,
                             Phone = item.phone
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
                     IOrderedEnumerable<CustomerModel> _sortList = null;
-                    foreach (var col in request.order)
+                    if (request.order != null)
                     {
-                        switch (col.ColumnName)
+                        foreach (var col in request.order)
                         {
-                            case "Name":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
-                                break;
-                            case "Address":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
-                                break;
-                            case "Phone":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
-                                break;
+                            switch (col.ColumnName)
+                            {
+                                case "Code":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
+                                    break;
+                                case "Name":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                    break;
+                                case "GenderString":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GenderString) : _sortList.Sort(col.Dir, m => m.GenderString);
+                                    break;
+                                case "Phone":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
+                                    break;
+                                case "Address":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                                    break;
+                            }
                         }
+                        itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
                     }
-                    itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
+                    else
+                    {
+                        itemResponse.data = _list.Skip(request.start).Take(request.length).ToList();
+                    }
                     _return.Add("data", itemResponse);
                 }
                 _return.Add("status", DatabaseExecute.Success);
@@ -101,7 +130,8 @@ namespace DataAccess
                                 join g in context.customer_group on m.group_id equals g.id
                                 join l in context.locations on m.location_id equals l.id
                                 where m.id == id
-                                select new {
+                                select new
+                                {
                                     m.id,
                                     m.code,
                                     m.name,
@@ -137,7 +167,7 @@ namespace DataAccess
                     _item.GroupID = item.group_id;
                     _item.GroupName = item.GroupName;
                     _item.Notes = item.notes;
-                    
+
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("data", _item);

@@ -1,24 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using Model.User;
 
 namespace DataAccess.User
 {
+    /// <summary>
+    /// Account login
+    /// </summary>
     public class AccountSrv
     {
 
-        public bool Login(string userName, string passWord)
+        public UserLoginModel Login(string userName, string passWord)
         {
             using (var context = new StoreEntities())
             {
                 var it = context.users.Where(a => a.user_name == userName && a.password == passWord).FirstOrDefault();
-                if(it.user_name != null && it.user_name.Length > 0)
+                if (it == null || it.user_name.Length == 0)
                 {
-                    return true;
+                    return null;
                 }
-                return false;
+                UserLoginModel item = new UserLoginModel();
+                item.ID = it.id;
+                item.UserName = item.UserName;
+                item.Token = "";
+                item.DeviceID = "";
+                return item;
             }
         }
 

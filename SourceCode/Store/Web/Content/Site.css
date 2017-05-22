@@ -1,9 +1,24 @@
-﻿.mrg-top-50 {
+﻿body{
+    font-size:12px;
+}
+.mrg-top-50 {
     margin-top: 50px;
+}
+
+.mrg-button-20 {
+    margin-bottom: 20px;
 }
 
 .text-center {
     text-align: center !important;
+}
+
+.basic-bg-color {
+    background: rgb(0, 150, 136) !important;
+}
+
+.basic-color {
+    color:white !important;
 }
 
 /*Login form*/
@@ -24,90 +39,101 @@
     color: #fff;
 }
 
+.toggleMenu:active,
+.toggleMenu:focus, 
+.toggleMenu:hover {
+    color:white;
+}
+
 .nav {
     list-style: none;
     *zoom: 1;
 }
 
-    .nav:before,
-    .nav:after {
-        content: " ";
-        display: table;
-    }
+.nav:before,
+.nav:after {
+    content: " ";
+    display: table;
+}
 
-    .nav:after {
-        clear: both;
-    }
+.nav:after {
+    clear: both;
+}
 
-    .nav ul {
-        list-style: none;
-        width: 9em;
-    }
+.nav ul {
+    list-style: none;
+    width: 9em;
+}
 
-    .nav a {
-        padding: 10px 15px;
-        color: #fff;
-    }
+.nav a {
+    padding: 10px 15px;
+    color: #fff;
+}
 
-    .nav li {
-        position: relative;
-    }
+.nav li {
+    position: relative;
+}
 
-    .nav > li {
-        float: left;
-        border-top: 1px solid #104336;
-    }
+.nav > li {
+    float: left;
+    border-top: 1px solid #104336;
+}
 
-        .nav > li > .parent {
-            background-image: url("/Images/downArrow.png");
-            background-repeat: no-repeat;
-            background-position: right;
-        }
+.nav > li > .parent {
+    background-position: right;
+}
 
-        .nav > li > a {
-            display: block;
-        }
+.nav > li > a {
+    display: block;
+    padding: 8px;
+}
 
-            .nav > li > a:hover,
-            .nav > li > a:focus {
-                background: rgb(23, 94, 76); /*#175e4c;*/
-            }
+.nav > li > a:hover,
+.nav > li > a:focus {
+    background: rgb(23, 94, 76); /*#175e4c;*/
+}
 
-    .nav li ul {
-        position: absolute;
-        left: -9999px;
-    }
+.nav > li > a > i{
+    top: 2px;
+}
 
-    .nav > li.hover > ul {
-        left: 0;
-    }
+.nav li ul {
+    position: absolute;
+    left: -9999px;
+    width:auto;
+}
 
-    .nav li li.hover ul {
-        left: 100%;
-        top: 0;
-    }
+.nav > li.hover > ul {
+    left: 0;
+    width:100%;
+}
 
-    .nav li li a {
-        display: block;
-        background: rgb(0, 150, 136); /*#009688*/
-        position: relative;
-        z-index: 100;
-        border-top: 1px solid rgb(23, 94, 76); /*#175e4c;*/
-    }
+.nav li li.hover ul {
+    left: 100%;
+    top: 0;
+}
 
-        .nav li li a:hover {
-            background: rgb(23, 94, 76); /*#175e4c;*/
-        }
+.nav li li a {
+    display: block;
+    background: rgb(0, 150, 136); /*#009688*/
+    position: relative;
+    z-index: 100;
+    border-top: 1px solid rgb(23, 94, 76); /*#175e4c;*/
+}
 
-    .nav li li li a {
-        background: rgb(0, 150, 136); /*#009688*/
-        z-index: 200;
-        border-top: 1px solid #1d7a62;
-    }
+.nav li li a:hover {
+    background: rgb(23, 94, 76); /*#175e4c;*/
+}
 
-        .nav li li li a:hover {
-            background: rgb(23, 94, 76); /*#175e4c;*/
-        }
+.nav li li li a {
+    background: rgb(0, 150, 136); /*#009688*/
+    z-index: 200;
+    border-top: 1px solid #1d7a62;
+}
+
+.nav li li li a:hover {
+    background: rgb(23, 94, 76); /*#175e4c;*/
+}
 
 @media screen and (max-width: 768px) {
     .active {
@@ -118,13 +144,11 @@
         float: none;
     }
 
-        .nav > li > .parent {
-            background-position: 95% 50%;
-        }
+    .nav > li > .parent {
+        background-position: 95% 50%;
+    }
 
     .nav li li .parent {
-        background-image: url("/Images/downArrow.png");
-        background-repeat: no-repeat;
         background-position: 95% 50%;
     }
 
@@ -261,4 +285,70 @@
     box-shadow: none;
     border-radius: unset;
 }
+
+.modal-header {
+    background: rgb(0, 150, 136);
+    border-bottom: 1px solid rgb(0, 150, 136);
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.modal-header .close {
+    margin-top: 0;
+}
+
 /*End model*/
+
+
+/*custom panel*/
+
+
+.panel {
+    border: 1px solid rgb(0, 150, 136);
+}
+
+.panel-heading {
+    font-weight:bold;
+}
+
+/*End custom panel*/
+
+.page-header {
+    border-bottom: 1px solid rgb(0, 150, 136);
+    margin: 10px 0;
+    padding-bottom: 0;
+    color:rgb(0, 150, 136);
+    font-weight:bold;
+}
+
+.page-tool{
+    text-align:right;
+    padding-top:10px;
+}
+
+.page-tool > span > i {
+    color: rgb(0, 150, 136) !important;    
+    font-size:20px;
+    cursor: pointer;
+}
+.page-tool > #deleteBtn > i {
+    color: Red !important;
+}
+
+@media screen and (max-width: 768px) {
+    .page-tool{
+        text-align:left;
+        padding-top:5px;
+        padding-bottom:3px;
+    }
+}
+
+.form-control {
+    font-size: 12px;
+    height: 28px;
+}
+
+.color-red {
+    color:red;
+}

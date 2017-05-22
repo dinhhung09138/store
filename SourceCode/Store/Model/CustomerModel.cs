@@ -88,6 +88,8 @@ namespace Model
         [Required]
         public bool Gender { get; set; }
 
+        public string GenderString { get; set; }
+
         /// <summary>
         /// true: Company, false: personal
         /// </summary>

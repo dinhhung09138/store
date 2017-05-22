@@ -2,10 +2,84 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/bootstrap")
     @Scripts.Render("~/Content/js/bootstrap")
+    <style>
+        #loginForm {
+            background: White;
+            padding: 15px;
+            border-radius: 10px;
+            color: white;
+        }
+
+            #loginForm img {
+                width: 100%;
+            }
+
+        .background {
+            background-color: rgb(0, 150, 136);
+        }
+
+        #captcha {
+            margin-left: 20px;
+        }
+
+            #captcha > * {
+                vertical-align: middle;
+            }
+
+            #captcha span {
+                width: 44px;
+                margin-right: 10px;
+            }
+
+            #captcha input {
+                background: url(/Images/refresh.png) no-repeat scroll center center #147dba;
+                padding: 0;
+                border: medium none;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+
+        ul {
+            list-style: outside none none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-footer {
+            border: 0 none;
+            text-align: center;
+        }
+
+            .modal-footer ul {
+                display: inline-block;
+                color: #969696;
+            }
+
+                .modal-footer ul li {
+                    float: left;
+                    border-right: 1px solid #969696;
+                    padding: 0 10px;
+                }
+
+                    .modal-footer ul li:last-child {
+                        border-right: 0;
+                    }
+
+            .modal-footer .fa-phone-square {
+                margin-right: 5px;
+            }
+
+            .modal-footer a {
+                color: #969696;
+            }
+    </style>
     @RenderSection("header", required: false)
 </head>
 <body class="container-fluid" style="background-color: rgba(0, 0, 0, 0.8);">

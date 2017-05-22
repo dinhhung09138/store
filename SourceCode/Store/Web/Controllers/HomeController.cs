@@ -1,4 +1,5 @@
-﻿using Model.User;
+﻿using Model;
+using Model.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +11,15 @@ using Microsoft.AspNet.SignalR.Client;
 using System.Threading.Tasks;
 using Common.JqueryDataTable;
 using DataAccess;
+using DataAccess.User;
 using Common.Status;
-using Model;
 
 namespace Web.Controllers
 {
-    
+
     public class HomeController : Controller
     {
-        [AllowAnonymous]
+        [CustomAuthorize]
         public ActionResult Index()
         {
             return View();
@@ -57,6 +58,8 @@ namespace Web.Controllers
             return this.Json(new JqueryDataTableResponse<CustomerModel>(), JsonRequestBehavior.AllowGet);
         }
 
+        #region " [ Login ] "
+
         [AllowAnonymous]
         public ActionResult Login()
         {
@@ -73,13 +76,56 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(UserLoginModel model)
         {
-            if (model.UserName == "admin" || model.Password != "pass")
+            string pass = Common.Security.PasswordSecurity.GetHashedPassword(model.Password);
+
+            AccountSrv _srvAccount = new AccountSrv();
+            UserLoginModel _return = _srvAccount.Login(model.UserName, pass);
+            if (_return == null)
             {
                 TempData["model"] = model;
                 TempData["message"] = Resources.Login.msgWrongLogin;
+                return RedirectToAction("login", "home");
             }
-            return View("login");
+            Session["user"] = _return;
+            return RedirectToAction("index", "home");
         }
+
+
+        #endregion
+
+        #region " [ For got password ] "
+
+        /// <summary>
+        /// Forgot password
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            ViewBag.email = "";
+            if (TempData["email"] != null)
+            {
+                ViewBag.email = TempData["email"];
+            }
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            return View();
+        }
+
+        #endregion
 
         [AllowAnonymous]
         public ActionResult Demo()
@@ -113,11 +159,11 @@ namespace Web.Controllers
                 Message();
                 return this.Json("Done", JsonRequestBehavior.AllowGet);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return this.Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
-            
+
         }
 
         private static async Task Message()
@@ -130,7 +176,7 @@ namespace Web.Controllers
                 await myHub.Invoke("Send", "Hung", "Toi la tran dinh hung");
                 hubConnection.Stop();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

@@ -13,7 +13,7 @@ namespace Web.Filters
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if(filterContext == null)
+            if (filterContext == null)
             {
                 throw new ArgumentNullException("filterContext");
             }
@@ -47,22 +47,22 @@ namespace Web.Filters
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            if(httpContext == null)
+            if (httpContext == null)
             {
                 throw new ArgumentNullException();
             }
-            if(httpContext.Session != null && httpContext.Session["user"] == null)
+            if (httpContext.Session != null && httpContext.Session["user"] == null)
             {
                 SetRedirect(httpContext);
                 return false;
             }
             var user = httpContext.Session["user"] as UserLoginModel;
-            if(user != null && user.ID != null)
+            if (user != null && user.ID != null)
             {
                 SetRedirect(httpContext);
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         /// <summary>

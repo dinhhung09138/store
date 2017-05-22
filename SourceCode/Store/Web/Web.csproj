@@ -233,6 +233,7 @@
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
+    <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Sale\SaleAreaRegistration.cs" />
@@ -309,6 +310,8 @@
     <Content Include="Content\datatable\responsive.dataTables.min.css" />
     <Content Include="Content\datatable\responsive.foundation.min.css" />
     <Content Include="Content\datatable\responsive.foundation.min.js" />
+    <Content Include="Content\font-awsome\font-awesome.css" />
+    <Content Include="Content\font-awsome\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\gritter\jquery.gritter.css" />
     <Content Include="Content\gritter\jquery.gritter.js" />
@@ -321,6 +324,8 @@
     <Content Include="Images\clear.png" />
     <Content Include="Images\downArrow.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\login_logo.png" />
+    <Content Include="Images\refresh.png" />
     <Content Include="Images\upArrow.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -342,6 +347,14 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Partner\Views\Customer\Index.cshtml" />
+    <Content Include="Content\font-awsome\font-awesome.css.map" />
+    <Content Include="Content\font-awsome\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awsome\fontawesome-webfont.svg" />
+    <Content Include="Content\font-awsome\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awsome\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awsome\fontawesome-webfont.woff2" />
+    <Content Include="Content\font-awsome\FontAwesome.otf" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -402,6 +415,7 @@
     <Content Include="Views\Shared\_MultipleModel.cshtml" />
     <Content Include="Views\Home\SetInterval.cshtml" />
     <Content Include="Views\Home\DataTable.cshtml" />
+    <Content Include="Views\Home\ForgotPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -417,7 +431,6 @@
     <Folder Include="Areas\Internal\Controllers\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\Internal\Views\Shared\" />
-    <Folder Include="Areas\Partner\Controllers\" />
     <Folder Include="Areas\Partner\Models\" />
     <Folder Include="Areas\Partner\Views\Shared\" />
     <Folder Include="Areas\Report\Controllers\" />
