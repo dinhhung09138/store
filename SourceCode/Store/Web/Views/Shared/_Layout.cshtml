@@ -199,6 +199,31 @@
         //    startLoading();
         //});
     </script>
+    <!--Check upload file-->
+    <script>
+        // Add events
+        $('input[type=file]').change(function () {
+            console.log(this.files[0]);
+            getBase64(this.files[0]);
+        });
+
+
+        function getBase64(file) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                console.log('05');
+                console.log(reader.result);
+                var image = new Image();
+                image.src = reader.result;
+                $('#thumbnail').html(image);
+            };
+            reader.onerror = function (error) {
+                console.log('Error: ', error);
+            };
+        }
+
+    </script>
     @RenderSection("script", required: false)
 </body>
 </html>
