@@ -38,6 +38,12 @@ namespace Web.Areas.Partner.Controllers
             return this.Json(new JqueryDataTableResponse<CustomerModel>(), JsonRequestBehavior.AllowGet);
         }
 
+        
+        public ActionResult Add()
+        {
+            return PartialView();
+        }
+
         [HttpPost]
         public JsonResult Save(CustomerModel model)
         {

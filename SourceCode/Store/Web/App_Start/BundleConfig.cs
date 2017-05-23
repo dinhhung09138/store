@@ -44,12 +44,21 @@ namespace Web
                 "~/Content/bootstrap/bootstrap.css",
                 "~/Content/font-awsome/font-awesome.min.css",
                 "~/Content/gritter/jquery.gritter.css",
-                "~/Content/site.css"));
+                "~/Content/site.css",
+                "~/Content/datatable/dataTables.bootstrap.min.css",
+                "~/Content/datatable/responsive.bootstrap.min.css",
+                "~/Content/datatable/buttons.dataTables.min.css"));
             bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Content/bootstrap/bootstrap.js",
                 "~/Content/gritter/jquery.gritter.min.js",
-                "~/Content/base.js"));
+                "~/Content/base.js",
+                "~/Scripts/jquery.validate.min.js",
+                "~/Scripts/jquery.validate.unobtrusive.min.js",
+                "~/Content/datatable/jquery.dataTables.min.js",
+                "~/Content/datatable/dataTables.bootstrap.min.js",
+                "~/Content/datatable/dataTables.responsive.min.js",
+                "~/Content/datatable/responsive.bootstrap.min.js"));
 
             #endregion
 

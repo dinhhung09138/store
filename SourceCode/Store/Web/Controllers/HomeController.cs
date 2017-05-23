@@ -127,6 +127,13 @@ namespace Web.Controllers
 
         #endregion
 
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RequiredLogin()
+        {
+            return PartialView();
+        }
+
         [AllowAnonymous]
         public ActionResult Demo()
         {
