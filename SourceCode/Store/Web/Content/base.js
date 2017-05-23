@@ -82,3 +82,11 @@ $(document).on('show.bs.modal', '.modal', function (event) {
         $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
     }, 0);
 });
+
+/*Use for dropdow select and find item*/
+$(document).ready(function () {
+    $('.selectpicker').selectpicker({
+        liveSearch: true,
+        showSubtext: true
+    });
+});

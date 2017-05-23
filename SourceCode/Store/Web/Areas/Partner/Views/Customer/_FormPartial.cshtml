@@ -1,0 +1,185 @@
+﻿
+@model Model.CustomerModel
+
+<div class="modal fade" id="editModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thông tin khách hàng</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("save", "customer",
+                new { @area = "partner" },
+                new AjaxOptions { HttpMethod = "post" },
+                new { @class = "form", @id = "editForm", }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-10 col-sm-10 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <label>Loại khách hàng</label>&nbsp;&nbsp;
+                                    @Html.RadioButtonFor(m => m.IsCompany, "Person", new { @checked = Model.IsCompany }) Cá nhân
+                                    @Html.RadioButtonFor(m => m.IsCompany, "Company", new { @checked = !Model.IsCompany }) Công ty
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Mẫ khách hàng</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.ValidationMessageFor(m => m.Code)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Tên khách hàng</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.ValidationMessageFor(m => m.Code)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Giới tính</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.RadioButtonFor(m => m.Gender, "Male", new { @checked = Model.Gender }) Nam
+                                    @Html.RadioButtonFor(m => m.Gender, "Female", new { @checked = !Model.Gender }) Nữ
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Ngày sinh</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Birthdate, new { @class = "form-control", @maxlength = 10 })
+                                    @Html.ValidationMessageFor(m => m.Birthdate)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Số điện thoại <span class="color-red">*</span></label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true })
+                                    @Html.ValidationMessageFor(m => m.Phone)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = 50 })
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Mã số thuế</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control", @maxlength = 20 })
+                                    @Html.ValidationMessageFor(m => m.TaxCode)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Nhóm khách hàng</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    <input type="text" id="email" name="email" class="form-control" maxlength="50" />
+                                    @Html.DropDownListFor(m => m.GroupID, (IEnumerable<SelectListItem>)ViewBag.group,
+                                                          new { @class = "form-control selectpicker", @value = Model.GroupID })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Khu vực</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.LocationName, new { @class = "form-control" })
+                                    @Html.HiddenFor(m => m.LocationID)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Địa chỉ</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Ghi chus</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Close</a>
+                <a href="#" class="btn btn-primary">Save changes</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#editModel').modal('show');
+    });
+</script>

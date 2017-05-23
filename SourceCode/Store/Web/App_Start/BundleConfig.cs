@@ -8,25 +8,6 @@ namespace Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
-
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
-
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
-
             bundles.Add(new ScriptBundle("~/Content/angular").Include(
                 "~/Content/angularjs/angular.min.js",
                 "~/Content/angularjs/angular-cookies.min.js",
@@ -41,20 +22,29 @@ namespace Web
             #region " User "
 
             bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include(
-                "~/Content/bootstrap/bootstrap.css",
+                "~/Content/jquery-ui.min.css",
+                "~/Content/bootstrap/bootstrap.min.css",
+                "~/Content/bootstrap/bootstrap-select.min.css",
+                "~/Content/bootstrap/bootstrap-datetimepicker.min.css",
                 "~/Content/font-awsome/font-awesome.min.css",
                 "~/Content/gritter/jquery.gritter.css",
                 "~/Content/site.css",
                 "~/Content/datatable/dataTables.bootstrap.min.css",
                 "~/Content/datatable/responsive.bootstrap.min.css",
                 "~/Content/datatable/buttons.dataTables.min.css"));
+
             bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Content/bootstrap/bootstrap.js",
+                "~/Content/jquery-ui.min.js",
+                "~/Content/bootstrap/bootstrap.min.js",
+                "~/Content/bootstrap/bootstrap-select.min.js",
+                "~/Content/moment.min.js",
+                "~/Content/bootstrap/bootstrap-datetimepicker.min.js",
                 "~/Content/gritter/jquery.gritter.min.js",
                 "~/Content/base.js",
                 "~/Scripts/jquery.validate.min.js",
                 "~/Scripts/jquery.validate.unobtrusive.min.js",
+                "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Content/datatable/jquery.dataTables.min.js",
                 "~/Content/datatable/dataTables.bootstrap.min.js",
                 "~/Content/datatable/dataTables.responsive.min.js",
@@ -62,7 +52,7 @@ namespace Web
 
             #endregion
 
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

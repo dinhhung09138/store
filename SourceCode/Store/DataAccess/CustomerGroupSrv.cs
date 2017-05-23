@@ -197,5 +197,23 @@ namespace DataAccess
             return _return;
         }
 
+        /// <summary>
+        /// Get list group of customer to display on dropdown controll (or for something else) in other form
+        /// </summary>
+        /// <returns></returns>
+        public List<CustomerGroupModel> GetListForDisplay()
+        {
+            List<CustomerGroupModel> _return = new List<CustomerGroupModel>();
+            using (var context = new StoreEntities())
+            {
+                var list = (from a in context.customer_group where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
+                foreach (var item in list)
+                {
+                    _return.Add(new CustomerGroupModel() { ID = item.id, Name = item.name });
+                }
+            }
+            return _return;
+        }
+
     }
 }

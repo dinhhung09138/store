@@ -233,6 +233,7 @@
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
+    <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
@@ -280,6 +281,10 @@
     <Content Include="Content\angularjs\i18n\angular-locale_en-vi.js" />
     <Content Include="Content\angularjs\i18n\angular-locale_vi-vn.js" />
     <Content Include="Content\base.js" />
+    <Content Include="Content\bootstrap\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\bootstrap\bootstrap-select.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-select.min.js" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.js" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
@@ -316,6 +321,9 @@
     <Content Include="Content\gritter\jquery.gritter.css" />
     <Content Include="Content\gritter\jquery.gritter.js" />
     <Content Include="Content\gritter\jquery.gritter.min.js" />
+    <Content Include="Content\jquery-ui.min.css" />
+    <Content Include="Content\jquery-ui.min.js" />
+    <Content Include="Content\moment.min.js" />
     <Content Include="Content\parsley\parsley.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -358,6 +366,9 @@
     <Content Include="Areas\Partner\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Partner\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Partner\Views\Customer\Add.cshtml" />
+    <Content Include="Areas\Location\Views\web.config" />
+    <Content Include="Areas\Partner\Views\Customer\_FormPartial.cshtml" />
+    <Content Include="Areas\Partner\Views\Customer\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -437,6 +448,9 @@
     <Folder Include="Areas\Internal\Controllers\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\Internal\Views\Shared\" />
+    <Folder Include="Areas\Location\Controllers\" />
+    <Folder Include="Areas\Location\Models\" />
+    <Folder Include="Areas\Location\Views\Shared\" />
     <Folder Include="Areas\Partner\Models\" />
     <Folder Include="Areas\Report\Controllers\" />
     <Folder Include="Areas\Report\Models\" />

@@ -121,6 +121,37 @@
                 }
             ]
         });
+
+        //LocationName
+        $("#LocationName").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("FindLocationByName", "Customer", new { Area = "Partner" })',
+                    datatype: "json",
+                    data: {
+                        name: request.term
+                    },
+                    success: function (data) {
+                        response($.map(data, function (val, item) {
+                            return {
+                                label: val.Name,
+                                value: val.ID,
+                                id: val.ID
+                            }
+                        }))
+                    }
+                })
+            },
+            select: function (event, ui) {
+                event.preventDefault();
+                $("#LocationName").val(ui.item.label);
+                $("#LocationID").val(ui.item.id);
+            },
+            focus: function (event, ui) {
+                event.preventDefault();
+                $("#LocationName").val(ui.item.label);
+            }
+        });
     });
 
     $('#example tbody').on('click', 'tr', function () {
@@ -167,6 +198,12 @@
             });
         }
         return false;
+    });
+
+    $(function () {
+        $('#Birthdate').datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
     });
 </script>
 }

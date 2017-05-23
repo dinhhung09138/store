@@ -118,12 +118,12 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public CustomerModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            CustomerModel _item = new CustomerModel() { ID = Guid.NewGuid() };
             try
             {
-                CustomerModel _item = new CustomerModel() { ID = Guid.NewGuid() };
+                
                 using (var context = new StoreEntities())
                 {
                     var item = (from m in context.customers
@@ -169,17 +169,15 @@ namespace DataAccess
                     _item.Notes = item.notes;
 
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>

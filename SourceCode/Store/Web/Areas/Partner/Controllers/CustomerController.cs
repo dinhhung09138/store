@@ -26,6 +26,7 @@ namespace Web.Areas.Partner.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public JsonResult Index(CustomJqueryDataTableRequest requestData)
         {
             CustomerSrv _srvCustomer = new CustomerSrv();
@@ -41,13 +42,58 @@ namespace Web.Areas.Partner.Controllers
         
         public ActionResult Add()
         {
-            return PartialView();
+            CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
+            var _lGroup = _srvGroup.GetListForDisplay();
+            List<SelectListItem> group = new List<SelectListItem>();
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm khách hàng" });
+            foreach (var item in _lGroup)
+            {
+                group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
+            }
+            ViewBag.group = group;
+            CustomerModel model = new CustomerModel() { Insert = true };
+            return PartialView(model);
+        }
+
+        public ActionResult Edit(string id)
+        {
+            CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
+            var _lGroup = _srvGroup.GetListForDisplay();
+            List<SelectListItem> group = new List<SelectListItem>();
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm khách hàng" });
+            foreach (var item in _lGroup)
+            {
+                group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
+            }
+            ViewBag.group = group;
+
+            CustomerSrv _serCustomer = new CustomerSrv();
+            CustomerModel model = _serCustomer.Item(new Guid(id));
+            model.Insert = false;
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Find location by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public JsonResult FindLocationByName(string name)
+        {
+            LocationSrv _srvLocation = new LocationSrv();
+            return this.Json(_srvLocation.FindByName(name.ToLower()), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public JsonResult Save(CustomerModel model)
         {
-            return Json("ok");
+            if (!model.Insert)
+            {
+                model.ID = Guid.NewGuid();
+            }
+            CustomerSrv _srvCustomer = new CustomerSrv();
+            return this.Json(_srvCustomer.Save(model), JsonRequestBehavior.AllowGet);
         }
 
     }
