@@ -160,8 +160,7 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <button id="load">Loading</button><br /><br />
-            <button id="showModel">Show model</button>
+            <button id="demo">demo</button><br /><br />
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     Thong bao neu co se hien thi o day
@@ -170,7 +169,6 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     @RenderBody()
-
                 </div>
             </div>
         </div>
@@ -179,28 +177,24 @@
         <div class="col-md-12 col-sm-12 col-xs-12"></div>
     </div>
 
-    @Html.Partial("_Loading")
+    @*@Html.Partial("_Loading")*@
     @Html.Partial("_MultipleModel")
     @Scripts.Render("~/Content/js/bootstrap")
+    <!--Demo-->
     <script>
-        $(document).on('click', '#load', function (e) {
-            $('#loadingModel').modal('show');
+        $(document).on('click', '#demo', function (e) {
+            $.ajax({
+                url: '/home/requiredlogin',
+                type: 'get',
+                data: 'html',
+                success: function (result) {
+                    console.log(result);
+                    if (result.login && result.login == true) {
+                        console.log('required login');
+                    }
+                }
+            });
         });
-        $(document).on('click', '#showModel', function (e) {
-            $('#model01').modal('show');
-        });
-
-        function startLoading(){
-            $('#loadingModel').modal('show');
-        }
-        function stopLoading() {
-            $('#loadingModel').modal('hide');
-        }
-        $('#loadingModel').modal('show');
-        window.onload = stopLoading;
-        //$(document).ready(function () {
-        //    startLoading();
-        //});
     </script>
     <!--Check upload file-->
     <script>
@@ -209,7 +203,6 @@
             console.log(this.files[0]);
             getBase64(this.files[0]);
         });
-
 
         function getBase64(file) {
             var reader = new FileReader();

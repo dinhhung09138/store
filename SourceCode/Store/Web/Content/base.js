@@ -90,3 +90,14 @@ $(document).ready(function () {
         showSubtext: true
     });
 });
+
+/*Loading model when page start and stop when finish load page*/
+function startLoading() {
+    $('#loadingModel').modal('show');
+}
+function stopLoading() {
+    $('#loadingModel').modal('hide');
+}
+$('#loadingModel').modal('show');
+window.onload = stopLoading;
+/*End Loading model*/

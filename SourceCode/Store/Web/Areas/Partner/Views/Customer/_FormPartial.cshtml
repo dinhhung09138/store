@@ -192,7 +192,18 @@
                             </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
-
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <img id="thumbnail" src="@Model.Avatar" style="width: 100%;"/>
+                                    @Html.HiddenFor(m => m.Avatar)
+                                    @Html.HiddenFor(m => m.ImageFileName)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <input type="file" accept="image/png, image/jpeg"/>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -294,6 +305,26 @@
             }
         });
 
+        $('input[type=file]').change(function () {
+            console.log(this.files[0]);
+            getBase64(this.files[0], '#thumbnail', '#ImageFileName', '#Avatar');
+        });
+
+        function getBase64(file, img, fileName, filebase64) {
+            $(fileName).val(file.name);
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                var image = new Image();
+                image.src = reader.result;
+                image.width = 100;
+                $(img).html(image);
+                $(filebase64).val(reader.result);
+            };
+            reader.onerror = function (error) {
+                console.log('Can not render file: ', error);
+            };
+        }
     });
 
 </script>

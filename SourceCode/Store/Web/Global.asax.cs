@@ -32,8 +32,7 @@ namespace Web
        {
 
             Exception exce = Server.GetLastError().GetBaseException();
-            
-            Common.ErrorLog.AddLogToFile(exce.Message + "</br>" + exce.StackTrace);
+            Logs.AddLog("Application_Error", "", exce.Source, exce.Message);
             var httpContext = ((MvcApplication)sender).Context;
             var currentController = " ";
             var currentAction = " ";

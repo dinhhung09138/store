@@ -1,21 +1,20 @@
-﻿using System;
+﻿using Common;
+using Common.JqueryDataTable;
+using Common.Status;
+using DataAccess;
+using Model;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Filters;
-using DataAccess;
-using Common.Status;
-using Common.JqueryDataTable;
-using Model;
-using System.IO;
-using System.Drawing;
-using Common;
 
 namespace Web.Areas.Partner.Controllers
 {
-    [CustomAuthorize]
-    public class CustomerController : Controller
+    public class DeliverController : Controller
     {
         // GET: Partner/Customer
         /// <summary>
@@ -23,6 +22,7 @@ namespace Web.Areas.Partner.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
+        [CustomAuthorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -34,29 +34,29 @@ namespace Web.Areas.Partner.Controllers
         public JsonResult Index(CustomJqueryDataTableRequest requestData)
         {
             requestData = requestData.SetOrderingColumnName();
-            CustomerSrv _srvCustomer = new CustomerSrv();
-            Dictionary<string, object> _return = _srvCustomer.List(requestData);
+            DeliverSrv _srvDeliver = new DeliverSrv();
+            Dictionary<string, object> _return = _srvDeliver.List(requestData);
             if ((DatabaseExecute)_return["status"] == DatabaseExecute.Success)
             {
-                JqueryDataTableResponse<CustomerModel> itemResponse = _return["data"] as JqueryDataTableResponse<CustomerModel>;
+                JqueryDataTableResponse<DeliverModel> itemResponse = _return["data"] as JqueryDataTableResponse<DeliverModel>;
                 return this.Json(itemResponse, JsonRequestBehavior.AllowGet);
             }
-            return this.Json(new JqueryDataTableResponse<CustomerModel>(), JsonRequestBehavior.AllowGet);
+            return this.Json(new JqueryDataTableResponse<DeliverModel>(), JsonRequestBehavior.AllowGet);
         }
 
 
         public ActionResult Add()
         {
-            CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
+            DeliverGroupSrv _srvGroup = new DeliverGroupSrv();
             var _lGroup = _srvGroup.GetListForDisplay();
             List<SelectListItem> group = new List<SelectListItem>();
-            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm khách hàng" });
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm giao hàng" });
             foreach (var item in _lGroup)
             {
                 group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
             ViewBag.group = group;
-            CustomerModel model = new CustomerModel()
+            DeliverModel model = new DeliverModel()
             {
                 Insert = true,
                 IsCompany = false,
@@ -69,18 +69,18 @@ namespace Web.Areas.Partner.Controllers
 
         public ActionResult Edit(string id)
         {
-            CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
+            DeliverGroupSrv _srvGroup = new DeliverGroupSrv();
             var _lGroup = _srvGroup.GetListForDisplay();
             List<SelectListItem> group = new List<SelectListItem>();
-            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm khách hàng" });
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm giao hàng" });
             foreach (var item in _lGroup)
             {
                 group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
             ViewBag.group = group;
 
-            CustomerSrv _serCustomer = new CustomerSrv();
-            CustomerModel model = _serCustomer.Item(new Guid(id));
+            DeliverSrv _serDeliver = new DeliverSrv();
+            DeliverModel model = _serDeliver.Item(new Guid(id));
             model.Insert = false;
             return PartialView(model);
         }
@@ -98,16 +98,16 @@ namespace Web.Areas.Partner.Controllers
         }
 
         [HttpPost]
-        public JsonResult Save(CustomerModel model)
+        public JsonResult Save(DeliverModel model)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
-            if(model.ImageFileName.Length > 0)
+            if (model.ImageFileName.Length > 0)
             {
                 string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.'));
                 byte[] file = model.Avatar.ConvertBase64ToByte(extension);
-                if(SaveAvatar(file, Server.MapPath("~/Files/Customer/" + model.Name.ConvertToTitleToAlias() + "." + extension)))
+                if (SaveAvatar(file, Server.MapPath("~/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension)))
                 {
-                    model.Avatar = "/Files/Customer/" + model.Name.ConvertToTitleToAlias() + "." + extension;
+                    model.Avatar = "/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension;
                 }
             }
             if (model.Insert)
@@ -119,10 +119,10 @@ namespace Web.Areas.Partner.Controllers
             {
                 model.UpdatedBy = user.ID;
             }
-            CustomerSrv _srvCustomer = new CustomerSrv();
+            DeliverSrv _srvCustomer = new DeliverSrv();
             return this.Json(_srvCustomer.Save(model), JsonRequestBehavior.AllowGet);
         }
-        
+
         private bool SaveAvatar(byte[] file, string fileName)
         {
             try

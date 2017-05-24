@@ -131,7 +131,7 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult RequiredLogin()
         {
-            return PartialView();
+            return this.Json(new { login = true }, JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
