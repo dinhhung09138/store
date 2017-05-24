@@ -27,8 +27,10 @@ namespace Web.Areas.Partner.Controllers
         }
 
         [AllowAnonymous]
+        [HttpPost]
         public JsonResult Index(CustomJqueryDataTableRequest requestData)
         {
+            requestData = requestData.SetOrderingColumnName();
             CustomerSrv _srvCustomer = new CustomerSrv();
             Dictionary<string, object> _return = _srvCustomer.List(requestData);
             if ((DatabaseExecute)_return["status"] == DatabaseExecute.Success)
@@ -51,7 +53,7 @@ namespace Web.Areas.Partner.Controllers
                 group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
             ViewBag.group = group;
-            CustomerModel model = new CustomerModel() { Insert = true };
+            CustomerModel model = new CustomerModel() { Insert = true, IsCompany = false, Gender = true };
             return PartialView(model);
         }
 
@@ -88,9 +90,15 @@ namespace Web.Areas.Partner.Controllers
         [HttpPost]
         public JsonResult Save(CustomerModel model)
         {
-            if (!model.Insert)
+            Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
+            if (model.Insert)
             {
                 model.ID = Guid.NewGuid();
+                model.CreateBy = user.ID;
+            }
+            else
+            { 
+                model.UpdatedBy = user.ID;
             }
             CustomerSrv _srvCustomer = new CustomerSrv();
             return this.Json(_srvCustomer.Save(model), JsonRequestBehavior.AllowGet);

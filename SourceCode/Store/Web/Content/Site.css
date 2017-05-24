@@ -21,6 +21,11 @@
     color:white !important;
 }
 
+.primary-button {
+    background: rgb(0, 150, 136) !important;
+    color:white !important;
+}
+
 /*Login form*/
 .form-title {
 }
@@ -351,4 +356,17 @@
 
 .color-red {
     color:red;
+}
+
+.input-validation-error {
+    border-color: #d9534f;
+    background: #d9534f;
+}
+
+.field-validation-error {
+    color:#d9534f;
+}
+
+.ui-autocomplete{
+    z-index: 9999;
 }

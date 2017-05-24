@@ -127,8 +127,10 @@ namespace DataAccess
                 using (var context = new StoreEntities())
                 {
                     var item = (from m in context.customers
-                                join g in context.customer_group on m.group_id equals g.id
-                                join l in context.locations on m.location_id equals l.id
+                                join g in context.customer_group on m.group_id equals g.id into grour_cus
+                                from g1 in grour_cus.DefaultIfEmpty()
+                                join l in context.locations on m.location_id equals l.id into lc_cus
+                                from l1 in lc_cus.DefaultIfEmpty()
                                 where m.id == id
                                 select new
                                 {
@@ -141,13 +143,13 @@ namespace DataAccess
                                     m.address,
                                     m.avatar,
                                     m.location_id,
-                                    LocationName = l.name,
+                                    LocationName = l1.name,
                                     m.maps,
                                     m.taxcode,
                                     m.is_company,
                                     m.gender,
                                     m.group_id,
-                                    GroupName = g.name,
+                                    GroupName = g1.name,
                                     m.notes
                                 }).First();
                     _item.ID = item.id;
@@ -202,6 +204,7 @@ namespace DataAccess
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
                         md.location_id = model.LocationID;
                         md.maps = model.Maps;
                         md.taxcode = model.TaxCode;
@@ -223,6 +226,7 @@ namespace DataAccess
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
                         md.location_id = model.LocationID;
                         md.maps = model.Maps;
                         md.taxcode = model.TaxCode;
