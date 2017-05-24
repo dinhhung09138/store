@@ -125,5 +125,23 @@ namespace Common
             }
             return str.Trim();
         }
+
+        /// <summary>
+        /// Convert base64 to byte base on image extension
+        /// </summary>
+        /// <param name="base64">base64 string</param>
+        /// <param name="type">Image type</param>
+        /// <returns></returns>
+        public static byte[] ConvertBase64ToByte(this string base64, string type)
+        {
+            if (type == "png")
+                return Convert.FromBase64String(base64.Replace("data:image/png;base64,", ""));
+            if (type == "jpeg")
+                return Convert.FromBase64String(base64.Replace("data:image/jpeg;base64,", ""));
+            if (type == "jpg")
+                return Convert.FromBase64String(base64.Replace("data:image/jpg;base64,", ""));
+            return Convert.FromBase64String(base64.Replace("data:image/png;base64,", ""));
+
+        }
     }
 }
