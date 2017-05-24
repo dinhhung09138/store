@@ -108,6 +108,7 @@ namespace DataAccess
                 _return.Add("status", DatabaseExecute.Error);
                 _return.Add("systemMessage", ex.Message);
                 _return.Add("message", DatabaseMessage.LIST_ERROR);
+                Common.Logs.AddLog("Customersvr/List", "", ex.StackTrace, ex.Message);
             }
 
             return _return;
@@ -169,7 +170,7 @@ namespace DataAccess
                     _item.GroupID = item.group_id;
                     _item.GroupName = item.GroupName;
                     _item.Notes = item.notes;
-
+                    _item.ImageFileName = "";
                 }
             }
             catch (Exception ex)

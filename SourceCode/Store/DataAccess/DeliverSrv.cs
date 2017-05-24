@@ -88,17 +88,18 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public DeliverModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            DeliverModel _item = new DeliverModel() { ID = Guid.NewGuid() };
             try
             {
-                DeliverModel _item = new DeliverModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
                     var item = (from m in context.delivers
-                                join g in context.deliver_group on m.group_id equals g.id
-                                join l in context.locations on m.location_id equals l.id
+                                join g in context.deliver_group on m.group_id equals g.id into group_deliver
+                                from g1 in group_deliver.DefaultIfEmpty()
+                                join l in context.locations on m.location_id equals l.id into location_deliver
+                                from l1 in location_deliver.DefaultIfEmpty()
                                 where m.id == id
                                 select new
                                 {
@@ -111,12 +112,12 @@ namespace DataAccess
                                     m.address,
                                     m.avatar,
                                     m.location_id,
-                                    LocationName = l.name,
+                                    LocationName = l1.name,
                                     m.taxcode,
                                     m.is_company,
                                     m.gender,
                                     m.group_id,
-                                    GroupName = g.name,
+                                    GroupName = g1.name,
                                     m.notes
                                 }).First();
                     _item.ID = item.id;
@@ -136,17 +137,15 @@ namespace DataAccess
                     _item.GroupName = item.GroupName;
                     _item.Notes = item.notes;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>
@@ -171,6 +170,7 @@ namespace DataAccess
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
                         md.location_id = model.LocationID;
                         md.taxcode = model.TaxCode;
                         md.is_company = model.IsCompany;
@@ -191,6 +191,7 @@ namespace DataAccess
                         md.phone = model.Phone;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
                         md.location_id = model.LocationID;
                         md.taxcode = model.TaxCode;
                         md.is_company = model.IsCompany;

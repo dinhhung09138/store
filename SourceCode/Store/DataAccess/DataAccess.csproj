@@ -173,6 +173,7 @@
     <Compile Include="supplier.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="SupplierSrv.cs" />
     <Compile Include="supplier_group.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

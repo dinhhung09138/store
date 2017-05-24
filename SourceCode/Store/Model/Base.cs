@@ -10,6 +10,11 @@ namespace Model
     public class Base
     {
         /// <summary>
+        /// Using when upload image for use.
+        /// </summary>
+        public string ImageFileName { get; set; }
+
+        /// <summary>
         /// User creates item
         /// </summary>
         [Required(ErrorMessage = "Nhân viên tạo dữ liệu không được rỗng")]

@@ -6,12 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace DataAccess
 {
-    /// <summary>
-    /// Delivery group service
-    /// </summary>
-    public class DeliverGroupSrv
+    public class SupplierSrv
     {
         /// <summary>
         /// Get list item
@@ -24,37 +22,47 @@ namespace DataAccess
             try
             {
                 //Declare response data to json object
-                JqueryDataTableResponse<DeliverGroupModel> itemResponse = new JqueryDataTableResponse<DeliverGroupModel>();
+                JqueryDataTableResponse<SupplierModel> itemResponse = new JqueryDataTableResponse<SupplierModel>();
                 //List of data
-                List<DeliverGroupModel> _list = new List<DeliverGroupModel>();
+                List<SupplierModel> _list = new List<SupplierModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.deliver_group where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
+                    var l = (from a in context.suppliers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
                     if (!string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.name.ToLower().Contains(searchValue)).ToList();
+                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
+                                    m.address.ToLower().Contains(searchValue) ||
+                                    m.phone.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new DeliverGroupModel()
+                        _list.Add(new SupplierModel()
                         {
                             ID = item.id,
-                            Name = item.name
+                            Name = item.name,
+                            Address = item.address,
+                            Phone = item.phone
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
-                    IOrderedEnumerable<DeliverGroupModel> _sortList = null;
+                    IOrderedEnumerable<SupplierModel> _sortList = null;
                     foreach (var col in request.order)
                     {
                         switch (col.ColumnName)
                         {
                             case "Name":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                break;
+                            case "Address":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                                break;
+                            case "Phone":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
                                 break;
                         }
                     }
@@ -78,30 +86,53 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public SupplierModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            SupplierModel _item = new SupplierModel() { ID = Guid.NewGuid() };
             try
             {
-                DeliverGroupModel _item = new DeliverGroupModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
-                    var item = context.deliver_group.First(m => m.id == id);
+                    var item = (from m in context.suppliers
+                                join g in context.supplier_group on m.group_id equals g.id into group_supplier
+                                from g1 in group_supplier.DefaultIfEmpty()
+                                where m.id == id
+                                select new
+                                {
+                                    m.id,
+                                    m.code,
+                                    m.name,
+                                    m.phone,
+                                    m.email,
+                                    m.address,
+                                    m.avatar,
+                                    m.taxcode,
+                                    m.company_name,
+                                    m.group_id,
+                                    GroupName = g1.name,
+                                    m.notes
+                                }).First();
                     _item.ID = item.id;
+                    _item.Code = item.code;
                     _item.Name = item.name;
+                    _item.Phone = item.phone;
+                    _item.Email = item.email;
+                    _item.Address = item.address;
+                    _item.Avatar = item.avatar;
+                    _item.TaxCode = item.taxcode;
+                    _item.CompanyName = item.company_name;
+                    _item.GroupName = item.GroupName;
                     _item.Notes = item.notes;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>
@@ -109,33 +140,47 @@ namespace DataAccess
         /// </summary>
         /// <param name="model">Motel</param>
         /// <returns>Dictionary</returns>
-        public Dictionary<string, object> Save(DeliverGroupModel model)
+        public Dictionary<string, object> Save(SupplierModel model)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
                 using (var context = new StoreEntities())
                 {
-                    deliver_group md = new deliver_group();
+                    supplier md = new supplier();
                     if (model.Insert)
                     {
                         md.id = Guid.NewGuid();
                         md.name = model.Name;
+                        md.code = model.Code;
+                        md.phone = model.Phone;
+                        md.address = model.Address;
+                        md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
+                        md.taxcode = model.TaxCode;
+                        md.company_name = model.CompanyName;
                         md.notes = model.Notes;
                         md.create_by = model.CreateBy;
                         md.create_date = DateTime.Now;
                         md.deleted = false;
-                        context.deliver_group.Add(md);
+                        context.suppliers.Add(md);
                         context.Entry(md).State = System.Data.Entity.EntityState.Added;
                     }
                     else
                     {
-                        md = context.deliver_group.FirstOrDefault(m => m.id == model.ID);
+                        md = context.suppliers.FirstOrDefault(m => m.id == model.ID);
                         md.name = model.Name;
+                        md.code = model.Code;
+                        md.phone = model.Phone;
+                        md.address = model.Address;
+                        md.avatar = model.Avatar;
+                        md.group_id = model.GroupID;
+                        md.taxcode = model.TaxCode;
+                        md.company_name = model.CompanyName;
                         md.notes = model.Notes;
                         md.update_by = model.UpdatedBy;
                         md.update_date = DateTime.Now;
-                        context.deliver_group.Attach(md);
+                        context.suppliers.Attach(md);
                         context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                     }
                     context.SaveChanges();
@@ -166,11 +211,11 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    var md = context.deliver_group.First(m => m.id == id);
+                    var md = context.suppliers.First(m => m.id == id);
                     md.deleted = true;
                     md.delete_by = userID;
                     md.delete_date = DateTime.Now;
-                    context.deliver_group.Attach(md);
+                    context.suppliers.Attach(md);
                     context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }
@@ -186,25 +231,5 @@ namespace DataAccess
 
             return _return;
         }
-
-
-        /// <summary>
-        /// Get list group of customer to display on dropdown controll (or for something else) in other form
-        /// </summary>
-        /// <returns></returns>
-        public List<DeliverGroupModel> GetListForDisplay()
-        {
-            List<DeliverGroupModel> _return = new List<DeliverGroupModel>();
-            using (var context = new StoreEntities())
-            {
-                var list = (from a in context.deliver_group where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
-                foreach (var item in list)
-                {
-                    _return.Add(new DeliverGroupModel() { ID = item.id, Name = item.name });
-                }
-            }
-            return _return;
-        }
-
     }
 }
