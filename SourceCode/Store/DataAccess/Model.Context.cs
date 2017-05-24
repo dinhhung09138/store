@@ -62,5 +62,6 @@ namespace DataAccess
         public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<deliver> delivers { get; set; }
         public virtual DbSet<employee> employees { get; set; }
+        public virtual DbSet<config> configs { get; set; }
     }
 }
