@@ -46,6 +46,17 @@
           <Property Name="delete_by" Type="uniqueidentifier" />
           <Property Name="delete_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="use_date" Type="bit" Nullable="false" />
+          <Property Name="value1" Type="nvarchar" MaxLength="100" />
+          <Property Name="value2" Type="nvarchar" MaxLength="50" />
+          <Property Name="value3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="contract_type">
           <Key>
             <PropertyRef Name="code" />
@@ -487,6 +498,7 @@
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="birthdate" Type="datetime" />
           <Property Name="avatar" Type="varchar" MaxLength="100" />
           <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="address" Type="nvarchar" MaxLength="50" />
@@ -1126,6 +1138,7 @@
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="branch_employee" EntityType="Self.branch_employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="config" EntityType="Self.config" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contract_type" EntityType="Self.contract_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer_group" EntityType="Self.customer_group" Schema="dbo" store:Type="Tables" />
@@ -1834,6 +1847,7 @@
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="stock_in" Relationship="Self.FK_stock_in_supplier" FromRole="supplier" ToRole="stock_in" />
           <NavigationProperty Name="supplier_group" Relationship="Self.FK_supplier_supplier_group" FromRole="supplier" ToRole="supplier_group" />
+          <Property Name="birthdate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="supplier_group">
           <Key>
@@ -2590,6 +2604,7 @@
             <End Role="employee" EntitySet="employees" />
             <End Role="user" EntitySet="users" />
           </AssociationSet>
+          <EntitySet Name="configs" EntityType="StoreModel.config" />
           </EntityContainer>
         <EntityType Name="customer">
           <Key>
@@ -2773,6 +2788,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="use_date" Type="Boolean" Nullable="false" />
+          <Property Name="value1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="value2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3207,6 +3233,7 @@
           <EntitySetMapping Name="suppliers">
             <EntityTypeMapping TypeName="StoreModel.supplier">
               <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -3379,6 +3406,18 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="configs">
+            <EntityTypeMapping TypeName="StoreModel.config">
+              <MappingFragment StoreEntitySet="config">
+                <ScalarProperty Name="value3" ColumnName="value3" />
+                <ScalarProperty Name="value2" ColumnName="value2" />
+                <ScalarProperty Name="value1" ColumnName="value1" />
+                <ScalarProperty Name="use_date" ColumnName="use_date" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
