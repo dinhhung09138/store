@@ -58,6 +58,9 @@
     <Compile Include="branch_employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="config.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="contract_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
