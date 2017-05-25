@@ -236,6 +236,7 @@
     <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Partner\Controllers\DeliverController.cs" />
+    <Compile Include="Areas\Partner\Controllers\SupplierController.cs" />
     <Compile Include="Areas\Partner\PartnerAreaRegistration.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Sale\SaleAreaRegistration.cs" />
@@ -248,7 +249,6 @@
     <Compile Include="Filters\AjaxAuthorizeAttribute.cs" />
     <Compile Include="Filters\APIAuthorizationRequiredFilters.cs" />
     <Compile Include="Filters\CustomAuthorizeAttribute.cs" />
-    <Compile Include="Filters\SkipAuthorizeFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -291,6 +291,12 @@
     <Content Include="Content\bootstrap\bootstrap.js" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\calendar\fullcalendar.css" />
+    <Content Include="Content\calendar\fullcalendar.js" />
+    <Content Include="Content\calendar\fullcalendar.min.css" />
+    <Content Include="Content\calendar\fullcalendar.min.js" />
+    <Content Include="Content\calendar\fullcalendar.print.css" />
+    <Content Include="Content\calendar\fullcalendar.print.min.css" />
     <Content Include="Content\chartjs\Chart.bundle.js" />
     <Content Include="Content\chartjs\Chart.bundle.min.js" />
     <Content Include="Content\chartjs\Chart.js" />
@@ -371,6 +377,14 @@
     <Content Include="Areas\Location\Views\web.config" />
     <Content Include="Areas\Partner\Views\Customer\_FormPartial.cshtml" />
     <Content Include="Areas\Partner\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Partner\Views\Deliver\Index.cshtml" />
+    <Content Include="Areas\Partner\Views\Deliver\Add.cshtml" />
+    <Content Include="Areas\Partner\Views\Deliver\Edit.cshtml" />
+    <Content Include="Areas\Partner\Views\Deliver\_FormPartial.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\Index.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\Add.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\Edit.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\_FormPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -436,6 +450,7 @@
     <Content Include="Views\Home\DataTable.cshtml" />
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\RequiredLogin.cshtml" />
+    <Content Include="Views\Home\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -455,7 +470,6 @@
     <Folder Include="Areas\Location\Models\" />
     <Folder Include="Areas\Location\Views\Shared\" />
     <Folder Include="Areas\Partner\Models\" />
-    <Folder Include="Areas\Partner\Views\Deliver\" />
     <Folder Include="Areas\Report\Controllers\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Report\Views\Shared\" />
