@@ -43,6 +43,12 @@ namespace Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Calendar()
+        {
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public JsonResult GetData(CustomJqueryDataTableRequest requestData)

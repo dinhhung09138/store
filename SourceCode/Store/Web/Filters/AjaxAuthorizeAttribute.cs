@@ -29,15 +29,7 @@ namespace Web.Filters
                 filterContext.Result = new RedirectResult(RedirectTo);
                 return;
             }
-
-            bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
-                || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
-                || filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipAuthorizeFilterAttribute), inherit: true).Any();
-            if (skipAuthorization)
-            {
-                return;
-            }
-
+            
             //Check if the requesting user has the permission to run the controller's action
             //if (!Authorization.HasPermission(filterContext.ActionDescriptor.ControllerDescriptor.ControllerName, filterContext.ActionDescriptor.ActionName, Convert.ToString(filterContext.HttpContext.Request.RequestContext.RouteData.DataTokens["area"])))
             //{

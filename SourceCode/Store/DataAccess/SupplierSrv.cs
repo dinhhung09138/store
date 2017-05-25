@@ -9,6 +9,9 @@ using System.Linq;
 
 namespace DataAccess
 {
+    /// <summary>
+    /// Supllier service
+    /// </summary>
     public class SupplierSrv
     {
         /// <summary>
@@ -27,16 +30,28 @@ namespace DataAccess
                 List<SupplierModel> _list = new List<SupplierModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.suppliers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    var l = (from a in context.suppliers
+                             where !a.deleted
+                             orderby a.name
+                             select new
+                             {
+                                 a.id,
+                                 a.name,
+                                 a.address,
+                                 a.phone,
+                                 a.company_name
+                             }).ToList();
+
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
-                    if (!string.IsNullOrWhiteSpace(request.search.Value))
+                    if (request.search != null && !string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                                    m.phone.ToLower().Contains(searchValue) ||
+                                    m.company_name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -46,36 +61,48 @@ namespace DataAccess
                             ID = item.id,
                             Name = item.name,
                             Address = item.address,
-                            Phone = item.phone
+                            Phone = item.phone,
+                            CompanyName = item.company_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
                     IOrderedEnumerable<SupplierModel> _sortList = null;
-                    foreach (var col in request.order)
+                    if (request.order != null)
                     {
-                        switch (col.ColumnName)
+                        foreach (var col in request.order)
                         {
-                            case "Name":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
-                                break;
-                            case "Address":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
-                                break;
-                            case "Phone":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
-                                break;
+                            switch (col.ColumnName)
+                            {
+                                case "Name":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                    break;
+                                case "Phone":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
+                                    break;
+                                case "Address":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                                    break;
+                                case "CompanyName":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.CompanyName) : _sortList.Sort(col.Dir, m => m.CompanyName);
+                                    break;
+                            }
                         }
+                        itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
                     }
-                    itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
+                    else
+                    {
+                        itemResponse.data = _list.Skip(request.start).Take(request.length).ToList();
+                    }
                     _return.Add("data", itemResponse);
                 }
                 _return.Add("status", DatabaseExecute.Success);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.LIST_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.LIST_ERROR);
+                //Common.Logs.AddLog("Customersvr/List", "", ex.StackTrace, ex.Message);
             }
 
             return _return;
@@ -91,17 +118,19 @@ namespace DataAccess
             SupplierModel _item = new SupplierModel() { ID = Guid.NewGuid() };
             try
             {
+
                 using (var context = new StoreEntities())
                 {
                     var item = (from m in context.suppliers
-                                join g in context.supplier_group on m.group_id equals g.id into group_supplier
-                                from g1 in group_supplier.DefaultIfEmpty()
+                                join g in context.supplier_group on m.group_id equals g.id into grour_spl
+                                from g1 in grour_spl.DefaultIfEmpty()
                                 where m.id == id
                                 select new
                                 {
                                     m.id,
                                     m.code,
                                     m.name,
+                                    m.birthdate,
                                     m.phone,
                                     m.email,
                                     m.address,
@@ -115,6 +144,7 @@ namespace DataAccess
                     _item.ID = item.id;
                     _item.Code = item.code;
                     _item.Name = item.name;
+                    _item.Birthdate = item.birthdate;
                     _item.Phone = item.phone;
                     _item.Email = item.email;
                     _item.Address = item.address;
@@ -123,6 +153,7 @@ namespace DataAccess
                     _item.CompanyName = item.company_name;
                     _item.GroupName = item.GroupName;
                     _item.Notes = item.notes;
+                    _item.ImageFileName = "";
                 }
             }
             catch (Exception ex)
@@ -153,12 +184,14 @@ namespace DataAccess
                         md.id = Guid.NewGuid();
                         md.name = model.Name;
                         md.code = model.Code;
+                        md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
+                        md.email = model.Email;
                         md.address = model.Address;
                         md.avatar = model.Avatar;
                         md.group_id = model.GroupID;
-                        md.taxcode = model.TaxCode;
                         md.company_name = model.CompanyName;
+                        md.taxcode = model.TaxCode;
                         md.notes = model.Notes;
                         md.create_by = model.CreateBy;
                         md.create_date = DateTime.Now;
@@ -171,8 +204,10 @@ namespace DataAccess
                         md = context.suppliers.FirstOrDefault(m => m.id == model.ID);
                         md.name = model.Name;
                         md.code = model.Code;
+                        md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
                         md.address = model.Address;
+                        md.email = model.Email;
                         md.avatar = model.Avatar;
                         md.group_id = model.GroupID;
                         md.taxcode = model.TaxCode;
@@ -231,5 +266,6 @@ namespace DataAccess
 
             return _return;
         }
+
     }
 }

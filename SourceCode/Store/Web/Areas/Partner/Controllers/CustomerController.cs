@@ -29,7 +29,7 @@ namespace Web.Areas.Partner.Controllers
             return View();
         }
 
-        [AllowAnonymous]
+        [AjaxAuthorize]
         [HttpPost]
         public JsonResult Index(CustomJqueryDataTableRequest requestData)
         {
@@ -46,6 +46,7 @@ namespace Web.Areas.Partner.Controllers
 
 
         [AjaxAuthorize]
+        [HttpGet]
         public ActionResult Add()
         {
             CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
@@ -69,6 +70,7 @@ namespace Web.Areas.Partner.Controllers
         }
 
         [AjaxAuthorize]
+        [HttpGet]
         public ActionResult Edit(string id)
         {
             CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
@@ -92,7 +94,8 @@ namespace Web.Areas.Partner.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        [AjaxAuthorize]
+        [HttpPost]
         public JsonResult FindLocationByName(string name)
         {
             LocationSrv _srvLocation = new LocationSrv();

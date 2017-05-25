@@ -33,6 +33,11 @@ namespace Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Birthday
+        /// </summary>
+        public DateTime? Birthdate { get; set; }
+
+        /// <summary>
         /// Avatar
         /// </summary>
         [StringLength(100, ErrorMessage = "Đường dẫn ảnh không vượt quá 100 ký tự")]
@@ -82,7 +87,7 @@ namespace Model
         /// <summary>
         /// Notes
         /// </summary>
-        [StringLength(266, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
+        [StringLength(255, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
         public string Notes { get; set; }
     }
 }

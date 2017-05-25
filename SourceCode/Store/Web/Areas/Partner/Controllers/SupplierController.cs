@@ -14,9 +14,8 @@ using Web.Filters;
 
 namespace Web.Areas.Partner.Controllers
 {
-    public class DeliverController : Controller
+    public class SupplierController : Controller
     {
-        // GET: Partner/Customer
         /// <summary>
         /// 
         /// </summary>
@@ -34,14 +33,14 @@ namespace Web.Areas.Partner.Controllers
         public JsonResult Index(CustomJqueryDataTableRequest requestData)
         {
             requestData = requestData.SetOrderingColumnName();
-            DeliverSrv _srvDeliver = new DeliverSrv();
-            Dictionary<string, object> _return = _srvDeliver.List(requestData);
+            SupplierSrv _srvSupplier = new SupplierSrv();
+            Dictionary<string, object> _return = _srvSupplier.List(requestData);
             if ((DatabaseExecute)_return["status"] == DatabaseExecute.Success)
             {
-                JqueryDataTableResponse<DeliverModel> itemResponse = _return["data"] as JqueryDataTableResponse<DeliverModel>;
+                JqueryDataTableResponse<SupplierModel> itemResponse = _return["data"] as JqueryDataTableResponse<SupplierModel>;
                 return this.Json(itemResponse, JsonRequestBehavior.AllowGet);
             }
-            return this.Json(new JqueryDataTableResponse<DeliverModel>(), JsonRequestBehavior.AllowGet);
+            return this.Json(new JqueryDataTableResponse<SupplierModel>(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -49,20 +48,18 @@ namespace Web.Areas.Partner.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            DeliverGroupSrv _srvGroup = new DeliverGroupSrv();
+            SupplierGroupSrv _srvGroup = new SupplierGroupSrv();
             var _lGroup = _srvGroup.GetListForDisplay();
             List<SelectListItem> group = new List<SelectListItem>();
-            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm giao hàng" });
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm đối tác" });
             foreach (var item in _lGroup)
             {
                 group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
             ViewBag.group = group;
-            DeliverModel model = new DeliverModel()
+            SupplierModel model = new SupplierModel()
             {
                 Insert = true,
-                IsCompany = false,
-                Gender = true,
                 Avatar = "",
                 ImageFileName = ""
             };
@@ -73,18 +70,18 @@ namespace Web.Areas.Partner.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            DeliverGroupSrv _srvGroup = new DeliverGroupSrv();
+            SupplierGroupSrv _srvGroup = new SupplierGroupSrv();
             var _lGroup = _srvGroup.GetListForDisplay();
             List<SelectListItem> group = new List<SelectListItem>();
-            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm giao hàng" });
+            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm đối tác" });
             foreach (var item in _lGroup)
             {
                 group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
             ViewBag.group = group;
 
-            DeliverSrv _serDeliver = new DeliverSrv();
-            DeliverModel model = _serDeliver.Item(new Guid(id));
+            SupplierSrv _srvSupplier = new SupplierSrv();
+            SupplierModel model = _srvSupplier.Item(new Guid(id));
             model.Insert = false;
             return PartialView(model);
         }
@@ -104,18 +101,9 @@ namespace Web.Areas.Partner.Controllers
 
         [AjaxAuthorize]
         [HttpPost]
-        public JsonResult Save(DeliverModel model)
+        public JsonResult Save(SupplierModel model)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
-            if (model.ImageFileName.Length > 0)
-            {
-                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.'));
-                byte[] file = model.Avatar.ConvertBase64ToByte(extension);
-                if (SaveAvatar(file, Server.MapPath("~/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension)))
-                {
-                    model.Avatar = "/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension;
-                }
-            }
             if (model.Insert)
             {
                 model.ID = Guid.NewGuid();
@@ -125,8 +113,17 @@ namespace Web.Areas.Partner.Controllers
             {
                 model.UpdatedBy = user.ID;
             }
-            DeliverSrv _srvCustomer = new DeliverSrv();
-            return this.Json(_srvCustomer.Save(model), JsonRequestBehavior.AllowGet);
+            if (model.ImageFileName != null && model.ImageFileName.Length > 0)
+            {
+                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.') + 1);
+                byte[] file = model.Avatar.ConvertBase64ToByte(extension);
+                if (SaveAvatar(file, Server.MapPath("~/Files/Supplier/" + model.ID + "." + extension)))
+                {
+                    model.Avatar = "/Files/Supplier/" + model.ID + "." + extension;
+                }
+            }
+            SupplierSrv _srvSupplier = new SupplierSrv();
+            return this.Json(_srvSupplier.Save(model), JsonRequestBehavior.AllowGet);
         }
 
         private bool SaveAvatar(byte[] file, string fileName)
@@ -140,7 +137,7 @@ namespace Web.Areas.Partner.Controllers
                     return true;
                 }
             }
-            catch { return false; }
+            catch (Exception ex) { return false; }
 
         }
     }

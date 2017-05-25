@@ -29,8 +29,7 @@ namespace Web.Filters
 
             bool skipAuthorization = filterContext.ActionDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
                 || filterContext.ActionDescriptor.ControllerDescriptor.IsDefined(typeof(AllowAnonymousAttribute), inherit: true)
-                || filterContext.HttpContext.Request.IsAjaxRequest()
-                || filterContext.ActionDescriptor.GetCustomAttributes(typeof(SkipAuthorizeFilterAttribute), inherit: true).Any();
+                || filterContext.HttpContext.Request.IsAjaxRequest();
             if (skipAuthorization)
             {
                 return;

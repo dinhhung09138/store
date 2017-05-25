@@ -1,7 +1,7 @@
 ﻿@using Model
-@model CustomerModel
+@model DeliverModel
 @{
-    ViewBag.Title = "Đối tác - khách hàng";
+    ViewBag.Title = "Đối tác - Giao hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,7 +22,7 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Tên KH</th>
+                    <th>Tên</th>
                     <th>Giới tính</th>
                     <th>SDT</th>
                     <th>Địa chỉ</th>
@@ -39,7 +39,6 @@
 <div id="divContainer">
 
 </div>
-
 
 @section script{
     <script>
@@ -77,7 +76,7 @@
                 },
                 order: [[1, "asc"]],
                 ajax: {
-                    url: '/partner/customer/index',
+                    url: '/partner/deliver/index',
                     type: 'post',
                     data: function (d) {
                         //d.ModuleCode = ""
@@ -141,7 +140,7 @@
         function update(id) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/partner/customer/edit',
+                url: '/partner/deliver/edit',
                 type: 'get',
                 dataType: 'html',
                 data: {id : id },
@@ -151,7 +150,7 @@
                     }
                     $('#divContainer').html(result);
                     $('#loadingModel').modal('hide');
-                    
+
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 401 || xhr.status == 530) {
@@ -164,7 +163,7 @@
         $(document).on('click', '#btnAdd', function (e) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/partner/customer/add',
+                url: '/partner/deliver/add',
                 type: 'get',
                 dataType: 'html',
                 success: function (result) {

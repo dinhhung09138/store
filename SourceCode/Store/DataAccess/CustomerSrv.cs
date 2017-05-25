@@ -30,17 +30,22 @@ namespace DataAccess
                 using (var context = new StoreEntities())
                 {
                     var l = (from a in context.customers
+                             join g in context.customer_group on a.group_id equals g.id into grour_cus
+                             from g1 in grour_cus.DefaultIfEmpty()
+                             join loc in context.locations on a.location_id equals loc.id into lc_cus
+                             from l1 in lc_cus.DefaultIfEmpty()
                              where !a.deleted
                              orderby a.name
                              select new
                              {
                                  a.id,
-                                 a.code,
                                  a.gender,
                                  genderString = a.gender == true ? "Nam" : "Nữ",
                                  a.name,
                                  a.address,
-                                 a.phone
+                                 a.phone,
+                                 group_name = g1.name,
+                                 location_name = l1.name
                              }).ToList();
 
                     itemResponse.draw = request.draw;
@@ -49,11 +54,12 @@ namespace DataAccess
                     if (request.search != null && !string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.code.ToLower().Contains(searchValue) ||
-                                    m.name.ToLower().Contains(searchValue) ||
+                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.genderString.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                                    m.phone.ToLower().Contains(searchValue) ||
+                                    m.group_name.ToLower().Contains(searchValue) ||
+                                    m.location_name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -61,11 +67,12 @@ namespace DataAccess
                         _list.Add(new CustomerModel()
                         {
                             ID = item.id,
-                            Code = item.code,
                             Name = item.name,
                             GenderString = item.genderString,
                             Address = item.address,
-                            Phone = item.phone
+                            Phone = item.phone,
+                            GroupName = item.group_name,
+                            LocationName = item.location_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -76,9 +83,6 @@ namespace DataAccess
                         {
                             switch (col.ColumnName)
                             {
-                                case "Code":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
-                                    break;
                                 case "Name":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
                                     break;
@@ -90,6 +94,12 @@ namespace DataAccess
                                     break;
                                 case "Address":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                                    break;
+                                case "GroupName":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GroupName) : _sortList.Sort(col.Dir, m => m.GroupName);
+                                    break;
+                                case "LocationName":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.LocationName) : _sortList.Sort(col.Dir, m => m.LocationName);
                                     break;
                             }
                         }
@@ -105,10 +115,10 @@ namespace DataAccess
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.LIST_ERROR);
-                Common.Logs.AddLog("Customersvr/List", "", ex.StackTrace, ex.Message);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.LIST_ERROR);
+                //Common.Logs.AddLog("Customersvr/List", "", ex.StackTrace, ex.Message);
             }
 
             return _return;
@@ -204,6 +214,7 @@ namespace DataAccess
                         md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
                         md.address = model.Address;
+                        md.email = model.Email;
                         md.avatar = model.Avatar;
                         md.group_id = model.GroupID;
                         md.location_id = model.LocationID;
@@ -226,6 +237,7 @@ namespace DataAccess
                         md.birthdate = model.Birthdate;
                         md.phone = model.Phone;
                         md.address = model.Address;
+                        md.email = model.Email;
                         md.avatar = model.Avatar;
                         md.group_id = model.GroupID;
                         md.location_id = model.LocationID;

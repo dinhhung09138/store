@@ -29,7 +29,23 @@ namespace DataAccess
                 List<DeliverModel> _list = new List<DeliverModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.delivers where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    var l = (from a in context.delivers
+                             join g in context.deliver_group on a.group_id equals g.id into group_deliver
+                             from g1 in group_deliver.DefaultIfEmpty()
+                             join loc in context.locations on a.location_id equals loc.id into lc_cus
+                             from l1 in lc_cus.DefaultIfEmpty()
+                             where !a.deleted
+                             orderby a.name
+                             select new
+                             {
+                                 a.id,
+                                 a.name,
+                                 a.address,
+                                 a.phone,
+                                 a.email,
+                                 group_name = g1.name,
+                                 location_name = l1.name
+                             }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
@@ -38,7 +54,10 @@ namespace DataAccess
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                                    m.phone.ToLower().Contains(searchValue) ||
+                                    m.email.ToLower().Contains(searchValue) ||
+                                    m.group_name.ToLower().Contains(searchValue) ||
+                                    m.location_name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -48,7 +67,10 @@ namespace DataAccess
                             ID = item.id,
                             Name = item.name,
                             Address = item.address,
-                            Phone = item.phone
+                            Phone = item.phone,
+                            Email = item.email,
+                            GroupName = item.group_name,
+                            LocationName =item.location_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -65,6 +87,15 @@ namespace DataAccess
                                 break;
                             case "Phone":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
+                                break;
+                            case "Email":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Email) : _sortList.Sort(col.Dir, m => m.Email);
+                                break;
+                            case "GroupName":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GroupName) : _sortList.Sort(col.Dir, m => m.GroupName);
+                                break;
+                            case "LocationName":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.LocationName) : _sortList.Sort(col.Dir, m => m.LocationName);
                                 break;
                         }
                     }
