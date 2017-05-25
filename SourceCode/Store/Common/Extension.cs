@@ -136,10 +136,8 @@ namespace Common
         {
             if (type == "png")
                 return Convert.FromBase64String(base64.Replace("data:image/png;base64,", ""));
-            if (type == "jpeg")
+            if (type == "jpeg" || type == "jpg")
                 return Convert.FromBase64String(base64.Replace("data:image/jpeg;base64,", ""));
-            if (type == "jpg")
-                return Convert.FromBase64String(base64.Replace("data:image/jpg;base64,", ""));
             return Convert.FromBase64String(base64.Replace("data:image/png;base64,", ""));
 
         }

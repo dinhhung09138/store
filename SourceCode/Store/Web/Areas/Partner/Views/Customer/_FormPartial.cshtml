@@ -173,7 +173,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Ghi chus</label>
+                                    <label>Ghi chú</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -201,7 +201,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <input type="file" accept="image/png, image/jpeg"/>
+                                    <label class="custom-file-upload">
+                                        <input type="file" accept="image/png, image/jpeg" />
+                                        Chọn ảnh
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -256,6 +259,9 @@
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
+                        if (result.login !== undefined || result.login !== null) {
+                            window.location.href = '/home/login';
+                        }
                         if (result.status == 1) {
                             notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
                             table.ajax.reload();
@@ -265,8 +271,10 @@
                         }
                         $('#loadingModel').modal('hide');
                     },
-                    error: function (xhr) {
-                        console.log(xhr);
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 401 || xhr.status == 530) {
+                            window.location.href = '/home/login';
+                        }
                     }
                 });
             }
@@ -318,7 +326,8 @@
                 var image = new Image();
                 image.src = reader.result;
                 image.width = 100;
-                $(img).html(image);
+                //$(img).html(image);
+                $(img).attr('src', reader.result);
                 $(filebase64).val(reader.result);
             };
             reader.onerror = function (error) {

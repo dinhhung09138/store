@@ -63,6 +63,7 @@ namespace Web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            Session["user"] = null;
             UserLoginModel model = new UserLoginModel();
             if (TempData["model"] != null)
             {

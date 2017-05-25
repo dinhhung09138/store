@@ -14,7 +14,6 @@ using Common;
 
 namespace Web.Areas.Partner.Controllers
 {
-    [CustomAuthorize]
     public class CustomerController : Controller
     {
         // GET: Partner/Customer
@@ -23,6 +22,7 @@ namespace Web.Areas.Partner.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
+        [CustomAuthorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -45,6 +45,7 @@ namespace Web.Areas.Partner.Controllers
         }
 
 
+        [AjaxAuthorize]
         public ActionResult Add()
         {
             CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
@@ -67,6 +68,7 @@ namespace Web.Areas.Partner.Controllers
             return PartialView(model);
         }
 
+        [AjaxAuthorize]
         public ActionResult Edit(string id)
         {
             CustomerGroupSrv _srvGroup = new CustomerGroupSrv();
@@ -97,19 +99,11 @@ namespace Web.Areas.Partner.Controllers
             return this.Json(_srvLocation.FindByName(name.ToLower()), JsonRequestBehavior.AllowGet);
         }
 
+        [AjaxAuthorize]
         [HttpPost]
         public JsonResult Save(CustomerModel model)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
-            if(model.ImageFileName.Length > 0)
-            {
-                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.'));
-                byte[] file = model.Avatar.ConvertBase64ToByte(extension);
-                if(SaveAvatar(file, Server.MapPath("~/Files/Customer/" + model.Name.ConvertToTitleToAlias() + "." + extension)))
-                {
-                    model.Avatar = "/Files/Customer/" + model.Name.ConvertToTitleToAlias() + "." + extension;
-                }
-            }
             if (model.Insert)
             {
                 model.ID = Guid.NewGuid();
@@ -118,6 +112,15 @@ namespace Web.Areas.Partner.Controllers
             else
             {
                 model.UpdatedBy = user.ID;
+            }
+            if (model.ImageFileName != null && model.ImageFileName.Length > 0)
+            {
+                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.') + 1);
+                byte[] file = model.Avatar.ConvertBase64ToByte(extension);
+                if(SaveAvatar(file, Server.MapPath("~/Files/Customer/" + model.ID + "." + extension)))
+                {
+                    model.Avatar = "/Files/Customer/" + model.ID + "." + extension;
+                }
             }
             CustomerSrv _srvCustomer = new CustomerSrv();
             return this.Json(_srvCustomer.Save(model), JsonRequestBehavior.AllowGet);
@@ -134,7 +137,7 @@ namespace Web.Areas.Partner.Controllers
                     return true;
                 }
             }
-            catch { return false; }
+            catch(Exception ex) { return false; }
 
         }
     }

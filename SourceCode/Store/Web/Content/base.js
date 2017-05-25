@@ -12,7 +12,7 @@
     }
     $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: title,
+        //title: title,
         // (string | mandatory) the text inside the notification
         text: mesage,
         sticky: stickyValue,//if you want to fade out it or still sit there

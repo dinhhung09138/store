@@ -13,6 +13,9 @@ namespace Web.Filters
 
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
+            var url = new UrlHelper(filterContext.RequestContext);
+            RedirectTo = url.Action("RequiredLogin", "Home");
+            //
             if (filterContext == null)
             {
                 throw new ArgumentNullException("filterContext");

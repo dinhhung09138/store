@@ -160,15 +160,55 @@
     </div>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <button id="demo">demo</button><br /><br />
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     Thong bao neu co se hien thi o day
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Thông báo <a href="javascript:;" title="Xem tất cả thông báo"><i class="glyphicon glyphicon-modal-window" style="float: right;"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Thông báo <a href="javascript:;" title="Xem tất cả thông báo"><i class="glyphicon glyphicon-modal-window" style="float: right;"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            Kế hoạch cá nhân
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
                     @RenderBody()
+                </div>
+                <div class="col-md-2 col-sm-2 col-xs-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Thông báo <a href="javascript:;" title="Xem tất cả thông báo"><i class="glyphicon glyphicon-modal-window" style="float: right;"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Hoạt động gần đây<a href="javascript:;" title="Xem tất cả các hoạt động gần đây"><i class="glyphicon glyphicon-modal-window" style="float: right;"></i></a></h3>
+                        </div>
+                        <div class="panel-body">
+                            Panel content
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,50 +217,9 @@
         <div class="col-md-12 col-sm-12 col-xs-12"></div>
     </div>
 
-    @*@Html.Partial("_Loading")*@
+    @Html.Partial("_Loading")
     @Html.Partial("_MultipleModel")
     @Scripts.Render("~/Content/js/bootstrap")
-    <!--Demo-->
-    <script>
-        $(document).on('click', '#demo', function (e) {
-            $.ajax({
-                url: '/home/requiredlogin',
-                type: 'get',
-                data: 'html',
-                success: function (result) {
-                    console.log(result);
-                    if (result.login && result.login == true) {
-                        console.log('required login');
-                    }
-                }
-            });
-        });
-    </script>
-    <!--Check upload file-->
-    <script>
-        // Add events
-        $('input[type=file]').change(function () {
-            console.log(this.files[0]);
-            getBase64(this.files[0]);
-        });
-
-        function getBase64(file) {
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-                console.log('05');
-                console.log(reader.result);
-                var image = new Image();
-                image.src = reader.result;
-                $('#thumbnail').html(image);
-            };
-            reader.onerror = function (error) {
-                console.log('Error: ', error);
-            };
-        }
-
-    </script>
-    
     @RenderSection("script", required: false)
 </body>
 </html>

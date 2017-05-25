@@ -1,6 +1,15 @@
 ﻿body{
     font-size:12px;
 }
+
+h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+label{
+    margin-bottom: 1px;
+}
 .mrg-top-50 {
     margin-top: 50px;
 }
@@ -24,6 +33,17 @@
 .primary-button {
     background: rgb(0, 150, 136) !important;
     color:white !important;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 6px;
+    cursor: pointer;
 }
 
 /*Login form*/
@@ -311,34 +331,51 @@
 
 .panel {
     border: 1px solid rgb(0, 150, 136);
+    margin-bottom: 3px;
+}
+
+.panel-default > .panel-heading {
+    background: rgb(0, 150, 136) !important;
+    color:white !important;
 }
 
 .panel-heading {
     font-weight:bold;
+    text-align: center;
+    padding: 5px;
+}
+
+.panel-title {
+    font-size:14px;
+    font-weight: bold;
+}
+
+.panel-body {
+    padding: 2px;
 }
 
 /*End custom panel*/
 
 .page-header {
-    border-bottom: 1px solid rgb(0, 150, 136);
-    margin: 10px 0;
+    border: 1px solid rgb(0, 150, 136);
+    background: rgb(0, 150, 136);
+    margin: 0;
     padding-bottom: 0;
-    color:rgb(0, 150, 136);
+    color:White;
     font-weight:bold;
 }
 
 .page-tool{
     text-align:right;
-    padding-top:10px;
+    padding-top:5px;
 }
 
+
+
 .page-tool > span > i {
-    color: rgb(0, 150, 136) !important;    
+    color: white !important;    
     font-size:20px;
     cursor: pointer;
-}
-.page-tool > #deleteBtn > i {
-    color: Red !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -370,3 +407,37 @@
 .ui-autocomplete{
     z-index: 9999;
 }
+
+/*Notification*/
+
+.custom-success,
+.custom-error,
+.custom-warning {
+    border-radius: 10px;
+}
+
+.gritter-without-image span {
+    font-size: 14px;
+}
+
+.gritter-without-image p {
+    font-size: 11px;
+}
+
+/*End Notification*/
+
+/*Datatable*/
+
+.dataTables_wrapper {
+    margin-top:2px;
+}
+
+table.dataTable {
+    margin: 0px !important;
+}
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+    margin: 0px;
+}
+
+/*End datatable*/
