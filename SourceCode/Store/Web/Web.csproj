@@ -375,16 +375,16 @@
     <Content Include="Areas\Partner\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Partner\Views\Customer\Add.cshtml" />
     <Content Include="Areas\Location\Views\web.config" />
-    <Content Include="Areas\Partner\Views\Customer\_FormPartial.cshtml" />
+    <Content Include="Areas\Partner\Views\Customer\_CustomerPartial.cshtml" />
     <Content Include="Areas\Partner\Views\Customer\Edit.cshtml" />
     <Content Include="Areas\Partner\Views\Deliver\Index.cshtml" />
     <Content Include="Areas\Partner\Views\Deliver\Add.cshtml" />
     <Content Include="Areas\Partner\Views\Deliver\Edit.cshtml" />
-    <Content Include="Areas\Partner\Views\Deliver\_FormPartial.cshtml" />
+    <Content Include="Areas\Partner\Views\Deliver\_DeliverPartial.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\Index.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\Add.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\Edit.cshtml" />
-    <Content Include="Areas\Partner\Views\Supplier\_FormPartial.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\_SupplierPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -483,6 +483,8 @@
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Files\Customer\" />
+    <Folder Include="Files\Deliver\" />
+    <Folder Include="Files\Supplier\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
