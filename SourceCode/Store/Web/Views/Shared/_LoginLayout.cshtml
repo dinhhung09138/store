@@ -4,10 +4,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-            @Styles.Render("~/Content/css/bootstrap")
-            <link href="~/Content/calendar/fullcalendar.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css/bootstrap")
+    <link href="~/Content/calendar/fullcalendar.min.css" rel="stylesheet" />
     <link href="~/Content/calendar/fullcalendar.print.min.css" rel="stylesheet" media="print" />
-   
+
     <style>
         body {
             margin: 40px 10px;
@@ -20,31 +20,56 @@
             max-width: 900px;
             margin: 0 auto;
         }
+
+        .background-color-green {
+            background: #316510;
+            border: #316510;
+            color: #fff;
+        }
+        .fc-content:hover {
+            cursor:pointer;
+        }
     </style>
 </head>
 <body>
     <div>
         @RenderBody()
     </div>
-                @*@Scripts.Render("~/Content/js/bootstrap")*@
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Content/moment.min.js"></script>
+    @Scripts.Render("~/Content/js/bootstrap")
     <script src="~/Content/calendar/fullcalendar.min.js"></script>
     <script>
 
         $(document).ready(function () {
 
+            /* initialize the external events
+     -----------------------------------------------------------------*/
+            function ini_events(ele) {
+                ele.each(function () {
+
+                    // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                    // it doesn't need to have a start or end
+                    var eventObject = {
+                        title: $.trim($(this).text()) // use the element's text as the event title
+                    };
+
+                    // store the Event Object in the DOM element so we can get to it later
+                    $(this).data('eventObject', eventObject);
+
+                    // make the event draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 1070,
+                        revert: true, // will cause the event to go back to its
+                        revertDuration: 0  //  original position after the drag
+                    });
+
+                });
+            }
+
+            ini_events($('#external-events div.external-event'));
+
             $('#calendar').fullCalendar({
-                customButtons: {
-                    myCustomButton: {
-                        text: 'custom!',
-                        click: function () {
-                            alert('clicked the custom button!');
-                        }
-                    }
-                },
                 header: {
-                    left: 'prev,next today myCustomButton',
+                    left: 'prev,next today',
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
@@ -56,68 +81,25 @@
                     nextYear: 'right-double-arrow'
                 },
                 theme: false,
-                themeButtonIcons: {
-                    prev: 'circle-triangle-w',
-                    next: 'circle-triangle-e',
-                    prevYear: 'seek-prev',
-                    nextYear: 'seek-next'
-                },
-                firstDay: 0, //0: sunday
+                firstDay: 1, //0: sunday
                 weekends: true, //true: show weekend days
-                defaultDate: new Date(),
-                //businessHours: {
-                //    // days of week. an array of zero-based day of week integers (0=Sunday)
-                //    dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
-
-                //    start: '10:00', // a start time (10am in this example)
-                //    end: '18:00', // an end time (6pm in this example)
-                //},
-                showNonCurrentDates: false, //In month view, whether dates in the previous or next month should be rendered at all.
-                eventLimit: 2,// allow "more" link when too many events
-                eventLimitClick: function (cellInfo, jsEvent) {
-                    //console.log('limit event');
-                    //Nothing to see
-                    //if (event.editevent) {
-                    //    if (flg == false) {
-                    //        flg = true;
-                    //        update_event_pop(event);
-                    //    }
-                    //}
-                },
-                viewRender: function (view, element) {
-                    //Triggered when a new date-range is rendered
-                    console.log('view render');
-                },
                 navLinks: true, // can click day/week names to navigate views
-                selectable: true,
-                selectHelper: true,
-                select: function (start, end) {
-                    var title = prompt('Event Title:');
-                    var eventData;
-                    if (title) {
-                        eventData = {
-                            title: title,
-                            start: start,
-                            end: end
-                        };
-                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    }
-                    $('#calendar').fullCalendar('unselect');
-                },
-                editable: true,
-                eventResize: function(event, delta, revertFunc) {
+                defaultDate: new Date(),
+                businessHours: {
+                //    // days of week. an array of zero-based day of week integers (0=Sunday)
+                    dow: [ 0, 1, 2, 3, 4, 5, 6 ], // Monday - Thursday
 
-                    alert(event.title + " end is now " + event.end.format());
-
-                    if (!confirm("is this okay?")) {
-                        revertFunc();
-                    }
-
+                    start: '08:00', // a start time (8am in this example)
+                    end: '22:00', // an end time (10pm in this example)
                 },
-                drop: function(date) {
-                    alert("Dropped on " + date.format());
-                },
+                showNonCurrentDates: false, //In month view, whether dates in the previous or next month should be rendered at all.
+                editable: true, //false: don't allow even dragging and resizing
                 eventClick: function (event, jsEvent, view) {
+                    //event is an Event Object that holds the event's information (date, title, etc).
+                    //jsEvent holds the native JavaScript event with low-level information such as click coordinates.
+                    //view holds the current View Object.
+                    //Within the callback function, this is set to the event's <div> element.
+
                     //console.log(event);
                     //if (event.editevent) {
                     //    if (flg == false) {
@@ -125,44 +107,151 @@
                     //        update_event_pop(event);
                     //    }
                     //}
+                    if (event.url) {
+                        window.open(event.url);
+                        return false;
+                    }
+                    //console.log(event);
+                    //console.log(jsEvent);
+                    //console.log(view);
+                    //$(this).css('border-color', 'red');
                 },
+                eventResize: function (event, delta, revertFunc) {
+                    //event is an Event Object that hold the event's information (date, title, etc).
+                    //delta is a Duration Object that represents the amount of time the event's end was extended by
+                    //revertFunc is a function that, if called, reverts the event's end date to the value before the drag. This is useful if an ajax call should fail.
+                    //alert(event.title + " end is now " + event.end.format());
+
+                    if (!confirm("is this okay?")) {
+                        revertFunc();
+                    }
+
+                },
+                eventDrop: function (event, delta, revertFunc) {
+                    //event: is an Event Object that hold the event's information (date, title, etc)
+                    //delta is a Duration Object that represents the amount of time the event was moved by
+                    //revertFunc is a function that, if called, reverts the event's start/end date to the values before the drag. This is useful if an ajax call should fail.
+
+                    //console.log(event);
+                    //console.log(delta);
+                    
+                    //alert(event.title + " was dropped on " + event.start.format());
+
+                    if (!confirm("Are you sure about this change?")) {
+                        revertFunc();
+                    }
+
+                },
+                selectable: true,
+                select: function (start, end) {
+                    //console.log(start);
+                    //console.log(end);
+                    //var title = prompt('Event Title:');
+                    //var eventData;
+                    //if (title) {
+                    //    eventData = {
+                    //        title: title,
+                    //        start: start,
+                    //        end: end,
+                    //        allDate: false
+                    //    };
+                    //    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    //}
+                    $('#calendar').fullCalendar('unselect');
+                },
+                dayClick: function (date, element, view) {
+                    //console.log('date click');
+                    //console.log(date);
+                    //console.log(element);
+                    //console.log(view);
+                    var title = prompt('Event Title:');
+                    var eventData;
+                    if (title) {
+                        eventData = {
+                            title: title,
+                            start: date,
+                            end: date,
+                            allDate: false
+                        };
+                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    }
+                },
+                // this allows things to be dropped onto the calendar !!!
+                //You must download the appropriate jQuery UI files and initialize a draggable element
+                droppable: true,
+                drop: function (date, allDay) {
+                    // this function is called when something is dropped
+                    console.log(date);
+                    // retrieve the dropped element's stored Event Object
+                    var originalEventObject = $(this).data('eventObject');
+
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    // assign it the date that was reported
+                    copiedEventObject.start = date;
+                    copiedEventObject.allDay = allDay;
+                    copiedEventObject.backgroundColor = $(this).css("background-color");
+                    copiedEventObject.borderColor = $(this).css("border-color");
+
+                    // render the event on the calendar
+                    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+
+                },
+                eventRender: function (event, element) {
+                    element.find(".fc-event-title").remove();
+                    element.find(".fc-event-time").remove();
+                    var new_description =
+                        moment(event.start).format("HH:mm") + '-'
+                        + moment(event.end).format("HH:mm") + '<br/>'
+                        + event.customer + '<br/>'
+                        + '<strong>Address: </strong><br/>' + event.address + '<br/>'
+                        + '<strong>Task: </strong><br/>' + event.task + '<br/>'
+                        + '<strong>Place: </strong>' + event.place + '<br/>'
+                    ;
+                    element.append(new_description);
+                },
+
+                viewRender: function (view, element) {
+                    //Triggered when a new date-range is rendered
+                    console.log('view render');
+                },
+                
+                selectHelper: true,
+                
                 eventMouseout: function (event, jsEvent, view) {
                     //$(".popover").css({
                     //    'display': 'none'
                     //});
                     //console.log(view);
                 },
-                dayClick: function (date, element, view) {
-                    console.log('date click');
-                    //$(".popover").css({
-                    //    'display': 'none'
-                    //});
-                    //if (flg == false) {
-                    //    flg = true;
-                    //    add_event_pop();
-                    //}
-                },
-                dayRender: function (date, cell) {
-                    console.log('day render');
-                    //console.log(cell);
-                    var $day = new Date(date);
-                    //if ($day.getDate() == 1) {
-                    //    cell.css("border-left", "3px solid green");
-                    //}
-                },
+                
+               
                 events: [
                     {
                         id: 1,
                         title: 'All Day Event',
                         start: '2017-05-01',
-                        editable: true //show cursor can click or not https://fullcalendar.io/docs/event_data/Event_Object/
+                        start: '2017-05-01',
+                        editable: true, //show cursor can click or not https://fullcalendar.io/docs/event_data/Event_Object/,
+                        className: 'background-color-green',
+                        url: 'http://google.com.vn'
                     },
                     {
                         id: 2,
                         title: 'Long Event',
                         start: '2017-05-07',
                         end: '2017-05-10',
-                        editable: false //show cursor can click or not https://fullcalendar.io/docs/event_data/Event_Object/
+                        editable: false, //show cursor can click or not https://fullcalendar.io/docs/event_data/Event_Object/
+                        url: 'http://google.com.vn',
+                        allDay: true,
                     },
                     {
                         id: 3,
@@ -219,6 +308,37 @@
                 ]
             });
 
+            /* ADDING EVENTS */
+            var currColor = "#3c8dbc"; //Red by default
+            //Color chooser button
+            var colorChooser = $("#color-chooser-btn");
+            $("#color-chooser > li > a").click(function (e) {
+                e.preventDefault();
+                //Save color
+                currColor = $(this).css("color");
+                //Add color effect to button
+                $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
+            });
+            $("#add-new-event").click(function (e) {
+                e.preventDefault();
+                //Get value and make sure it is not null
+                var val = $("#new-event").val();
+                if (val.length == 0) {
+                    return;
+                }
+
+                //Create events
+                var event = $("<div />");
+                event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
+                event.html(val);
+                $('#external-events').prepend(event);
+
+                //Add draggable funtionality
+                ini_events(event);
+
+                //Remove event from text input
+                $("#new-event").val("");
+            });
         });
 
     </script>

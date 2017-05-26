@@ -49,6 +49,12 @@ namespace Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
+        public ActionResult Editor()
+        {
+            return View();
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public JsonResult GetData(CustomJqueryDataTableRequest requestData)
@@ -207,5 +213,91 @@ namespace Web.Controllers
             await myHub.Invoke("Send", "Hung", "Toi la tran dinh hung");
             hubConnection.Stop();
         }
+    }
+
+    public class Event
+    {
+        /// <summary>
+        /// String/Integer. Optional
+        /// Uniquely identifies the given event. Different instances of repeating events should all have the same id.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// String. Required.
+        /// The text on an event's element
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// The date/time an event begins. Required.
+        /// </summary>
+        public DateTime Start { get; set; }
+
+        /// <summary>
+        /// The exclusive date/time an event ends. Optional.
+        /// </summary>
+        public DateTime End { get; set; }
+
+        /// <summary>
+        /// String. Optional.
+        /// A URL that will be visited when this event is clicked by the user. For more information on controlling
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
+        /// String/Array. Optional.
+        /// </summary>
+        public string ClassName { get; set; }
+
+        /// <summary>
+        /// true or false. Optional.
+        /// Overrides the master editable option for this single event.
+        /// </summary>
+        public bool Editable { get; set; }
+
+        /// <summary>
+        /// Sets an event's background and border color just like the calendar-wide eventColor option.
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
+        /// Sets an event's border color just like the the calendar-wide eventBorderColor option.
+        /// </summary>
+        public string BorderColor { get; set; }
+
+        /// <summary>
+        /// Sets an event's background color just like the calendar-wide eventBackgroundColor option.
+        /// </summary>
+        public string BackgroundColor { get; set; }
+
+        /// <summary>
+        /// Sets an event's text color just like the calendar-wide eventTextColor option.
+        /// </summary>
+        public string TextColor { get; set; }
+
+        /// <summary>
+        /// true or false. Optional.
+        /// If false, prevents this event from being dragged/resized over other events. 
+        /// Also prevents other events from being dragged/resized over this event.
+        /// </summary>
+        public bool Overlap { get; set; }
+
+        /// <summary>
+        /// Allows alternate rendering of the event, like background events.
+        /// Can be empty, "background", or "inverse-background"
+        /// </summary>
+        public string Rendering { get; set; }
+
+        /// <summary>
+        /// true or false. Optional.
+        /// </summary>
+        public string ResourceEditable { get; set; }
+
+        /// <summary>
+        /// true or false. Optional.
+        /// Allow events' start times to be editable through dragging.
+        /// </summary>
+        public bool StartEditable { get; set; }
     }
 }

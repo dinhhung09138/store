@@ -287,10 +287,18 @@
     <Content Include="Content\bootstrap\bootstrap-datetimepicker.min.js" />
     <Content Include="Content\bootstrap\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap\bootstrap-select.min.js" />
+    <Content Include="Content\bootstrap\bootstrap-year-calendar.css" />
+    <Content Include="Content\bootstrap\bootstrap-year-calendar.js" />
+    <Content Include="Content\bootstrap\bootstrap-year-calendar.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-year-calendar.min.js" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.js" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Content\bootstrap\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Content\bootstrap\bootstrap3-wysihtml5.min.css" />
+    <Content Include="Content\bootstrap\bootstrap3-wysihtml5.min.js" />
     <Content Include="Content\calendar\fullcalendar.css" />
     <Content Include="Content\calendar\fullcalendar.js" />
     <Content Include="Content\calendar\fullcalendar.min.css" />
@@ -451,6 +459,7 @@
     <Content Include="Views\Home\ForgotPassword.cshtml" />
     <Content Include="Views\Home\RequiredLogin.cshtml" />
     <Content Include="Views\Home\Calendar.cshtml" />
+    <Content Include="Views\Home\Editor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
