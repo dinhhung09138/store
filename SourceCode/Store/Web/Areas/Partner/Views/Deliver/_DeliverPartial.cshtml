@@ -1,4 +1,5 @@
-﻿@model Model.DeliverModel
+﻿@using System.Globalization;
+@model Model.DeliverModel
 <div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -12,7 +13,7 @@
                 @Html.HiddenFor(m => m.ID)
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Thông tin người giao hàng</h4>
+                    <h4 class="modall-title">Thông tin người giao hàng</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -46,7 +47,7 @@
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mẫ khách hàng</label>
+                                    <label>Mẫ đơn vị giao hàng</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -57,7 +58,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên khách hàng</label>
+                                    <label>Tên đơn vị giao hàng</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -140,7 +141,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Nhóm khách hàng</label>
+                                    <label>Nhóm</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -246,7 +247,7 @@
 
         $(function () {
             $('#Birthdate').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: '@CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToUpper()'
             });
         });
 
@@ -258,9 +259,6 @@
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
-                        if (result.login !== undefined || result.login !== null) {
-                            window.location.href = '/home/login';
-                        }
                         if (result.status == 1) {
                             notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
                             table.ajax.reload();
@@ -284,8 +282,9 @@
         $("#LocationName").autocomplete({
             source: function (request, response) {
                 $.ajax({
-                    url: '@Url.Action("FindLocationByName", "deliver", new { Area = "Partner" })',
+                    url: '@Url.Action("FindLocationByName", "Deliver", new { Area = "Partner" })',
                     datatype: "json",
+                    type: 'post',
                     data: {
                         name: request.term
                     },
@@ -294,8 +293,8 @@
                         response($.map(data, function (val, item) {
                             return {
                                 label: val.Name,
-                                value: 'val.ID',
-                                id: 'val.ID'
+                                value: val.ID,
+                                id: val.ID
                             }
                         }))
                     }

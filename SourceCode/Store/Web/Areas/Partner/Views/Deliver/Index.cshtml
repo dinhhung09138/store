@@ -23,7 +23,6 @@
                 <tr>
                     <th>STT</th>
                     <th>Tên</th>
-                    <th>Giới tính</th>
                     <th>SDT</th>
                     <th>Địa chỉ</th>
                     <th>Nhóm</th>
@@ -98,12 +97,6 @@
                         width: '200px'
                     },
                     {
-                        data: 'GenderString',
-                        orderable: true,
-                        searchable: true,
-                        width: '50px'
-                    },
-                    {
                         data: 'Phone',
                         orderable: true,
                         searchable: true,
@@ -145,9 +138,6 @@
                 dataType: 'html',
                 data: {id : id },
                 success: function (result) {
-                    if (result.login !== undefined || result.login !== null) {
-                        window.location.href = '/home/login';
-                    }
                     $('#divContainer').html(result);
                     $('#loadingModel').modal('hide');
 

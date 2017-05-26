@@ -146,9 +146,6 @@
                 dataType: 'html',
                 data: {id : id },
                 success: function (result) {
-                    if (result.login !== undefined || result.login !== null) {
-                        window.location.href = '/home/login';
-                    }
                     $('#divContainer').html(result);
                     $('#loadingModel').modal('hide');
                     
@@ -174,6 +171,7 @@
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 401 || xhr.status == 530) {
                         window.location.href = '/home/login';
+                        console.log(xhr);
                     }
                 }
             });

@@ -1,9 +1,10 @@
-﻿@model Model.CustomerModel
+﻿@using System.Globalization;
+@model Model.SupplierModel
 
 <div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            @using (Ajax.BeginForm("save", "customer",
+            @using (Ajax.BeginForm("save", "supplier",
                             new { @area = "partner" },
                             new AjaxOptions { HttpMethod = "post" },
                             new { @class = "form", @id = "inputForm", }))
@@ -13,41 +14,14 @@
                 @Html.HiddenFor(m => m.ID)
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Thông tin khách hàng</h4>
+                    <h4 class="modal-title">Thông tin nhà cung cấp</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-10 col-sm-10 col-xs-12">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    <label>Loại khách hàng</label>&nbsp;&nbsp;
-                                    @Html.HiddenFor(m => m.IsCompany)
-                                    @if (Model.IsCompany == false)
-                                    {
-                                        <input type="radio" name="customerType" value="person" checked />
-                                        @Html.Raw("Cá nhân")
-                                        <input type="radio" name="customerType" value="company" />
-                                        @Html.Raw("Công ty")
-                                    }
-                                    else
-                                    {
-                                        <input type="radio" name="customerType" value="person" />
-                                        @Html.Raw("Cá nhân")
-                                        <input type="radio" name="customerType" value="company" checked />
-                                        @Html.Raw("Công ty")
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mẫ khách hàng</label>
+                                    <label>Mẫ nhà cung cấp</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -58,39 +32,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên khách hàng</label>
+                                    <label>Tên nhà cung cấp</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                                     @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true })
                                     @Html.ValidationMessageFor(m => m.Name)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Giới tính</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.HiddenFor(m => m.Gender)
-                                    @{
-                                        if (Model.Gender == true)
-                                        {
-                                            <input type="radio" name="genderType" value="male" checked />
-                                            @Html.Raw("Nam")
-                                            <input type="radio" name="genderType" value="female" />
-                                            @Html.Raw("Nữ")
-                                        }
-                                        else
-                                        {
-                                            <input type="radio" name="genderType" value="male" />
-                                            @Html.Raw("Nam")
-                                            <input type="radio" name="genderType" value="female" checked />
-                                            @Html.Raw("Nữ")
-                                        }
-                                    }
                                 </div>
                             </div>
                             <div class="row">
@@ -130,6 +78,17 @@
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label>Tên công ty</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @maxlength = 50 })
+                                    @Html.ValidationMessageFor(m => m.CompanyName)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
                                     <label>Mã số thuế</label>
                                 </div>
                             </div>
@@ -141,24 +100,13 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Nhóm khách hàng</label>
+                                    <label>Nhóm</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                                     @Html.DropDownListFor(m => m.GroupID, (IEnumerable<SelectListItem>)ViewBag.group,
                                                                        new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Khu vực</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.LocationName, new { @class = "form-control" })
-                                    @Html.HiddenFor(m => m.LocationID)
                                 </div>
                             </div>
                             <div class="row">
@@ -181,20 +129,11 @@
                                     @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-2 col-sm-2 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <img id="thumbnail" src="@Model.Avatar" style="width: 100%;"/>
+                                    <img id="thumbnail" src="@Model.Avatar" style="width: 100%;" />
                                     @Html.HiddenFor(m => m.Avatar)
                                     @Html.HiddenFor(m => m.ImageFileName)
                                 </div>
@@ -215,7 +154,7 @@
                     <a href="#" data-dismiss="modal" class="btn btn-default">Đóng</a>
                     <button class="btn btn-primary primary-button">Lưu</button>
                 </div>
-            }
+                                        }
         </div>
     </div>
 </div>
@@ -228,26 +167,9 @@
         //
         $('.selectpicker').selectpicker();
         //
-        $('input[type=radio][name=customerType]').change(function () {
-            if (this.value == 'company') {
-                $('#IsCompany').val(true);
-            }
-            else {
-                $('#IsCompany').val(false);
-            }
-        });
-        $('input[type=radio][name=genderType]').change(function () {
-            if (this.value == 'male') {
-                $('#Gender').val(true);
-            }
-            else {
-                $('#Gender').val(false);
-            }
-        });
-
         $(function () {
             $('#Birthdate').datetimepicker({
-                format: 'DD/MM/YYYY'
+                format: '@CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToUpper()'
             });
         });
 
@@ -259,9 +181,6 @@
                     type: this.method,
                     data: $(this).serialize(),
                     success: function (result) {
-                        if (result.login !== undefined || result.login !== null) {
-                            window.location.href = '/home/login';
-                        }
                         if (result.status == 1) {
                             notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
                             table.ajax.reload();
@@ -281,37 +200,6 @@
             return false;
         });
 
-        //LocationName
-        $("#LocationName").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '@Url.Action("FindLocationByName", "Customer", new { Area = "Partner" })',
-                    datatype: "json",
-                    data: {
-                        name: request.term
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        response($.map(data, function (val, item) {
-                            return {
-                                label: val.Name,
-                                value: 'val.ID',
-                                id: 'val.ID'
-                            }
-                        }))
-                    }
-                })
-            },
-            select: function (event, ui) {
-                event.preventDefault();
-                $("#LocationName").val(ui.item.label);
-                $("#LocationID").val(ui.item.id);
-            },
-            focus: function (event, ui) {
-                event.preventDefault();
-                $("#LocationName").val(ui.item.label);
-            }
-        });
 
         $('input[type=file]').change(function () {
             console.log(this.files[0]);

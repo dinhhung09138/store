@@ -107,10 +107,11 @@ namespace Web.Areas.Partner.Controllers
         public JsonResult Save(DeliverModel model)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
-            if (model.ImageFileName.Length > 0)
+            if (model.ImageFileName != null && model.ImageFileName.Length > 0)
             {
-                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.'));
+                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.') + 1);
                 byte[] file = model.Avatar.ConvertBase64ToByte(extension);
+                model.Avatar = "";
                 if (SaveAvatar(file, Server.MapPath("~/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension)))
                 {
                     model.Avatar = "/Files/Deliver/" + model.Name.ConvertToTitleToAlias() + "." + extension;

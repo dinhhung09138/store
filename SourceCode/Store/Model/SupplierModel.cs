@@ -65,7 +65,7 @@ namespace Model
         /// <summary>
         /// id of group which belong to
         /// </summary>
-        public Guid GroupID { get; set; }
+        public Guid? GroupID { get; set; }
 
         /// <summary>
         /// Name of group which belong to

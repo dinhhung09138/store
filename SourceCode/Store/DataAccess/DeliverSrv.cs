@@ -42,7 +42,6 @@ namespace DataAccess
                                  a.name,
                                  a.address,
                                  a.phone,
-                                 a.email,
                                  group_name = g1.name,
                                  location_name = l1.name
                              }).ToList();
@@ -55,7 +54,6 @@ namespace DataAccess
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
                                     m.phone.ToLower().Contains(searchValue) ||
-                                    m.email.ToLower().Contains(searchValue) ||
                                     m.group_name.ToLower().Contains(searchValue) ||
                                     m.location_name.ToLower().Contains(searchValue)).ToList();
                     }
@@ -68,7 +66,6 @@ namespace DataAccess
                             Name = item.name,
                             Address = item.address,
                             Phone = item.phone,
-                            Email = item.email,
                             GroupName = item.group_name,
                             LocationName =item.location_name
                         });
@@ -87,9 +84,6 @@ namespace DataAccess
                                 break;
                             case "Phone":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
-                                break;
-                            case "Email":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Email) : _sortList.Sort(col.Dir, m => m.Email);
                                 break;
                             case "GroupName":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GroupName) : _sortList.Sort(col.Dir, m => m.GroupName);

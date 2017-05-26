@@ -117,6 +117,7 @@ namespace Web.Areas.Partner.Controllers
             {
                 string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.') + 1);
                 byte[] file = model.Avatar.ConvertBase64ToByte(extension);
+                model.Avatar = "";
                 if (SaveAvatar(file, Server.MapPath("~/Files/Supplier/" + model.ID + "." + extension)))
                 {
                     model.Avatar = "/Files/Supplier/" + model.ID + "." + extension;

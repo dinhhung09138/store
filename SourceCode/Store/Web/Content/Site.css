@@ -46,11 +46,6 @@ input[type="file"] {
     cursor: pointer;
 }
 
-/*Login form*/
-.form-title {
-}
-/*Login form*/
-
 /* Navigation */
 .section-navbar {
     background-color: rgb(0, 150, 136); /*#009688*/

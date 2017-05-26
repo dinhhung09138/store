@@ -29,7 +29,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = true })
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = true, @focus = true })
                             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 form-group">
-                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @required = true })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = true })
                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                         </div>
                     </div>
