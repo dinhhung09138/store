@@ -31,54 +31,85 @@ namespace DataAccess
                 List<BranchModel> _list = new List<BranchModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.branches where !a.deleted orderby a.name select new { a.id, a.name, a.address, a.phone }).ToList();
+                    var l = (from a in context.branches
+                             join lc in context.locations on a.location_id equals lc.id into br_location
+                             from l1 in br_location.DefaultIfEmpty()
+                             where !a.deleted
+                             orderby a.name
+                             select new
+                             {
+                                 a.id,
+                                 a.name,
+                                 a.address,
+                                 a.phone,
+                                 a.hotline,
+                                 location_name = l1.name
+                             }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
-                    if (!string.IsNullOrWhiteSpace(request.search.Value))
+                    if (request.search != null && !string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                                    m.phone.ToLower().Contains(searchValue) ||
+                                    m.hotline.ToLower().Contains(searchValue) ||
+                                    m.location_name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new BranchModel() {
+                        _list.Add(new BranchModel()
+                        {
                             ID = item.id,
                             Name = item.name,
                             Address = item.address,
-                            Phone = item.phone
+                            Phone = item.phone,
+                            Hotline = item.hotline,
+                            LocationName = item.location_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
                     IOrderedEnumerable<BranchModel> _sortList = null;
-                    foreach (var col in request.order)
+                    if (request.order != null)
                     {
-                        switch (col.ColumnName)
+                        foreach (var col in request.order)
                         {
-                            case "Name":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
-                                break;
-                            case "Address":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
-                                break;
-                            case "Phone":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
-                                break;
+                            switch (col.ColumnName)
+                            {
+                                case "Name":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                    break;
+                                case "Address":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                                    break;
+                                case "Phone":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
+                                    break;
+                                case "Hotline":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Hotline) : _sortList.Sort(col.Dir, m => m.Hotline);
+                                    break;
+                                case "LocationName":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.LocationName) : _sortList.Sort(col.Dir, m => m.LocationName);
+                                    break;
+                            }
                         }
+                        itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
                     }
-                    itemResponse.data = _sortList.Skip(request.start).Take(request.length).ToList();
+                    else
+                    {
+                        itemResponse.data = _list.Skip(request.start).Take(request.length).ToList();
+                    }
                     _return.Add("data", itemResponse);
                 }
                 _return.Add("status", DatabaseExecute.Success);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.LIST_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.LIST_ERROR);
             }
 
             return _return;
@@ -89,30 +120,30 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public BranchModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            BranchModel _item = new BranchModel() { ID = Guid.NewGuid() };
             try
             {
-                BranchModel _item = new BranchModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
                     var item = (from m in context.branches
-                               join l in context.locations on m.location_id equals l.id
-                               where m.id == id
-                               select new
-                               {
-                                   m.id,
-                                   m.name,
-                                   m.address,
-                                   m.phone,
-                                   m.hotline,
-                                   m.num_of_employee,
-                                   m.notes,
-                                   m.open_day,
-                                   m.location_id,
-                                   locationName = l.name
-                               }).First();
+                                join l in context.locations on m.location_id equals l.id into br_location
+                                from l1 in br_location.DefaultIfEmpty()
+                                where m.id == id
+                                select new
+                                {
+                                    m.id,
+                                    m.name,
+                                    m.address,
+                                    m.phone,
+                                    m.hotline,
+                                    m.num_of_employee,
+                                    m.notes,
+                                    m.open_day,
+                                    m.location_id,
+                                    locationName = l1.name
+                                }).First();
                     _item.ID = item.id;
                     _item.Name = item.name;
                     _item.Address = item.address;
@@ -124,17 +155,15 @@ namespace DataAccess
                     _item.LocationID = item.location_id;
                     _item.LocationName = item.locationName;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>
@@ -174,7 +203,6 @@ namespace DataAccess
                         md.address = model.Address;
                         md.phone = model.Phone;
                         md.hotline = model.Hotline;
-                        md.num_of_employee = 0;
                         md.open_day = model.OpenDate;
                         md.notes = model.Notes;
                         md.location_id = model.LocationID;

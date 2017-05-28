@@ -2,6 +2,10 @@
     font-size:12px;
 }
 
+.bg-gray {
+    background: #eee;
+}
+
 h4, .h4, h5, .h5, h6, .h6 {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -45,6 +49,121 @@ input[type="file"] {
     padding: 6px 6px;
     cursor: pointer;
 }
+
+/*TOp div*/
+.logo img{
+    max-width: 150px;
+}
+
+@media screen and (max-width: 768px){
+    .logo img{
+        max-width: 150px;
+        text-align: center;
+    }
+}
+
+.notifications-menu {
+
+}
+
+.right-bar {
+    float: right;
+    list-style: outside none none;
+    margin-bottom: 0px !important;
+    clear:both;
+}
+
+.right-bar li {
+    float: left;
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.right-bar > li > a {
+    padding-top: 10px;
+}
+
+.right-bar > li > a > i.fa {
+    font-size: 14px;
+}
+
+.right-bar > li > a > .label {
+    font-size: 9px;
+    line-height: 0.9;
+    padding: 2px 6px;
+    position: absolute;
+    right: -1px;
+    text-align: center;
+    top: 6px;
+}
+
+.label-schedule {
+    background: rgb(14, 158, 62) !important;
+    color: white;
+}
+
+.schedule-content {
+
+}
+
+.schedule-content > a:hover{
+    text-decoration: none;
+    background: rgb(244, 244, 244);
+}
+
+.schedule-content > a > h4 {
+    color: #444444;
+    font-size: 13px;
+    padding: 0;
+    position: relative;
+}
+
+.schedule-content > a > h4 > small {
+    color: #999999;
+    font-size: 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.schedule-content > a > p {
+    color: #888888;
+    font-size: 12px;
+}
+
+.label-notification {
+    background: rgb(255, 185, 0) !important;
+    color:white;
+}
+
+.label-task {
+    background: rgb(217, 83, 79);
+    color:white;
+}
+.right-bar> .user-menu .user-image {
+    border-radius: 50%;
+    float: left;
+    height: 17px;
+    margin-right: 10px;
+    margin-top: 0;
+    width: 17px;
+}
+
+.right-bar > li > .dropdown-menu {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    left: auto;
+    position: absolute;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    top: 100%;
+    width: 230px;
+}
+
+
+/*End top div*/
 
 /* Navigation */
 .section-navbar {
@@ -186,9 +305,11 @@ input[type="file"] {
 
 
 /*Footer*/
+
 .section-footer {
     background-color: #455a64;
 }
+
 /*End footer*/
 
 /*Loading*/
@@ -200,6 +321,7 @@ input[type="file"] {
     height: 100%;
     z-index: 1000;
 }
+
 #loader {
     display: block;
     position: relative;
@@ -255,6 +377,7 @@ input[type="file"] {
         transform: rotate(360deg);  /* Firefox 16+, IE 10+, Opera */
     }
 }
+
 @keyframes spin {
     0%   {
         -webkit-transform: rotate(0deg);  /* Chrome, Opera 15+, Safari 3.1+ */
@@ -323,7 +446,6 @@ input[type="file"] {
 
 /*custom panel*/
 
-
 .panel {
     border: 1px solid rgb(0, 150, 136);
     margin-bottom: 3px;
@@ -349,6 +471,38 @@ input[type="file"] {
     padding: 2px;
 }
 
+.panel-danger > .panel-heading {
+    background: rgb(183, 70, 53) !important;
+    color:white !important;
+}
+
+.panel-schedule > .panel-heading {
+    background: rgb(14, 158, 62) !important;
+    color: white;
+}
+
+.panel-notification .panel-heading {
+    background: rgb(255, 185, 0) !important;
+    color: white;
+}
+
+.panel-task .panel-heading {
+    background: rgb(217, 83, 79);
+    color: white;
+}
+
+.panel-profile .panel-heading {
+    background: rgb(255, 7, 1) !important;
+    color:white;
+    font-weight:bold;
+}
+
+.panel-schedule > .panel-footer,
+.panel-notification > .panel-footer,
+.panel-task > .panel-footer {
+    text-align: center;
+}
+
 /*End custom panel*/
 
 .page-header {
@@ -364,8 +518,6 @@ input[type="file"] {
     text-align:right;
     padding-top:5px;
 }
-
-
 
 .page-tool > span > i {
     color: white !important;    
@@ -408,7 +560,15 @@ input[type="file"] {
 .custom-success,
 .custom-error,
 .custom-warning {
-    border-radius: 10px;
+}
+
+.gritter-item {
+    padding: 2px 12px;
+}
+
+.gritter-with-image, 
+.gritter-without-image {
+    padding: 0 15px 0 0;
 }
 
 .gritter-without-image span {
@@ -436,3 +596,5 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 /*End datatable*/
+
+

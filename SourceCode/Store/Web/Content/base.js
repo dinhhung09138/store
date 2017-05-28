@@ -22,8 +22,18 @@
     });
 }
 
+//Add slimscroll to navbar dropdown
+
+$(document).ready(function () { 
+    $(".dropdown-menu .panel-body").slimscroll({
+        height: "150px",
+        alwaysVisible: false,
+        size: "3px"
+    }).css("width", "100%");
+});
 
 /*Navigation*/
+
 var ww = document.body.clientWidth;
 
 $(document).ready(function () {
@@ -72,9 +82,11 @@ var adjustMenu = function () {
         });
     }
 }
+
 /*End Navigation*/
 
 /*When show model above another model*/
+
 $(document).on('show.bs.modal', '.modal', function (event) {
     var zIndex = 1040 + (10 * $('.modal:visible').length);
     $(this).css('z-index', zIndex);
@@ -84,6 +96,7 @@ $(document).on('show.bs.modal', '.modal', function (event) {
 });
 
 /*Use for dropdow select and find item*/
+
 $(document).ready(function () {
     $('.selectpicker').selectpicker({
         liveSearch: true,
@@ -92,12 +105,15 @@ $(document).ready(function () {
 });
 
 /*Loading model when page start and stop when finish load page*/
+
 function startLoading() {
     $('#loadingModel').modal('show');
 }
+
 function stopLoading() {
     $('#loadingModel').modal('hide');
 }
 $('#loadingModel').modal('show');
 window.onload = stopLoading;
+
 /*End Loading model*/

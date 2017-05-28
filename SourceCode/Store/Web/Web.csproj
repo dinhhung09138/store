@@ -232,6 +232,7 @@
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
+    <Compile Include="Areas\Internal\Controllers\BranchController.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
     <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
@@ -341,7 +342,10 @@
     <Content Include="Content\jquery-ui.min.js" />
     <Content Include="Content\moment.min.js" />
     <Content Include="Content\parsley\parsley.min.js" />
+    <Content Include="Content\slimScroll\jquery.slimscroll.js" />
+    <Content Include="Content\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="favicon.ico" />
+    <Content Include="Files\User\user2-160x160.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -393,6 +397,7 @@
     <Content Include="Areas\Partner\Views\Supplier\Add.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\Edit.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\_SupplierPartial.cshtml" />
+    <Content Include="Areas\Internal\Views\Branch\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -472,7 +477,6 @@
     <Folder Include="Areas\Goods\Controllers\" />
     <Folder Include="Areas\Goods\Models\" />
     <Folder Include="Areas\Goods\Views\Shared\" />
-    <Folder Include="Areas\Internal\Controllers\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\Internal\Views\Shared\" />
     <Folder Include="Areas\Location\Controllers\" />
