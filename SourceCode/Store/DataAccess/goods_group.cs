@@ -12,12 +12,12 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class product_group
+    public partial class goods_group
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public product_group()
+        public goods_group()
         {
-            this.products = new HashSet<product>();
+            this.goods = new HashSet<good>();
         }
     
         public System.Guid id { get; set; }
@@ -32,6 +32,6 @@ namespace DataAccess
         public Nullable<System.DateTime> delete_date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<product> products { get; set; }
+        public virtual ICollection<good> goods { get; set; }
     }
 }

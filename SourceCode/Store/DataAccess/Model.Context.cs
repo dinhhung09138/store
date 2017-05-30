@@ -28,12 +28,21 @@ namespace DataAccess
         public virtual DbSet<branch> branches { get; set; }
         public virtual DbSet<branch_employee> branch_employee { get; set; }
         public virtual DbSet<contract_type> contract_type { get; set; }
+        public virtual DbSet<customer> customers { get; set; }
         public virtual DbSet<customer_group> customer_group { get; set; }
+        public virtual DbSet<deliver> delivers { get; set; }
         public virtual DbSet<deliver_group> deliver_group { get; set; }
         public virtual DbSet<delivery_status> delivery_status { get; set; }
         public virtual DbSet<department> departments { get; set; }
+        public virtual DbSet<dish> dishes { get; set; }
+        public virtual DbSet<dish_group> dish_group { get; set; }
+        public virtual DbSet<dish_type> dish_type { get; set; }
+        public virtual DbSet<employee> employees { get; set; }
+        public virtual DbSet<employee_contract_history> employee_contract_history { get; set; }
         public virtual DbSet<function> functions { get; set; }
-        public virtual DbSet<inventory> inventories { get; set; }
+        public virtual DbSet<good> goods { get; set; }
+        public virtual DbSet<goods_group> goods_group { get; set; }
+        public virtual DbSet<inventory_goods> inventory_goods { get; set; }
         public virtual DbSet<invoice> invoices { get; set; }
         public virtual DbSet<leave> leaves { get; set; }
         public virtual DbSet<leave_type> leave_type { get; set; }
@@ -41,9 +50,6 @@ namespace DataAccess
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<order_detail> order_detail { get; set; }
         public virtual DbSet<position> positions { get; set; }
-        public virtual DbSet<product> products { get; set; }
-        public virtual DbSet<product_group> product_group { get; set; }
-        public virtual DbSet<product_type> product_type { get; set; }
         public virtual DbSet<reset_password_history> reset_password_history { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<role_detail> role_detail { get; set; }
@@ -55,13 +61,8 @@ namespace DataAccess
         public virtual DbSet<stock_tranfer_detail> stock_tranfer_detail { get; set; }
         public virtual DbSet<supplier> suppliers { get; set; }
         public virtual DbSet<supplier_group> supplier_group { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<token> tokens { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<customer> customers { get; set; }
-        public virtual DbSet<deliver> delivers { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
-        public virtual DbSet<config> configs { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace DataAccess
     {
         public System.Guid id { get; set; }
         public System.Guid stock_tranfer_id { get; set; }
-        public System.Guid product_id { get; set; }
+        public System.Guid goods_id { get; set; }
         public decimal number { get; set; }
     
-        public virtual product product { get; set; }
+        public virtual good good { get; set; }
         public virtual stock_tranfer stock_tranfer { get; set; }
     }
 }

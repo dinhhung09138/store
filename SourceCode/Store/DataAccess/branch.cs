@@ -18,7 +18,8 @@ namespace DataAccess
         public branch()
         {
             this.branch_employee = new HashSet<branch_employee>();
-            this.inventories = new HashSet<inventory>();
+            this.dishes = new HashSet<dish>();
+            this.inventory_goods = new HashSet<inventory_goods>();
             this.orders = new HashSet<order>();
             this.stock_in = new HashSet<stock_in>();
             this.stock_out = new HashSet<stock_out>();
@@ -47,7 +48,9 @@ namespace DataAccess
         public virtual ICollection<branch_employee> branch_employee { get; set; }
         public virtual location location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inventory> inventories { get; set; }
+        public virtual ICollection<dish> dishes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<inventory_goods> inventory_goods { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

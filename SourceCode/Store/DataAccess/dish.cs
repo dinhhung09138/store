@@ -12,26 +12,25 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class supplier
+    public partial class dish
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public supplier()
-        {
-            this.stock_in = new HashSet<stock_in>();
-        }
-    
         public System.Guid id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
-        public Nullable<System.DateTime> birthdate { get; set; }
-        public string avatar { get; set; }
-        public string phone { get; set; }
-        public string address { get; set; }
-        public string email { get; set; }
+        public System.Guid type_id { get; set; }
+        public Nullable<System.Guid> unit_id { get; set; }
         public Nullable<System.Guid> group_id { get; set; }
-        public string taxcode { get; set; }
-        public string company_name { get; set; }
-        public string notes { get; set; }
+        public System.Guid branch_id { get; set; }
+        public Nullable<decimal> price { get; set; }
+        public Nullable<decimal> original_price { get; set; }
+        public Nullable<decimal> number_in_stock { get; set; }
+        public Nullable<decimal> weight { get; set; }
+        public bool allow_sale_direct { get; set; }
+        public string avatar { get; set; }
+        public Nullable<decimal> min_in_stock { get; set; }
+        public Nullable<decimal> max_in_stock { get; set; }
+        public string description { get; set; }
+        public string note_in_order { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }
@@ -40,8 +39,9 @@ namespace DataAccess
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_in> stock_in { get; set; }
-        public virtual supplier_group supplier_group { get; set; }
+        public virtual branch branch { get; set; }
+        public virtual dish_group dish_group { get; set; }
+        public virtual dish_type dish_type { get; set; }
+        public virtual unit unit { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace DataAccess
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
     
+        public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<leave> leaves { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,6 +61,5 @@ namespace DataAccess
         public virtual ICollection<stock_tranfer> stock_tranfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<token> tokens { get; set; }
-        public virtual employee employee { get; set; }
     }
 }

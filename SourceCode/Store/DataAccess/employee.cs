@@ -18,6 +18,7 @@ namespace DataAccess
         public employee()
         {
             this.branch_employee = new HashSet<branch_employee>();
+            this.employee_contract_history = new HashSet<employee_contract_history>();
             this.users = new HashSet<user>();
         }
     
@@ -27,8 +28,8 @@ namespace DataAccess
         public string email { get; set; }
         public bool gender { get; set; }
         public Nullable<System.DateTime> birthdate { get; set; }
-        public byte[] image { get; set; }
         public string address { get; set; }
+        public string avatar { get; set; }
         public string id_card { get; set; }
         public Nullable<System.Guid> location_id { get; set; }
         public System.DateTime start_working_date { get; set; }
@@ -45,6 +46,8 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<branch_employee> branch_employee { get; set; }
         public virtual contract_type contract_type { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<employee_contract_history> employee_contract_history { get; set; }
         public virtual location location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }

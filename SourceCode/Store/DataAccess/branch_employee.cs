@@ -32,7 +32,7 @@ namespace DataAccess
     
         public virtual branch branch { get; set; }
         public virtual department department { get; set; }
-        public virtual position position { get; set; }
         public virtual employee employee { get; set; }
+        public virtual position position { get; set; }
     }
 }

@@ -12,12 +12,15 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class inventory_goods
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid id { get; set; }
+        public System.Guid branch_id { get; set; }
+        public System.Guid goods_id { get; set; }
+        public double total { get; set; }
+        public System.DateTime last_update { get; set; }
+    
+        public virtual branch branch { get; set; }
+        public virtual good good { get; set; }
     }
 }

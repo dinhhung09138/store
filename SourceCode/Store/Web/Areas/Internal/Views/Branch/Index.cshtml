@@ -1,7 +1,7 @@
 ﻿@using Model
 @model BranchModel
 @{
-    ViewBag.Title = "Đối tác - khách hàng";
+    ViewBag.Title = "Quản lý chi nhánh";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,10 +23,9 @@
                 <tr>
                     <th>STT</th>
                     <th>Tên</th>
-                    <th>Địa chỉ</th>
                     <th>Số điện thoại</th>
                     <th>Hotline</th>
-                    <th>Khu vực</th>
+                    <th>Địa chỉ</th>
                     <th></th>
                 </tr>
             </thead>
@@ -76,7 +75,7 @@
                 },
                 order: [[1, "asc"]],
                 ajax: {
-                    url: '/intenal/branch/index',
+                    url: '/internal/branch/index',
                     type: 'post',
                     data: function (d) {
                         //d.ModuleCode = ""
@@ -113,11 +112,6 @@
                         data: 'Address',
                         orderable: true,
                         searchable: true,
-                    },
-                    {
-                        data: 'LocationName',
-                        orderable: true,
-                        searchable: true
                     },
                     {
                         orderable: false,

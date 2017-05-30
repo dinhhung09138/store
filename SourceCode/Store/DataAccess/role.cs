@@ -23,6 +23,7 @@ namespace DataAccess
         public System.Guid id { get; set; }
         public string name { get; set; }
         public string notes { get; set; }
+        public byte level { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }

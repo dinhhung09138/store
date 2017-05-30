@@ -41,5 +41,58 @@ namespace Web.Areas.Internal.Controllers
             return this.Json(new JqueryDataTableResponse<BranchModel>(), JsonRequestBehavior.AllowGet);
         }
 
+        [AjaxAuthorize]
+        [HttpGet]
+        public ActionResult Add()
+        {
+            BranchModel model = new BranchModel()
+            {
+                Insert = true
+            };
+            return PartialView(model);
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
+        public ActionResult Edit(string id)
+        {
+
+            BranchSrv _serBranch = new BranchSrv();
+            BranchModel model = _serBranch.Item(new Guid(id));
+            model.Insert = false;
+            return PartialView(model);
+        }
+
+        /// <summary>
+        /// Find location by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [AjaxAuthorize]
+        [HttpPost]
+        public JsonResult FindLocationByName(string name)
+        {
+            LocationSrv _srvLocation = new LocationSrv();
+            return this.Json(_srvLocation.FindByName(name.ToLower()), JsonRequestBehavior.AllowGet);
+        }
+
+        [AjaxAuthorize]
+        [HttpPost]
+        public JsonResult Save(BranchModel model)
+        {
+            Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
+            if (model.Insert)
+            {
+                model.ID = Guid.NewGuid();
+                model.CreateBy = user.ID;
+            }
+            else
+            {
+                model.UpdatedBy = user.ID;
+            }
+            BranchSrv _srvBranch = new BranchSrv();
+            return this.Json(_srvBranch.Save(model), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

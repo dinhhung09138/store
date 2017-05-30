@@ -398,6 +398,8 @@
     <Content Include="Areas\Partner\Views\Supplier\Edit.cshtml" />
     <Content Include="Areas\Partner\Views\Supplier\_SupplierPartial.cshtml" />
     <Content Include="Areas\Internal\Views\Branch\Index.cshtml" />
+    <Content Include="Areas\Internal\Views\Branch\Add.cshtml" />
+    <Content Include="Areas\Internal\Views\Branch\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

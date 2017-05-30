@@ -58,9 +58,6 @@
     <Compile Include="branch_employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="config.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="contract_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -88,15 +85,33 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DepartmentSrv.cs" />
+    <Compile Include="dish.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dish_group.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dish_type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EmployeeSrv.cs" />
+    <Compile Include="employee_contract_history.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="function.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="FunctionSrv.cs" />
-    <Compile Include="inventory.cs">
+    <Compile Include="good.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="goods_group.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="inventory_goods.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="invoice.cs">
@@ -136,15 +151,6 @@
     <Compile Include="position.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="product.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_group.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="product_type.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="reset_password_history.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -179,9 +185,6 @@
     <Compile Include="SupplierGroupSrv.cs" />
     <Compile Include="SupplierSrv.cs" />
     <Compile Include="supplier_group.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="token.cs">

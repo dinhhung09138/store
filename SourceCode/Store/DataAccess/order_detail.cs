@@ -22,6 +22,5 @@ namespace DataAccess
         public decimal discount { get; set; }
     
         public virtual order order { get; set; }
-        public virtual product product { get; set; }
     }
 }

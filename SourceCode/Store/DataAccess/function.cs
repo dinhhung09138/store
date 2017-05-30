@@ -25,7 +25,7 @@ namespace DataAccess
         public string action { get; set; }
         public string controller { get; set; }
         public string area { get; set; }
-        public string group_name { get; set; }
+        public byte ordering { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<role_detail> role_detail { get; set; }
