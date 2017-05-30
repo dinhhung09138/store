@@ -6,13 +6,12 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    /// <summary>
-    /// Customer service
-    /// </summary>
-    public class CustomerSrv
+    public class GoodsSrv
     {
         /// <summary>
         /// Get list item
@@ -25,28 +24,27 @@ namespace DataAccess
             try
             {
                 //Declare response data to json object
-                JqueryDataTableResponse<CustomerModel> itemResponse = new JqueryDataTableResponse<CustomerModel>();
+                JqueryDataTableResponse<GoodsModel> itemResponse = new JqueryDataTableResponse<GoodsModel>();
                 //List of data
-                List<CustomerModel> _list = new List<CustomerModel>();
+                List<GoodsModel> _list = new List<GoodsModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.customers
-                             join g in context.customer_group on a.group_id equals g.id into grour_cus
+                    var l = (from a in context.goods
+                             join g in context.goods_group on a.group_id equals g.id into grour_cus
                              from g1 in grour_cus.DefaultIfEmpty()
-                             join loc in context.locations on a.location_id equals loc.id into lc_cus
-                             from l1 in lc_cus.DefaultIfEmpty()
+                             join loc in context.units on a.unit_id equals loc.id into lc_unit
+                             from l1 in lc_unit.DefaultIfEmpty()
                              where !a.deleted
                              orderby a.name
                              select new
                              {
                                  a.id,
-                                 a.gender,
-                                 genderString = a.gender == true ? "Nam" : "Nữ",
+                                 a.code,
                                  a.name,
-                                 a.address,
-                                 a.phone,
+                                 a.price,
+                                 a.number_in_stock,
                                  group_name = g1.name,
-                                 location_name = l1.name
+                                 unit_name = l1.name
                              }).ToList();
 
                     itemResponse.draw = request.draw;
@@ -56,51 +54,43 @@ namespace DataAccess
                     {
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
-                                    m.genderString.ToLower().Contains(searchValue) ||
-                                    m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue) ||
+                                    m.code.ToLower().Contains(searchValue) ||
                                     m.group_name.ToLower().Contains(searchValue) ||
-                                    m.location_name.ToLower().Contains(searchValue)).ToList();
+                                    m.unit_name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new CustomerModel()
+                        _list.Add(new GoodsModel()
                         {
                             ID = item.id,
+                            Code = item.code,
                             Name = item.name,
-                            GenderString = item.genderString,
-                            Address = item.address,
-                            Phone = item.phone,
+                            Price = item.price ?? 0,
+                            NumInStock = item.number_in_stock ?? 0,
                             GroupName = item.group_name,
-                            LocationName = item.location_name
+                            UnitName = item.unit_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
-                    IOrderedEnumerable<CustomerModel> _sortList = null;
+                    IOrderedEnumerable<GoodsModel> _sortList = null;
                     if (request.order != null)
                     {
                         foreach (var col in request.order)
                         {
                             switch (col.ColumnName)
                             {
+                                case "Code":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
+                                    break;
                                 case "Name":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
-                                    break;
-                                case "GenderString":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GenderString) : _sortList.Sort(col.Dir, m => m.GenderString);
-                                    break;
-                                case "Phone":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
-                                    break;
-                                case "Address":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
                                     break;
                                 case "GroupName":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GroupName) : _sortList.Sort(col.Dir, m => m.GroupName);
                                     break;
-                                case "LocationName":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.LocationName) : _sortList.Sort(col.Dir, m => m.LocationName);
+                                case "UnitName":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.UnitName) : _sortList.Sort(col.Dir, m => m.UnitName);
                                     break;
                             }
                         }
@@ -135,33 +125,33 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    int count = context.customers.Count();
-                    return Utils.CUSTOMER_CODE + count.ReturnTo9Digit();
+                    int count = context.goods.Count();
+                    return Utils.GOODS_CODE + count.ReturnTo9Digit();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return "";
             }
         }
-        
+
         /// <summary>
         /// Get item
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public CustomerModel Item(Guid id)
+        public GoodsModel Item(Guid id)
         {
-            CustomerModel _item = new CustomerModel() { ID = Guid.NewGuid() };
+            GoodsModel _item = new GoodsModel() { ID = Guid.NewGuid() };
             try
             {
 
                 using (var context = new StoreEntities())
                 {
-                    var item = (from m in context.customers
-                                join g in context.customer_group on m.group_id equals g.id into grour_cus
+                    var item = (from m in context.goods
+                                join g in context.goods_group on m.group_id equals g.id into grour_cus
                                 from g1 in grour_cus.DefaultIfEmpty()
-                                join l in context.locations on m.location_id equals l.id into lc_cus
+                                join u in context.units on m.unit_id equals u.id into lc_cus
                                 from l1 in lc_cus.DefaultIfEmpty()
                                 where m.id == id
                                 select new
@@ -169,39 +159,32 @@ namespace DataAccess
                                     m.id,
                                     m.code,
                                     m.name,
-                                    m.birthdate,
-                                    m.phone,
-                                    m.email,
-                                    m.address,
                                     m.avatar,
-                                    m.location_id,
-                                    LocationName = l1.name,
-                                    m.maps,
-                                    m.taxcode,
-                                    m.is_company,
-                                    m.gender,
+                                    m.unit_id,
+                                    UnitName = l1.name,
                                     m.group_id,
                                     GroupName = g1.name,
-                                    m.notes
+                                    m.price,
+                                    m.weight,
+                                    m.description,
+                                    m.min_in_stock,
+                                    m.max_in_stock,
+                                    m.note_in_order
                                 }).First();
                     _item.ID = item.id;
                     _item.Code = item.code;
                     _item.Name = item.name;
-                    _item.Birthdate = item.birthdate;
-                    _item.Phone = item.phone;
-                    _item.Email = item.email;
-                    _item.Address = item.address;
-                    _item.Avatar = item.avatar;
-                    _item.LocationID = item.location_id;
-                    _item.LocationName = item.LocationName;
-                    _item.Maps = item.maps;
-                    _item.TaxCode = item.taxcode;
-                    _item.IsCompany = item.is_company;
-                    _item.Gender = item.gender;
+                    _item.UnitID = item.unit_id;
+                    _item.UnitName = item.UnitName;
                     _item.GroupID = item.group_id;
                     _item.GroupName = item.GroupName;
-                    _item.Notes = item.notes;
+                    _item.Avatar = item.avatar;
                     _item.ImageFileName = "";
+                    _item.Weight = item.weight;
+                    _item.Description = item.description;
+                    _item.MinInStock = item.min_in_stock ?? 0;
+                    _item.MaxInStock = item.max_in_stock ?? 0;
+                    _item.NoteInOrder = item.note_in_order;
                 }
             }
             catch (Exception ex)
@@ -219,57 +202,55 @@ namespace DataAccess
         /// </summary>
         /// <param name="model">Motel</param>
         /// <returns>Dictionary</returns>
-        public Dictionary<string, object> Save(CustomerModel model)
+        public Dictionary<string, object> Save(GoodsModel model)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
                 using (var context = new StoreEntities())
                 {
-                    customer md = new customer();
+                    good md = new good();
                     if (model.Insert)
                     {
                         md.id = Guid.NewGuid();
                         md.name = model.Name;
                         md.code = model.Code;
-                        md.birthdate = model.Birthdate;
-                        md.phone = model.Phone;
-                        md.address = model.Address;
-                        md.email = model.Email;
-                        md.avatar = model.Avatar;
+                        md.unit_id = model.UnitID;
                         md.group_id = model.GroupID;
-                        md.location_id = model.LocationID;
-                        md.maps = model.Maps;
-                        md.taxcode = model.TaxCode;
-                        md.is_company = model.IsCompany;
-                        md.gender = model.Gender;
-                        md.notes = model.Notes;
+                        md.price = model.Price;
+                        md.number_in_stock = model.NumInStock;
+                        md.avatar = model.Avatar;
+                        md.weight = model.Weight;
+                        md.description = model.Description;
+                        md.min_in_stock = model.MinInStock;
+                        md.max_in_stock = model.MaxInStock;
+                        md.note_in_order = model.NoteInOrder;
                         md.create_by = model.CreateBy;
                         md.create_date = DateTime.Now;
                         md.deleted = false;
-                        context.customers.Add(md);
+                        context.goods.Add(md);
                         context.Entry(md).State = System.Data.Entity.EntityState.Added;
                     }
                     else
                     {
-                        md = context.customers.FirstOrDefault(m => m.id == model.ID);
+                        md = context.goods.FirstOrDefault(m => m.id == model.ID);
                         md.name = model.Name;
                         md.code = model.Code;
-                        md.birthdate = model.Birthdate;
-                        md.phone = model.Phone;
-                        md.address = model.Address;
-                        md.email = model.Email;
-                        md.avatar = model.Avatar;
+                        md.unit_id = model.UnitID;
                         md.group_id = model.GroupID;
-                        md.location_id = model.LocationID;
-                        md.maps = model.Maps;
-                        md.taxcode = model.TaxCode;
-                        md.is_company = model.IsCompany;
-                        md.gender = model.Gender;
-                        md.notes = model.Notes;
+                        md.price = model.Price;
+                        md.number_in_stock = model.NumInStock;
+                        md.avatar = model.Avatar;
+                        md.weight = model.Weight;
+                        md.description = model.Description;
+                        md.min_in_stock = model.MinInStock;
+                        md.max_in_stock = model.MaxInStock;
+                        md.note_in_order = model.NoteInOrder;
+                        md.create_by = model.CreateBy;
+                        md.create_date = DateTime.Now;
                         md.update_by = model.UpdatedBy;
                         md.update_date = DateTime.Now;
-                        context.customers.Attach(md);
+                        context.goods.Attach(md);
                         context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                     }
                     context.SaveChanges();
@@ -300,11 +281,11 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    var md = context.customers.First(m => m.id == id);
+                    var md = context.goods.First(m => m.id == id);
                     md.deleted = true;
                     md.delete_by = userID;
                     md.delete_date = DateTime.Now;
-                    context.customers.Attach(md);
+                    context.goods.Attach(md);
                     context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }

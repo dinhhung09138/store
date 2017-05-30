@@ -340,5 +340,12 @@
     @Html.Partial("_MultipleModel")
         @Scripts.Render("~/Content/js/bootstrap")
     @RenderSection("script", required: false)
+    <script>
+        $('.priceNumber').priceFormat({
+            prefix: '',
+            limit: 11,
+            centsLimit: 1
+        });
+    </script>
 </body>
 </html>

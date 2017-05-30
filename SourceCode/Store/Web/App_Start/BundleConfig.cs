@@ -42,6 +42,7 @@ namespace Web
                 "~/Content/bootstrap/bootstrap-datetimepicker.min.js",
                 "~/Content/gritter/jquery.gritter.min.js",
                 "~/Content/slimScroll/jquery.slimscroll.min.js",
+                "~/Content/jquery.priceformat.min.js",
                 "~/Content/base.js",
                 "~/Scripts/jquery.unobtrusive-ajax.min.js",
                 "~/Scripts/jquery.validate.min.js",

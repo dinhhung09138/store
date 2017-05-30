@@ -141,5 +141,33 @@ namespace Common
             return Convert.FromBase64String(base64.Replace("data:image/png;base64,", ""));
 
         }
+
+        /// <summary>
+        /// Return auto code
+        /// maxlength 9 digits
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public static string ReturnTo9Digit(this int count)
+        {
+            if (count < 10)
+                return "00000000" + count;
+            if (count < 100)
+                return "0000000" + count;
+            if (count < 1000)
+                return "000000" + count;
+            if (count < 10000)
+                return "00000" + count;
+            if (count < 100000)
+                return "0000" + count;
+            if (count < 1000000)
+                return "000" + count;
+            if (count < 10000000)
+                return "00" + count;
+            if (count < 100000000)
+                return "0" + count;
+            return count.ToString();
+        }
+
     }
 }
