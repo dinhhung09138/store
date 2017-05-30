@@ -37,7 +37,6 @@ namespace DataAccess
         public virtual DbSet<dish> dishes { get; set; }
         public virtual DbSet<dish_group> dish_group { get; set; }
         public virtual DbSet<dish_type> dish_type { get; set; }
-        public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<employee_contract_history> employee_contract_history { get; set; }
         public virtual DbSet<function> functions { get; set; }
         public virtual DbSet<good> goods { get; set; }
@@ -64,5 +63,7 @@ namespace DataAccess
         public virtual DbSet<token> tokens { get; set; }
         public virtual DbSet<unit> units { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<config> configs { get; set; }
+        public virtual DbSet<employee> employees { get; set; }
     }
 }

@@ -6,13 +6,20 @@ namespace Model
     /// <summary>
     /// Employee model
     /// </summary>
-    public class EmployeeModel
+    public class EmployeeModel : Base
     {
         /// <summary>
         /// ID
         /// </summary>
         [Required(ErrorMessage = "ID không được rỗng")]
         public Guid ID { get; set; }
+
+        /// <summary>
+        /// Code
+        /// </summary>
+        [Required(ErrorMessage = "Mã NV không được rỗng")]
+        [StringLength(20, ErrorMessage = "Mã NV không vượt quá 20 ký tự")]
+        public string Code { get; set; }
 
         /// <summary>
         /// Name
@@ -43,13 +50,13 @@ namespace Model
         /// <summary>
         /// Birthdate
         /// </summary>
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthdate { get; set; }
 
         /// <summary>
         /// Employee's image
         /// </summary>
         [StringLength(100, ErrorMessage = "Đường dẫn ảnh không vượt quá 100 ký tự")]
-        public string Image { get; set; }
+        public string Avatar { get; set; }
 
         /// <summary>
         /// Address
@@ -62,17 +69,7 @@ namespace Model
         /// </summary>
         [StringLength(12, ErrorMessage = "CMND không vượt quá 12 ký tự")]
         public string IDCard { get; set; }
-
-        /// <summary>
-        /// Location's id
-        /// </summary>
-        public Guid LocationID { get; set; }
-
-        /// <summary>
-        /// Location's name
-        /// </summary>
-        public string LocationName { get; set; }
-
+        
         /// <summary>
         /// Ngày bắt đầu làm việc
         /// </summary>
@@ -82,7 +79,7 @@ namespace Model
         /// <summary>
         /// Ngày kết thúc làm việc
         /// </summary>
-        public DateTime EndWorkingDate { get; set; }
+        public DateTime? EndWorkingDate { get; set; }
 
         /// <summary>
         /// Contract type's code

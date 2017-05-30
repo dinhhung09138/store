@@ -23,6 +23,7 @@ namespace DataAccess
         }
     
         public System.Guid id { get; set; }
+        public string code { get; set; }
         public string name { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
@@ -31,7 +32,6 @@ namespace DataAccess
         public string address { get; set; }
         public string avatar { get; set; }
         public string id_card { get; set; }
-        public Nullable<System.Guid> location_id { get; set; }
         public System.DateTime start_working_date { get; set; }
         public Nullable<System.DateTime> end_working_date { get; set; }
         public System.Guid contract_type_code { get; set; }
@@ -48,7 +48,6 @@ namespace DataAccess
         public virtual contract_type contract_type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<employee_contract_history> employee_contract_history { get; set; }
-        public virtual location location { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
     }

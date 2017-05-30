@@ -46,6 +46,17 @@
           <Property Name="delete_by" Type="uniqueidentifier" />
           <Property Name="delete_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="use_date" Type="bit" Nullable="false" />
+          <Property Name="value1" Type="nvarchar" MaxLength="100" />
+          <Property Name="value2" Type="nvarchar" MaxLength="50" />
+          <Property Name="value3" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="contract_type">
           <Key>
             <PropertyRef Name="code" />
@@ -215,6 +226,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" />
@@ -223,7 +235,6 @@
           <Property Name="address" Type="nvarchar" MaxLength="50" />
           <Property Name="avatar" Type="nvarchar" MaxLength="100" />
           <Property Name="id_card" Type="varchar" MaxLength="12" />
-          <Property Name="location_id" Type="uniqueidentifier" />
           <Property Name="start_working_date" Type="datetime" Nullable="false" />
           <Property Name="end_working_date" Type="datetime" />
           <Property Name="contract_type_code" Type="uniqueidentifier" Nullable="false" />
@@ -810,18 +821,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_employee_location">
-          <End Role="location" Type="Self.location" Multiplicity="0..1" />
-          <End Role="employee" Type="Self.employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="location">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="location_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_goods_goods_group">
           <End Role="goods_group" Type="Self.goods_group" Multiplicity="0..1" />
           <End Role="goods" Type="Self.goods" Multiplicity="*" />
@@ -1221,6 +1220,7 @@
         <EntityContainer Name="StoreModelStoreContainer">
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="branch_employee" EntityType="Self.branch_employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="config" EntityType="Self.config" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contract_type" EntityType="Self.contract_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="customer_group" EntityType="Self.customer_group" Schema="dbo" store:Type="Tables" />
@@ -1320,10 +1320,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_employee_contract_type" Association="Self.FK_employee_contract_type">
             <End Role="contract_type" EntitySet="contract_type" />
-            <End Role="employee" EntitySet="employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_employee_location" Association="Self.FK_employee_location">
-            <End Role="location" EntitySet="location" />
             <End Role="employee" EntitySet="employee" />
           </AssociationSet>
           <AssociationSet Name="FK_goods_goods_group" Association="Self.FK_goods_goods_group">
@@ -1472,7 +1468,6 @@
           <EntitySet Name="dishes" EntityType="StoreModel.dish" />
           <EntitySet Name="dish_group" EntityType="StoreModel.dish_group" />
           <EntitySet Name="dish_type" EntityType="StoreModel.dish_type" />
-          <EntitySet Name="employees" EntityType="StoreModel.employee" />
           <EntitySet Name="employee_contract_history" EntityType="StoreModel.employee_contract_history" />
           <EntitySet Name="functions" EntityType="StoreModel.function" />
           <EntitySet Name="goods" EntityType="StoreModel.good" />
@@ -1539,10 +1534,6 @@
             <End Role="department" EntitySet="departments" />
             <End Role="branch_employee" EntitySet="branch_employee" />
           </AssociationSet>
-          <AssociationSet Name="FK_branch_employee_employee" Association="StoreModel.FK_branch_employee_employee">
-            <End Role="employee" EntitySet="employees" />
-            <End Role="branch_employee" EntitySet="branch_employee" />
-          </AssociationSet>
           <AssociationSet Name="FK_branch_employee_position" Association="StoreModel.FK_branch_employee_position">
             <End Role="position" EntitySet="positions" />
             <End Role="branch_employee" EntitySet="branch_employee" />
@@ -1550,10 +1541,6 @@
           <AssociationSet Name="FK_employee_contract_history_contract_type" Association="StoreModel.FK_employee_contract_history_contract_type">
             <End Role="contract_type" EntitySet="contract_type" />
             <End Role="employee_contract_history" EntitySet="employee_contract_history" />
-          </AssociationSet>
-          <AssociationSet Name="FK_employee_contract_type" Association="StoreModel.FK_employee_contract_type">
-            <End Role="contract_type" EntitySet="contract_type" />
-            <End Role="employee" EntitySet="employees" />
           </AssociationSet>
           <AssociationSet Name="FK_customer_customer_group" Association="StoreModel.FK_customer_customer_group">
             <End Role="customer_group" EntitySet="customer_group" />
@@ -1586,18 +1573,6 @@
           <AssociationSet Name="FK_dish_unit" Association="StoreModel.FK_dish_unit">
             <End Role="unit" EntitySet="units" />
             <End Role="dish" EntitySet="dishes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_employee_contract_history_employee" Association="StoreModel.FK_employee_contract_history_employee">
-            <End Role="employee" EntitySet="employees" />
-            <End Role="employee_contract_history" EntitySet="employee_contract_history" />
-          </AssociationSet>
-          <AssociationSet Name="FK_employee_location" Association="StoreModel.FK_employee_location">
-            <End Role="location" EntitySet="locations" />
-            <End Role="employee" EntitySet="employees" />
-          </AssociationSet>
-          <AssociationSet Name="FK_user_employee" Association="StoreModel.FK_user_employee">
-            <End Role="employee" EntitySet="employees" />
-            <End Role="user" EntitySet="users" />
           </AssociationSet>
           <AssociationSet Name="FK_role_detail_function" Association="StoreModel.FK_role_detail_function">
             <End Role="function" EntitySet="functions" />
@@ -1695,6 +1670,24 @@
             <End Role="user" EntitySet="users" />
             <End Role="token" EntitySet="tokens" />
           </AssociationSet>
+          <EntitySet Name="configs" EntityType="StoreModel.config" />
+          <EntitySet Name="employees" EntityType="StoreModel.employee" />
+          <AssociationSet Name="FK_branch_employee_employee" Association="StoreModel.FK_branch_employee_employee">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="branch_employee" EntitySet="branch_employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_contract_type" Association="StoreModel.FK_employee_contract_type">
+            <End Role="contract_type" EntitySet="contract_type" />
+            <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_employee_contract_history_employee" Association="StoreModel.FK_employee_contract_history_employee">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="employee_contract_history" EntitySet="employee_contract_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_employee" Association="StoreModel.FK_user_employee">
+            <End Role="employee" EntitySet="employees" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="branch">
           <Key>
@@ -1747,8 +1740,8 @@
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="branch" Relationship="StoreModel.FK_branch_employee_branch_employee" FromRole="branch_employee" ToRole="branch" />
           <NavigationProperty Name="department" Relationship="StoreModel.FK_branch_employee_department" FromRole="branch_employee" ToRole="department" />
-          <NavigationProperty Name="employee" Relationship="StoreModel.FK_branch_employee_employee" FromRole="branch_employee" ToRole="employee" />
           <NavigationProperty Name="position" Relationship="StoreModel.FK_branch_employee_position" FromRole="branch_employee" ToRole="position" />
+          <NavigationProperty Name="employee" Relationship="StoreModel.FK_branch_employee_employee" FromRole="branch_employee" ToRole="employee" />
         </EntityType>
         <EntityType Name="contract_type">
           <Key>
@@ -1930,36 +1923,6 @@
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="dishes" Relationship="StoreModel.FK_dish_dish_type" FromRole="dish_type" ToRole="dish" />
         </EntityType>
-        <EntityType Name="employee">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="gender" Type="Boolean" Nullable="false" />
-          <Property Name="birthdate" Type="DateTime" Precision="3" />
-          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="id_card" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="location_id" Type="Guid" />
-          <Property Name="start_working_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="end_working_date" Type="DateTime" Precision="3" />
-          <Property Name="contract_type_code" Type="Guid" Nullable="false" />
-          <Property Name="create_by" Type="Guid" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="update_by" Type="Guid" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="delete_by" Type="Guid" />
-          <Property Name="delete_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="branch_employee" Relationship="StoreModel.FK_branch_employee_employee" FromRole="employee" ToRole="branch_employee" />
-          <NavigationProperty Name="contract_type" Relationship="StoreModel.FK_employee_contract_type" FromRole="employee" ToRole="contract_type" />
-          <NavigationProperty Name="employee_contract_history" Relationship="StoreModel.FK_employee_contract_history_employee" FromRole="employee" ToRole="employee_contract_history" />
-          <NavigationProperty Name="location" Relationship="StoreModel.FK_employee_location" FromRole="employee" ToRole="location" />
-          <NavigationProperty Name="users" Relationship="StoreModel.FK_user_employee" FromRole="employee" ToRole="user" />
-        </EntityType>
         <EntityType Name="employee_contract_history">
           <Key>
             <PropertyRef Name="id" />
@@ -2101,7 +2064,6 @@
           <NavigationProperty Name="branches" Relationship="StoreModel.FK_branch_location" FromRole="location" ToRole="branch" />
           <NavigationProperty Name="customers" Relationship="StoreModel.FK_customer_location" FromRole="location" ToRole="customer" />
           <NavigationProperty Name="delivers" Relationship="StoreModel.FK_deliver_location" FromRole="location" ToRole="deliver" />
-          <NavigationProperty Name="employees" Relationship="StoreModel.FK_employee_location" FromRole="location" ToRole="employee" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -2396,7 +2358,6 @@
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="delete_by" Type="Guid" />
           <Property Name="delete_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="employee" Relationship="StoreModel.FK_user_employee" FromRole="user" ToRole="employee" />
           <NavigationProperty Name="leaves" Relationship="StoreModel.FK_leave_user" FromRole="user" ToRole="leave" />
           <NavigationProperty Name="leaves1" Relationship="StoreModel.FK_leave_user1" FromRole="user" ToRole="leave" />
           <NavigationProperty Name="orders" Relationship="StoreModel.FK_order_user_create_order" FromRole="user" ToRole="order" />
@@ -2406,6 +2367,7 @@
           <NavigationProperty Name="stock_out" Relationship="StoreModel.FK_stock_out_user" FromRole="user" ToRole="stock_out" />
           <NavigationProperty Name="stock_tranfer" Relationship="StoreModel.FK_stock_tranfer_user" FromRole="user" ToRole="stock_tranfer" />
           <NavigationProperty Name="tokens" Relationship="StoreModel.FK_token_user" FromRole="user" ToRole="token" />
+          <NavigationProperty Name="employee" Relationship="StoreModel.FK_user_employee" FromRole="user" ToRole="employee" />
         </EntityType>
         <Association Name="FK_branch_employee_branch_employee">
           <End Type="StoreModel.branch" Role="branch" Multiplicity="1" />
@@ -2527,18 +2489,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_branch_employee_employee">
-          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="StoreModel.branch_employee" Role="branch_employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="branch_employee">
-              <PropertyRef Name="empl_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_branch_employee_position">
           <End Type="StoreModel.position" Role="position" Multiplicity="0..1" />
           <End Type="StoreModel.branch_employee" Role="branch_employee" Multiplicity="*" />
@@ -2559,18 +2509,6 @@
               <PropertyRef Name="code" />
             </Principal>
             <Dependent Role="employee_contract_history">
-              <PropertyRef Name="contract_type_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employee_contract_type">
-          <End Type="StoreModel.contract_type" Role="contract_type" Multiplicity="1" />
-          <End Type="StoreModel.employee" Role="employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="contract_type">
-              <PropertyRef Name="code" />
-            </Principal>
-            <Dependent Role="employee">
               <PropertyRef Name="contract_type_code" />
             </Dependent>
           </ReferentialConstraint>
@@ -2668,42 +2606,6 @@
             </Principal>
             <Dependent Role="dish">
               <PropertyRef Name="unit_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employee_contract_history_employee">
-          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="StoreModel.employee_contract_history" Role="employee_contract_history" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee_contract_history">
-              <PropertyRef Name="empl_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employee_location">
-          <End Type="StoreModel.location" Role="location" Multiplicity="0..1" />
-          <End Type="StoreModel.employee" Role="employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="location">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="employee">
-              <PropertyRef Name="location_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_employee">
-          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
-          <End Type="StoreModel.user" Role="user" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="employee">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="user">
-              <PropertyRef Name="empl_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3007,6 +2909,94 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="config">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="use_date" Type="Boolean" Nullable="false" />
+          <Property Name="value1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="value2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="value3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="Boolean" Nullable="false" />
+          <Property Name="birthdate" Type="DateTime" Precision="3" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="id_card" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="start_working_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="end_working_date" Type="DateTime" Precision="3" />
+          <Property Name="contract_type_code" Type="Guid" Nullable="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="branch_employee" Relationship="StoreModel.FK_branch_employee_employee" FromRole="employee" ToRole="branch_employee" />
+          <NavigationProperty Name="contract_type" Relationship="StoreModel.FK_employee_contract_type" FromRole="employee" ToRole="contract_type" />
+          <NavigationProperty Name="employee_contract_history" Relationship="StoreModel.FK_employee_contract_history_employee" FromRole="employee" ToRole="employee_contract_history" />
+          <NavigationProperty Name="users" Relationship="StoreModel.FK_user_employee" FromRole="employee" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_branch_employee_employee">
+          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="StoreModel.branch_employee" Role="branch_employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="branch_employee">
+              <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_contract_type">
+          <End Type="StoreModel.contract_type" Role="contract_type" Multiplicity="1" />
+          <End Type="StoreModel.employee" Role="employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="contract_type">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="employee">
+              <PropertyRef Name="contract_type_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employee_contract_history_employee">
+          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="StoreModel.employee_contract_history" Role="employee_contract_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="employee_contract_history">
+              <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_employee">
+          <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
+          <End Type="StoreModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="employee">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3225,32 +3215,6 @@
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="notes" ColumnName="notes" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="employees">
-            <EntityTypeMapping TypeName="StoreModel.employee">
-              <MappingFragment StoreEntitySet="employee">
-                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
-                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="contract_type_code" ColumnName="contract_type_code" />
-                <ScalarProperty Name="end_working_date" ColumnName="end_working_date" />
-                <ScalarProperty Name="start_working_date" ColumnName="start_working_date" />
-                <ScalarProperty Name="location_id" ColumnName="location_id" />
-                <ScalarProperty Name="id_card" ColumnName="id_card" />
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -3661,6 +3625,44 @@
                 <ScalarProperty Name="empl_id" ColumnName="empl_id" />
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="configs">
+            <EntityTypeMapping TypeName="StoreModel.config">
+              <MappingFragment StoreEntitySet="config">
+                <ScalarProperty Name="value3" ColumnName="value3" />
+                <ScalarProperty Name="value2" ColumnName="value2" />
+                <ScalarProperty Name="value1" ColumnName="value1" />
+                <ScalarProperty Name="use_date" ColumnName="use_date" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="StoreModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="contract_type_code" ColumnName="contract_type_code" />
+                <ScalarProperty Name="end_working_date" ColumnName="end_working_date" />
+                <ScalarProperty Name="start_working_date" ColumnName="start_working_date" />
+                <ScalarProperty Name="id_card" ColumnName="id_card" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
