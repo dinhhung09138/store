@@ -53,6 +53,8 @@
     <Compile Include="DepartmentModel.cs" />
     <Compile Include="EmployeeModel.cs" />
     <Compile Include="FunctionModel.cs" />
+    <Compile Include="GoodsGroupModel.cs" />
+    <Compile Include="GoodsModel.cs" />
     <Compile Include="InventoryModel.cs" />
     <Compile Include="LocationModel.cs" />
     <Compile Include="ProductGroupModel.cs" />

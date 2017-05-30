@@ -1,4 +1,5 @@
-﻿using Common.JqueryDataTable;
+﻿using Common;
+using Common.JqueryDataTable;
 using Common.Message;
 using Common.Status;
 using Model;
@@ -171,6 +172,26 @@ namespace DataAccess
             }
 
             return _item;
+        }
+
+        /// <summary>
+        /// Return dynamic item code
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCode()
+        {
+            try
+            {
+                using (var context = new StoreEntities())
+                {
+                    int count = context.delivers.Count();
+                    return Utils.DELIVER_CODE + count.ReturnTo9Digit();
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
         /// <summary>

@@ -111,6 +111,8 @@
     <Compile Include="good.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GoodsGroupSrv.cs" />
+    <Compile Include="GoodsSrv.cs" />
     <Compile Include="goods_group.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -196,6 +198,7 @@
     <Compile Include="unit.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="UnitSrv.cs" />
     <Compile Include="user.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
