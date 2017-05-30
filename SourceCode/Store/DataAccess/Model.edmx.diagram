@@ -5,89 +5,94 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="29d3528cf786441a90c30adaa53c0b62" Name="Diagram1">
-        <EntityTypeShape EntityType="StoreModel.branch" Width="1.5" PointX="3" PointY="26.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.branch_employee" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.contract_type" Width="1.5" PointX="0.75" PointY="21.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.customer_group" Width="1.5" PointX="3.75" PointY="43.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.deliver_group" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.delivery_status" Width="1.5" PointX="9" PointY="38.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.department" Width="1.5" PointX="3" PointY="33.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.function" Width="1.5" PointX="10.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.inventory" Width="1.5" PointX="8.25" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.leave" Width="1.5" PointX="10.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.leave_type" Width="1.5" PointX="8.25" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.location" Width="1.5" PointX="0.75" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.order" Width="1.5" PointX="11.25" PointY="26" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.order_detail" Width="1.5" PointX="13.5" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.position" Width="1.5" PointX="3" PointY="35.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.product" Width="1.5" PointX="8.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.product_group" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.product_type" Width="1.5" PointX="6" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.reset_password_history" Width="1.5" PointX="7.5" PointY="17.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.role" Width="1.5" PointX="10.75" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.role_detail" Width="1.5" PointX="13" PointY="2.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_in" Width="1.5" PointX="8.25" PointY="21.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="13.5" PointY="22.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_out" Width="1.5" PointX="8.25" PointY="31.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_out_detail" Width="1.5" PointX="10.5" PointY="33.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_tranfer" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.stock_tranfer_detail" Width="1.5" PointX="10.5" PointY="22" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.supplier" Width="1.5" PointX="6" PointY="38.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.supplier_group" Width="1.5" PointX="3.75" PointY="39.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.sysdiagram" Width="1.5" PointX="2.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.token" Width="1.5" PointX="7.5" PointY="14" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.unit" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="StoreModel.user" Width="1.5" PointX="5.25" PointY="14.375" IsExpanded="true" />
-        <AssociationConnector Association="StoreModel.FK_branch_employee_branch_employee" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_branch_location" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_inventory_branch" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_branch" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_branch" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_out_branch" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_from" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_to" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_branch_employee_department" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_branch_employee_position" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_delivery_status" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_role_detail_function" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_inventory_product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_leave_leave_type" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_leave_user" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_leave_user1" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_detail_order" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_user_create_order" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_user_deliver" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_order_detail_product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_product_product_group" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_product_product_type" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_product_unit" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_detail_product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_out_detail_product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_product" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_reset_password_history_user" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_role_detail_role" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_detail_stock_in" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_supplier" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_user" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_out_detail_stock_out" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_out_user" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_stock_tranfer" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_stock_tranfer_user" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_supplier_supplier_group" ManuallyRouted="false" />
-        <AssociationConnector Association="StoreModel.FK_token_user" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="StoreModel.customer" Width="1.5" PointX="9" PointY="40.625" />
-        <EntityTypeShape EntityType="StoreModel.deliver" Width="1.5" PointX="15" PointY="15.75" />
-        <EntityTypeShape EntityType="StoreModel.employee" Width="1.5" PointX="3" PointY="19" />
+        <EntityTypeShape EntityType="StoreModel.branch" Width="1.5" PointX="3" PointY="47.875" />
+        <EntityTypeShape EntityType="StoreModel.branch_employee" Width="1.5" PointX="8.25" PointY="39" />
+        <EntityTypeShape EntityType="StoreModel.contract_type" Width="1.5" PointX="3.75" PointY="31.875" />
+        <EntityTypeShape EntityType="StoreModel.customer" Width="1.5" PointX="3" PointY="35" />
+        <EntityTypeShape EntityType="StoreModel.customer_group" Width="1.5" PointX="0.75" PointY="32.125" />
+        <EntityTypeShape EntityType="StoreModel.deliver" Width="1.5" PointX="9" PointY="32.125" />
+        <EntityTypeShape EntityType="StoreModel.deliver_group" Width="1.5" PointX="6.75" PointY="20.25" />
+        <EntityTypeShape EntityType="StoreModel.delivery_status" Width="1.5" PointX="3" PointY="45" />
+        <EntityTypeShape EntityType="StoreModel.department" Width="1.5" PointX="6" PointY="42.375" />
+        <EntityTypeShape EntityType="StoreModel.dish" Width="1.5" PointX="11.25" PointY="40.625" />
+        <EntityTypeShape EntityType="StoreModel.dish_group" Width="1.5" PointX="9" PointY="68.125" />
+        <EntityTypeShape EntityType="StoreModel.dish_type" Width="1.5" PointX="9" PointY="64.25" />
+        <EntityTypeShape EntityType="StoreModel.employee" Width="1.5" PointX="6" PointY="34.875" />
+        <EntityTypeShape EntityType="StoreModel.employee_contract_history" Width="1.5" PointX="11.25" PointY="35.875" />
+        <EntityTypeShape EntityType="StoreModel.function" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="StoreModel.good" Width="1.5" PointX="6" PointY="24.75" />
+        <EntityTypeShape EntityType="StoreModel.goods_group" Width="1.5" PointX="3.75" PointY="26.25" />
+        <EntityTypeShape EntityType="StoreModel.inventory_goods" Width="1.5" PointX="8.25" PointY="44.625" />
+        <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="StoreModel.leave" Width="1.5" PointX="13.5" PointY="26" />
+        <EntityTypeShape EntityType="StoreModel.leave_type" Width="1.5" PointX="11.25" PointY="22" />
+        <EntityTypeShape EntityType="StoreModel.location" Width="1.5" PointX="0.75" PointY="36.75" />
+        <EntityTypeShape EntityType="StoreModel.order" Width="1.5" PointX="5.25" PointY="47.625" />
+        <EntityTypeShape EntityType="StoreModel.order_detail" Width="1.5" PointX="7.5" PointY="60.625" />
+        <EntityTypeShape EntityType="StoreModel.position" Width="1.5" PointX="6" PointY="44.625" />
+        <EntityTypeShape EntityType="StoreModel.reset_password_history" Width="1.5" PointX="10.5" PointY="25" />
+        <EntityTypeShape EntityType="StoreModel.role" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="StoreModel.role_detail" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="StoreModel.stock_in" Width="1.5" PointX="8.25" PointY="48" />
+        <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="13.5" PointY="49.625" />
+        <EntityTypeShape EntityType="StoreModel.stock_out" Width="1.5" PointX="8.25" PointY="54.25" />
+        <EntityTypeShape EntityType="StoreModel.stock_out_detail" Width="1.5" PointX="10.5" PointY="55.625" />
+        <EntityTypeShape EntityType="StoreModel.stock_tranfer" Width="1.5" PointX="11.25" PointY="48.375" />
+        <EntityTypeShape EntityType="StoreModel.stock_tranfer_detail" Width="1.5" PointX="13.5" PointY="46.625" />
+        <EntityTypeShape EntityType="StoreModel.supplier" Width="1.5" PointX="6" PointY="64.25" />
+        <EntityTypeShape EntityType="StoreModel.supplier_group" Width="1.5" PointX="3.75" PointY="65.25" />
+        <EntityTypeShape EntityType="StoreModel.token" Width="1.5" PointX="10.5" PointY="28.75" />
+        <EntityTypeShape EntityType="StoreModel.unit" Width="1.5" PointX="9" PointY="20.25" />
+        <EntityTypeShape EntityType="StoreModel.user" Width="1.5" PointX="8.25" PointY="25.125" />
+        <AssociationConnector Association="StoreModel.FK_branch_employee_branch_employee" />
+        <AssociationConnector Association="StoreModel.FK_branch_location" />
+        <AssociationConnector Association="StoreModel.FK_dish_branch" />
+        <AssociationConnector Association="StoreModel.FK_inventory_branch" />
+        <AssociationConnector Association="StoreModel.FK_order_branch" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_branch" />
+        <AssociationConnector Association="StoreModel.FK_stock_out_branch" />
+        <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_from" />
+        <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_to" />
+        <AssociationConnector Association="StoreModel.FK_branch_employee_department" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_employee" />
+        <AssociationConnector Association="StoreModel.FK_branch_employee_position" />
+        <AssociationConnector Association="StoreModel.FK_employee_contract_history_contract_type" />
         <AssociationConnector Association="StoreModel.FK_employee_contract_type" />
         <AssociationConnector Association="StoreModel.FK_customer_customer_group" />
         <AssociationConnector Association="StoreModel.FK_customer_location" />
         <AssociationConnector Association="StoreModel.FK_deliver_deliver_group" />
         <AssociationConnector Association="StoreModel.FK_deliver_location" />
+        <AssociationConnector Association="StoreModel.FK_order_delivery_status" />
+        <AssociationConnector Association="StoreModel.FK_dish_dish_group" />
+        <AssociationConnector Association="StoreModel.FK_dish_dish_type" />
+        <AssociationConnector Association="StoreModel.FK_dish_unit" />
+        <AssociationConnector Association="StoreModel.FK_employee_contract_history_employee" />
         <AssociationConnector Association="StoreModel.FK_employee_location" />
         <AssociationConnector Association="StoreModel.FK_user_employee" />
-        <EntityTypeShape EntityType="StoreModel.config" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="StoreModel.FK_role_detail_function" />
+        <AssociationConnector Association="StoreModel.FK_goods_goods_group" />
+        <AssociationConnector Association="StoreModel.FK_goods_unit" />
+        <AssociationConnector Association="StoreModel.FK_inventory_goods" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_detail_goods" />
+        <AssociationConnector Association="StoreModel.FK_stock_out_detail_goods" />
+        <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_goods" />
+        <AssociationConnector Association="StoreModel.FK_leave_leave_type" />
+        <AssociationConnector Association="StoreModel.FK_leave_user" />
+        <AssociationConnector Association="StoreModel.FK_leave_user1" />
+        <AssociationConnector Association="StoreModel.FK_order_detail_order" />
+        <AssociationConnector Association="StoreModel.FK_order_user_create_order" />
+        <AssociationConnector Association="StoreModel.FK_order_user_deliver" />
+        <AssociationConnector Association="StoreModel.FK_reset_password_history_user" />
+        <AssociationConnector Association="StoreModel.FK_role_detail_role" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_detail_stock_in" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_supplier" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_user" />
+        <AssociationConnector Association="StoreModel.FK_stock_out_detail_stock_out" />
+        <AssociationConnector Association="StoreModel.FK_stock_out_user" />
+        <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_stock_tranfer" />
+        <AssociationConnector Association="StoreModel.FK_stock_tranfer_user" />
+        <AssociationConnector Association="StoreModel.FK_supplier_supplier_group" />
+        <AssociationConnector Association="StoreModel.FK_token_user" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

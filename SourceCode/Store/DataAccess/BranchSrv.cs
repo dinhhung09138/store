@@ -32,8 +32,6 @@ namespace DataAccess
                 using (var context = new StoreEntities())
                 {
                     var l = (from a in context.branches
-                             join lc in context.locations on a.location_id equals lc.id into br_location
-                             from l1 in br_location.DefaultIfEmpty()
                              where !a.deleted
                              orderby a.name
                              select new
@@ -42,8 +40,7 @@ namespace DataAccess
                                  a.name,
                                  a.address,
                                  a.phone,
-                                 a.hotline,
-                                 location_name = l1.name
+                                 a.hotline
                              }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
@@ -54,8 +51,7 @@ namespace DataAccess
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
                                     m.phone.ToLower().Contains(searchValue) ||
-                                    m.hotline.ToLower().Contains(searchValue) ||
-                                    m.location_name.ToLower().Contains(searchValue)).ToList();
+                                    m.hotline.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -66,8 +62,7 @@ namespace DataAccess
                             Name = item.name,
                             Address = item.address,
                             Phone = item.phone,
-                            Hotline = item.hotline,
-                            LocationName = item.location_name
+                            Hotline = item.hotline
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -81,17 +76,14 @@ namespace DataAccess
                                 case "Name":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
                                     break;
-                                case "Address":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
-                                    break;
                                 case "Phone":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
                                     break;
                                 case "Hotline":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Hotline) : _sortList.Sort(col.Dir, m => m.Hotline);
                                     break;
-                                case "LocationName":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.LocationName) : _sortList.Sort(col.Dir, m => m.LocationName);
+                                case "Address":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
                                     break;
                             }
                         }
