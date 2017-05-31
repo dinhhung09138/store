@@ -1,0 +1,147 @@
+﻿@using Model
+@{
+    ViewBag.Title = "Đối tác - Nhóm nhà cung cấp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row page-header">
+    <div class="col-md-9 col-sm-8 col-xs-12">
+        <h4 style="float:left;">Đối tác - Nhóm nhà cung cấp</h4>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-12 page-tool">
+        <span id="btnAdd" data-tooltip="Thêm mới" title="Thêm mới"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+    </div>
+</div>
+<div class="row">
+
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <table id="table" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên nhóm</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<div id="divContainer">
+
+</div>
+
+
+@section script{
+    <script>
+        var table;
+        $(document).ready(function () {
+
+            table = $('#table').DataTable({
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                searching: true,
+                ordering: true,
+                paging: true,
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+                pagingType: 'full_numbers',
+                info: true,
+                initComplete: function (settings, json) {
+                    //Do something after finish
+                },
+                language: {
+                    lengthMenu: 'Hiển thị _MENU_ dòng mỗi trang',
+                    zeroRecords: 'Dữ liệu không tồn tại',
+                    info: 'Trang _PAGE_/_PAGES_',
+                    infoEmpty: '',//'Không tìm thấy kết quả',
+                    infoFiltered: '',//'(Tìm kiếm trên _MAX_ dòng)',
+                    search: 'Tìm kiếm',
+                    processing: 'Đang xử lý',
+                    paginate: {
+                        first: '<<',
+                        previous: '<',
+                        next: '>',
+                        last: '>>'
+                    }
+                },
+                order: [[1, "asc"]],
+                ajax: {
+                    url: '/partner/suppliergroup/index',
+                    type: 'post',
+                    data: function (d) {
+                        //d.ModuleCode = ""
+                    }
+                },
+                columns: [
+                    {
+                        orderable: false,
+                        width: '40px',
+                        render: function (obj, type, data, meta) {
+                            var index = meta.row + meta.settings._iDisplayStart + 1;
+                            return '<div class="ctn-center text-bold">' + index + '<div/>';
+                        }
+                    },
+                    {
+                        data: 'Name',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        orderable: false,
+                        width: '40px',
+                        render: function (obj, type, data, meta) {
+                            return '<a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                    <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                        }
+                    }
+                ]
+            });
+
+        });
+
+        function update(id) {
+            $('#loadingModel').modal('show');
+            $.ajax({
+                url: '/partner/suppliergroup/edit',
+                type: 'get',
+                dataType: 'html',
+                data: {id : id },
+                success: function (result) {
+                    $('#divContainer').html(result);
+                    $('#loadingModel').modal('hide');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 401 || xhr.status == 530) {
+                        window.location.href = '/home/login';
+                    }
+                }
+            });
+        }
+
+        $(document).on('click', '#btnAdd', function (e) {
+            $('#loadingModel').modal('show');
+            $.ajax({
+                url: '/partner/suppliergroup/add',
+                type: 'get',
+                dataType: 'html',
+                success: function (result) {
+                    $('#divContainer').html(result);
+                    $('#loadingModel').modal('hide');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 401 || xhr.status == 530) {
+                        window.location.href = '/home/login';
+                        console.log(xhr);
+                    }
+                }
+            });
+        });
+
+    </script>
+}
