@@ -54,6 +54,7 @@ namespace Web.Areas.Partner.Controllers
             ViewBag.group = group;
             CustomerModel model = new CustomerModel()
             {
+                Code = CustomerSrv.GetCode(),
                 Insert = true,
                 IsCompany = false,
                 Gender = true,

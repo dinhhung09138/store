@@ -1,4 +1,5 @@
-﻿using Common.JqueryDataTable;
+﻿using Common;
+using Common.JqueryDataTable;
 using Common.Message;
 using Common.Status;
 using Model;
@@ -35,6 +36,7 @@ namespace DataAccess
                              {
                                  a.id,
                                  a.name,
+                                 a.code,
                                  a.address,
                                  a.phone,
                                  ContractTypeName = ct.name
@@ -46,6 +48,7 @@ namespace DataAccess
                     {
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
+                                    m.code.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
                                     m.phone.ToLower().Contains(searchValue)).ToList();
                     }
@@ -55,6 +58,7 @@ namespace DataAccess
                         _list.Add(new EmployeeModel()
                         {
                             ID = item.id,
+                            Code = item.code,
                             Name = item.name,
                             Address = item.address,
                             Phone = item.phone,
@@ -67,6 +71,9 @@ namespace DataAccess
                     {
                         switch (col.ColumnName)
                         {
+                            case "Code":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
+                                break;
                             case "Name":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
                                 break;
@@ -94,6 +101,26 @@ namespace DataAccess
             }
 
             return _return;
+        }
+
+        /// <summary>
+        /// Return dynamic item code
+        /// </summary>
+        /// <returns></returns>
+        public static string GetCode()
+        {
+            try
+            {
+                using (var context = new StoreEntities())
+                {
+                    int count = context.employees.Count();
+                    return Utils.EMPLOYEE_CODE + count.ReturnTo9Digit();
+                }
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
         /// <summary>

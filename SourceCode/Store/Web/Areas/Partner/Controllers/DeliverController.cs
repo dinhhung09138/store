@@ -60,6 +60,7 @@ namespace Web.Areas.Partner.Controllers
             ViewBag.group = group;
             DeliverModel model = new DeliverModel()
             {
+                Code = DeliverSrv.GetCode(),
                 Insert = true,
                 IsCompany = false,
                 Gender = true,

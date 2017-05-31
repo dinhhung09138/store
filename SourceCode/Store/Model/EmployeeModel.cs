@@ -85,7 +85,7 @@ namespace Model
         /// Contract type's code
         /// </summary>
         [Required(ErrorMessage = "Loại hợp đồng không được rỗng")]
-        public Guid ContractTypeCode { get; set; }
+        public Guid? ContractTypeCode { get; set; }
 
         /// <summary>
         /// Contract type's name

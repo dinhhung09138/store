@@ -31,15 +31,14 @@ namespace DataAccess
                 List<CustomerGroupModel> _list = new List<CustomerGroupModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.customer_group where !a.deleted orderby a.name select new { a.id, a.code, a.name }).ToList();
+                    var l = (from a in context.customer_group where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
                     if (!string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
-                                    m.code.ToLower().Contains(searchValue)).ToList();
+                        l = l.Where(m => m.name.ToLower().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -47,8 +46,7 @@ namespace DataAccess
                         _list.Add(new CustomerGroupModel()
                         {
                             ID = item.id,
-                            Name = item.name,
-                            Code = item.code
+                            Name = item.name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -57,9 +55,6 @@ namespace DataAccess
                     {
                         switch (col.ColumnName)
                         {
-                            case "Code":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
-                                break;
                             case "Name":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
                                 break;
@@ -85,31 +80,27 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public CustomerGroupModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            CustomerGroupModel _item = new CustomerGroupModel() { ID = Guid.NewGuid() };
             try
             {
-                CustomerGroupModel _item = new CustomerGroupModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
                     var item = context.customer_group.First(m => m.id == id);
                     _item.ID = item.id;
-                    _item.Code = item.code;
                     _item.Name = item.name;
                     _item.Notes = item.notes;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>
@@ -129,7 +120,6 @@ namespace DataAccess
                     {
                         md.id = Guid.NewGuid();
                         md.name = model.Name;
-                        md.code = model.Code;
                         md.notes = model.Notes;
                         md.create_by = model.CreateBy;
                         md.create_date = DateTime.Now;
@@ -141,7 +131,6 @@ namespace DataAccess
                     {
                         md = context.customer_group.FirstOrDefault(m => m.id == model.ID);
                         md.name = model.Name;
-                        md.code = model.Code;
                         md.notes = model.Notes;
                         md.update_by = model.UpdatedBy;
                         md.update_date = DateTime.Now;

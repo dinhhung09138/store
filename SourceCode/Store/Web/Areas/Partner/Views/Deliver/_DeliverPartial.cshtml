@@ -47,23 +47,23 @@
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mẫ đơn vị giao hàng</label>
+                                    <label>Mẫ đơn vị giao hàng<span class="color-red"> *</span></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "20", @class = "form-control", @required = true, @readonly = true, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Code)
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên đơn vị giao hàng</label>
+                                    <label>Tên đơn vị giao hàng<span class="color-red"> *</span></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
                                     @Html.ValidationMessageFor(m => m.Name)
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true })
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Phone)
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control", @maxlength = 20 })
+                                    @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control", @maxlength = 20, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.TaxCode)
                                 </div>
                             </div>
@@ -168,7 +168,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
+                                    @Html.TextAreaFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
                                 </div>
                             </div>
                             <div class="row">

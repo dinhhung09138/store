@@ -78,12 +78,11 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public DeliverGroupModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            DeliverGroupModel _item = new DeliverGroupModel() { ID = Guid.NewGuid() };
             try
             {
-                DeliverGroupModel _item = new DeliverGroupModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
                     var item = context.deliver_group.First(m => m.id == id);
@@ -91,17 +90,15 @@ namespace DataAccess
                     _item.Name = item.name;
                     _item.Notes = item.notes;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>

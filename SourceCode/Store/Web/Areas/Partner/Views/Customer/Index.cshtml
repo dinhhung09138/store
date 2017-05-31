@@ -1,7 +1,6 @@
-﻿@using Model
-@model CustomerModel
+﻿
 @{
-    ViewBag.Title = "Đối tác - khách hàng";
+    ViewBag.Title = "Đối tác - Khách hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -22,6 +21,7 @@
             <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Mã KH</th>
                     <th>Tên KH</th>
                     <th>Giới tính</th>
                     <th>SDT</th>
@@ -75,7 +75,7 @@
                         last: '>>'
                     }
                 },
-                order: [[1, "asc"]],
+                order: [[2, "asc"]],
                 ajax: {
                     url: '/partner/customer/index',
                     type: 'post',
@@ -91,6 +91,12 @@
                             var index = meta.row + meta.settings._iDisplayStart + 1;
                             return '<div class="ctn-center text-bold">' + index + '<div/>';
                         }
+                    },
+                    {
+                        data: 'Code',
+                        orderable: true,
+                        searchable: true,
+                        width: '80px'
                     },
                     {
                         data: 'Name',

@@ -13,12 +13,7 @@ namespace Model
         /// </summary>
         [Required(ErrorMessage = "ID nhóm không được rỗng")]
         public Guid ID { get; set; }
-        /// <summary>
-        /// Code
-        /// </summary>
-        [Required(ErrorMessage = "mã nhóm không được rỗng")]
-        [StringLength(20, ErrorMessage = "mã nhóm không vượt quá 20 ký tự")]
-        public string Code { get; set; }
+
         /// <summary>
         /// Name
         /// </summary>

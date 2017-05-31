@@ -59,6 +59,7 @@ namespace Web.Areas.Partner.Controllers
             ViewBag.group = group;
             SupplierModel model = new SupplierModel()
             {
+                Code = SupplierSrv.GetCode(),
                 Insert = true,
                 Avatar = "",
                 ImageFileName = ""

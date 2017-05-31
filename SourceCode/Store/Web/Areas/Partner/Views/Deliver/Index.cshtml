@@ -1,5 +1,4 @@
-﻿@using Model
-@model DeliverModel
+﻿
 @{
     ViewBag.Title = "Đối tác - Giao hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +6,7 @@
 
 <div class="row page-header">
     <div class="col-md-9 col-sm-8 col-xs-12">
-        <h4 style="float:left;">Đối tác - Khách hàng</h4>
+        <h4 style="float:left;">Đối tác - Giao hàng</h4>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-12 page-tool">
         <span id="btnAdd" data-tooltip="Thêm mới" title="Thêm mới"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
@@ -22,6 +21,7 @@
             <thead>
                 <tr>
                     <th>STT</th>
+                    <th>Mã</th>
                     <th>Tên</th>
                     <th>SDT</th>
                     <th>Địa chỉ</th>
@@ -73,7 +73,7 @@
                         last: '>>'
                     }
                 },
-                order: [[1, "asc"]],
+                order: [[2, "asc"]],
                 ajax: {
                     url: '/partner/deliver/index',
                     type: 'post',
@@ -89,6 +89,12 @@
                             var index = meta.row + meta.settings._iDisplayStart + 1;
                             return '<div class="ctn-center text-bold">' + index + '<div/>';
                         }
+                    },
+                    {
+                        data: 'Code',
+                        orderable: true,
+                        searchable: true,
+                        width: '80px'
                     },
                     {
                         data: 'Name',

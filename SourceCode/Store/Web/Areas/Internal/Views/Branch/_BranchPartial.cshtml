@@ -26,7 +26,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
                                     @Html.ValidationMessageFor(m => m.Name)
                                 </div>
                             </div>
@@ -37,18 +37,18 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15 })
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Phone)
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Hotline <span class="color-red">*</span></label>
+                                    <label>Hotline</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Hotline, new { @class = "form-control", @maxlength = 15 })
+                                    @Html.TextBoxFor(m => m.Hotline, new { @class = "form-control", @maxlength = 15, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Hotline)
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
+                                    @Html.TextAreaFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
                                 </div>
                             </div>
                             <div class="row">

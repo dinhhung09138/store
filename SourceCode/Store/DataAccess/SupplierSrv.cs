@@ -37,6 +37,7 @@ namespace DataAccess
                              select new
                              {
                                  a.id,
+                                 a.code,
                                  a.name,
                                  a.address,
                                  a.phone,
@@ -50,6 +51,7 @@ namespace DataAccess
                     {
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
+                                    m.code.ToLower().Contains(searchValue) ||
                                     m.address.ToLower().Contains(searchValue) ||
                                     m.phone.ToLower().Contains(searchValue) ||
                                     m.company_name.ToLower().Contains(searchValue)).ToList();
@@ -60,6 +62,7 @@ namespace DataAccess
                         _list.Add(new SupplierModel()
                         {
                             ID = item.id,
+                            Code = item.code,
                             Name = item.name,
                             Address = item.address,
                             Phone = item.phone,
@@ -74,6 +77,9 @@ namespace DataAccess
                         {
                             switch (col.ColumnName)
                             {
+                                case "Code":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
+                                    break;
                                 case "Name":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
                                     break;

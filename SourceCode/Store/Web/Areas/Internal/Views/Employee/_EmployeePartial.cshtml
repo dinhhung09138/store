@@ -14,30 +14,30 @@
                 @Html.HiddenFor(m => m.ID)
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Thông tin khách hàng</h4>
+                    <h4 class="modal-title">Thông tin nhân viên</h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-5 col-sm-5 col-xs-12">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mẫ nhân viên</label>
+                                    <label>Mẫ nhân viên<span class="color-red"> *</span></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "20", @class = "form-control", @required = true, @readonly = true, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Code)
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên nhân viên</label>
+                                    <label>Tên nhân viên<span class="color-red"> *</span></label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true })
+                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
                                     @Html.ValidationMessageFor(m => m.Name)
                                 </div>
                             </div>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true })
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Phone)
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = 50 })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = 50, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.Email)
                                 </div>
                             </div>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.IDCard, new { @class = "form-control", @maxlength = 12 })
+                                    @Html.TextBoxFor(m => m.IDCard, new { @class = "form-control", @maxlength = 12, @autocomplete = "off" })
                                     @Html.ValidationMessageFor(m => m.IDCard)
                                 </div>
                             </div>
@@ -153,7 +153,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
+                                    @Html.TextAreaFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
                                 </div>
                             </div>
                             <div class="row">
@@ -201,16 +201,6 @@
     $(document).ready(function () {
         $('#inputModel').modal('show');
         //
-        $('.selectpicker').selectpicker();
-        //
-        $('input[type=radio][name=customerType]').change(function () {
-            if (this.value == 'company') {
-                $('#IsCompany').val(true);
-            }
-            else {
-                $('#IsCompany').val(false);
-            }
-        });
         $('input[type=radio][name=genderType]').change(function () {
             if (this.value == 'male') {
                 $('#Gender').val(true);
@@ -264,39 +254,6 @@
                 });
             }
             return false;
-        });
-
-        //LocationName
-        $("#LocationName").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '@Url.Action("FindLocationByName", "Customer", new { Area = "Partner" })',
-                    datatype: "json",
-                    type: 'post',
-                    data: {
-                        name: request.term
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        response($.map(data, function (val, item) {
-                            return {
-                                label: val.Name,
-                                value: val.ID,
-                                id: val.ID
-                            }
-                        }))
-                    }
-                })
-            },
-            select: function (event, ui) {
-                event.preventDefault();
-                $("#LocationName").val(ui.item.label);
-                $("#LocationID").val(ui.item.id);
-            },
-            focus: function (event, ui) {
-                event.preventDefault();
-                $("#LocationName").val(ui.item.label);
-            }
         });
 
         $('input[type=file]').change(function () {

@@ -37,8 +37,7 @@ namespace Web.Areas.Internal.Controllers
             }
             return this.Json(new JqueryDataTableResponse<EmployeeModel>(), JsonRequestBehavior.AllowGet);
         }
-
-
+        
         [AjaxAuthorize]
         [HttpGet]
         public ActionResult Add()
@@ -54,6 +53,7 @@ namespace Web.Areas.Internal.Controllers
             ViewBag.group = group;
             EmployeeModel model = new EmployeeModel()
             {
+                Code = EmployeeSrv.GetCode(),
                 Insert = true,
                 Gender = true,
                 Avatar = "",
@@ -82,7 +82,6 @@ namespace Web.Areas.Internal.Controllers
             return PartialView(model);
         }
         
-
         [AjaxAuthorize]
         [HttpPost]
         public JsonResult Save(EmployeeModel model)
