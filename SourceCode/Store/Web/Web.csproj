@@ -232,8 +232,10 @@
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Goods\Controllers\GoodsController.cs" />
+    <Compile Include="Areas\Goods\Controllers\ProductController.cs" />
     <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
     <Compile Include="Areas\Internal\Controllers\BranchController.cs" />
+    <Compile Include="Areas\Internal\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
     <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
@@ -405,6 +407,10 @@
     <Content Include="Areas\Internal\Views\Branch\Add.cshtml" />
     <Content Include="Areas\Internal\Views\Branch\Edit.cshtml" />
     <Content Include="Areas\Internal\Views\Branch\_BranchPartial.cshtml" />
+    <Content Include="Areas\Internal\Views\Employee\Index.cshtml" />
+    <Content Include="Areas\Internal\Views\Employee\Add.cshtml" />
+    <Content Include="Areas\Internal\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Internal\Views\Employee\_EmployeePartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -483,6 +489,7 @@
     <Folder Include="Areas\Dashboard\Views\Shared\" />
     <Folder Include="Areas\Goods\Models\" />
     <Folder Include="Areas\Goods\Views\Goods\" />
+    <Folder Include="Areas\Goods\Views\Product\" />
     <Folder Include="Areas\Goods\Views\Shared\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\Internal\Views\Shared\" />
@@ -505,6 +512,7 @@
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Files\Customer\" />
     <Folder Include="Files\Deliver\" />
+    <Folder Include="Files\Employee\" />
     <Folder Include="Files\Supplier\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>

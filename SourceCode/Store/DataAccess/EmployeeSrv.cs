@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace DataAccess
 {
-    class EmployeeSrv
+    public class EmployeeSrv
     {
         /// <summary>
         /// Get list item

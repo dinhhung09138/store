@@ -61,6 +61,7 @@
     <Compile Include="config.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContractTypeSrv.cs" />
     <Compile Include="contract_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
