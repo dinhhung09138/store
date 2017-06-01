@@ -17,10 +17,12 @@ namespace DataAccess
         public System.Guid id { get; set; }
         public System.Guid stock_in_id { get; set; }
         public System.Guid goods_id { get; set; }
+        public System.Guid supplier_id { get; set; }
         public decimal number { get; set; }
         public decimal price { get; set; }
     
-        public virtual stock_in stock_in { get; set; }
         public virtual good good { get; set; }
+        public virtual stock_in stock_in { get; set; }
+        public virtual supplier supplier { get; set; }
     }
 }

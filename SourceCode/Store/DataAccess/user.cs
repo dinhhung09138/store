@@ -22,10 +22,10 @@ namespace DataAccess
             this.orders = new HashSet<order>();
             this.orders1 = new HashSet<order>();
             this.reset_password_history = new HashSet<reset_password_history>();
-            this.stock_in = new HashSet<stock_in>();
             this.stock_out = new HashSet<stock_out>();
             this.stock_tranfer = new HashSet<stock_tranfer>();
             this.tokens = new HashSet<token>();
+            this.stock_in = new HashSet<stock_in>();
         }
     
         public System.Guid id { get; set; }
@@ -53,13 +53,13 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reset_password_history> reset_password_history { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_in> stock_in { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_out> stock_out { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_tranfer> stock_tranfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<token> tokens { get; set; }
         public virtual employee employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock_in> stock_in { get; set; }
     }
 }

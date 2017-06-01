@@ -28,12 +28,12 @@ namespace Model
         [Required(ErrorMessage = "Chọn Chi nhánh")]
         public Guid BranchID { get; set; }
 
-        /// <summary>
-        /// ID
-        /// </summary>
-        [Required(ErrorMessage = "Chọn nhà cung cấp")]
-        public Guid SupplierID { get; set; }
 
+        /// <summary>
+        /// Branch's name
+        /// </summary>
+        public string BranchName { get; set; }
+        
         /// <summary>
         /// Stock in date
         /// </summary>
@@ -65,7 +65,12 @@ namespace Model
         /// </summary>
         [Required(ErrorMessage = "Nhân viên nhập kho không được rỗng")]
         public Guid EmployeeID { get; set; }
-        
+
+        /// <summary>
+        /// Employee name
+        /// </summary>
+        public string EmployeeName { get; set; }
+
         /// <summary>
         /// Reason
         /// </summary>

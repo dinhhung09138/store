@@ -235,7 +235,6 @@
     <Compile Include="Areas\Goods\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Goods\Controllers\GoodsController.cs" />
     <Compile Include="Areas\Goods\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Goods\Controllers\StockInController.cs" />
     <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
     <Compile Include="Areas\Internal\Controllers\BranchController.cs" />
     <Compile Include="Areas\Internal\Controllers\EmployeeController.cs" />

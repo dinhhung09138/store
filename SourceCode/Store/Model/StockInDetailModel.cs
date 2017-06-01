@@ -17,11 +17,23 @@ namespace Model
         [Required(ErrorMessage = "ID Phiếu nhập kho không được rỗng")]
         public Guid StockInID { get; set; }
 
+        public Guid SupplierID { get; set; }
+
         /// <summary>
-        /// Product's id
+        /// Supplier's name
+        /// </summary>
+        public string SupplierName { get; set; }
+
+        /// <summary>
+        /// Good's id
         /// </summary>
         [Required(ErrorMessage = "ID sản phẩm không được rỗng")]
-        public Guid ProductID { get; set; }
+        public Guid GoodsID { get; set; }
+
+        /// <summary>
+        /// Goods's name
+        /// </summary>
+        public string GoodsName { get; set; }
 
         /// <summary>
         /// Output number

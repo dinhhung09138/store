@@ -30,18 +30,22 @@ namespace DataAccess
                 using (var context = new StoreEntities())
                 {
                     var l = (from a in context.stock_in
-                             join c in context.contract_type on a.contract_type_code equals c.code into ContactType
-                             from ct in ContactType.DefaultIfEmpty()
+                             join e in context.employees on a.empl_id equals e.id
+                             join br in context.branches on a.branch_id equals br.id into branch
+                             from b in branch.DefaultIfEmpty()
                              where !a.deleted
-                             orderby a.name
+                             orderby a.code
                              select new
                              {
                                  a.id,
-                                 a.name,
                                  a.code,
-                                 a.address,
-                                 a.phone,
-                                 ContractTypeName = ct.name
+                                 a.stock_in_date,
+                                 a.total_money,
+                                 a.discount,
+                                 a.payable,
+                                 a.dept,
+                                 employee_name = e.name,
+                                 branch_name = b.name
                              }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
@@ -49,26 +53,33 @@ namespace DataAccess
                     if (!string.IsNullOrWhiteSpace(request.search.Value))
                     {
                         string searchValue = request.search.Value.ToLower();
-                        l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
-                                    m.code.ToLower().Contains(searchValue) ||
-                                    m.address.ToLower().Contains(searchValue) ||
-                                    m.phone.ToLower().Contains(searchValue)).ToList();
+                        l = l.Where(m => m.code.ToLower().Contains(searchValue) ||
+                                    m.employee_name.ToLower().Contains(searchValue) ||
+                                    m.branch_name.ToLower().Contains(searchValue) ||
+                                    m.stock_in_date.ToString().ToLower().Contains(searchValue) ||
+                                    m.total_money.ToString().Contains(searchValue) ||
+                                    m.payable.ToString().Contains(searchValue) ||
+                                    m.dept.ToString().Contains(searchValue) ||
+                                    m.discount.ToString().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
                     {
-                        _list.Add(new EmployeeModel()
+                        _list.Add(new StockInModel()
                         {
                             ID = item.id,
                             Code = item.code,
-                            Name = item.name,
-                            Address = item.address,
-                            Phone = item.phone,
-                            ContractTypeName = item.ContractTypeName
+                            EmployeeName = item.employee_name,
+                            BranchName = item.branch_name,
+                            StockInDate = item.stock_in_date,
+                            TotalMoney = item.total_money,
+                            Payable = item.payable,
+                            Dept = item.dept,
+                            Discount = item.discount
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
-                    IOrderedEnumerable<EmployeeModel> _sortList = null;
+                    IOrderedEnumerable<StockInModel> _sortList = null;
                     foreach (var col in request.order)
                     {
                         switch (col.ColumnName)
@@ -76,17 +87,26 @@ namespace DataAccess
                             case "Code":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Code) : _sortList.Sort(col.Dir, m => m.Code);
                                 break;
-                            case "Name":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                            case "EmployeeName":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.EmployeeName) : _sortList.Sort(col.Dir, m => m.EmployeeName);
                                 break;
-                            case "Address":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Address) : _sortList.Sort(col.Dir, m => m.Address);
+                            case "BranchName":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.BranchName) : _sortList.Sort(col.Dir, m => m.BranchName);
                                 break;
-                            case "Phone":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Phone) : _sortList.Sort(col.Dir, m => m.Phone);
+                            case "StockInDate":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.StockInDate) : _sortList.Sort(col.Dir, m => m.StockInDate);
                                 break;
-                            case "ContractTypeName":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.ContractTypeName) : _sortList.Sort(col.Dir, m => m.ContractTypeName);
+                            case "TotalMoney":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.TotalMoney) : _sortList.Sort(col.Dir, m => m.TotalMoney);
+                                break;
+                            case "Payable":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Payable) : _sortList.Sort(col.Dir, m => m.Payable);
+                                break;
+                            case "Dept":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Dept) : _sortList.Sort(col.Dir, m => m.Dept);
+                                break;
+                            case "Discount":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Discount) : _sortList.Sort(col.Dir, m => m.Discount);
                                 break;
                         }
                     }
@@ -115,8 +135,8 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    int count = context.employees.Count();
-                    return Utils.EMPLOYEE_CODE + count.ReturnTo9Digit();
+                    int count = context.stock_in.Count();
+                    return Utils.STOCKIN_CODE + count.ReturnTo9Digit();
                 }
             }
             catch (Exception ex)
@@ -130,48 +150,74 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public EmployeeModel Item(Guid id)
+        public StockInModel Item(Guid id)
         {
-            EmployeeModel _item = new EmployeeModel();
+            StockInModel _item = new StockInModel();
             try
             {
                 using (var context = new StoreEntities())
                 {
-                    var item = (from m in context.employees
-                                join g in context.contract_type on m.contract_type_code equals g.code into grour
-                                from g1 in grour.DefaultIfEmpty()
+                    var item = (from m in context.stock_in
+                                join b in context.branches on m.branch_id equals b.id
+                                join e in context.employees on m.empl_id equals e.id
                                 where m.id == id
                                 select new
                                 {
                                     m.id,
                                     m.code,
-                                    m.name,
-                                    m.birthdate,
-                                    m.gender,
-                                    m.phone,
-                                    m.email,
-                                    m.address,
-                                    m.avatar,
-                                    m.id_card,
-                                    m.start_working_date,
-                                    m.end_working_date,
-                                    m.contract_type_code,
-                                    GroupName = g1.name,
+                                    m.branch_id,
+                                    branch_name = b.name,
+                                    m.stock_in_date,
+                                    m.total_money,
+                                    m.discount,
+                                    m.payable,
+                                    m.dept,
+                                    m.empl_id,
+                                    empl_name = e.name,
+                                    m.reason,
+                                    m.notes
                                 }).First();
                     _item.ID = item.id;
                     _item.Code = item.code;
-                    _item.Name = item.name;
-                    _item.Birthdate = item.birthdate;
-                    _item.Phone = item.phone;
-                    _item.Email = item.email;
-                    _item.Address = item.address;
-                    _item.Avatar = item.avatar;
-                    _item.IDCard = item.id_card;
-                    _item.Gender = item.gender;
-                    _item.StartWorkingDate = item.start_working_date;
-                    _item.EndWorkingDate = item.end_working_date;
-                    _item.ContractTypeCode = item.contract_type_code;
-                    _item.ContractTypeName = item.GroupName;
+                    _item.BranchID = item.branch_id;
+                    _item.BranchName = item.branch_name;
+                    _item.StockInDate = item.stock_in_date;
+                    _item.TotalMoney = item.total_money;
+                    _item.Discount = item.discount;
+                    _item.Payable = item.payable;
+                    _item.Dept = item.dept;
+                    _item.EmployeeID = item.empl_id;
+                    _item.EmployeeName = item.empl_name;
+                    _item.Reason = item.reason;
+                    _item.Notes = item.notes;
+
+                    var details = (from m in context.stock_in_detail
+                                   join p in context.goods on m.goods_id equals p.id
+                                   join s in context.suppliers on m.supplier_id equals s.id
+                                   where m.stock_in_id == item.id
+                                   select new
+                                   {
+                                       m.id,
+                                       m.goods_id,
+                                       goods_name = p.name,
+                                       m.supplier_id,
+                                       supplier_name = s.name,
+                                       m.number,
+                                       m.price
+                                   }).ToList();
+                    foreach (var it in details)
+                    {
+                        _item.details.Add(new StockInDetailModel()
+                        {
+                            ID = it.id,
+                            GoodsID = it.goods_id,
+                            GoodsName = it.goods_name,
+                            SupplierID = it.supplier_id,
+                            SupplierName = it.supplier_name,
+                            Number = it.number,
+                            Price = it.price
+                        });
+                    }
                 }
             }
             catch (Exception ex)
@@ -189,57 +235,56 @@ namespace DataAccess
         /// </summary>
         /// <param name="model">Motel</param>
         /// <returns>Dictionary</returns>
-        public Dictionary<string, object> Save(EmployeeModel model)
+        public Dictionary<string, object> Save(StockInModel model)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
             {
                 using (var context = new StoreEntities())
                 {
-                    employee md = new employee();
-                    if (model.Insert)
+                    stock_in md = new stock_in();
+                    using (var trans = context.Database.BeginTransaction())
                     {
-                        md.id = Guid.NewGuid();
-                        md.name = model.Name;
-                        md.code = model.Code;
-                        md.birthdate = model.Birthdate;
-                        md.phone = model.Phone;
-                        md.address = model.Address;
-                        md.email = model.Email;
-                        md.avatar = model.Avatar;
-                        //md.contract_type_code = model.ContractTypeCode;
-                        md.id_card = model.IDCard;
-                        md.gender = model.Gender;
-                        md.start_working_date = model.StartWorkingDate;
-                        md.end_working_date = model.EndWorkingDate;
-                        md.create_by = model.CreateBy;
-                        md.create_date = DateTime.Now;
-                        md.deleted = false;
-                        context.employees.Add(md);
-                        context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                        if (model.Insert)
+                        {
+                            md.id = Guid.NewGuid();
+                            md.code = model.Code;
+                            md.stock_in_date = model.StockInDate;
+                            md.branch_id = model.BranchID;
+                            md.total_money = model.TotalMoney;
+                            md.discount = model.Discount;
+                            md.payable = model.Payable;
+                            md.dept = model.Dept;
+                            md.empl_id = model.EmployeeID;
+                            md.reason = model.Reason;
+                            md.notes = model.Notes;
+                            md.create_by = model.CreateBy;
+                            md.create_date = DateTime.Now;
+                            md.deleted = false;
+                            context.stock_in.Add(md);
+                            context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                        }
+                        else
+                        {
+                            md = context.stock_in.FirstOrDefault(m => m.id == model.ID);
+                            md.code = model.Code;
+                            md.stock_in_date = model.StockInDate;
+                            md.branch_id = model.BranchID;
+                            md.total_money = model.TotalMoney;
+                            md.discount = model.Discount;
+                            md.payable = model.Payable;
+                            md.dept = model.Dept;
+                            md.empl_id = model.EmployeeID;
+                            md.reason = model.Reason;
+                            md.notes = model.Notes;
+                            md.update_by = model.UpdatedBy;
+                            md.update_date = DateTime.Now;
+                            context.stock_in.Attach(md);
+                            context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                        }
+                        context.SaveChanges();
                     }
-                    else
-                    {
-                        md = context.employees.FirstOrDefault(m => m.id == model.ID);
-                        md.id = Guid.NewGuid();
-                        md.name = model.Name;
-                        md.code = model.Code;
-                        md.birthdate = model.Birthdate;
-                        md.phone = model.Phone;
-                        md.address = model.Address;
-                        md.email = model.Email;
-                        md.avatar = model.Avatar;
-                        //md.contract_type_code = model.ContractTypeCode;
-                        md.id_card = model.IDCard;
-                        md.gender = model.Gender;
-                        md.start_working_date = model.StartWorkingDate;
-                        md.end_working_date = model.EndWorkingDate;
-                        md.update_by = model.UpdatedBy;
-                        md.update_date = DateTime.Now;
-                        context.employees.Attach(md);
-                        context.Entry(md).State = System.Data.Entity.EntityState.Modified;
-                    }
-                    context.SaveChanges();
+                    
                 }
                 _return.Add("status", DatabaseExecute.Success);
                 _return.Add("message", DatabaseMessage.SAVE_SUCCESS);

@@ -1,3 +1,1 @@
-﻿- remove code in customer_group table
-- Set contract_type is null in employee table
-- Add org_price to goods table.
+﻿

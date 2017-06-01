@@ -24,7 +24,17 @@ namespace Model
         /// Product's id
         /// </summary>
         [Required(ErrorMessage = "ID sản phẩm không được rỗng")]
-        public Guid ProductID { get; set; }
+        public Guid GoodsID { get; set; }
+
+        /// <summary>
+        /// Product's name
+        /// </summary>
+        public string GoodsName { get; set; }
+
+        /// <summary>
+        /// Branch's id
+        /// </summary>
+        public Guid BranchID { get; set; }
 
         /// <summary>
         /// Output number

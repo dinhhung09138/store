@@ -21,10 +21,10 @@ namespace DataAccess
             this.dishes = new HashSet<dish>();
             this.inventory_goods = new HashSet<inventory_goods>();
             this.orders = new HashSet<order>();
-            this.stock_in = new HashSet<stock_in>();
             this.stock_out = new HashSet<stock_out>();
             this.stock_tranfer = new HashSet<stock_tranfer>();
             this.stock_tranfer1 = new HashSet<stock_tranfer>();
+            this.stock_in = new HashSet<stock_in>();
         }
     
         public System.Guid id { get; set; }
@@ -54,12 +54,12 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_in> stock_in { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_out> stock_out { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_tranfer> stock_tranfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_tranfer> stock_tranfer1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock_in> stock_in { get; set; }
     }
 }

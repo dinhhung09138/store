@@ -30,8 +30,6 @@
         <EntityTypeShape EntityType="StoreModel.reset_password_history" Width="1.5" PointX="10.5" PointY="25" />
         <EntityTypeShape EntityType="StoreModel.role" Width="1.5" PointX="0.75" PointY="6.25" />
         <EntityTypeShape EntityType="StoreModel.role_detail" Width="1.5" PointX="3" PointY="1.125" />
-        <EntityTypeShape EntityType="StoreModel.stock_in" Width="1.5" PointX="8.25" PointY="48" />
-        <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="13.5" PointY="49.625" />
         <EntityTypeShape EntityType="StoreModel.stock_out" Width="1.5" PointX="8.25" PointY="54.25" />
         <EntityTypeShape EntityType="StoreModel.stock_out_detail" Width="1.5" PointX="10.5" PointY="55.625" />
         <EntityTypeShape EntityType="StoreModel.stock_tranfer" Width="1.5" PointX="11.25" PointY="48.375" />
@@ -46,7 +44,6 @@
         <AssociationConnector Association="StoreModel.FK_dish_branch" />
         <AssociationConnector Association="StoreModel.FK_inventory_branch" />
         <AssociationConnector Association="StoreModel.FK_order_branch" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_branch" />
         <AssociationConnector Association="StoreModel.FK_stock_out_branch" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_from" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_branch_to" />
@@ -69,9 +66,6 @@
         <AssociationConnector Association="StoreModel.FK_order_user_deliver" />
         <AssociationConnector Association="StoreModel.FK_reset_password_history_user" />
         <AssociationConnector Association="StoreModel.FK_role_detail_role" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_detail_stock_in" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_supplier" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_user" />
         <AssociationConnector Association="StoreModel.FK_stock_out_detail_stock_out" />
         <AssociationConnector Association="StoreModel.FK_stock_out_user" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_stock_tranfer" />
@@ -90,9 +84,15 @@
         <AssociationConnector Association="StoreModel.FK_goods_goods_group" />
         <AssociationConnector Association="StoreModel.FK_goods_unit" />
         <AssociationConnector Association="StoreModel.FK_inventory_goods" />
-        <AssociationConnector Association="StoreModel.FK_stock_in_detail_goods" />
         <AssociationConnector Association="StoreModel.FK_stock_out_detail_goods" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_goods" />
+        <EntityTypeShape EntityType="StoreModel.stock_in" Width="1.5" PointX="13.5" PointY="36.875" />
+        <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="16.5" PointY="42.625" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_branch" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_detail_goods" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_detail_stock_in" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_user" />
+        <AssociationConnector Association="StoreModel.FK_stock_in_detail_supplier" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

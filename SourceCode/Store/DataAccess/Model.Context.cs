@@ -50,8 +50,6 @@ namespace DataAccess
         public virtual DbSet<reset_password_history> reset_password_history { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<role_detail> role_detail { get; set; }
-        public virtual DbSet<stock_in> stock_in { get; set; }
-        public virtual DbSet<stock_in_detail> stock_in_detail { get; set; }
         public virtual DbSet<stock_out> stock_out { get; set; }
         public virtual DbSet<stock_out_detail> stock_out_detail { get; set; }
         public virtual DbSet<stock_tranfer> stock_tranfer { get; set; }
@@ -65,5 +63,7 @@ namespace DataAccess
         public virtual DbSet<customer_group> customer_group { get; set; }
         public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<good> goods { get; set; }
+        public virtual DbSet<stock_in> stock_in { get; set; }
+        public virtual DbSet<stock_in_detail> stock_in_detail { get; set; }
     }
 }
