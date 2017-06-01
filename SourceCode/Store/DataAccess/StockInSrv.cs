@@ -6,10 +6,12 @@ using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class EmployeeSrv
+    public class StockInSrv
     {
         /// <summary>
         /// Get list item
@@ -22,12 +24,12 @@ namespace DataAccess
             try
             {
                 //Declare response data to json object
-                JqueryDataTableResponse<EmployeeModel> itemResponse = new JqueryDataTableResponse<EmployeeModel>();
+                JqueryDataTableResponse<StockInModel> itemResponse = new JqueryDataTableResponse<StockInModel>();
                 //List of data
-                List<EmployeeModel> _list = new List<EmployeeModel>();
+                List<StockInModel> _list = new List<StockInModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.employees
+                    var l = (from a in context.stock_in
                              join c in context.contract_type on a.contract_type_code equals c.code into ContactType
                              from ct in ContactType.DefaultIfEmpty()
                              where !a.deleted
@@ -285,6 +287,5 @@ namespace DataAccess
 
             return _return;
         }
-
     }
 }

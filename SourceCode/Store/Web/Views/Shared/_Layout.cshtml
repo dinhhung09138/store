@@ -330,10 +330,15 @@
         @Scripts.Render("~/Content/js/bootstrap")
     @RenderSection("script", required: false)
     <script>
-        $('.priceNumber').priceFormat({
+        $('.priceValue').priceFormat({
             prefix: '',
             limit: 11,
             centsLimit: 1
+        });
+        $('.numberValue').priceFormat({
+            prefix: '',
+            limit: 11,
+            centsLimit: 0
         });
     </script>
 </body>

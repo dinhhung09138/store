@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model
@@ -76,5 +77,10 @@ namespace Model
         /// </summary>
         [StringLength(255, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
         public string Notes { get; set; }
+
+        /// <summary>
+        /// List of detail
+        /// </summary>
+        public List<StockInDetailModel> details { get; set; }
     }
 }
