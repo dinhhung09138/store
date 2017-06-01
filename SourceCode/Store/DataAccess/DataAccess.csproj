@@ -167,6 +167,7 @@
     <Compile Include="role_detail.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="StockInSrv.cs" />
     <Compile Include="stock_in.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

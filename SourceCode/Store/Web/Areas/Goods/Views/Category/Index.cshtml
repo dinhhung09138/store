@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Quản lý nhân viên";
+﻿
+@{
+    ViewBag.Title = "Danh mục hàng hóa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row page-header">
     <div class="col-md-9 col-sm-8 col-xs-12">
-        <h4 style="float:left;">Quản lý nhân viên</h4>
+        <h4 style="float:left;">Danh mục hàng hóa</h4>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-12 page-tool">
         <span id="btnAdd" data-tooltip="Thêm mới" title="Thêm mới"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
@@ -17,11 +18,13 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Mã NV</th>
-                    <th>Tên NV</th>
-                    <th>SDT</th>
-                    <th>Địa chỉ</th>
-                    <th>Loại hợp đồng</th>
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>Nhóm hàng hóa</th>
+                    <th>Đơn vị tính</th>
+                    <th>Giá gốc</th>
+                    <th>Giá bán</th>
+                    <th>Số lượng tồn</th>
                     <th></th>
                 </tr>
             </thead>
@@ -71,7 +74,7 @@
                 },
                 order: [[2, "asc"]],
                 ajax: {
-                    url: '/internal/employee/index',
+                    url: '/goods/category/index',
                     type: 'post',
                     data: function (d) {
                         //d.ModuleCode = ""
@@ -95,24 +98,41 @@
                     {
                         data: 'Name',
                         orderable: true,
-                        searchable: true,
-                        width: '200px'
+                        searchable: true
                     },
                     {
-                        data: 'Phone',
-                        orderable: true,
-                        searchable: true,
-                        width: '80px'
-                    },
-                    {
-                        data: 'Address',
+                        data: 'GroupName',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'ContractTypeName',
+                        data: 'UnitName',
                         orderable: true,
                         searchable: true
+                    },
+                    {
+                        data: 'OriPrice',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<span class="priceValue">' + data.OriPrice + '</span>';
+                        }
+                    },
+                    {
+                        data: 'Price',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<span class="priceValue">' + data.Price + '</span>';
+                        }
+                    },
+                    {
+                        data: 'NumInStock',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<span class="numberValue">' + data.NumInStock + '</span>';
+                        }
                     },
                     {
                         orderable: false,
@@ -130,7 +150,7 @@
         function update(id) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/internal/employee/edit',
+                url: '/goods/category/edit',
                 type: 'get',
                 dataType: 'html',
                 data: {id : id },
@@ -150,7 +170,7 @@
         $(document).on('click', '#btnAdd', function (e) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/internal/employee/add',
+                url: '/goods/category/add',
                 type: 'get',
                 dataType: 'html',
                 success: function (result) {

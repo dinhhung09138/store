@@ -41,8 +41,8 @@ namespace DataAccess
                                  a.id,
                                  a.code,
                                  a.name,
-                                 a.price,
-                                 a.number_in_stock,
+                                 price= a.price ?? 0,
+                                 number_in_stock = a.number_in_stock ?? 0,
                                  group_name = g1.name,
                                  unit_name = l1.name
                              }).ToList();
@@ -55,6 +55,8 @@ namespace DataAccess
                         string searchValue = request.search.Value.ToLower();
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.code.ToLower().Contains(searchValue) ||
+                                    m.price.ToString().Contains(searchValue) ||
+                                    m.number_in_stock.ToString().Contains(searchValue) ||
                                     m.group_name.ToLower().Contains(searchValue) ||
                                     m.unit_name.ToLower().Contains(searchValue)).ToList();
                     }
@@ -66,8 +68,9 @@ namespace DataAccess
                             ID = item.id,
                             Code = item.code,
                             Name = item.name,
-                            Price = item.price ?? 0,
-                            NumInStock = item.number_in_stock ?? 0,
+                            Price = item.price,
+                            OriPrice = 0,
+                            NumInStock = item.number_in_stock,
                             GroupName = item.group_name,
                             UnitName = item.unit_name
                         });
@@ -85,6 +88,15 @@ namespace DataAccess
                                     break;
                                 case "Name":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                    break;
+                                case "Price":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Price) : _sortList.Sort(col.Dir, m => m.Price);
+                                    break;
+                                case "OriPrice":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.OriPrice) : _sortList.Sort(col.Dir, m => m.OriPrice);
+                                    break;
+                                case "NumInStock":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.NumInStock) : _sortList.Sort(col.Dir, m => m.NumInStock);
                                     break;
                                 case "GroupName":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.GroupName) : _sortList.Sort(col.Dir, m => m.GroupName);
