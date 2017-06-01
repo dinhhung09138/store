@@ -37,7 +37,7 @@ namespace DataAccess
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
     
-        public virtual customer_group customer_group { get; set; }
         public virtual location location { get; set; }
+        public virtual customer_group customer_group { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace DataAccess
         public System.Guid goods_id { get; set; }
         public decimal number { get; set; }
     
-        public virtual good good { get; set; }
         public virtual stock_tranfer stock_tranfer { get; set; }
+        public virtual good good { get; set; }
     }
 }

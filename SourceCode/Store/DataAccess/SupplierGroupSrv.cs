@@ -84,7 +84,7 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    var item = context.customer_group.First(m => m.id == id);
+                    var item = context.supplier_group.First(m => m.id == id);
                     _item.ID = item.id;
                     _item.Name = item.name;
                     _item.Notes = item.notes;

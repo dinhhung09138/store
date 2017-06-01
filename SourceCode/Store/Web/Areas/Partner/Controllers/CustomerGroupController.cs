@@ -40,6 +40,7 @@ namespace Web.Areas.Partner.Controllers
         public ActionResult Add()
         {
             CustomerGroupModel model = new CustomerGroupModel();
+            model.Insert = true;
             return PartialView(model);
         }
 

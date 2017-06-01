@@ -20,7 +20,7 @@ namespace DataAccess
         public decimal number { get; set; }
         public decimal price { get; set; }
     
-        public virtual good good { get; set; }
         public virtual stock_in stock_in { get; set; }
+        public virtual good good { get; set; }
     }
 }

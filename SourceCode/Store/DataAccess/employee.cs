@@ -34,7 +34,7 @@ namespace DataAccess
         public string id_card { get; set; }
         public System.DateTime start_working_date { get; set; }
         public Nullable<System.DateTime> end_working_date { get; set; }
-        public System.Guid contract_type_code { get; set; }
+        public Nullable<System.Guid> contract_type_code { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }

@@ -96,7 +96,6 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="notes" Type="nvarchar" MaxLength="255" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
@@ -237,7 +236,7 @@
           <Property Name="id_card" Type="varchar" MaxLength="12" />
           <Property Name="start_working_date" Type="datetime" Nullable="false" />
           <Property Name="end_working_date" Type="datetime" />
-          <Property Name="contract_type_code" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="contract_type_code" Type="uniqueidentifier" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="update_by" Type="uniqueidentifier" />
@@ -284,6 +283,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="unit_id" Type="uniqueidentifier" />
           <Property Name="group_id" Type="uniqueidentifier" />
+          <Property Name="org_price" Type="money" />
           <Property Name="price" Type="money" />
           <Property Name="number_in_stock" Type="decimal" Precision="7" Scale="1" />
           <Property Name="avatar" Type="nvarchar" MaxLength="100" />
@@ -810,7 +810,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_employee_contract_type">
-          <End Role="contract_type" Type="Self.contract_type" Multiplicity="1" />
+          <End Role="contract_type" Type="Self.contract_type" Multiplicity="0..1" />
           <End Role="employee" Type="Self.employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="contract_type">
@@ -1460,7 +1460,6 @@
           <EntitySet Name="branch_employee" EntityType="StoreModel.branch_employee" />
           <EntitySet Name="contract_type" EntityType="StoreModel.contract_type" />
           <EntitySet Name="customers" EntityType="StoreModel.customer" />
-          <EntitySet Name="customer_group" EntityType="StoreModel.customer_group" />
           <EntitySet Name="delivers" EntityType="StoreModel.deliver" />
           <EntitySet Name="deliver_group" EntityType="StoreModel.deliver_group" />
           <EntitySet Name="delivery_status" EntityType="StoreModel.delivery_status" />
@@ -1470,7 +1469,6 @@
           <EntitySet Name="dish_type" EntityType="StoreModel.dish_type" />
           <EntitySet Name="employee_contract_history" EntityType="StoreModel.employee_contract_history" />
           <EntitySet Name="functions" EntityType="StoreModel.function" />
-          <EntitySet Name="goods" EntityType="StoreModel.good" />
           <EntitySet Name="goods_group" EntityType="StoreModel.goods_group" />
           <EntitySet Name="inventory_goods" EntityType="StoreModel.inventory_goods" />
           <EntitySet Name="invoices" EntityType="StoreModel.invoice" />
@@ -1542,10 +1540,6 @@
             <End Role="contract_type" EntitySet="contract_type" />
             <End Role="employee_contract_history" EntitySet="employee_contract_history" />
           </AssociationSet>
-          <AssociationSet Name="FK_customer_customer_group" Association="StoreModel.FK_customer_customer_group">
-            <End Role="customer_group" EntitySet="customer_group" />
-            <End Role="customer" EntitySet="customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_customer_location" Association="StoreModel.FK_customer_location">
             <End Role="location" EntitySet="locations" />
             <End Role="customer" EntitySet="customers" />
@@ -1577,30 +1571,6 @@
           <AssociationSet Name="FK_role_detail_function" Association="StoreModel.FK_role_detail_function">
             <End Role="function" EntitySet="functions" />
             <End Role="role_detail" EntitySet="role_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_goods_goods_group" Association="StoreModel.FK_goods_goods_group">
-            <End Role="goods_group" EntitySet="goods_group" />
-            <End Role="good" EntitySet="goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_goods_unit" Association="StoreModel.FK_goods_unit">
-            <End Role="unit" EntitySet="units" />
-            <End Role="good" EntitySet="goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_inventory_goods" Association="StoreModel.FK_inventory_goods">
-            <End Role="good" EntitySet="goods" />
-            <End Role="inventory_goods" EntitySet="inventory_goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_stock_in_detail_goods" Association="StoreModel.FK_stock_in_detail_goods">
-            <End Role="good" EntitySet="goods" />
-            <End Role="stock_in_detail" EntitySet="stock_in_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_stock_out_detail_goods" Association="StoreModel.FK_stock_out_detail_goods">
-            <End Role="good" EntitySet="goods" />
-            <End Role="stock_out_detail" EntitySet="stock_out_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_stock_tranfer_detail_goods" Association="StoreModel.FK_stock_tranfer_detail_goods">
-            <End Role="good" EntitySet="goods" />
-            <End Role="stock_tranfer_detail" EntitySet="stock_tranfer_detail" />
           </AssociationSet>
           <AssociationSet Name="FK_leave_leave_type" Association="StoreModel.FK_leave_leave_type">
             <End Role="leave_type" EntitySet="leave_type" />
@@ -1671,7 +1641,9 @@
             <End Role="token" EntitySet="tokens" />
           </AssociationSet>
           <EntitySet Name="configs" EntityType="StoreModel.config" />
+          <EntitySet Name="customer_group" EntityType="StoreModel.customer_group" />
           <EntitySet Name="employees" EntityType="StoreModel.employee" />
+          <EntitySet Name="goods" EntityType="StoreModel.good" />
           <AssociationSet Name="FK_branch_employee_employee" Association="StoreModel.FK_branch_employee_employee">
             <End Role="employee" EntitySet="employees" />
             <End Role="branch_employee" EntitySet="branch_employee" />
@@ -1679,6 +1651,10 @@
           <AssociationSet Name="FK_employee_contract_type" Association="StoreModel.FK_employee_contract_type">
             <End Role="contract_type" EntitySet="contract_type" />
             <End Role="employee" EntitySet="employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_customer_customer_group" Association="StoreModel.FK_customer_customer_group">
+            <End Role="customer_group" EntitySet="customer_group" />
+            <End Role="customer" EntitySet="customers" />
           </AssociationSet>
           <AssociationSet Name="FK_employee_contract_history_employee" Association="StoreModel.FK_employee_contract_history_employee">
             <End Role="employee" EntitySet="employees" />
@@ -1688,7 +1664,31 @@
             <End Role="employee" EntitySet="employees" />
             <End Role="user" EntitySet="users" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="FK_goods_goods_group" Association="StoreModel.FK_goods_goods_group">
+            <End Role="goods_group" EntitySet="goods_group" />
+            <End Role="good" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_unit" Association="StoreModel.FK_goods_unit">
+            <End Role="unit" EntitySet="units" />
+            <End Role="good" EntitySet="goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inventory_goods" Association="StoreModel.FK_inventory_goods">
+            <End Role="good" EntitySet="goods" />
+            <End Role="inventory_goods" EntitySet="inventory_goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stock_in_detail_goods" Association="StoreModel.FK_stock_in_detail_goods">
+            <End Role="good" EntitySet="goods" />
+            <End Role="stock_in_detail" EntitySet="stock_in_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stock_out_detail_goods" Association="StoreModel.FK_stock_out_detail_goods">
+            <End Role="good" EntitySet="goods" />
+            <End Role="stock_out_detail" EntitySet="stock_out_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stock_tranfer_detail_goods" Association="StoreModel.FK_stock_tranfer_detail_goods">
+            <End Role="good" EntitySet="goods" />
+            <End Role="stock_tranfer_detail" EntitySet="stock_tranfer_detail" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="branch">
           <Key>
             <PropertyRef Name="id" />
@@ -1778,25 +1778,8 @@
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="delete_by" Type="Guid" />
           <Property Name="delete_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="customer_group" Relationship="StoreModel.FK_customer_customer_group" FromRole="customer" ToRole="customer_group" />
           <NavigationProperty Name="location" Relationship="StoreModel.FK_customer_location" FromRole="customer" ToRole="location" />
-        </EntityType>
-        <EntityType Name="customer_group">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="create_by" Type="Guid" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="update_by" Type="Guid" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="delete_by" Type="Guid" />
-          <Property Name="delete_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="customers" Relationship="StoreModel.FK_customer_customer_group" FromRole="customer_group" ToRole="customer" />
+          <NavigationProperty Name="customer_group" Relationship="StoreModel.FK_customer_customer_group" FromRole="customer" ToRole="customer_group" />
         </EntityType>
         <EntityType Name="deliver">
           <Key>
@@ -1954,37 +1937,6 @@
           <Property Name="area" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ordering" Type="Byte" Nullable="false" />
           <NavigationProperty Name="role_detail" Relationship="StoreModel.FK_role_detail_function" FromRole="function" ToRole="role_detail" />
-        </EntityType>
-        <EntityType Name="good">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="unit_id" Type="Guid" />
-          <Property Name="group_id" Type="Guid" />
-          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="number_in_stock" Type="Decimal" Precision="7" Scale="1" />
-          <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="weight" Type="Decimal" Nullable="false" Precision="7" Scale="1" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="min_in_stock" Type="Decimal" Precision="7" Scale="1" />
-          <Property Name="max_in_stock" Type="Decimal" Precision="7" Scale="1" />
-          <Property Name="note_in_order" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="create_by" Type="Guid" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="update_by" Type="Guid" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="delete_by" Type="Guid" />
-          <Property Name="delete_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="goods_group" Relationship="StoreModel.FK_goods_goods_group" FromRole="good" ToRole="goods_group" />
-          <NavigationProperty Name="unit" Relationship="StoreModel.FK_goods_unit" FromRole="good" ToRole="unit" />
-          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_goods" FromRole="good" ToRole="inventory_goods" />
-          <NavigationProperty Name="stock_in_detail" Relationship="StoreModel.FK_stock_in_detail_goods" FromRole="good" ToRole="stock_in_detail" />
-          <NavigationProperty Name="stock_out_detail" Relationship="StoreModel.FK_stock_out_detail_goods" FromRole="good" ToRole="stock_out_detail" />
-          <NavigationProperty Name="stock_tranfer_detail" Relationship="StoreModel.FK_stock_tranfer_detail_goods" FromRole="good" ToRole="stock_tranfer_detail" />
         </EntityType>
         <EntityType Name="goods_group">
           <Key>
@@ -2195,8 +2147,8 @@
           <Property Name="goods_id" Type="Guid" Nullable="false" />
           <Property Name="number" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
           <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_in_detail_goods" FromRole="stock_in_detail" ToRole="good" />
           <NavigationProperty Name="stock_in" Relationship="StoreModel.FK_stock_in_detail_stock_in" FromRole="stock_in_detail" ToRole="stock_in" />
+          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_in_detail_goods" FromRole="stock_in_detail" ToRole="good" />
         </EntityType>
         <EntityType Name="stock_out">
           <Key>
@@ -2233,8 +2185,8 @@
           <Property Name="goods_id" Type="Guid" Nullable="false" />
           <Property Name="number" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
           <Property Name="price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_out_detail_goods" FromRole="stock_out_detail" ToRole="good" />
           <NavigationProperty Name="stock_out" Relationship="StoreModel.FK_stock_out_detail_stock_out" FromRole="stock_out_detail" ToRole="stock_out" />
+          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_out_detail_goods" FromRole="stock_out_detail" ToRole="good" />
         </EntityType>
         <EntityType Name="stock_tranfer">
           <Key>
@@ -2268,8 +2220,8 @@
           <Property Name="stock_tranfer_id" Type="Guid" Nullable="false" />
           <Property Name="goods_id" Type="Guid" Nullable="false" />
           <Property Name="number" Type="Decimal" Nullable="false" Precision="5" Scale="1" />
-          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_tranfer_detail_goods" FromRole="stock_tranfer_detail" ToRole="good" />
           <NavigationProperty Name="stock_tranfer" Relationship="StoreModel.FK_stock_tranfer_detail_stock_tranfer" FromRole="stock_tranfer_detail" ToRole="stock_tranfer" />
+          <NavigationProperty Name="good" Relationship="StoreModel.FK_stock_tranfer_detail_goods" FromRole="stock_tranfer_detail" ToRole="good" />
         </EntityType>
         <EntityType Name="supplier">
           <Key>
@@ -2513,18 +2465,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_customer_customer_group">
-          <End Type="StoreModel.customer_group" Role="customer_group" Multiplicity="0..1" />
-          <End Type="StoreModel.customer" Role="customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="customer_group">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="customer">
-              <PropertyRef Name="group_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_customer_location">
           <End Type="StoreModel.location" Role="location" Multiplicity="0..1" />
           <End Type="StoreModel.customer" Role="customer" Multiplicity="*" />
@@ -2620,78 +2560,6 @@
             </Principal>
             <Dependent Role="role_detail">
               <PropertyRef Name="function_code" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_goods_goods_group">
-          <End Type="StoreModel.goods_group" Role="goods_group" Multiplicity="0..1" />
-          <End Type="StoreModel.good" Role="good" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="goods_group">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="good">
-              <PropertyRef Name="group_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_goods_unit">
-          <End Type="StoreModel.unit" Role="unit" Multiplicity="0..1" />
-          <End Type="StoreModel.good" Role="good" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="unit">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="good">
-              <PropertyRef Name="unit_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_inventory_goods">
-          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
-          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="good">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="inventory_goods">
-              <PropertyRef Name="goods_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_stock_in_detail_goods">
-          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
-          <End Type="StoreModel.stock_in_detail" Role="stock_in_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="good">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="stock_in_detail">
-              <PropertyRef Name="goods_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_stock_out_detail_goods">
-          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
-          <End Type="StoreModel.stock_out_detail" Role="stock_out_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="good">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="stock_out_detail">
-              <PropertyRef Name="goods_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_stock_tranfer_detail_goods">
-          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
-          <End Type="StoreModel.stock_tranfer_detail" Role="stock_tranfer_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="good">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="stock_tranfer_detail">
-              <PropertyRef Name="goods_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2920,6 +2788,22 @@
           <Property Name="value2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="value3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="customer_group">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="customers" Relationship="StoreModel.FK_customer_customer_group" FromRole="customer_group" ToRole="customer" />
+        </EntityType>
         <EntityType Name="employee">
           <Key>
             <PropertyRef Name="id" />
@@ -2936,7 +2820,7 @@
           <Property Name="id_card" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="start_working_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="end_working_date" Type="DateTime" Precision="3" />
-          <Property Name="contract_type_code" Type="Guid" Nullable="false" />
+          <Property Name="contract_type_code" Type="Guid" />
           <Property Name="create_by" Type="Guid" Nullable="false" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="update_by" Type="Guid" />
@@ -2948,6 +2832,38 @@
           <NavigationProperty Name="contract_type" Relationship="StoreModel.FK_employee_contract_type" FromRole="employee" ToRole="contract_type" />
           <NavigationProperty Name="employee_contract_history" Relationship="StoreModel.FK_employee_contract_history_employee" FromRole="employee" ToRole="employee_contract_history" />
           <NavigationProperty Name="users" Relationship="StoreModel.FK_user_employee" FromRole="employee" ToRole="user" />
+        </EntityType>
+        <EntityType Name="good">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="unit_id" Type="Guid" />
+          <Property Name="group_id" Type="Guid" />
+          <Property Name="org_price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="number_in_stock" Type="Decimal" Precision="7" Scale="1" />
+          <Property Name="avatar" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="weight" Type="Decimal" Nullable="false" Precision="7" Scale="1" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="min_in_stock" Type="Decimal" Precision="7" Scale="1" />
+          <Property Name="max_in_stock" Type="Decimal" Precision="7" Scale="1" />
+          <Property Name="note_in_order" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="goods_group" Relationship="StoreModel.FK_goods_goods_group" FromRole="good" ToRole="goods_group" />
+          <NavigationProperty Name="unit" Relationship="StoreModel.FK_goods_unit" FromRole="good" ToRole="unit" />
+          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_goods" FromRole="good" ToRole="inventory_goods" />
+          <NavigationProperty Name="stock_in_detail" Relationship="StoreModel.FK_stock_in_detail_goods" FromRole="good" ToRole="stock_in_detail" />
+          <NavigationProperty Name="stock_out_detail" Relationship="StoreModel.FK_stock_out_detail_goods" FromRole="good" ToRole="stock_out_detail" />
+          <NavigationProperty Name="stock_tranfer_detail" Relationship="StoreModel.FK_stock_tranfer_detail_goods" FromRole="good" ToRole="stock_tranfer_detail" />
         </EntityType>
         <Association Name="FK_branch_employee_employee">
           <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
@@ -2962,7 +2878,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_employee_contract_type">
-          <End Type="StoreModel.contract_type" Role="contract_type" Multiplicity="1" />
+          <End Type="StoreModel.contract_type" Role="contract_type" Multiplicity="0..1" />
           <End Type="StoreModel.employee" Role="employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="contract_type">
@@ -2970,6 +2886,18 @@
             </Principal>
             <Dependent Role="employee">
               <PropertyRef Name="contract_type_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_customer_customer_group">
+          <End Type="StoreModel.customer_group" Role="customer_group" Multiplicity="0..1" />
+          <End Type="StoreModel.customer" Role="customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="customer">
+              <PropertyRef Name="group_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2994,6 +2922,78 @@
             </Principal>
             <Dependent Role="user">
               <PropertyRef Name="empl_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_goods_group">
+          <End Type="StoreModel.goods_group" Role="goods_group" Multiplicity="0..1" />
+          <End Type="StoreModel.good" Role="good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="goods_group">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="good">
+              <PropertyRef Name="group_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_goods_unit">
+          <End Type="StoreModel.unit" Role="unit" Multiplicity="0..1" />
+          <End Type="StoreModel.good" Role="good" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="unit">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="good">
+              <PropertyRef Name="unit_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inventory_goods">
+          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
+          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="good">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inventory_goods">
+              <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stock_in_detail_goods">
+          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
+          <End Type="StoreModel.stock_in_detail" Role="stock_in_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="good">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stock_in_detail">
+              <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stock_out_detail_goods">
+          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
+          <End Type="StoreModel.stock_out_detail" Role="stock_out_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="good">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stock_out_detail">
+              <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stock_tranfer_detail_goods">
+          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
+          <End Type="StoreModel.stock_tranfer_detail" Role="stock_tranfer_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="good">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stock_tranfer_detail">
+              <PropertyRef Name="goods_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3076,23 +3076,6 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="birthdate" ColumnName="birthdate" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="customer_group">
-            <EntityTypeMapping TypeName="StoreModel.customer_group">
-              <MappingFragment StoreEntitySet="customer_group">
-                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
-                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -3248,32 +3231,6 @@
                 <ScalarProperty Name="action" ColumnName="action" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="code" ColumnName="code" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="goods">
-            <EntityTypeMapping TypeName="StoreModel.good">
-              <MappingFragment StoreEntitySet="goods">
-                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
-                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="note_in_order" ColumnName="note_in_order" />
-                <ScalarProperty Name="max_in_stock" ColumnName="max_in_stock" />
-                <ScalarProperty Name="min_in_stock" ColumnName="min_in_stock" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="weight" ColumnName="weight" />
-                <ScalarProperty Name="avatar" ColumnName="avatar" />
-                <ScalarProperty Name="number_in_stock" ColumnName="number_in_stock" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="group_id" ColumnName="group_id" />
-                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3641,6 +3598,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="customer_group">
+            <EntityTypeMapping TypeName="StoreModel.customer_group">
+              <MappingFragment StoreEntitySet="customer_group">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="employees">
             <EntityTypeMapping TypeName="StoreModel.employee">
               <MappingFragment StoreEntitySet="employee">
@@ -3661,6 +3634,33 @@
                 <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="StoreModel.good">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="note_in_order" ColumnName="note_in_order" />
+                <ScalarProperty Name="max_in_stock" ColumnName="max_in_stock" />
+                <ScalarProperty Name="min_in_stock" ColumnName="min_in_stock" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="avatar" ColumnName="avatar" />
+                <ScalarProperty Name="number_in_stock" ColumnName="number_in_stock" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="org_price" ColumnName="org_price" />
+                <ScalarProperty Name="group_id" ColumnName="group_id" />
+                <ScalarProperty Name="unit_id" ColumnName="unit_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />

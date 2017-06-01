@@ -29,17 +29,18 @@ namespace Web.Areas.Partner.Controllers
             Dictionary<string, object> _return = _srvGroup.List(requestData);
             if ((DatabaseExecute)_return["status"] == DatabaseExecute.Success)
             {
-                JqueryDataTableResponse<DeliverGroupModel> itemResponse = _return["data"] as JqueryDataTableResponse<DeliverGroupModel>;
+                JqueryDataTableResponse<SupplierGroupModel> itemResponse = _return["data"] as JqueryDataTableResponse<SupplierGroupModel>;
                 return this.Json(itemResponse, JsonRequestBehavior.AllowGet);
             }
-            return this.Json(new JqueryDataTableResponse<DeliverGroupModel>(), JsonRequestBehavior.AllowGet);
+            return this.Json(new JqueryDataTableResponse<SupplierGroupModel>(), JsonRequestBehavior.AllowGet);
         }
 
         [AjaxAuthorize]
         [HttpGet]
         public ActionResult Add()
         {
-            DeliverGroupModel model = new DeliverGroupModel();
+            SupplierGroupModel model = new SupplierGroupModel();
+            model.Insert = true;
             return PartialView(model);
         }
 

@@ -28,6 +28,7 @@ namespace DataAccess
         public string name { get; set; }
         public Nullable<System.Guid> unit_id { get; set; }
         public Nullable<System.Guid> group_id { get; set; }
+        public Nullable<decimal> org_price { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<decimal> number_in_stock { get; set; }
         public string avatar { get; set; }
