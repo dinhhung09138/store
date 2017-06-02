@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Web.Controllers.ListData>
 @{
     ViewBag.Title = "DataTable";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -54,7 +54,24 @@
     </div>
 </div>
 
+<br />
+<br />
+<span id="resultForm"></span>
+<br />
+<br />
 <input type="text" class="priceNumber"/>
+<br/>
+<br/>
+@using (Ajax.BeginForm("savedata", "home", new AjaxOptions { HttpMethod = "post", UpdateTargetId = "resultForm" }, new { @id = "inputForm" }))
+{
+    <input type="text" name="Code" id="Code" /><br/>
+    <input type="text" name="Name" id="Name" /><br />
+    <input type="text" name="Code" id="Code" /><br />
+    <input type="text" name="Name" id="Name" /><br />
+    <input type="submit" value="Save"/>
+}
+
+
 
 @section script{
     
@@ -152,6 +169,24 @@
             }
 
             $(this).toggleClass('selected');
+        });
+
+
+        $('#inputForm').submit(function () {
+            if ($(this).valid()) {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        console.log(result);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                      
+                    }
+                });
+            }
+            return false;
         });
 
     </script>

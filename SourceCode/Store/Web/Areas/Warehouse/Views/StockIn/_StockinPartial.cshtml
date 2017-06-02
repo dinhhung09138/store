@@ -1,0 +1,58 @@
+﻿
+<div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+
+    </div>
+    <div class="col-md-4 col-sm-4 col-xs-12">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin chung</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Mở rộng</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">...</div>
+            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+            <div role="tabpanel" class="tab-pane" id="messages">...</div>
+            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+        </div>
+    </div>
+</div>
+<script>
+    var app = angular.module('app', []);
+
+    app.controller('stockInCtrl', ['$scope', '$http', function ($scope, $http) {
+
+        $scope.stockIn = {
+            ID: null,
+            Code: '',
+            BranchID: null,
+            BranchName: '',
+            StockInDate: new Date(),
+            TotalMoney: 0,
+            Discount: 0,
+            Payable: 0,
+            Dept: 0,
+            EmployeeID: null,
+            EmployeeName: '',
+            Reason: '',
+            Notes: '',
+            details: []
+        };
+
+        $scope.stockInDetail = {
+            ID: null,
+            StockInID: null,
+            SupplierID: null,
+            SupplierName: '',
+            GoodsID: null,
+            GoodsName: '',
+            Number: 0,
+            Price: 0
+        };
+
+
+    }]);
+
+</script>

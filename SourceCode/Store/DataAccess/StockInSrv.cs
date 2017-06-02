@@ -212,8 +212,6 @@ namespace DataAccess
                             ID = it.id,
                             GoodsID = it.goods_id,
                             GoodsName = it.goods_name,
-                            SupplierID = it.supplier_id,
-                            SupplierName = it.supplier_name,
                             Number = it.number,
                             Price = it.price
                         });
@@ -269,7 +267,6 @@ namespace DataAccess
                                 dt.id = Guid.NewGuid();
                                 dt.stock_in_id = md.id;
                                 dt.goods_id = item.GoodsID;
-                                dt.supplier_id = item.SupplierID;
                                 dt.number = item.Number;
                                 dt.price = item.Price;
                                 context.stock_in_detail.Add(dt);
@@ -303,7 +300,6 @@ namespace DataAccess
                                 dt.id = Guid.NewGuid();
                                 dt.stock_in_id = md.id;
                                 dt.goods_id = item.GoodsID;
-                                dt.supplier_id = item.SupplierID;
                                 dt.number = item.Number;
                                 dt.price = item.Price;
                                 context.stock_in_detail.Add(dt);

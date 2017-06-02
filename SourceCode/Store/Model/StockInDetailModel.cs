@@ -17,13 +17,6 @@ namespace Model
         [Required(ErrorMessage = "ID Phiếu nhập kho không được rỗng")]
         public Guid StockInID { get; set; }
 
-        public Guid SupplierID { get; set; }
-
-        /// <summary>
-        /// Supplier's name
-        /// </summary>
-        public string SupplierName { get; set; }
-
         /// <summary>
         /// Good's id
         /// </summary>

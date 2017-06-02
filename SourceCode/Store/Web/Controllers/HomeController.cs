@@ -49,6 +49,17 @@ namespace Web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// http
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveData(List<ListData> model)
+        {
+            return this.Json("");
+        }
+
         [AllowAnonymous]
         public ActionResult Editor()
         {
@@ -299,5 +310,11 @@ namespace Web.Controllers
         /// Allow events' start times to be editable through dragging.
         /// </summary>
         public bool StartEditable { get; set; }
+    }
+
+    public class ListData
+    {
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }

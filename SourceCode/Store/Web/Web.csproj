@@ -248,6 +248,7 @@
     <Compile Include="Areas\Setting\SettingAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Areas\Warehouse\Controllers\GoodsController.cs" />
+    <Compile Include="Areas\Warehouse\Controllers\StockInController.cs" />
     <Compile Include="Areas\Warehouse\WarehouseAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -430,6 +431,7 @@
     <Content Include="Areas\Warehouse\Views\Goods\Add.cshtml" />
     <Content Include="Areas\Warehouse\Views\Goods\Edit.cshtml" />
     <Content Include="Areas\Warehouse\Views\Goods\_GoodsPartial.cshtml" />
+    <Content Include="Areas\Warehouse\Views\StockIn\_StockinPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

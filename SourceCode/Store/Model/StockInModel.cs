@@ -33,7 +33,17 @@ namespace Model
         /// Branch's name
         /// </summary>
         public string BranchName { get; set; }
-        
+
+        /// <summary>
+        /// Supplier's id
+        /// </summary>
+        public Guid SupplierID { get; set; }
+
+        /// <summary>
+        /// Supplier's name
+        /// </summary>
+        public string SupplierName { get; set; }
+
         /// <summary>
         /// Stock in date
         /// </summary>
