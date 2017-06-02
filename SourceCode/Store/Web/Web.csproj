@@ -232,10 +232,6 @@
     <Compile Include="Areas\Dashboard\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Dashboard\DashboardAreaRegistration.cs" />
     <Compile Include="Areas\Exchange\ExchangeAreaRegistration.cs" />
-    <Compile Include="Areas\Goods\Controllers\CategoryController.cs" />
-    <Compile Include="Areas\Goods\Controllers\GoodsController.cs" />
-    <Compile Include="Areas\Goods\Controllers\ProductController.cs" />
-    <Compile Include="Areas\Goods\GoodsAreaRegistration.cs" />
     <Compile Include="Areas\Internal\Controllers\BranchController.cs" />
     <Compile Include="Areas\Internal\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
@@ -251,6 +247,8 @@
     <Compile Include="Areas\Sale\SaleAreaRegistration.cs" />
     <Compile Include="Areas\Setting\SettingAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
+    <Compile Include="Areas\Warehouse\Controllers\GoodsController.cs" />
+    <Compile Include="Areas\Warehouse\WarehouseAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -376,7 +374,6 @@
     <Content Include="Areas\Partner\Views\web.config" />
     <Content Include="Areas\Setting\Views\web.config" />
     <Content Include="Areas\CashFlow\Views\web.config" />
-    <Content Include="Areas\Goods\Views\web.config" />
     <Content Include="Areas\Internal\Views\web.config" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Dashboard\Views\Home\Index.cshtml" />
@@ -428,10 +425,11 @@
     <Content Include="Areas\Partner\Views\SupplierGroup\Edit.cshtml" />
     <Content Include="Areas\Partner\Views\SupplierGroup\_SupplierGroupPartial.cshtml" />
     <Content Include="Areas\Exchange\Views\web.config" />
-    <Content Include="Areas\Goods\Views\Category\Index.cshtml" />
-    <Content Include="Areas\Goods\Views\Category\Add.cshtml" />
-    <Content Include="Areas\Goods\Views\Category\Edit.cshtml" />
-    <Content Include="Areas\Goods\Views\Category\_CategoryPartial.cshtml" />
+    <Content Include="Areas\Warehouse\Views\web.config" />
+    <Content Include="Areas\Warehouse\Views\Goods\Index.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Goods\Add.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Goods\Edit.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Goods\_GoodsPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -511,11 +509,6 @@
     <Folder Include="Areas\Exchange\Controllers\" />
     <Folder Include="Areas\Exchange\Models\" />
     <Folder Include="Areas\Exchange\Views\Shared\" />
-    <Folder Include="Areas\Goods\Models\" />
-    <Folder Include="Areas\Goods\Views\Goods\" />
-    <Folder Include="Areas\Goods\Views\Product\" />
-    <Folder Include="Areas\Goods\Views\Shared\" />
-    <Folder Include="Areas\Goods\Views\StockIn\" />
     <Folder Include="Areas\Internal\Models\" />
     <Folder Include="Areas\Internal\Views\Shared\" />
     <Folder Include="Areas\Location\Controllers\" />
@@ -534,6 +527,8 @@
     <Folder Include="Areas\User\Controllers\" />
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
+    <Folder Include="Areas\Warehouse\Models\" />
+    <Folder Include="Areas\Warehouse\Views\Shared\" />
     <Folder Include="Files\Customer\" />
     <Folder Include="Files\Deliver\" />
     <Folder Include="Files\Employee\" />

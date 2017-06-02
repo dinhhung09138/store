@@ -219,7 +219,6 @@ namespace DataAccess
                     else
                     {
                         md = context.employees.FirstOrDefault(m => m.id == model.ID);
-                        md.id = Guid.NewGuid();
                         md.name = model.Name;
                         md.code = model.Code;
                         md.birthdate = model.Birthdate;

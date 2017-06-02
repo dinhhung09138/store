@@ -150,7 +150,7 @@
         function update(id) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/goods/category/edit',
+                url: '/warehouse/goods/edit',
                 type: 'get',
                 dataType: 'html',
                 data: {id : id },
@@ -170,7 +170,7 @@
         $(document).on('click', '#btnAdd', function (e) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/goods/category/add',
+                url: '/warehouse/goods/add',
                 type: 'get',
                 dataType: 'html',
                 success: function (result) {

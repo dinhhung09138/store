@@ -12,9 +12,9 @@ using System.Web;
 using System.Web.Mvc;
 using Web.Filters;
 
-namespace Web.Areas.Goods.Controllers
+namespace Web.Areas.Warehouse.Controllers
 {
-    public class CategoryController : Controller
+    public class GoodsController : Controller
     {
         [CustomAuthorize]
         [HttpGet]

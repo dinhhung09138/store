@@ -4,8 +4,8 @@
 <div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            @using (Ajax.BeginForm("save", "category",
-                            new { @area = "goods" },
+            @using (Ajax.BeginForm("save", "goods",
+                            new { @area = "warehouse" },
                             new AjaxOptions { HttpMethod = "post" },
                             new { @class = "form", @id = "inputForm", }))
             {
@@ -163,7 +163,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            @Html.TextAreaFor(m => m.Description, new { @class= "form-control"})
+                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
                     <a href="#" data-dismiss="modal" class="btn btn-default">Đóng</a>
                     <button class="btn btn-primary primary-button">Lưu</button>
                 </div>
-                                        }
+            }
         </div>
     </div>
 </div>

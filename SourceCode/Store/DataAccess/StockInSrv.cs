@@ -263,6 +263,18 @@ namespace DataAccess
                             md.deleted = false;
                             context.stock_in.Add(md);
                             context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                            foreach (var item in model.details)
+                            {
+                                stock_in_detail dt = new stock_in_detail();
+                                dt.id = Guid.NewGuid();
+                                dt.stock_in_id = md.id;
+                                dt.goods_id = item.GoodsID;
+                                dt.supplier_id = item.SupplierID;
+                                dt.number = item.Number;
+                                dt.price = item.Price;
+                                context.stock_in_detail.Add(dt);
+                                context.Entry(dt).State = System.Data.Entity.EntityState.Added;
+                            }
                         }
                         else
                         {
@@ -281,6 +293,22 @@ namespace DataAccess
                             md.update_date = DateTime.Now;
                             context.stock_in.Attach(md);
                             context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                            foreach (var item in model.details)
+                            {
+                                var listDt = context.stock_in_detail.Where(m => m.stock_in_id == md.id).ToList();
+                                context.stock_in_detail.RemoveRange(listDt);
+                                context.Entry(listDt).State = System.Data.Entity.EntityState.Deleted;
+                                //
+                                stock_in_detail dt = new stock_in_detail();
+                                dt.id = Guid.NewGuid();
+                                dt.stock_in_id = md.id;
+                                dt.goods_id = item.GoodsID;
+                                dt.supplier_id = item.SupplierID;
+                                dt.number = item.Number;
+                                dt.price = item.Price;
+                                context.stock_in_detail.Add(dt);
+                                context.Entry(dt).State = System.Data.Entity.EntityState.Added;
+                            }
                         }
                         context.SaveChanges();
                     }
@@ -312,11 +340,11 @@ namespace DataAccess
             {
                 using (var context = new StoreEntities())
                 {
-                    var md = context.employees.First(m => m.id == id);
+                    var md = context.stock_in.First(m => m.id == id);
                     md.deleted = true;
                     md.delete_by = userID;
                     md.delete_date = DateTime.Now;
-                    context.employees.Attach(md);
+                    context.stock_in.Attach(md);
                     context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                     context.SaveChanges();
                 }
