@@ -1,7 +1,7 @@
 ﻿@using System.Globalization;
 @model Model.DeliverModel
 <div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             @using (Ajax.BeginForm("save", "deliver",
                             new { @area = "partner" },
@@ -332,6 +332,9 @@
                 console.log('Can not render file: ', error);
             };
         }
+    });
+    $('#inputModel').on('shown.bs.modal', function (e) {
+        $("#Name").focus();
     });
 
 </script>

@@ -2,9 +2,11 @@
 
     var className = 'custom-success';
     var stickyValue = true;
+    var time = '100';
     if (type.toLowerCase() == "error") {
         className = 'custom-error';
         stickyValue = true;
+        time = ''
     }
     if (type.toLowerCase() == "warning") {
         className = 'custom-warning';
@@ -15,10 +17,10 @@
         //title: title,
         // (string | mandatory) the text inside the notification
         text: mesage,
-        sticky: stickyValue,//if you want to fade out it or still sit there
         class_name: className,
         //image: '/Images/clear.png',
-        time: 8000 //time alive before fade out
+        sticky: stickyValue,//if you want to fade out it or still sit there
+        time: time //time alive before fade out
     });
 }
 
@@ -49,6 +51,9 @@ $(document).ready(function () {
         $(".nav").toggle();
     });
     adjustMenu();
+
+    
+
 })
 
 $(window).bind('resize orientationchange', function () {

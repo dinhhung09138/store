@@ -21,7 +21,7 @@ namespace Model
         /// <summary>
         /// Name
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Tên nhóm sản phẩm không được rỗng")]
         [StringLength(50, ErrorMessage = "Tên nhóm không vượt quá 50 ký tự")]
         public string Name { get; set; }
 

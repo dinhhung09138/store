@@ -64,6 +64,7 @@ namespace Web.Areas.Warehouse.Controllers
             ViewBag.group = group;
             GoodsModel model = new GoodsModel()
             {
+                Code = GoodsSrv.GetCode(),
                 Insert = true,
                 Avatar = "",
                 ImageFileName = "",

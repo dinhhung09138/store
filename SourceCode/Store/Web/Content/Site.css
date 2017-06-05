@@ -141,6 +141,7 @@ input[type="file"] {
     background: rgb(217, 83, 79);
     color:white;
 }
+
 .right-bar> .user-menu .user-image {
     border-radius: 50%;
     float: left;
@@ -201,7 +202,6 @@ input[type="file"] {
 
 .nav ul {
     list-style: none;
-    width: 9em;
 }
 
 .nav a {
@@ -239,17 +239,19 @@ input[type="file"] {
 .nav li ul {
     position: absolute;
     left: -9999px;
-    width:auto;
+    padding-left:0px;
 }
 
 .nav > li.hover > ul {
     left: 0;
-    width:100%;
+    width:auto;
+    min-width:180px;
 }
 
 .nav li li.hover ul {
     left: 100%;
     top: 0;
+    min-width: 190px;
 }
 
 .nav li li a {
@@ -258,6 +260,7 @@ input[type="file"] {
     position: relative;
     z-index: 100;
     border-top: 1px solid rgb(23, 94, 76); /*#175e4c;*/
+    width: auto;
 }
 
 .nav li li a:hover {
@@ -275,6 +278,7 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 768px) {
+
     .active {
         display: block;
     }
@@ -299,6 +303,14 @@ input[type="file"] {
     .nav > li.hover > ul, .nav li li.hover ul {
         position: static;
     }
+    
+    .nav li ul {
+        padding-left:unset;
+    }
+    .nav li ul li {
+        padding-left: 20px;
+    }
+
 }
 
 /*End Navigation*/
@@ -560,6 +572,7 @@ input[type="file"] {
 .custom-success,
 .custom-error,
 .custom-warning {
+    border-radius: 10px;
 }
 
 .gritter-item {
@@ -576,7 +589,9 @@ input[type="file"] {
 }
 
 .gritter-without-image p {
-    font-size: 11px;
+    font-size: 14px;
+    font-weight:bold;
+    line-height: 15px;
 }
 
 /*End Notification*/

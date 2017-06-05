@@ -31,7 +31,7 @@ namespace DataAccess
                 List<UnitModel> _list = new List<UnitModel>();
                 using (var context = new StoreEntities())
                 {
-                    var l = (from a in context.units where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
+                    var l = (from a in context.units where !a.deleted orderby a.name select new { a.id, a.name, a.notes }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
                     //Search
@@ -46,7 +46,8 @@ namespace DataAccess
                         _list.Add(new UnitModel()
                         {
                             ID = item.id,
-                            Name = item.name
+                            Name = item.name,
+                            Notes = item.notes
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -57,6 +58,9 @@ namespace DataAccess
                         {
                             case "Name":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Name) : _sortList.Sort(col.Dir, m => m.Name);
+                                break;
+                            case "Notes":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Notes) : _sortList.Sort(col.Dir, m => m.Notes);
                                 break;
                         }
                     }
@@ -80,12 +84,11 @@ namespace DataAccess
         /// </summary>
         /// <param name="id">id of item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Item(Guid id)
+        public UnitModel Item(Guid id)
         {
-            Dictionary<string, object> _return = new Dictionary<string, object>();
+            UnitModel _item = new UnitModel() { ID = Guid.NewGuid() };
             try
             {
-                UnitModel _item = new UnitModel() { ID = Guid.NewGuid() };
                 using (var context = new StoreEntities())
                 {
                     var item = context.units.First(m => m.id == id);
@@ -93,17 +96,15 @@ namespace DataAccess
                     _item.Name = item.name;
                     _item.Notes = item.notes;
                 }
-                _return.Add("status", DatabaseExecute.Success);
-                _return.Add("data", _item);
             }
             catch (Exception ex)
             {
-                _return.Add("status", DatabaseExecute.Error);
-                _return.Add("systemMessage", ex.Message);
-                _return.Add("message", DatabaseMessage.ITEM_ERROR);
+                //_return.Add("status", DatabaseExecute.Error);
+                //_return.Add("systemMessage", ex.Message);
+                //_return.Add("message", DatabaseMessage.ITEM_ERROR);
             }
 
-            return _return;
+            return _item;
         }
 
         /// <summary>
