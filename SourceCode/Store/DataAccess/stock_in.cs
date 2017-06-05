@@ -23,6 +23,7 @@ namespace DataAccess
         public System.Guid id { get; set; }
         public string code { get; set; }
         public System.Guid branch_id { get; set; }
+        public System.Guid supplier_id { get; set; }
         public System.DateTime stock_in_date { get; set; }
         public decimal total_money { get; set; }
         public decimal discount { get; set; }
@@ -42,6 +43,7 @@ namespace DataAccess
         public virtual branch branch { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_in_detail> stock_in_detail { get; set; }
+        public virtual supplier supplier { get; set; }
         public virtual user user { get; set; }
     }
 }
