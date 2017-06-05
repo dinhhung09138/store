@@ -1,11 +1,11 @@
 ﻿@{
-    ViewBag.Title = "Nhóm hàng hóa";
+    ViewBag.Title = "Đơn vị tính";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row page-header">
     <div class="col-md-9 col-sm-8 col-xs-12">
-        <h4 style="float:left;">Nhóm hàng hóa</h4>
+        <h4 style="float:left;">Đơn vị tính</h4>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-12 page-tool">
         <span id="btnAdd" data-tooltip="Thêm mới" title="Thêm mới"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
@@ -68,7 +68,7 @@
                 },
                 order: [[1, "asc"]],
                 ajax: {
-                    url: '/warehouse/goodsgroup/index',
+                    url: '/warehouse/unit/index',
                     type: 'post',
                     data: function (d) {
                         //d.ModuleCode = ""
@@ -109,7 +109,7 @@
         function update(id) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/warehouse/goodsgroup/edit',
+                url: '/warehouse/unit/edit',
                 type: 'get',
                 dataType: 'html',
                 data: {id : id },
@@ -129,7 +129,7 @@
         $(document).on('click', '#btnAdd', function (e) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/warehouse/goodsgroup/add',
+                url: '/warehouse/unit/add',
                 type: 'get',
                 dataType: 'html',
                 success: function (result) {

@@ -17,7 +17,7 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public supplier()
         {
-            this.stock_in_detail = new HashSet<stock_in_detail>();
+            this.stock_in = new HashSet<stock_in>();
         }
     
         public System.Guid id { get; set; }
@@ -42,6 +42,6 @@ namespace DataAccess
     
         public virtual supplier_group supplier_group { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_in_detail> stock_in_detail { get; set; }
+        public virtual ICollection<stock_in> stock_in { get; set; }
     }
 }

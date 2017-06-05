@@ -438,6 +438,11 @@
     <Content Include="Areas\Warehouse\Views\GoodsGroup\Add.cshtml" />
     <Content Include="Areas\Warehouse\Views\GoodsGroup\Edit.cshtml" />
     <Content Include="Areas\Warehouse\Views\GoodsGroup\_GroupPartial.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Unit\Index.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Unit\Add.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Unit\Edit.cshtml" />
+    <Content Include="Areas\Warehouse\Views\Unit\_UnitPartial.cshtml" />
+    <Content Include="Areas\Warehouse\Views\StockIn\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -537,7 +542,6 @@
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Areas\Warehouse\Models\" />
     <Folder Include="Areas\Warehouse\Views\Shared\" />
-    <Folder Include="Areas\Warehouse\Views\Unit\" />
     <Folder Include="Files\Customer\" />
     <Folder Include="Files\Deliver\" />
     <Folder Include="Files\Employee\" />

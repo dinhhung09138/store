@@ -32,6 +32,7 @@ namespace DataAccess
                     var l = (from a in context.stock_in
                              join e in context.employees on a.empl_id equals e.id
                              join br in context.branches on a.branch_id equals br.id into branch
+                             join s in context.suppliers on a.supplier_id equals s.id
                              from b in branch.DefaultIfEmpty()
                              where !a.deleted
                              orderby a.code
@@ -41,11 +42,10 @@ namespace DataAccess
                                  a.code,
                                  a.stock_in_date,
                                  a.total_money,
-                                 a.discount,
-                                 a.payable,
                                  a.dept,
                                  employee_name = e.name,
-                                 branch_name = b.name
+                                 branch_name = b.name,
+                                 supplier_name = s.name
                              }).ToList();
                     itemResponse.draw = request.draw;
                     itemResponse.recordsTotal = l.Count;
@@ -56,11 +56,10 @@ namespace DataAccess
                         l = l.Where(m => m.code.ToLower().Contains(searchValue) ||
                                     m.employee_name.ToLower().Contains(searchValue) ||
                                     m.branch_name.ToLower().Contains(searchValue) ||
+                                    m.supplier_name.ToLower().Contains(searchValue) ||
                                     m.stock_in_date.ToString().ToLower().Contains(searchValue) ||
                                     m.total_money.ToString().Contains(searchValue) ||
-                                    m.payable.ToString().Contains(searchValue) ||
-                                    m.dept.ToString().Contains(searchValue) ||
-                                    m.discount.ToString().Contains(searchValue)).ToList();
+                                    m.dept.ToString().Contains(searchValue)).ToList();
                     }
                     //Add to list
                     foreach (var item in l)
@@ -73,9 +72,8 @@ namespace DataAccess
                             BranchName = item.branch_name,
                             StockInDate = item.stock_in_date,
                             TotalMoney = item.total_money,
-                            Payable = item.payable,
                             Dept = item.dept,
-                            Discount = item.discount
+                            SupplierName = item.supplier_name
                         });
                     }
                     itemResponse.recordsFiltered = _list.Count;
@@ -99,14 +97,11 @@ namespace DataAccess
                             case "TotalMoney":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.TotalMoney) : _sortList.Sort(col.Dir, m => m.TotalMoney);
                                 break;
-                            case "Payable":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Payable) : _sortList.Sort(col.Dir, m => m.Payable);
-                                break;
                             case "Dept":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Dept) : _sortList.Sort(col.Dir, m => m.Dept);
                                 break;
-                            case "Discount":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Discount) : _sortList.Sort(col.Dir, m => m.Discount);
+                            case "SupplierName":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.SupplierName) : _sortList.Sort(col.Dir, m => m.SupplierName);
                                 break;
                         }
                     }
@@ -193,15 +188,12 @@ namespace DataAccess
 
                     var details = (from m in context.stock_in_detail
                                    join p in context.goods on m.goods_id equals p.id
-                                   join s in context.suppliers on m.supplier_id equals s.id
                                    where m.stock_in_id == item.id
                                    select new
                                    {
                                        m.id,
                                        m.goods_id,
                                        goods_name = p.name,
-                                       m.supplier_id,
-                                       supplier_name = s.name,
                                        m.number,
                                        m.price
                                    }).ToList();

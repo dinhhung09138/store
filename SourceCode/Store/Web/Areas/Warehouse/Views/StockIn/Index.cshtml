@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Nhóm hàng hóa";
+﻿@using System.Globalization;
+@{
+    ViewBag.Title = "Nhập kho";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row page-header">
     <div class="col-md-9 col-sm-8 col-xs-12">
-        <h4 style="float:left;">Nhóm hàng hóa</h4>
+        <h4 style="float:left;">Nhập kho</h4>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-12 page-tool">
         <span id="btnAdd" data-tooltip="Thêm mới" title="Thêm mới"><i class="fa fa-plus-circle" aria-hidden="true"></i></span>
@@ -17,8 +18,13 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Tên nhóm</th>
-                    <th>Ghi chú</th>
+                    <th>Mã</th>
+                    <th>Ngày nhập</th>
+                    <th>Người nhập</th>
+                    <th>Chi nhánh</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Tổng tiền</th>
+                    <th>Công nợ</th>
                     <th></th>
                 </tr>
             </thead>
@@ -66,9 +72,9 @@
                         last: '>>'
                     }
                 },
-                order: [[1, "asc"]],
+                order: [[2, "asc"]],
                 ajax: {
-                    url: '/warehouse/goodsgroup/index',
+                    url: '/warehouse/stockin/index',
                     type: 'post',
                     data: function (d) {
                         //d.ModuleCode = ""
@@ -84,14 +90,49 @@
                         }
                     },
                     {
-                        data: 'Name',
+                        data: 'Code',
+                        orderable: true,
+                        searchable: true,
+                        width: '80px'
+                    },
+                    {
+                        data: 'StockInDate',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return data.stockInDate.toString('@CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToUpper()');
+                        }
+                    },
+                    {
+                        data: 'EmployeeName',
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: 'Notes',
+                        data: 'BranchName',
                         orderable: true,
                         searchable: true
+                    },
+                    {
+                        data: 'SupplierName',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'TotalMoney',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<span class="priceValue">' + data.OriPrice + '</span>';
+                        }
+                    },
+                    {
+                        data: 'Dept',
+                        orderable: true,
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<span class="priceValue">' + data.Price + '</span>';
+                        }
                     },
                     {
                         orderable: false,
@@ -109,7 +150,7 @@
         function update(id) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/warehouse/goodsgroup/edit',
+                url: '/warehouse/goods/edit',
                 type: 'get',
                 dataType: 'html',
                 data: {id : id },
@@ -129,7 +170,7 @@
         $(document).on('click', '#btnAdd', function (e) {
             $('#loadingModel').modal('show');
             $.ajax({
-                url: '/warehouse/goodsgroup/add',
+                url: '/warehouse/goods/add',
                 type: 'get',
                 dataType: 'html',
                 success: function (result) {
