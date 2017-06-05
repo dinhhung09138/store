@@ -248,7 +248,9 @@
     <Compile Include="Areas\Setting\SettingAreaRegistration.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Areas\Warehouse\Controllers\GoodsController.cs" />
+    <Compile Include="Areas\Warehouse\Controllers\GoodsGroupController.cs" />
     <Compile Include="Areas\Warehouse\Controllers\StockInController.cs" />
+    <Compile Include="Areas\Warehouse\Controllers\UnitController.cs" />
     <Compile Include="Areas\Warehouse\WarehouseAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -432,6 +434,10 @@
     <Content Include="Areas\Warehouse\Views\Goods\Edit.cshtml" />
     <Content Include="Areas\Warehouse\Views\Goods\_GoodsPartial.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\_StockinPartial.cshtml" />
+    <Content Include="Areas\Warehouse\Views\GoodsGroup\Index.cshtml" />
+    <Content Include="Areas\Warehouse\Views\GoodsGroup\Add.cshtml" />
+    <Content Include="Areas\Warehouse\Views\GoodsGroup\Edit.cshtml" />
+    <Content Include="Areas\Warehouse\Views\GoodsGroup\_GroupPartial.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -531,9 +537,11 @@
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Areas\Warehouse\Models\" />
     <Folder Include="Areas\Warehouse\Views\Shared\" />
+    <Folder Include="Areas\Warehouse\Views\Unit\" />
     <Folder Include="Files\Customer\" />
     <Folder Include="Files\Deliver\" />
     <Folder Include="Files\Employee\" />
+    <Folder Include="Files\Goods\" />
     <Folder Include="Files\Supplier\" />
     <Folder Include="Views\Error\" />
   </ItemGroup>
