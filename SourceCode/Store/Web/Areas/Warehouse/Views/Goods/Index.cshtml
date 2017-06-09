@@ -43,6 +43,17 @@
         var table;
         $(document).ready(function () {
 
+            $('.priceValue').priceFormat({
+                prefix: '',
+                limit: 11,
+                centsLimit: 0
+            });
+            $('.numberValue').priceFormat({
+                prefix: '',
+                limit: 11,
+                centsLimit: 1
+            });
+
             table = $('#table').DataTable({
                 responsive: true,
                 processing: true,
@@ -111,11 +122,11 @@
                         searchable: true
                     },
                     {
-                        data: 'OriPrice',
+                        data: 'OrgPrice',
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.OriPrice + '</span>';
+                            return '<span class="priceValue" style="float: right;">' + String(data.OriPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
                         }
                     },
                     {
@@ -123,7 +134,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.Price + '</span>';
+                            return '<span class="priceValue" style="float: right;">' + String(data.Price).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
                         }
                     },
                     {
@@ -131,7 +142,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="numberValue">' + data.NumInStock + '</span>';
+                            return '<span class="numberValue" style="float: right;">' + String(data.NumInStock).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
                         }
                     },
                     {
@@ -185,6 +196,7 @@
                 }
             });
         });
+
 
     </script>
 }

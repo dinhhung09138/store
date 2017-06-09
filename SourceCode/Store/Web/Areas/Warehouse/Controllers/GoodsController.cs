@@ -108,9 +108,33 @@ namespace Web.Areas.Warehouse.Controllers
 
         [AjaxAuthorize]
         [HttpPost]
-        public JsonResult Save(GoodsModel model)
+        public JsonResult Save(GoodsModel model, FormCollection fc)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
+            if(fc["Price"] != null && fc["Price"].ToString().Length > 0)
+            {
+                model.Price = decimal.Parse(fc["Price"].ToString().Replace(",", ""));
+            }
+            if (fc["OrgPrice"] != null && fc["OrgPrice"].ToString().Length > 0)
+            {
+                model.OrgPrice = decimal.Parse(fc["OrgPrice"].ToString().Replace(",", ""));
+            }
+            if (fc["Weight"] != null && fc["Weight"].ToString().Length > 0)
+            {
+                model.Weight = decimal.Parse(fc["Weight"].ToString().Replace(",", ""));
+            }
+            if (fc["NumInStock"] != null && fc["NumInStock"].ToString().Length > 0)
+            {
+                model.NumInStock = decimal.Parse(fc["NumInStock"].ToString().Replace(",", ""));
+            }
+            if (fc["MaxInStock"] != null && fc["MaxInStock"].ToString().Length > 0)
+            {
+                model.MaxInStock = decimal.Parse(fc["MaxInStock"].ToString().Replace(",", ""));
+            }
+            if (fc["MinInStock"] != null && fc["MinInStock"].ToString().Length > 0)
+            {
+                model.MinInStock = decimal.Parse(fc["MinInStock"].ToString().Replace(",", ""));
+            }
             if (model.Insert)
             {
                 model.ID = Guid.NewGuid();

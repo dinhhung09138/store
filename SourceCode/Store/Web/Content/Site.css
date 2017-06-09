@@ -26,6 +26,11 @@ label{
     text-align: center !important;
 }
 
+.btn {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
 .basic-bg-color {
     background: rgb(0, 150, 136) !important;
 }
@@ -205,7 +210,7 @@ input[type="file"] {
 }
 
 .nav a {
-    padding: 10px 15px;
+    padding: 5px 10px;
     color: #fff;
 }
 
@@ -215,7 +220,6 @@ input[type="file"] {
 
 .nav > li {
     float: left;
-    border-top: 1px solid #104336;
 }
 
 .nav > li > .parent {
@@ -265,6 +269,7 @@ input[type="file"] {
 
 .nav li li a:hover {
     background: rgb(23, 94, 76); /*#175e4c;*/
+    text-decoration:none;
 }
 
 .nav li li li a {
@@ -453,6 +458,12 @@ input[type="file"] {
     margin-top: 0;
 }
 
+@media screen and (min-width: 760px){
+    .modal.fade .modal-dialog{
+        width: 98%;
+    }
+}
+
 /*End model*/
 
 
@@ -545,9 +556,14 @@ input[type="file"] {
     }
 }
 
+label {
+    font-weight:normal;
+}
+
 .form-control {
     font-size: 12px;
-    height: 28px;
+    height: 24px;
+    padding: 3px 6px;
 }
 
 .color-red {
@@ -610,6 +626,49 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
     margin: 0px;
 }
 
+.table-bordered > thead > tr > th, 
+.table-bordered > thead > tr > td{
+    border-bottom-width: 0px;
+}
+
+table.dataTable thead .sorting::after, 
+table.dataTable thead .sorting_asc::after, 
+table.dataTable thead .sorting_desc::after, 
+table.dataTable thead .sorting_asc_disabled::after,
+ table.dataTable thead .sorting_desc_disabled::after {
+    bottom: 4px !important;
+}
+
+.table > thead > tr > th, 
+.table > tbody > tr > th, 
+.table > tfoot > tr > th, 
+.table > thead > tr > td, 
+.table > tbody > tr > td, 
+.table > tfoot > tr > td {
+    padding: 4px !important;
+}
+
+select.input-sm {
+    height: 22px;
+    line-height: 22px;
+}
+
 /*End datatable*/
 
 
+/*Tab*/
+.nav-tabs > li > a {
+    color: rgb(0, 150, 136) !important;
+    border: 1px solid rgb(0, 150, 136) !important;
+    padding: 4px;
+}
+
+.nav-tabs > li > a:hover,
+.nav-tabs > li.active > a, 
+.nav-tabs > li.active > a:hover, 
+.nav-tabs > li.active > a:focus {
+    color: white !important;
+    background-color: rgb(0, 150, 136) !important;
+}
+
+/*Tab*/

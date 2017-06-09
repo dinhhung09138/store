@@ -1,4 +1,4 @@
-﻿@using System.Globalization;
+﻿@using System.Globalization
 @model Model.GoodsModel
 
 <div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
@@ -48,8 +48,8 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.OriPrice, new { @class = "form-control priceValue", @maxlength = 12 })
-                                    @Html.ValidationMessageFor(m => m.OriPrice)
+                                    @Html.TextBoxFor(m => m.OrgPrice, "{0:#,###}", new { @class = "form-control priceValue", @maxlength = 12 })
+                                    @Html.ValidationMessageFor(m => m.OrgPrice)
                                 </div>
                             </div>
                             <div class="row">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control priceValue", @maxlength = 12 })
+                                    @Html.TextBoxFor(m => m.Price, "{0:#,###}", new { @class = "form-control priceValue", @maxlength = 12 })
                                     @Html.ValidationMessageFor(m => m.Price)
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Weight, new { @maxlength = 11, @class = "form-control priceValue" })
+                                    @Html.TextBoxFor(m => m.Weight, new { @maxlength = 11, @class = "form-control numberValue" })
                                     @Html.ValidationMessageFor(m => m.Weight)
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.NumInStock, new { @maxlength = 11, @class = "form-control priceValue" })
+                                    @Html.TextBoxFor(m => m.NumInStock, new { @maxlength = 11, @class = "form-control numberValue" })
                                     @Html.ValidationMessageFor(m => m.NumInStock)
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.MinInStock, new { @maxlength = 11, @class = "form-control priceValue" })
+                                    @Html.TextBoxFor(m => m.MinInStock, new { @maxlength = 11, @class = "form-control numberValue" })
                                     @Html.ValidationMessageFor(m => m.MinInStock)
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.MaxInStock, new { @maxlength = 11, @class = "form-control priceValue" })
+                                    @Html.TextBoxFor(m => m.MaxInStock, new { @maxlength = 11, @class = "form-control numberValue" })
                                     @Html.ValidationMessageFor(m => m.MaxInStock)
                                 </div>
                             </div>
@@ -179,6 +179,7 @@
         </div>
     </div>
 </div>
+<script src="~/Content/jquery.priceformat.min.js"></script>
 <script type="text/javascript" language=javascript>
     $.validator.unobtrusive.parse(document);
 </script>
@@ -252,5 +253,6 @@
     $('#inputModel').on('shown.bs.modal', function (e) {
         $("#Name").focus();
     });
+
 
 </script>

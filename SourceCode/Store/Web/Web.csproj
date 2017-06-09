@@ -443,6 +443,8 @@
     <Content Include="Areas\Warehouse\Views\Unit\Edit.cshtml" />
     <Content Include="Areas\Warehouse\Views\Unit\_UnitPartial.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\Index.cshtml" />
+    <Content Include="Areas\Warehouse\Views\StockIn\Add.cshtml" />
+    <Content Include="Areas\Warehouse\Views\StockIn\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

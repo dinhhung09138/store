@@ -1,58 +1,291 @@
-﻿
-<div class="row">
-    <div class="col-md-8 col-sm-8 col-xs-12">
+﻿@model Model.StockInModel
 
-    </div>
-    <div class="col-md-4 col-sm-4 col-xs-12">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Thông tin chung</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Mở rộng</a></li>
-        </ul>
+<style>
+    .removeItem {
+        cursor: pointer;
+    }
+    #goodsOrgPrice,
+    #goodsDiscount,
+    #goodsNumber {
+        width: 70px;
+        text-align:right;
+    }
+</style>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home">...</div>
-            <div role="tabpanel" class="tab-pane" id="profile">...</div>
-            <div role="tabpanel" class="tab-pane" id="messages">...</div>
-            <div role="tabpanel" class="tab-pane" id="settings">...</div>
+<div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+        @using (Ajax.BeginForm("save", "stockin",
+                                                new { @area = "warehouse" },
+                                                new AjaxOptions { HttpMethod = "post" },
+                                                new { @class = "form", @id = "inputForm", }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Insert)
+            @Html.HiddenFor(m => m.ID)
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Thông tin nhập kho</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Nhập hàng</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <input type="text" id="findGoods" name="findGoods" class="form-control" placeholder="Nhập thông tin hàng hóa cần tìm" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="tableStockin" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Tên hàng hóa</th>
+                                            <th style="width: 80px;">Đơn giá</th>
+                                            <th style="width: 80px;">Giảm giá</th>
+                                            <th style="width: 80px;">Số lượng</th>
+                                            <th style="width: 80px;">Thành tiên</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#commonTab" aria-controls="commonTab" role="tab" data-toggle="tab">Thông tin chung</a></li>
+                            <li role="presentation"><a href="#extendTab" aria-controls="extendTab" role="tab" data-toggle="tab">Mở rộng</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content" style="padding-top:10px;">
+                            <div role="tabpanel" class="tab-pane active" id="commonTab">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+                                        @Html.DropDownListFor(m => m.EmployeeID, (IEnumerable<SelectListItem>)ViewBag.employee, new { @class = "form-control", @style = "font-size: 10px;", @value = Model.EmployeeID})
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+                                        @Html.TextBoxFor(m => m.StockInDate, new { @class = "form-control", @style = "font-size: 10px;" })
+                                        @Html.ValidationMessageFor(m => m.StockInDate)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Mã phiếu nhập</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @readonly = true })
+                                        @Html.ValidationMessageFor(m => m.Code)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Chi nhánh</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                        @Html.DropDownListFor(m => m.BranchID, (IEnumerable<SelectListItem>)ViewBag.branch, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.BranchID)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Nhà cung cấp</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                        @Html.DropDownListFor(m => m.SupplierID, (IEnumerable<SelectListItem>)ViewBag.supplier, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.SupplierID)
+                                    </div>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="extendTab">
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Lý do nhập</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                        @Html.TextAreaFor(m => m.Reason, new { @class = "form-control", @maxlength = 255 })
+                                        @Html.ValidationMessageFor(m => m.Reason)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Ghi chú</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @maxlength = 255 })
+                                        @Html.ValidationMessageFor(m => m.Notes)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn btn-default">Đóng</a>
+                <button class="btn btn-primary primary-button">Lưu</button>
+            </div>
+        }
+            
         </div>
     </div>
 </div>
 <script>
-    var app = angular.module('app', []);
+    $(document).ready(function () {
+        $(function () {
+            $('#StockInDate').datetimepicker({
+                //format: 'DD/MM/YYYY'
+                //format: 'CultureInfo.CurrentCulture.DateTimeFormat..ToUpper()'
+            });
+        });
 
-    app.controller('stockInCtrl', ['$scope', '$http', function ($scope, $http) {
+        declareFormat();
+        declareValueChange();
 
-        $scope.stockIn = {
-            ID: null,
-            Code: '',
-            BranchID: null,
-            BranchName: '',
-            StockInDate: new Date(),
-            TotalMoney: 0,
-            Discount: 0,
-            Payable: 0,
-            Dept: 0,
-            EmployeeID: null,
-            EmployeeName: '',
-            Reason: '',
-            Notes: '',
-            details: []
-        };
+        $('#inputModel').modal('show');
 
-        $scope.stockInDetail = {
-            ID: null,
-            StockInID: null,
-            SupplierID: null,
-            SupplierName: '',
-            GoodsID: null,
-            GoodsName: '',
-            Number: 0,
-            Price: 0
-        };
+        $('#inputForm').submit(function () {
+            if ($(this).valid()) {
+                $('#loadingModel').modal('show');
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.status == 1) {
+                            notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
+                            table.ajax.reload();
+                            $('#inputModel').modal('hide');
+                        } else {
+                            notification('@Resources.Notification.TypeErrorTitle', result.message, '@Resources.Notification.TypeError');
+                        }
+                        $('#loadingModel').modal('hide');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 401 || xhr.status == 530) {
+                            window.location.href = '/home/login';
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
 
+    //LocationName
+    $("#findGoods").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("findgoods", "stockin", new { Area = "Warehouse" })',
+                datatype: "json",
+                type: 'post',
+                data: {
+                    name: request.term
+                },
+                success: function (data) {
+                    console.log(data);
+                    response($.map(data, function (val, item) {
+                        return {
+                            label: val.Name,
+                            value: val.ID,
+                            id: val.ID,
+                            code: val.Code,
+                            orgPrice: val.OrgPrice,
+                        }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            event.preventDefault();
+            //$("#LocationName").val(ui.item.label);
+            //$("#LocationID").val(ui.item.id);
 
-    }]);
+            var row = $('<tr/>');
+            var td1 = $('<td/>');
+            td1.append($('<span/>').attr('class', 'removeItem color-red').html('x'));
+            td1.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsId').attr('name', 'goodsId').attr('class', 'idItem').attr('value', ui.item.id));
+            var td2 = $('<td/>').html(ui.item.label);
+            var td3 = $('<td/>');
+            td3.append($('<input/>').attr('type','text').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('class', 'priceValue').attr('value', ui.item.orgPrice));
+            td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('value', ui.item.orgPrice));
+            var td4 = $('<td/>');
+            td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('class', 'priceValue').attr('value', 0));
+            td4.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('value', 0));
+            var td5 = $('<td/>');
+            td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('class', 'numberValue').attr('value', 0));
+            td5.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsNumberValue').attr('name', 'goodsNumberValue').attr('value', 0));
+            var td6 = $('<td/>');
+            td6.append($('<label/>').attr('id', 'goodsTotal').attr('name', 'goodsTotal').attr('class', 'priceValue').attr('style', 'float:right;').html(0));
+            row.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
+            $('#tableStockin tbody').append(row);
 
+            $('#findGoods').val('');
+            declareFormat();
+            declareValueChange();
+        },
+        focus: function (event, ui) {
+            event.preventDefault();
+            //$("#LocationName").val(ui.item.label);
+        }
+    });
+
+    $('#inputModel').on('shown.bs.modal', function (e) {
+        $("#findGoods").focus();
+    });
+
+    $(document).on('click', '.removeItem', function (e) {
+        $(this).parent().parent().remove();
+    });
+
+    function declareFormat() {
+        $('.priceValue').priceFormat({
+            prefix: '',
+            limit: 11,
+            centsLimit: 0
+        });
+        $('.numberValue').priceFormat({
+            prefix: '',
+            limit: 11,
+            centsLimit: 1
+        });
+    }
+
+    function declareValueChange() {
+        $(document).on('change', '#goodsOrgPrice', function (e) {
+            var price = $(this).val().replace(',', '');
+            $(this).parent().find('#goodsOrgPriceValue').val(price);
+            var discount = $(this).parent().parent().find('#goodsDiscountValue').val();
+            var number = $(this).parent().parent().find('#goodsNumberValue').val();
+            var total = (price * number) - discount;
+            $(this).parent().parent().find('#goodsTotal').html(total);
+            declareFormat();
+        });
+        $(document).on('change', '#goodsDiscount', function (e) {
+            var discount = $(this).val().replace(',', '');
+            $(this).parent().find('#goodsDiscountValue').val(discount);
+            var price = $(this).parent().parent().find('#goodsOrgPriceValue').val();
+            var number = $(this).parent().parent().find('#goodsNumberValue').val();
+            var total = (price * number) - discount;
+            $(this).parent().parent().find('#goodsTotal').html(total);
+            declareFormat();
+        });
+        $(document).on('change', '#goodsNumber', function (e) {
+            var number = $(this).val();
+            $(this).parent().find('#goodsNumberValue').val(number);
+            var price = $(this).parent().parent().find('#goodsOrgPriceValue').val();
+            var discount = $(this).parent().parent().find('#goodsDiscountValue').val();
+            var total = (price * number) - discount;
+            $(this).parent().parent().find('#goodsTotal').html(total);
+            declareFormat();
+        });
+    }
 </script>

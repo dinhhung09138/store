@@ -148,7 +148,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="/warehouse/goods"><i class="glyphicon glyphicon-th"></i> Hàng hóa</a>
+                            <a href="/warehouse/stockin"><i class="glyphicon glyphicon-th"></i> Nhập kho</a>
                         </li>
                         <li>
                             <a href="#"><i class="glyphicon glyphicon-usd"></i> Thiết lập giá</a>
@@ -317,7 +317,7 @@
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12" style="min-height: 15px;">
                     Thong bao neu co se hien thi o day
                 </div>
             </div>
@@ -354,17 +354,5 @@
     @Html.Partial("_MultipleModel")
         @Scripts.Render("~/Content/js/bootstrap")
     @RenderSection("script", required: false)
-    <script>
-        $('.priceValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 1
-        });
-        $('.numberValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 0
-        });
-    </script>
 </body>
 </html>
