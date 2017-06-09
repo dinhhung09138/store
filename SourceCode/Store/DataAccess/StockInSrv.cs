@@ -237,10 +237,11 @@ namespace DataAccess
                     {
                         if (model.Insert)
                         {
-                            md.id = Guid.NewGuid();
+                            md.id = model.ID;
                             md.code = model.Code;
                             md.stock_in_date = model.StockInDate;
-                            md.branch_id = model.BranchID;
+                            md.branch_id = context.branches.FirstOrDefault().id;
+                            md.supplier_id = context.suppliers.FirstOrDefault().id;
                             md.total_money = model.TotalMoney;
                             md.discount = model.Discount;
                             md.payable = model.Payable;
@@ -248,6 +249,7 @@ namespace DataAccess
                             md.empl_id = model.EmployeeID;
                             md.reason = model.Reason;
                             md.notes = model.Notes;
+                            md.is_finish = model.IsFinish;
                             md.create_by = model.CreateBy;
                             md.create_date = DateTime.Now;
                             md.deleted = false;
@@ -271,6 +273,7 @@ namespace DataAccess
                             md.code = model.Code;
                             md.stock_in_date = model.StockInDate;
                             md.branch_id = model.BranchID;
+                            md.supplier_id = model.SupplierID;
                             md.total_money = model.TotalMoney;
                             md.discount = model.Discount;
                             md.payable = model.Payable;
@@ -278,6 +281,7 @@ namespace DataAccess
                             md.empl_id = model.EmployeeID;
                             md.reason = model.Reason;
                             md.notes = model.Notes;
+                            md.is_finish = model.IsFinish;
                             md.update_by = model.UpdatedBy;
                             md.update_date = DateTime.Now;
                             context.stock_in.Attach(md);
@@ -299,6 +303,7 @@ namespace DataAccess
                             }
                         }
                         context.SaveChanges();
+                        trans.Commit();
                     }
                     
                 }

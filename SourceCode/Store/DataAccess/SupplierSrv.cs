@@ -294,5 +294,22 @@ namespace DataAccess
             return _return;
         }
 
+        /// <summary>
+        /// Get list supplier to display on dropdown controll (or for something else) in other form
+        /// </summary>
+        /// <returns></returns>
+        public List<SupplierModel> GetListForDisplay()
+        {
+            List<SupplierModel> _return = new List<SupplierModel>();
+            using (var context = new StoreEntities())
+            {
+                var list = (from a in context.suppliers where !a.deleted orderby a.name select new { a.id, a.name }).ToList();
+                foreach (var item in list)
+                {
+                    _return.Add(new SupplierModel() { ID = item.id, Name = item.name });
+                }
+            }
+            return _return;
+        }
     }
 }

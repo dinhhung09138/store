@@ -41,7 +41,8 @@ namespace DataAccess
                                  a.id,
                                  a.code,
                                  a.name,
-                                 price= a.price ?? 0,
+                                 org_price = a.org_price ?? 0,
+                                 price = a.price ?? 0,
                                  number_in_stock = a.number_in_stock ?? 0,
                                  group_name = g1.name,
                                  unit_name = l1.name
@@ -56,6 +57,7 @@ namespace DataAccess
                         l = l.Where(m => m.name.ToLower().Contains(searchValue) ||
                                     m.code.ToLower().Contains(searchValue) ||
                                     m.price.ToString().Contains(searchValue) ||
+                                    m.org_price.ToString().Contains(searchValue) ||
                                     m.number_in_stock.ToString().Contains(searchValue) ||
                                     m.group_name.ToLower().Contains(searchValue) ||
                                     m.unit_name.ToLower().Contains(searchValue)).ToList();
@@ -69,7 +71,7 @@ namespace DataAccess
                             Code = item.code,
                             Name = item.name,
                             Price = item.price,
-                            OriPrice = 0,
+                            OrgPrice = item.org_price,
                             NumInStock = item.number_in_stock,
                             GroupName = item.group_name,
                             UnitName = item.unit_name
@@ -92,8 +94,8 @@ namespace DataAccess
                                 case "Price":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.Price) : _sortList.Sort(col.Dir, m => m.Price);
                                     break;
-                                case "OriPrice":
-                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.OriPrice) : _sortList.Sort(col.Dir, m => m.OriPrice);
+                                case "OrgPrice":
+                                    _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.OrgPrice) : _sortList.Sort(col.Dir, m => m.OrgPrice);
                                     break;
                                 case "NumInStock":
                                     _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.NumInStock) : _sortList.Sort(col.Dir, m => m.NumInStock);
@@ -177,8 +179,10 @@ namespace DataAccess
                                     m.group_id,
                                     GroupName = g1.name,
                                     m.price,
+                                    m.org_price,
                                     m.weight,
                                     m.description,
+                                    m.number_in_stock,
                                     m.min_in_stock,
                                     m.max_in_stock,
                                     m.note_in_order
@@ -192,8 +196,11 @@ namespace DataAccess
                     _item.GroupName = item.GroupName;
                     _item.Avatar = item.avatar;
                     _item.ImageFileName = "";
+                    _item.Price = item.price ?? 0;
+                    _item.OrgPrice = item.org_price ?? 0;
                     _item.Weight = item.weight;
                     _item.Description = item.description;
+                    _item.NumInStock = item.number_in_stock ?? 0;
                     _item.MinInStock = item.min_in_stock ?? 0;
                     _item.MaxInStock = item.max_in_stock ?? 0;
                     _item.NoteInOrder = item.note_in_order;
@@ -230,6 +237,7 @@ namespace DataAccess
                         md.unit_id = model.UnitID;
                         md.group_id = model.GroupID;
                         md.price = model.Price;
+                        md.org_price = model.OrgPrice;
                         md.number_in_stock = model.NumInStock;
                         md.avatar = model.Avatar;
                         md.weight = model.Weight;
@@ -251,6 +259,7 @@ namespace DataAccess
                         md.unit_id = model.UnitID;
                         md.group_id = model.GroupID;
                         md.price = model.Price;
+                        md.org_price = model.OrgPrice;
                         md.number_in_stock = model.NumInStock;
                         md.avatar = model.Avatar;
                         md.weight = model.Weight;
@@ -312,6 +321,37 @@ namespace DataAccess
             }
 
             return _return;
+        }
+
+        public List<GoodsModel> FindGood(string searchString)
+        {
+            List<GoodsModel> _return = new List<GoodsModel>();
+
+            using (var context = new StoreEntities())
+            {
+                var list = (from a in context.goods
+                            where a.code.Contains(searchString) || a.name.Contains(searchString)
+                            select new
+                            {
+                                a.id,
+                                a.code,
+                                a.name,
+                                a.org_price
+                            }).ToList();
+                foreach (var item in list)
+                {
+                    _return.Add(new GoodsModel()
+                    {
+                        ID = item.id,
+                        Code = item.code,
+                        Name  = item.name,
+                        OrgPrice = item.org_price ?? 0
+                    });
+                }
+            }
+
+            return _return;
+
         }
 
     }

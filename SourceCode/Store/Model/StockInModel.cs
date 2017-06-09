@@ -79,13 +79,13 @@ namespace Model
         /// <summary>
         /// Employee name
         /// </summary>
-        public string EmployeeName { get; set; }
+        public string EmployeeName { get; set; } = "";
 
         /// <summary>
         /// Reason
         /// </summary>
         [StringLength(255, ErrorMessage = "Lý do nhập không vượt quá 255 ký tự")]
-        public string Reason { get; set; }
+        public string Reason { get; set; } = "";
 
         /// <summary>
         /// Notes
@@ -94,8 +94,13 @@ namespace Model
         public string Notes { get; set; }
 
         /// <summary>
+        /// Is finish invoice
+        /// </summary>
+        public bool IsFinish { get; set; } = false;
+
+        /// <summary>
         /// List of detail
         /// </summary>
-        public List<StockInDetailModel> details { get; set; }
+        public List<StockInDetailModel> details { get; set; } = new List<StockInDetailModel>();
     }
 }

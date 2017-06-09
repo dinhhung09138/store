@@ -55,23 +55,23 @@ namespace Model
         /// <summary>
         /// Price
         /// </summary>
+        [DisplayFormat(DataFormatString = "{0: #,###}", ApplyFormatInEditMode = true)]
         public decimal Price { get; set; }
 
         /// <summary>
         /// Original price
         /// </summary>
-        public decimal OriPrice { get; set; }
+        [DisplayFormat(DataFormatString = "{0: #,###}", ApplyFormatInEditMode = true)]
+        public decimal OrgPrice { get; set; }
 
         /// <summary>
         /// Number of the rest product in stock
         /// </summary>
-        [Range(0, 9999999.9, ErrorMessage = "Số lượng tồn từ 0 đến 999999999.9")]
         public decimal NumInStock { get; set; }
 
         /// <summary>
         /// Weight on a unit of product
         /// </summary>
-        [Range(0, 9999999.9, ErrorMessage = "Cân nặng từ 0 đến 999999999.9")]
         public decimal Weight { get; set; }
 
         /// <summary>
@@ -88,13 +88,11 @@ namespace Model
         /// <summary>
         /// Mininum value in stock
         /// </summary>
-        [Range(0, 9999999.9, ErrorMessage = "Số lượng tồn tối thiểu từ 0 đến 999999999.9")]
         public decimal MinInStock { get; set; }
 
         /// <summary>
         /// Maximum value in stock
         /// </summary>
-        [Range(0, 9999999.9, ErrorMessage = "Số lượng tồn tối đa từ 0 đến 999999999.9")]
         public decimal MaxInStock { get; set; }
 
         /// <summary>

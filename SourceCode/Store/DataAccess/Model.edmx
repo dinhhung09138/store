@@ -467,6 +467,7 @@
           <Property Name="empl_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="reason" Type="nvarchar" MaxLength="255" />
           <Property Name="notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_finish" Type="bit" Nullable="false" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="update_by" Type="uniqueidentifier" />
@@ -2922,6 +2923,7 @@
           <NavigationProperty Name="stock_in_detail" Relationship="StoreModel.FK_stock_in_detail_stock_in" FromRole="stock_in" ToRole="stock_in_detail" />
           <NavigationProperty Name="supplier" Relationship="StoreModel.FK_stock_in_supplier" FromRole="stock_in" ToRole="supplier" />
           <NavigationProperty Name="user" Relationship="StoreModel.FK_stock_in_user" FromRole="stock_in" ToRole="user" />
+          <Property Name="is_finish" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="stock_in_detail">
           <Key>
@@ -3634,6 +3636,7 @@
           <EntitySetMapping Name="stock_in">
             <EntityTypeMapping TypeName="StoreModel.stock_in">
               <MappingFragment StoreEntitySet="stock_in">
+                <ScalarProperty Name="is_finish" ColumnName="is_finish" />
                 <ScalarProperty Name="delete_date" ColumnName="delete_date" />
                 <ScalarProperty Name="delete_by" ColumnName="delete_by" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
