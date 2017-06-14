@@ -104,6 +104,15 @@
                                         @Html.ValidationMessageFor(m => m.SupplierID)
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                        <span>Trạng thái</span>
+                                    </div>
+                                    <div class="col-md-9 col-sm-8 col-xs-12">
+                                        <span>Phiếu tạm</span>
+                                        @Html.HiddenFor(m => m.IsFinish)
+                                    </div>
+                                </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="extendTab">
                                 <div class="row">
@@ -122,6 +131,49 @@
                                     <div class="col-md-9 col-sm-8 col-xs-12 form-group">
                                         @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @maxlength = 255 })
                                         @Html.ValidationMessageFor(m => m.Notes)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#paymentTab" aria-controls="paymentTab" role="tab" data-toggle="tab">Thanh toán</a></li>
+                        </ul>
+                        <div class="tab-content" style="padding-top:10px;">
+                            <div role="tabpanel" class="tab-pane active" id="paymentTab">
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-8" style="padding-top: 5px;">
+                                        <span>Tổng tiền hàng</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                        @Html.HiddenFor(m => m.TotalMoney)
+                                        @Html.TextBox("TotalMoneyValue", Model.TotalMoney, new { @class = "priceValue fl-right form-control", @readonly = true, @style = "text-align: right; color: Blue; font-weight: bold;" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span>Giảm giá</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                        @Html.TextBox("DiscountValue", Model.Discount, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                        @Html.HiddenFor(m => m.Discount)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span>Tiền cần trả</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                        @Html.TextBox("PayableValue",Model.Payable, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                        @Html.HiddenFor(m => m.Payable)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8 col-sm-8 col-xs-8">
+                                        <span>Tính vào công nợ</span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                        @Html.TextBox("DeptValue", Model.Dept, new { @class = "deptPriceValue fl-right form-control", @style = "text-align: right; color: red;", @readonly = true })
+                                        @Html.HiddenFor(m => m.Dept)
                                     </div>
                                 </div>
                             </div>
@@ -206,25 +258,24 @@
         },
         select: function (event, ui) {
             event.preventDefault();
-            //$("#LocationName").val(ui.item.label);
-            //$("#LocationID").val(ui.item.id);
-
+           
             var row = $('<tr/>');
-            var td1 = $('<td/>');
+            var td1 = $('<td/>').attr('style', 'vertical-align: middle;').attr('width', '20px');
             td1.append($('<span/>').attr('class', 'removeItem color-red').html('x'));
             td1.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsId').attr('name', 'goodsId').attr('class', 'idItem').attr('value', ui.item.id));
-            var td2 = $('<td/>').html(ui.item.label);
+            var td2 = $('<td/>').attr('style', 'vertical-align: middle;').html(ui.item.label);
             var td3 = $('<td/>');
-            td3.append($('<input/>').attr('type','text').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('class', 'priceValue').attr('value', ui.item.orgPrice));
+            td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('class', 'priceValue form-control').attr('value', ui.item.orgPrice));
             td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('value', ui.item.orgPrice));
             var td4 = $('<td/>');
-            td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('class', 'priceValue').attr('value', 0));
+            td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('class', 'priceValue form-control').attr('value', 0));
             td4.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('value', 0));
             var td5 = $('<td/>');
-            td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('class', 'numberValue').attr('value', 0));
+            td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('class', 'numberValue form-control').attr('value', 0));
             td5.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsNumberValue').attr('name', 'goodsNumberValue').attr('value', 0));
             var td6 = $('<td/>');
-            td6.append($('<label/>').attr('id', 'goodsTotal').attr('name', 'goodsTotal').attr('class', 'priceValue').attr('style', 'float:right;').html(0));
+            td6.append($('<label/>').attr('id', 'goodsTotalValue').attr('name', 'goodsTotalValue').attr('class', 'priceValue').attr('style', 'float:right; margin-top:5px;').html(0));
+            td6.append($('<input/>').attr('id', 'goodsTotal').attr('name', 'goodsTotal').attr('type', 'hidden').val(0));
             row.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
             $('#tableStockin tbody').append(row);
 
@@ -243,12 +294,19 @@
     });
 
     $(document).on('click', '.removeItem', function (e) {
+        var price = parseFloat($(this).parent().parent().find('#goodsTotal').val());
+        totalPayment(price, 0);
         $(this).parent().parent().remove();
     });
 
     function declareFormat() {
         $('.priceValue').priceFormat({
             prefix: '',
+            limit: 11,
+            centsLimit: 0
+        });
+        $('.deptPriceValue').priceFormat({
+            prefix: '-',
             limit: 11,
             centsLimit: 0
         });
@@ -261,31 +319,82 @@
 
     function declareValueChange() {
         $(document).on('change', '#goodsOrgPrice', function (e) {
-            var price = $(this).val().replace(',', '');
+            var price = parseFloat($(this).val().replace(',', ''));
             $(this).parent().find('#goodsOrgPriceValue').val(price);
-            var discount = $(this).parent().parent().find('#goodsDiscountValue').val();
-            var number = $(this).parent().parent().find('#goodsNumberValue').val();
+            var discount = parseFloat($(this).parent().parent().find('#goodsDiscountValue').val());
+            var number = parseFloat($(this).parent().parent().find('#goodsNumberValue').val());
             var total = (price * number) - discount;
-            $(this).parent().parent().find('#goodsTotal').html(total);
-            declareFormat();
+            var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
+            $(this).parent().parent().find('#goodsTotal').val(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            totalPayment(oldValue, total);
         });
         $(document).on('change', '#goodsDiscount', function (e) {
-            var discount = $(this).val().replace(',', '');
+            var discount = parseFloat($(this).val().replace(',', ''));
             $(this).parent().find('#goodsDiscountValue').val(discount);
-            var price = $(this).parent().parent().find('#goodsOrgPriceValue').val();
-            var number = $(this).parent().parent().find('#goodsNumberValue').val();
+            var price = parseFloat($(this).parent().parent().find('#goodsOrgPriceValue').val());
+            var number = parseFloat($(this).parent().parent().find('#goodsNumberValue').val());
             var total = (price * number) - discount;
-            $(this).parent().parent().find('#goodsTotal').html(total);
-            declareFormat();
+            var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
+            $(this).parent().parent().find('#goodsTotal').val(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            totalPayment(oldValue, total);
         });
         $(document).on('change', '#goodsNumber', function (e) {
-            var number = $(this).val();
+            var number = parseFloat($(this).val().replace(',', ''));
             $(this).parent().find('#goodsNumberValue').val(number);
-            var price = $(this).parent().parent().find('#goodsOrgPriceValue').val();
-            var discount = $(this).parent().parent().find('#goodsDiscountValue').val();
+            var price = parseFloat($(this).parent().parent().find('#goodsOrgPriceValue').val());
+            var discount = parseFloat($(this).parent().parent().find('#goodsDiscountValue').val());
             var total = (price * number) - discount;
-            $(this).parent().parent().find('#goodsTotal').html(total);
-            declareFormat();
+            var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
+            $(this).parent().parent().find('#goodsTotal').val(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            totalPayment(oldValue, total);
         });
+    }
+
+    $(document).on('change', '#PayableValue', function (e) {
+        var payable = parseFloat($(this).val().replace(',', ''));
+
+        var totalMoney = parseFloat($('#TotalMoney').val());
+        var discount = parseFloat($('#Discount').val());
+        var dept = totalMoney - discount - payable;
+        //
+        $('#Payable').val(payable);
+        $('#Dept').val(dept);
+        $('#DeptValue').val(dept);
+        declareFormat();
+    });
+
+    $(document).on('change', '#DiscountValue', function (e) {
+        var discount = parseFloat($(this).val().replace(',', ''));
+
+        var totalMoney = parseFloat($('#TotalMoney').val());
+        var payable = parseFloat($('#Payable').val());
+        var dept = totalMoney - discount - payable;
+        //
+        $('#Discount').val(discount);
+        $('#Dept').val(dept);
+        $('#DeptValue').val(dept);
+        declareFormat();
+    });
+
+    function totalPayment(oldValue, newValue) {
+        var totalMoney = parseFloat($('#TotalMoney').val());
+        var discount = parseFloat($('#Discount').val());
+        var payable = parseFloat($('#Payable').val());
+        var dept = parseFloat($('#Dept').val());
+        debugger;
+        if (oldValue > newValue) {
+            totalMoney = totalMoney - (oldValue - newValue);
+        } else {
+            totalMoney = totalMoney + (newValue - oldValue);
+        }
+        $('#TotalMoney').val(totalMoney);
+        $('#TotalMoneyValue').empty();
+        $('#TotalMoneyValue').val(totalMoney);
+        $('#Dept').val(totalMoney - discount - payable);
+        $('#DeptValue').val(totalMoney - discount - payable);
+        declareFormat();
     }
 </script>
