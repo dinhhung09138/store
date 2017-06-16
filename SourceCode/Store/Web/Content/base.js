@@ -1,44 +1,48 @@
-﻿function notification(title, mesage, type) {
+﻿function notification(mesage, type) {
 
-    var className = 'custom-success';
-    var stickyValue = true;
-    var time = '100';
     if (type.toLowerCase() == "error") {
-        className = 'custom-error';
-        stickyValue = true;
-        time = ''
+        Lobibox.notify('error', {
+            sound: true,
+            delay: false,
+            size: 'mini',
+            icon: false,
+            position: 'bottom right',
+            msg: mesage
+        });
+        return;
     }
     if (type.toLowerCase() == "warning") {
-        className = 'custom-warning';
-        stickyValue = true;
+        Lobibox.notify('warning', {
+            sound: true,
+            delay: false,
+            size: 'mini',
+            icon: false,
+            position: 'bottom right',
+            msg: mesage
+        });
+        return;
     }
-    $.gritter.add({
-        // (string | mandatory) the heading of the notification
-        //title: title,
-        // (string | mandatory) the text inside the notification
-        text: mesage,
-        class_name: className,
-        //image: '/Images/clear.png',
-        sticky: stickyValue,//if you want to fade out it or still sit there
-        time: time //time alive before fade out
-    });
+    if (type.toLowerCase() == "success") {
+        Lobibox.notify('success', {
+            sound: true,
+            delay: 3000,
+            size: 'mini',
+            icon: false,
+            position: 'bottom right',
+            msg: mesage
+        });
+        return;
+    }
+    
 }
 
-//Add slimscroll to navbar dropdown
-
-$(document).ready(function () {
-    $(".dropdown-menu .panel-body").slimscroll({
-        height: "150px",
-        alwaysVisible: false,
-        size: "3px"
-    }).css("width", "100%");
-});
 
 /*Navigation*/
 
 var ww = document.body.clientWidth;
 
 $(document).ready(function () {
+
     $(".nav li a").each(function () {
         if ($(this).next().length > 0) {
             $(this).addClass("parent");
@@ -51,9 +55,8 @@ $(document).ready(function () {
         $(".nav").toggle();
     });
     adjustMenu();
-
-
-
+    selectPicker();
+    fullScreenModel();
 })
 
 $(window).bind('resize orientationchange', function () {
@@ -90,6 +93,16 @@ var adjustMenu = function () {
 
 /*End Navigation*/
 
+/*Set full screen model*/
+
+function fullScreenModel() {
+    $(".dropdown-menu .panel-body").slimscroll({
+        height: "150px",
+        alwaysVisible: false,
+        size: "3px"
+    }).css("width", "100%");
+}
+
 /*When show model above another model*/
 
 $(document).on('show.bs.modal', '.modal', function (event) {
@@ -102,12 +115,14 @@ $(document).on('show.bs.modal', '.modal', function (event) {
 
 /*Use for dropdow select and find item*/
 
-$(document).ready(function () {
+/*Select picker*/
+
+function selectPicker() {
     $('.selectpicker').selectpicker({
         liveSearch: true,
         showSubtext: true
     });
-});
+}
 
 /*Loading model when page start and stop when finish load page*/
 
@@ -118,6 +133,7 @@ function startLoading() {
 function stopLoading() {
     $('#loadingModel').modal('hide');
 }
+
 $('#loadingModel').modal('show');
 window.onload = stopLoading;
 
