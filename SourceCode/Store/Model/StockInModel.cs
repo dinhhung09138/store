@@ -37,6 +37,7 @@ namespace Model
         /// <summary>
         /// Supplier's id
         /// </summary>
+        [Required(ErrorMessage = "Chọn nhà cung cấp")]
         public Guid SupplierID { get; set; }
 
         /// <summary>

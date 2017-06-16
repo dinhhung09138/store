@@ -26,7 +26,7 @@
 
 //Add slimscroll to navbar dropdown
 
-$(document).ready(function () { 
+$(document).ready(function () {
     $(".dropdown-menu .panel-body").slimscroll({
         height: "150px",
         alwaysVisible: false,
@@ -52,7 +52,7 @@ $(document).ready(function () {
     });
     adjustMenu();
 
-    
+
 
 })
 
@@ -122,3 +122,17 @@ $('#loadingModel').modal('show');
 window.onload = stopLoading;
 
 /*End Loading model*/
+
+function scrollBodyModel() {
+    var h = window.innerHeight - 120;
+    $(".modal-body .container-fluid").slimscroll({
+        height: h + "px",
+        alwaysVisible: false,
+        size: "3px"
+    }).css("width", "100%");
+    $('#inputModel').modal('show');
+}
+
+window.onresize = function (event) {
+    scrollBodyModel();
+};

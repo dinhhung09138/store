@@ -419,39 +419,38 @@ input[type="file"] {
 /*end loading*/
 
 /*model*/
-.modal {
-  text-align: center;
-  padding: 0!important;
+
+
+.modal-header .close {
+    margin-top: 0;
 }
 
-.modal:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-  margin-right: -4px; /* Adjusts for spacing */
+.modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
 }
 
 .modal-dialog {
-  display: inline-block;
-  text-align: left;
-  vertical-align: middle;
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
 }
 
-.modal.fade .modal-dialog {
-    -webkit-transform: none;
-    -ms-transform: none;
-    transform:none;
-    -webkit-transition: none;
-    -moz-transition: none;
-    -o-transition: none;
-    transition: none;
-}
-
-.modal-content{
-    -webkit-box-shadow: none;
+.modal-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 1px solid #3c7dcf;
+    border-radius: 0;
     box-shadow: none;
-    border-radius: unset;
 }
 
 .modal-header {
@@ -460,17 +459,31 @@ input[type="file"] {
     color: white;
     font-weight: bold;
     padding: 5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
 }
 
-.modal-header .close {
-    margin-top: 0;
+.modal-title {
+  color: #fff;
 }
 
-@media screen and (min-width: 760px){
-    .modal.fade .modal-dialog{
-        width: 100%;
-        height: 100%;
-    }
+.modal-body {
+    position: absolute;
+    top: 50px;
+    bottom: 60px;
+    width: 100%;
+    padding: 10px;
+}
+
+.modal-footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    background: #f1f3f5;
 }
 
 /*End model*/
@@ -681,8 +694,3 @@ select.input-sm {
 }
 
 /*Tab*/
-
-.modal-body {
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-}

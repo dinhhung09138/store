@@ -12,8 +12,8 @@
     }
 </style>
 
-<div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
+<div class="modal" id="inputModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
         <div class="modal-content">
         @using (Ajax.BeginForm("save", "stockin",
                                                 new { @area = "warehouse" },
@@ -24,156 +24,157 @@
             @Html.HiddenFor(m => m.Insert)
             @Html.HiddenFor(m => m.ID)
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title">Thông tin nhập kho</h4>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Nhập hàng</label>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Nhập hàng</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <input type="text" id="findGoods" name="findGoods" class="form-control" placeholder="Nhập thông tin hàng hóa cần tìm" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tableStockin" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Tên hàng hóa</th>
+                                                <th style="width: 80px;">Đơn giá</th>
+                                                <th style="width: 80px;">Giảm giá</th>
+                                                <th style="width: 80px;">Số lượng</th>
+                                                <th style="width: 80px;">Thành tiên</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <input type="text" id="findGoods" name="findGoods" class="form-control" placeholder="Nhập thông tin hàng hóa cần tìm" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table id="tableStockin" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Tên hàng hóa</th>
-                                            <th style="width: 80px;">Đơn giá</th>
-                                            <th style="width: 80px;">Giảm giá</th>
-                                            <th style="width: 80px;">Số lượng</th>
-                                            <th style="width: 80px;">Thành tiên</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#commonTab" aria-controls="commonTab" role="tab" data-toggle="tab">Thông tin chung</a></li>
-                            <li role="presentation"><a href="#extendTab" aria-controls="extendTab" role="tab" data-toggle="tab">Mở rộng</a></li>
-                        </ul>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#commonTab" aria-controls="commonTab" role="tab" data-toggle="tab">Thông tin chung</a></li>
+                                <li role="presentation"><a href="#extendTab" aria-controls="extendTab" role="tab" data-toggle="tab">Mở rộng</a></li>
+                            </ul>
 
-                        <!-- Tab panes -->
-                        <div class="tab-content" style="padding-top:10px;">
-                            <div role="tabpanel" class="tab-pane active" id="commonTab">
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
-                                        @Html.DropDownListFor(m => m.EmployeeID, (IEnumerable<SelectListItem>)ViewBag.employee, new { @class = "form-control", @style = "font-size: 10px;", @value = Model.EmployeeID})
+                            <!-- Tab panes -->
+                            <div class="tab-content" style="padding-top:10px;">
+                                <div role="tabpanel" class="tab-pane active" id="commonTab">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+                                            @Html.DropDownListFor(m => m.EmployeeID, (IEnumerable<SelectListItem>)ViewBag.employee, new { @class = "form-control", @style = "font-size: 10px;", @value = Model.EmployeeID})
+                                        </div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 form-group">
+                                            @Html.TextBoxFor(m => m.StockInDate, new { @class = "form-control", @style = "font-size: 10px;" })
+                                            @Html.ValidationMessageFor(m => m.StockInDate)
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6 form-group">
-                                        @Html.TextBoxFor(m => m.StockInDate, new { @class = "form-control", @style = "font-size: 10px;" })
-                                        @Html.ValidationMessageFor(m => m.StockInDate)
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Mã phiếu nhập</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @readonly = true })
+                                            @Html.ValidationMessageFor(m => m.Code)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Chi nhánh</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                            @Html.DropDownListFor(m => m.BranchID, (IEnumerable<SelectListItem>)ViewBag.branch, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.BranchID)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Nhà cung cấp</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                            @Html.DropDownListFor(m => m.SupplierID, (IEnumerable<SelectListItem>)ViewBag.supplier, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.SupplierID)
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Trạng thái</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12" style="padding-top: 5px;">
+                                            <span>Phiếu tạm</span>
+                                            @Html.HiddenFor(m => m.IsFinish)
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Mã phiếu nhập</span>
+                                <div role="tabpanel" class="tab-pane" id="extendTab">
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Lý do nhập</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                            @Html.TextAreaFor(m => m.Reason, new { @class = "form-control", @maxlength = 255 })
+                                            @Html.ValidationMessageFor(m => m.Reason)
+                                        </div>
                                     </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.Code, new { @class = "form-control", @readonly = true })
-                                        @Html.ValidationMessageFor(m => m.Code)
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Chi nhánh</span>
-                                    </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
-                                        @Html.DropDownListFor(m => m.BranchID, (IEnumerable<SelectListItem>)ViewBag.branch, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.BranchID)
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Nhà cung cấp</span>
-                                    </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
-                                        @Html.DropDownListFor(m => m.SupplierID, (IEnumerable<SelectListItem>)ViewBag.supplier, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.SupplierID)
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Trạng thái</span>
-                                    </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12">
-                                        <span>Phiếu tạm</span>
-                                        @Html.HiddenFor(m => m.IsFinish)
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
+                                            <span>Ghi chú</span>
+                                        </div>
+                                        <div class="col-md-9 col-sm-8 col-xs-12 form-group">
+                                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @maxlength = 255 })
+                                            @Html.ValidationMessageFor(m => m.Notes)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="extendTab">
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Lý do nhập</span>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#paymentTab" aria-controls="paymentTab" role="tab" data-toggle="tab">Thanh toán</a></li>
+                            </ul>
+                            <div class="tab-content" style="padding-top:10px;">
+                                <div role="tabpanel" class="tab-pane active" id="paymentTab">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-8" style="padding-top: 5px;">
+                                            <span>Tổng tiền hàng</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                            @Html.HiddenFor(m => m.TotalMoney)
+                                            @Html.TextBox("TotalMoneyValue", Model.TotalMoney, new { @class = "priceValue fl-right form-control", @readonly = true, @style = "text-align: right; color: Blue; font-weight: bold;" })
+                                        </div>
                                     </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
-                                        @Html.TextAreaFor(m => m.Reason, new { @class = "form-control", @maxlength = 255 })
-                                        @Html.ValidationMessageFor(m => m.Reason)
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <span>Giảm giá</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                            @Html.TextBox("DiscountValue", Model.Discount, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                            @Html.HiddenFor(m => m.Discount)
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3 col-sm-4 col-xs-12" style="padding-top: 5px;">
-                                        <span>Ghi chú</span>
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <span>Tiền cần trả</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                            @Html.TextBox("PayableValue",Model.Payable, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                            @Html.HiddenFor(m => m.Payable)
+                                        </div>
                                     </div>
-                                    <div class="col-md-9 col-sm-8 col-xs-12 form-group">
-                                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @maxlength = 255 })
-                                        @Html.ValidationMessageFor(m => m.Notes)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#paymentTab" aria-controls="paymentTab" role="tab" data-toggle="tab">Thanh toán</a></li>
-                        </ul>
-                        <div class="tab-content" style="padding-top:10px;">
-                            <div role="tabpanel" class="tab-pane active" id="paymentTab">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8" style="padding-top: 5px;">
-                                        <span>Tổng tiền hàng</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                        @Html.HiddenFor(m => m.TotalMoney)
-                                        @Html.TextBox("TotalMoneyValue", Model.TotalMoney, new { @class = "priceValue fl-right form-control", @readonly = true, @style = "text-align: right; color: Blue; font-weight: bold;" })
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <span>Giảm giá</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                        @Html.TextBox("DiscountValue", Model.Discount, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
-                                        @Html.HiddenFor(m => m.Discount)
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <span>Tiền cần trả</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                        @Html.TextBox("PayableValue",Model.Payable, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
-                                        @Html.HiddenFor(m => m.Payable)
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-8 col-xs-8">
-                                        <span>Tính vào công nợ</span>
-                                    </div>
-                                    <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                        @Html.TextBox("DeptValue", Model.Dept, new { @class = "deptPriceValue fl-right form-control", @style = "text-align: right; color: red;", @readonly = true })
-                                        @Html.HiddenFor(m => m.Dept)
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-8 col-xs-8">
+                                            <span>Tính vào công nợ</span>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-4 form-group">
+                                            @Html.TextBox("DeptValue", Model.Dept, new { @class = "deptPriceValue fl-right form-control", @style = "text-align: right; color: red;", @readonly = true })
+                                            @Html.HiddenFor(m => m.Dept)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -190,14 +191,12 @@
         </div>
     </div>
 </div>
+<script type="text/javascript" language=javascript>
+    $.validator.unobtrusive.parse(document);
+</script>
 <script>
     $(document).ready(function () {
-        $(function () {
-            $('#StockInDate').datetimepicker({
-                //format: 'DD/MM/YYYY'
-                //format: 'CultureInfo.CurrentCulture.DateTimeFormat..ToUpper()'
-            });
-        });
+        scrollBodyModel();
 
         declareFormat();
         declareValueChange();

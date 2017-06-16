@@ -40,5 +40,17 @@ namespace Model
         [Range(0.1, 999999999, ErrorMessage = "Giá nhập phải lớn hơn 0")]
         public decimal Price { get; set; } = 0;
 
+        /// <summary>
+        /// Discount
+        /// </summary>
+        [Range(0.1, 999999999, ErrorMessage = "Giá giảm phải lớn hơn 0")]
+        public decimal Discount { get; set; } = 0;
+
+        /// <summary>
+        /// Total
+        /// </summary>
+        [Range(0.1, 999999999, ErrorMessage = "Tổng tiền phải lớn hơn 0")]
+        public decimal Total { get; set; } = 0;
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model Model.CustomerGroupModel
 
-<div class="modal fade" id="inputModel" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-lg">
+<div class="modal" id="inputModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
         <div class="modal-content">
             @using (Ajax.BeginForm("save", "customergroup",
                             new { @area = "partner" },
@@ -16,25 +16,27 @@
                     <h4 class="modal-title">Thông tin nhóm khách hàng</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <label>Tên nhóm<span class="color-red"> *</span></label>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <label>Tên nhóm<span class="color-red"> *</span></label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                            @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
-                            @Html.ValidationMessageFor(m => m.Name)
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
+                                @Html.ValidationMessageFor(m => m.Name)
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <label>Ghi chú</label>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <label>Ghi chú</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,7 +53,7 @@
 </script>
 <script>
     $(document).ready(function () {
-        $('#inputModel').modal('show');
+        scrollBodyModel();
 
         $('#inputForm').submit(function () {
             if ($(this).valid()) {

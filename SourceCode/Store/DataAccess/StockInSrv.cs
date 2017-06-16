@@ -237,11 +237,12 @@ namespace DataAccess
                     {
                         if (model.Insert)
                         {
-                            md.id = model.ID;
+                            md.id = Guid.NewGuid();
                             md.code = model.Code;
+                            md.empl_id = model.EmployeeID;
                             md.stock_in_date = model.StockInDate;
-                            md.branch_id = context.branches.FirstOrDefault().id;
-                            md.supplier_id = context.suppliers.FirstOrDefault().id;
+                            md.branch_id = model.BranchID;
+                            md.supplier_id = model.SupplierID;
                             md.total_money = model.TotalMoney;
                             md.discount = model.Discount;
                             md.payable = model.Payable;
@@ -271,6 +272,7 @@ namespace DataAccess
                         {
                             md = context.stock_in.FirstOrDefault(m => m.id == model.ID);
                             md.code = model.Code;
+                            md.empl_id = model.EmployeeID;
                             md.stock_in_date = model.StockInDate;
                             md.branch_id = model.BranchID;
                             md.supplier_id = model.SupplierID;

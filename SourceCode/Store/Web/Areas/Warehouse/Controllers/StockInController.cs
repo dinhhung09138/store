@@ -147,30 +147,39 @@ namespace Web.Areas.Warehouse.Controllers
 
         [AjaxAuthorize]
         [HttpPost]
-        public JsonResult Save(GoodsModel model, FormCollection fc)
+        public JsonResult Save(StockInModel model, FormCollection fc)
         {
             Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
             if (model.Insert)
             {
-                model.ID = Guid.NewGuid();
                 model.CreateBy = user.ID;
             }
             else
             {
                 model.UpdatedBy = user.ID;
             }
-            if (model.ImageFileName != null && model.ImageFileName.Length > 0)
+
+            if(fc["goodsId"] != null && fc["goodsId"].ToString().Length > 0)
             {
-                string extension = model.ImageFileName.Substring(model.ImageFileName.LastIndexOf('.') + 1);
-                byte[] file = model.Avatar.ConvertBase64ToByte(extension);
-                model.Avatar = "";
-                if (SaveAvatar(file, Server.MapPath("~/Files/Goods/" + model.ID + "." + extension)))
+                string[] goodsIDs = fc["goodsId"].ToString().Split(',');
+                string[] orgPrices = fc["goodsOrgPriceValue"].ToString().Split(',');
+                string[] discounts = fc["goodsDiscountValue"].ToString().Split(',');
+                string[] numbers = fc["goodsNumberValue"].ToString().Split(',');
+                string[] totals = fc["goodsTotal"].ToString().Split(',');
+                for (int i = 0; i < goodsIDs.Count(); i++)
                 {
-                    model.Avatar = "/Files/Goods/" + model.ID + "." + extension;
+                    model.details.Add(new StockInDetailModel()
+                    {
+                        ID = new Guid(goodsIDs[i]),
+                        Price = decimal.Parse(orgPrices[i]),
+                        Number = decimal.Parse(numbers[i]),
+                        Discount = decimal.Parse(discounts[i]),
+                        Total = decimal.Parse(totals[i])
+                    });
                 }
             }
-            GoodsSrv _srvGoods = new GoodsSrv();
-            return this.Json(_srvGoods.Save(model), JsonRequestBehavior.AllowGet);
+            StockInSrv _srvStockIn = new StockInSrv();
+            return this.Json(_srvStockIn.Save(model), JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
