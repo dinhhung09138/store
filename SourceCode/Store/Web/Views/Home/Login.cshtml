@@ -48,7 +48,8 @@
                         <div class="col-md-12 form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input id="remember" name="remember" type="checkbox" value="true">
+                                    
+                                    @Html.CheckBoxFor(m => m.RememberMe, new { @checked = true })
                                     <span>Duy trì đăng nhập</span>
                                 </label>
                             </div>
