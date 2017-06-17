@@ -351,6 +351,14 @@
     <Content Include="Content\jquery-ui.min.js" />
     <Content Include="Content\jquery.priceformat.js" />
     <Content Include="Content\jquery.priceformat.min.js" />
+    <Content Include="Content\lobibox\lobibox.css" />
+    <Content Include="Content\lobibox\lobibox.js" />
+    <Content Include="Content\lobibox\lobibox.min.css" />
+    <Content Include="Content\lobibox\lobibox.min.js" />
+    <Content Include="Content\lobibox\messageboxes.js" />
+    <Content Include="Content\lobibox\messageboxes.min.js" />
+    <Content Include="Content\lobibox\notifications.js" />
+    <Content Include="Content\lobibox\notifications.min.js" />
     <Content Include="Content\moment.min.js" />
     <Content Include="Content\parsley\parsley.min.js" />
     <Content Include="Content\slimScroll\jquery.slimscroll.js" />
@@ -445,6 +453,12 @@
     <Content Include="Areas\Warehouse\Views\StockIn\Index.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\Add.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\Edit.cshtml" />
+    <Content Include="Content\lobibox\sound1.ogg" />
+    <Content Include="Content\lobibox\sound2.ogg" />
+    <Content Include="Content\lobibox\sound3.ogg" />
+    <Content Include="Content\lobibox\sound4.ogg" />
+    <Content Include="Content\lobibox\sound5.ogg" />
+    <Content Include="Content\lobibox\sound6.ogg" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
