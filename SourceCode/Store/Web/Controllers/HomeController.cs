@@ -3,7 +3,7 @@ using Model.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using Web.Filters;
 //
@@ -13,6 +13,7 @@ using Common.JqueryDataTable;
 using DataAccess;
 using DataAccess.User;
 using Common.Status;
+using System.Web;
 
 namespace Web.Controllers
 {
@@ -88,10 +89,21 @@ namespace Web.Controllers
         {
             Session["user"] = null;
             UserLoginModel model = new UserLoginModel();
+
             if (TempData["model"] != null)
             {
                 model = TempData["model"] as UserLoginModel;
                 TempData["message"] = TempData["message"];
+            }
+            if(Response.Cookies.Get("userName") != null)
+            {
+                AccountSrv _srvAccount = new AccountSrv();
+                UserLoginModel _return = _srvAccount.Login(Response.Cookies.Get("userName").Value, Response.Cookies.Get("password").Value);
+                if(_return != null && _return.UserName.Length > 0)
+                {
+                    Session["user"] = _return;
+                    return RedirectToAction("index", "home");
+                }
             }
             return View(model);
         }
@@ -110,6 +122,17 @@ namespace Web.Controllers
                 TempData["message"] = Resources.Login.msgWrongLogin;
                 return RedirectToAction("login", "home");
             }
+            if (model.RememberMe != false)
+            {
+                HttpCookie userName = new HttpCookie("userName", model.UserName);
+                userName.Expires = DateTime.Now.AddDays(1);
+                Response.Cookies.Add(userName);
+                HttpCookie passWord = new HttpCookie("password", pass);
+                passWord.Expires = DateTime.Now.AddDays(1); // For a cookie to effectively never expire
+                // Add the cookie.
+                Response.Cookies.Add(passWord);
+            }
+
             Session["user"] = _return;
             return RedirectToAction("index", "home");
         }
@@ -117,6 +140,22 @@ namespace Web.Controllers
 
         #endregion
 
+        #region " [Log out] "
+        [AllowAnonymous]
+
+        public ActionResult Logout(UserLoginModel u)
+        {
+            Session.Clear();
+            Session.Abandon();
+            Session.Remove("user");
+            Session.Remove("pass");
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", true);
+        }
+        #endregion
         #region " [ For got password ] "
 
         /// <summary>
