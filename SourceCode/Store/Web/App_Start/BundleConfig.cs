@@ -27,20 +27,20 @@ namespace Web
                 "~/Content/bootstrap/bootstrap-select.min.css",
                 "~/Content/bootstrap/bootstrap-datetimepicker.min.css",
                 "~/Content/font-awsome/font-awesome.min.css",
-                "~/Content/gritter/jquery.gritter.css",
+                "~/Content/lobibox/lobibox.min.css",
                 "~/Content/site.css",
                 "~/Content/datatable/dataTables.bootstrap.min.css",
                 "~/Content/datatable/responsive.bootstrap.min.css",
                 "~/Content/datatable/buttons.dataTables.min.css"));
 
             bundles.Add(new ScriptBundle("~/Content/js/bootstrap").Include(
-                "~/Scripts/jquery-{version}.js",
+                "~/Scripts/jquery-1.10.2.js",
                 "~/Content/jquery-ui.min.js",
                 "~/Content/bootstrap/bootstrap.min.js",
                 "~/Content/bootstrap/bootstrap-select.min.js",
                 "~/Content/moment.min.js",
                 "~/Content/bootstrap/bootstrap-datetimepicker.min.js",
-                "~/Content/gritter/jquery.gritter.min.js",
+                "~/Content/lobibox/lobibox.min.js",
                 "~/Content/slimScroll/jquery.slimscroll.min.js",
                 "~/Content/jquery.priceformat.min.js",
                 "~/Content/base.js",

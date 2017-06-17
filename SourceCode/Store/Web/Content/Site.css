@@ -1,9 +1,6 @@
-﻿/* latin-ext */
-@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
-
-body{
+﻿body{
     font-size:12px;
-    font-family: 'Lato', sans-serif !important;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
 .bg-gray {
@@ -287,7 +284,7 @@ input[type="file"] {
 .nav li li li a {
     background: rgb(0, 150, 136); /*#009688*/
     z-index: 200;
-    border-top: 1px solid #1d7a62;
+    border-top: 1px solid rgb(29, 122, 98);
 }
 
 .nav li li li a:hover {
@@ -336,7 +333,7 @@ input[type="file"] {
 /*Footer*/
 
 .section-footer {
-    background-color: #455a64;
+    background-color: rgb(69, 90, 100);
 }
 
 /*End footer*/
@@ -389,7 +386,7 @@ input[type="file"] {
     bottom: 15px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #f9c922;
+    border-top-color: rgb(249, 201, 34);
     -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
       animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
 }
@@ -452,7 +449,7 @@ input[type="file"] {
     right: 0;
     bottom: 0;
     left: 0;
-    border: 1px solid #3c7dcf;
+    border: 1px solid rgb(60, 125, 207);
     border-radius: 0;
     box-shadow: none;
 }
@@ -487,7 +484,7 @@ input[type="file"] {
     bottom: 0;
     left: 0;
     padding: 10px;
-    background: #f1f3f5;
+    background: rgb(241, 243, 245);
 }
 
 /*End model*/
@@ -555,8 +552,7 @@ input[type="file"] {
 /*End custom panel*/
 
 .page-header {
-    border: 1px solid rgb(0, 150, 136);
-    background: rgb(0, 150, 136);
+    background: rgb(155, 105, 16);
     margin: 0;
     padding-bottom: 0;
     color:White;
@@ -597,12 +593,12 @@ label {
 }
 
 .input-validation-error {
-    border-color: #d9534f;
-    background: #d9534f;
+    border-color: rgb(217, 83, 79);
+    background: rgb(255, 117, 117);
 }
 
 .field-validation-error {
-    color:#d9534f;
+    color:rgb(217, 83, 79);
 }
 
 .ui-autocomplete{
@@ -674,6 +670,10 @@ table.dataTable thead .sorting_asc_disabled::after,
     padding: 4px !important;
 }
 
+.ctn-center {
+    text-align:center;
+}
+
 select.input-sm {
     height: 22px;
     line-height: 22px;
@@ -698,3 +698,13 @@ select.input-sm {
 }
 
 /*Tab*/
+
+
+.glyphicon-remove {
+    color: red;
+    font-weight:bold;
+}
+
+.glyphicon-edit {
+    font-weight:bold;
+}
