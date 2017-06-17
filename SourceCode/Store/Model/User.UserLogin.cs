@@ -34,5 +34,10 @@ namespace Model.User
         /// Device ID, login from mobile
         /// </summary>
         public string DeviceID { get; set; }
+
+        /// <summary>
+        /// Remember me
+        /// </summary>
+        public bool RememberMe { get; set; }
     }
 }
