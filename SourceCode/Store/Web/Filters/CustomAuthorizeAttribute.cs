@@ -51,17 +51,18 @@ namespace Web.Filters
             {
                 throw new ArgumentNullException();
             }
-            if (httpContext.Request.Cookies.Get("userName") != null)
-            {
-                AccountSrv _srvAccount = new AccountSrv();
-                UserLoginModel _return = _srvAccount.Login(httpContext.Request.Cookies.Get("userName").Value, httpContext.Request.Cookies.Get("password").Value);
-                if (_return != null && _return.UserName.Length > 0)
-                {
-                    httpContext.Session["user"] = _return;
-                }
-            }
             if (httpContext.Session != null && httpContext.Session["user"] == null)
             {
+                if (httpContext.Request.Cookies.Get("userName") != null)
+                {
+                    AccountSrv _srvAccount = new AccountSrv();
+                    UserLoginModel _return = _srvAccount.Login(httpContext.Request.Cookies.Get("userName").Value, httpContext.Request.Cookies.Get("password").Value);
+                    if (_return != null && _return.UserName.Length > 0)
+                    {
+                        httpContext.Session["user"] = _return;
+                        return true;
+                    }
+                }
                 SetRedirect(httpContext);
                 return false;
             }

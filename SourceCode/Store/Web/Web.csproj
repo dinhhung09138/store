@@ -472,6 +472,7 @@
     <Content Include="Content\fonts\Lato-Regular.woff2" />
     <Content Include="Content\fonts\Lato-Bold.woff2" />
     <Content Include="Content\fonts\Lato-Italic.woff2" />
+    <Content Include="Areas\Warehouse\Views\Shared\_WarehouseLayout.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -570,7 +571,6 @@
     <Folder Include="Areas\User\Models\" />
     <Folder Include="Areas\User\Views\Shared\" />
     <Folder Include="Areas\Warehouse\Models\" />
-    <Folder Include="Areas\Warehouse\Views\Shared\" />
     <Folder Include="Files\Customer\" />
     <Folder Include="Files\Deliver\" />
     <Folder Include="Files\Employee\" />

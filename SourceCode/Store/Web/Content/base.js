@@ -1,6 +1,6 @@
 ﻿function notification(mesage, type) {
 
-    if (type.toLowerCase() == "error") {
+    if (type.toLowerCase() === "error") {
         Lobibox.notify('error', {
             sound: true,
             delay: false,
@@ -11,7 +11,7 @@
         });
         return;
     }
-    if (type.toLowerCase() == "warning") {
+    if (type.toLowerCase() === "warning") {
         Lobibox.notify('warning', {
             sound: true,
             delay: false,
@@ -22,7 +22,7 @@
         });
         return;
     }
-    if (type.toLowerCase() == "success") {
+    if (type.toLowerCase() === "success") {
         Lobibox.notify('success', {
             sound: true,
             delay: 3000,
@@ -147,7 +147,9 @@ function scrollBodyModal(focusID) {
         size: "3px"
     }).css("width", "100%");
     $('#inputModel').modal('show');
-    $(focusID).focus();
+    if (focusID.length > 0) {
+        $(focusID).focus();
+    }
 }
 
 window.onresize = function (event) {
@@ -156,5 +158,6 @@ window.onresize = function (event) {
 
 function clearInputModal() {
     $('#inputModel').modal('hide');
+    $('.modal-backdrop').remove();
     $('#divContainer').empty();
 }
