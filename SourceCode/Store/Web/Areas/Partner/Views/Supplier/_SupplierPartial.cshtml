@@ -13,148 +13,148 @@
                 @Html.HiddenFor(m => m.Insert)
                 @Html.HiddenFor(m => m.ID)
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h4 class="modal-title">Thông tin nhà cung cấp</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-5 col-sm-5 col-xs-12">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mẫ nhà cung cấp<span class="color-red"> *</span></label>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Mẫ nhà cung cấp<span class="color-red"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Code, new { @maxlength = "20", @class = "form-control", @required = true, @readonly = true, @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.Code)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Tên nhà cung cấp<span class="color-red"> *</span></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
+                                        @Html.ValidationMessageFor(m => m.Name)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Ngày sinh</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Birthdate, new { @class = "form-control", @maxlength = 10 })
+                                        @Html.ValidationMessageFor(m => m.Birthdate)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Số điện thoại <span class="color-red">*</span></label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true, @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.Phone)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Email</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = 50, @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.Email)
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Code, new { @maxlength = "20", @class = "form-control", @required = true, @readonly = true, @autocomplete = "off" })
-                                    @Html.ValidationMessageFor(m => m.Code)
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Tên công ty</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @maxlength = 50, @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.CompanyName)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Mã số thuế</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control", @maxlength = 25, @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(m => m.TaxCode)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Nhóm</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.DropDownListFor(m => m.GroupID, (IEnumerable<SelectListItem>)ViewBag.group,
+                                                                       new { @class = "form-control selectpicker" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Địa chỉ</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextAreaFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label>Ghi chú</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                                        @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên nhà cung cấp<span class="color-red"> *</span></label>
+                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <img id="thumbnail" src="@Model.Avatar" style="width: 100%;" />
+                                        @Html.HiddenFor(m => m.Avatar)
+                                        @Html.HiddenFor(m => m.ImageFileName)
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Name, new { @maxlength = "50", @class = "form-control", @required = true, @autocomplete = "off", @autofocus = true })
-                                    @Html.ValidationMessageFor(m => m.Name)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Ngày sinh</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Birthdate, new { @class = "form-control", @maxlength = 10 })
-                                    @Html.ValidationMessageFor(m => m.Birthdate)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Số điện thoại <span class="color-red">*</span></label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @maxlength = 15, @required = true, @autocomplete = "off" })
-                                    @Html.ValidationMessageFor(m => m.Phone)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Email</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @maxlength = 50, @autocomplete = "off" })
-                                    @Html.ValidationMessageFor(m => m.Email)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-12">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Tên công ty</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @maxlength = 50, @autocomplete = "off" })
-                                    @Html.ValidationMessageFor(m => m.CompanyName)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Mã số thuế</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextBoxFor(m => m.TaxCode, new { @class = "form-control", @maxlength = 25, @autocomplete = "off" })
-                                    @Html.ValidationMessageFor(m => m.TaxCode)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Nhóm</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.DropDownListFor(m => m.GroupID, (IEnumerable<SelectListItem>)ViewBag.group,
-                                                                       new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Địa chỉ</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextAreaFor(m => m.Address, new { @maxlength = 50, @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label>Ghi chú</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                    @Html.TextAreaFor(m => m.Notes, new { @class = "form-control" })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2 col-sm-2 col-xs-12">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <img id="thumbnail" src="@Model.Avatar" style="width: 100%;" />
-                                    @Html.HiddenFor(m => m.Avatar)
-                                    @Html.HiddenFor(m => m.ImageFileName)
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <label class="custom-file-upload">
-                                        <input type="file" accept="image/png, image/jpeg" />
-                                        Chọn ảnh
-                                    </label>
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <label class="custom-file-upload">
+                                            <input type="file" accept="image/png, image/jpeg" />
+                                            Chọn ảnh
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn btn-default">Đóng</a>
+                    <a href="javascript:;" onclick="clearInputModal()" class="btn btn-default">Đóng</a>
                     <button class="btn btn-primary primary-button">Lưu</button>
                 </div>
-                                        }
+            }
         </div>
     </div>
 </div>
@@ -163,7 +163,7 @@
 </script>
 <script>
     $(document).ready(function () {
-        $('#inputModel').modal('show');
+        scrollBodyModal('#Name');
         //
         $('.selectpicker').selectpicker();
         //
@@ -182,11 +182,11 @@
                     data: $(this).serialize(),
                     success: function (result) {
                         if (result.status == 1) {
-                            notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
+                            notification(result.message, '@Resources.Notification.TypeSuccess');
                             table.ajax.reload();
                             $('#inputModel').modal('hide');
                         } else {
-                            notification('@Resources.Notification.TypeErrorTitle', result.message, '@Resources.Notification.TypeError');
+                            notification(result.message, '@Resources.Notification.TypeError');
                         }
                         $('#loadingModel').modal('hide');
                     },
@@ -222,9 +222,6 @@
                 console.log('Can not render file: ', error);
             };
         }
-    });
-    $('#inputModel').on('shown.bs.modal', function (e) {
-        $("#Name").focus();
     });
 
 </script>

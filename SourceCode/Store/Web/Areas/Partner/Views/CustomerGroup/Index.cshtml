@@ -112,7 +112,6 @@
                 success: function (result) {
                     $('#divContainer').html(result);
                     $('#loadingModel').modal('hide');
-
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (xhr.status == 401 || xhr.status == 530) {
