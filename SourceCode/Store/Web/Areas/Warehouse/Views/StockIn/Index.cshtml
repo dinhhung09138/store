@@ -1,7 +1,6 @@
-﻿@using System.Globalization;
-@{
+﻿@{
     ViewBag.Title = "Nhập kho";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Warehouse/Views/Shared/_WarehouseLayout.cshtml";
 }
 
 <div class="row page-header">
@@ -96,12 +95,9 @@
                         width: '80px'
                     },
                     {
-                        data: 'StockInDate',
+                        data: 'StockInDateString',
                         orderable: true,
-                        searchable: true,
-                        render: function (obj, type, data, meta) {
-                            return data.stockInDate.toString('@CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern.ToUpper()');
-                        }
+                        searchable: true
                     },
                     {
                         data: 'EmployeeName',
@@ -123,7 +119,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.OriPrice + '</span>';
+                            return '<span class="priceValue">' + data.TotalMoney + '</span>';
                         }
                     },
                     {
@@ -131,15 +127,17 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.Price + '</span>';
+                            return '<span class="priceValue">' + data.Dept + '</span>';
                         }
                     },
                     {
                         orderable: false,
                         width: '40px',
                         render: function (obj, type, data, meta) {
-                            return '<a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
-                                    <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                            return '<div class="ctn-center">\
+                                        <a href="/warehouse/stockin/edit?id=' + data.ID + '" title="Cập nhật"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                        <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
+                                    </div>';
                         }
                     }
                 ]
@@ -153,6 +151,7 @@
                 url: '/warehouse/stockin/edit',
                 type: 'get',
                 dataType: 'html',
+                async: false,
                 data: {id : id },
                 success: function (result) {
                     $('#divContainer').html(result);
@@ -172,6 +171,7 @@
             $.ajax({
                 url: '/warehouse/stockin/add',
                 type: 'get',
+                async: false,
                 dataType: 'html',
                 success: function (result) {
                     $('#divContainer').html(result);
