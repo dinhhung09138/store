@@ -40,6 +40,7 @@ label{
     margin-bottom: 10px;
 }
 
+
 .basic-bg-color {
     background: rgb(0, 150, 136) !important;
 }
@@ -708,3 +709,35 @@ select.input-sm {
 .glyphicon-edit {
     font-weight:bold;
 }
+
+/*Loading model*/
+#loadingModel {
+    text-align: center;
+    padding: 0!important;
+}
+
+#loadingModel:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -4px; /* Adjusts for spacing */
+}
+
+#loadingModel .modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#loadingModel .modal.fade .modal-dialog {
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform:none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+}
+
+/*End Loading model*/
