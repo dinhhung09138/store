@@ -119,7 +119,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.TotalMoney + '</span>';
+                            return '<span style="float: right;">' + formatNumberValue(data.TotalMoney, 1) + '</span>';
                         }
                     },
                     {
@@ -127,7 +127,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue">' + data.Dept + '</span>';
+                            return '<span style="float:right;">' + formatNumberValue(data.Dept, 1) + '</span>';
                         }
                     },
                     {
@@ -135,7 +135,7 @@
                         width: '40px',
                         render: function (obj, type, data, meta) {
                             return '<div class="ctn-center">\
-                                        <a href="/warehouse/stockin/edit?id=' + data.ID + '" title="Cập nhật"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                        <a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
                                         <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
                                     </div>';
                         }

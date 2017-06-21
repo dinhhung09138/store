@@ -181,6 +181,7 @@ namespace DataAccess
                     _item.BranchID = item.branch_id;
                     _item.BranchName = item.branch_name;
                     _item.StockInDate = item.stock_in_date;
+                    _item.StockInDateString = item.stock_in_date.ToString();
                     _item.SupplierID = item.supplier_id;
                     _item.SupplierName = item.supplier_name;
                     _item.TotalMoney = item.total_money;
@@ -204,7 +205,7 @@ namespace DataAccess
                                        goods_name = p.name,
                                        m.number,
                                        m.price,
-                                       m.discount
+                                       m.discount,
                                    }).ToList();
                     foreach (var it in details)
                     {
@@ -215,7 +216,8 @@ namespace DataAccess
                             GoodsName = it.goods_name,
                             Number = it.number,
                             Price = it.price,
-                            Discount = it.discount
+                            Discount = it.discount,
+                            Total = it.price * it.number - it.discount
                         });
                     }
                 }
@@ -300,11 +302,13 @@ namespace DataAccess
                             context.stock_in.Attach(md);
                             context.Entry(md).State = System.Data.Entity.EntityState.Modified;
                             context.SaveChanges();
+                            //
+                            var listDt = context.stock_in_detail.Where(m => m.stock_in_id == md.id).ToList();
+                            context.stock_in_detail.RemoveRange(listDt);
+                            //context.Entry(listDt).State = System.Data.Entity.EntityState.Deleted;
+                            //
                             foreach (var item in model.details)
                             {
-                                var listDt = context.stock_in_detail.Where(m => m.stock_in_id == md.id).ToList();
-                                context.stock_in_detail.RemoveRange(listDt);
-                                context.Entry(listDt).State = System.Data.Entity.EntityState.Deleted;
                                 //
                                 stock_in_detail dt = new stock_in_detail();
                                 dt.id = Guid.NewGuid();

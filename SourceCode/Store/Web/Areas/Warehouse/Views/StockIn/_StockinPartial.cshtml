@@ -73,7 +73,7 @@
                                             @Html.DropDownListFor(m => m.EmployeeID, (IEnumerable<SelectListItem>)ViewBag.employee, new { @class = "form-control", @style = "font-size: 10px;", @value = Model.EmployeeID})
                                         </div>
                                         <div class="col-md-6 col-sm-6 col-xs-6 form-group">
-                                            @Html.TextBoxFor(m => m.StockInDate, new { @class = "form-control", @style = "font-size: 10px;" })
+                                            @Html.TextBoxFor(m => m.StockInDate, new { @class = "form-control datetimepicker", @style = "font-size: 10px;" })
                                             @Html.ValidationMessageFor(m => m.StockInDate)
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 form-group">
                                             @Html.HiddenFor(m => m.TotalMoney)
-                                            @Html.TextBox("TotalMoneyValue", Model.TotalMoney, new { @class = "priceValue fl-right form-control", @readonly = true, @style = "text-align: right; color: Blue; font-weight: bold;" })
+                                            @Html.TextBox("TotalMoneyValue", Model.TotalMoney, new { @class = "number form-control", @readonly = true, @style = "color: Blue; font-weight: bold;" })
                                         </div>
                                     </div>
                                     <div class="row">
@@ -154,7 +154,7 @@
                                             <span>Giảm giá</span>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                            @Html.TextBox("DiscountValue", Model.Discount, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                            @Html.TextBox("DiscountValue", Model.Discount, new { @class = "form-control number", @maxlength = 12 })
                                             @Html.HiddenFor(m => m.Discount)
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                                             <span>Tiền cần trả</span>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                            @Html.TextBox("PayableValue",Model.Payable, new { @class = "form-control priceValue", @style = "text-align: right;", @maxlength = 12 })
+                                            @Html.TextBox("PayableValue",Model.Payable, new { @class = "form-control number", @maxlength = 12 })
                                             @Html.HiddenFor(m => m.Payable)
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                             <span>Tính vào công nợ</span>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 form-group">
-                                            @Html.TextBox("DeptValue", Model.Dept, new { @class = "deptPriceValue fl-right form-control", @style = "text-align: right; color: red;", @readonly = true })
+                                            @Html.TextBox("DeptValue", Model.Dept, new { @class = "number form-control", @style = " color: red;", @readonly = true })
                                             @Html.HiddenFor(m => m.Dept)
                                         </div>
                                     </div>
@@ -191,17 +191,19 @@
         </div>
     </div>
 </div>
+<script src="~/Content/accounting.min.js"></script>
 <script type="text/javascript" language=javascript>
     $.validator.unobtrusive.parse(document);
 </script>
 <script>
+    var listProduct = [];
     $(document).ready(function () {
-        scrollBodyModel();
-
-        declareFormat();
+        scrollBodyModal('#findGoods');
+        onlyInputNumber();
+        $('.datetimepicker').datetimepicker({
+        });
         declareValueChange();
-
-        $('#inputModel').modal('show');
+        getItem('@Model.ID', '@Model.Insert');
 
         $('#inputForm').submit(function () {
             if ($(this).valid()) {
@@ -212,11 +214,11 @@
                     data: $(this).serialize(),
                     success: function (result) {
                         if (result.status == 1) {
-                            notification('@Resources.Notification.TypeSuccessTitle', result.message, '@Resources.Notification.TypeSuccess');
+                            notification(result.message, '@Resources.Notification.TypeSuccess');
                             table.ajax.reload();
                             $('#inputModel').modal('hide');
                         } else {
-                            notification('@Resources.Notification.TypeErrorTitle', result.message, '@Resources.Notification.TypeError');
+                            notification(result.message, '@Resources.Notification.TypeError');
                         }
                         $('#loadingModel').modal('hide');
                     },
@@ -239,7 +241,8 @@
                 datatype: "json",
                 type: 'post',
                 data: {
-                    name: request.term
+                    name: request.term,
+                    productID: listProduct.toString()
                 },
                 success: function (data) {
                     console.log(data);
@@ -257,30 +260,30 @@
         },
         select: function (event, ui) {
             event.preventDefault();
-           
+            listProduct.push(ui.item.id);
             var row = $('<tr/>');
             var td1 = $('<td/>').attr('style', 'vertical-align: middle;').attr('width', '20px');
             td1.append($('<span/>').attr('class', 'removeItem color-red').html('x'));
             td1.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsId').attr('name', 'goodsId').attr('class', 'idItem').attr('value', ui.item.id));
             var td2 = $('<td/>').attr('style', 'vertical-align: middle;').html(ui.item.label);
             var td3 = $('<td/>');
-            td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('class', 'priceValue form-control').attr('value', ui.item.orgPrice));
-            td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('value', ui.item.orgPrice));
+            td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('class', 'number form-control').attr('value', ui.item.orgPrice));
+            td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('value', ui.item.orgPrice));
             var td4 = $('<td/>');
-            td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('class', 'priceValue form-control').attr('value', 0));
-            td4.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('value', 0));
+            td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('class', 'number form-control').attr('value', 0));
+            td4.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('value', 0));
             var td5 = $('<td/>');
-            td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('class', 'numberValue form-control').attr('value', 0));
-            td5.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsNumberValue').attr('name', 'goodsNumberValue').attr('value', 0));
+            td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumberValue').attr('name', 'goodsNumberValue').attr('class', 'number form-control').attr('value', 0));
+            td5.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('value', 0));
             var td6 = $('<td/>');
-            td6.append($('<label/>').attr('id', 'goodsTotalValue').attr('name', 'goodsTotalValue').attr('class', 'priceValue').attr('style', 'float:right; margin-top:5px;').html(0));
+            td6.append($('<label/>').attr('id', 'goodsTotalValue').attr('name', 'goodsTotalValue').attr('class', 'number').attr('style', 'float:right; margin-top:5px;').html(0));
             td6.append($('<input/>').attr('id', 'goodsTotal').attr('name', 'goodsTotal').attr('type', 'hidden').val(0));
             row.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
             $('#tableStockin tbody').append(row);
 
             $('#findGoods').val('');
-            declareFormat();
             declareValueChange();
+            onlyInputNumber();
         },
         focus: function (event, ui) {
             event.preventDefault();
@@ -288,94 +291,79 @@
         }
     });
 
-    $('#inputModel').on('shown.bs.modal', function (e) {
-        $("#findGoods").focus();
-    });
-
     $(document).on('click', '.removeItem', function (e) {
         var price = parseFloat($(this).parent().parent().find('#goodsTotal').val());
         totalPayment(price, 0);
+        var id = $(this).parent().find('#goodsId').val();
+        listProduct = $.grep(listProduct, function (value) {
+            return value !== id;
+        });
         $(this).parent().parent().remove();
     });
-
-    function declareFormat() {
-        $('.priceValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 0
-        });
-        $('.deptPriceValue').priceFormat({
-            prefix: '-',
-            limit: 11,
-            centsLimit: 0
-        });
-        $('.numberValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 1
-        });
-    }
-
+    
     function declareValueChange() {
-        $(document).on('change', '#goodsOrgPrice', function (e) {
-            var price = parseFloat($(this).val().replace(',', ''));
-            $(this).parent().find('#goodsOrgPriceValue').val(price);
-            var discount = parseFloat($(this).parent().parent().find('#goodsDiscountValue').val());
-            var number = parseFloat($(this).parent().parent().find('#goodsNumberValue').val());
+        $(document).on('change', '#goodsOrgPriceValue', function (e) {
+            var price = $(this).val().replace(',', '');
+            $(this).val(formatNumberValue(price, 1));
+            $(this).parent().find('#goodsOrgPrice').val(price);
+            var discount = parseFloat($(this).parent().parent().find('#goodsDiscount').val());
+            var number = parseFloat($(this).parent().parent().find('#goodsNumber').val());
             var total = (price * number) - discount;
             var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
             $(this).parent().parent().find('#goodsTotal').val(total);
-            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(formatNumberValue(total, 1));
             totalPayment(oldValue, total);
         });
-        $(document).on('change', '#goodsDiscount', function (e) {
-            var discount = parseFloat($(this).val().replace(',', ''));
-            $(this).parent().find('#goodsDiscountValue').val(discount);
-            var price = parseFloat($(this).parent().parent().find('#goodsOrgPriceValue').val());
-            var number = parseFloat($(this).parent().parent().find('#goodsNumberValue').val());
+        $(document).on('change', '#goodsDiscountValue', function (e) {
+            var discount = $(this).val().replace(',', '');
+            $(this).val(formatNumberValue(discount, 1));
+            $(this).parent().find('#goodsDiscount').val(discount);
+            var price = parseFloat($(this).parent().parent().find('#goodsOrgPrice').val());
+            var number = parseFloat($(this).parent().parent().find('#goodsNumber').val());
             var total = (price * number) - discount;
             var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
             $(this).parent().parent().find('#goodsTotal').val(total);
-            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(formatNumberValue(total, 1));
             totalPayment(oldValue, total);
         });
-        $(document).on('change', '#goodsNumber', function (e) {
-            var number = parseFloat($(this).val().replace(',', ''));
-            $(this).parent().find('#goodsNumberValue').val(number);
-            var price = parseFloat($(this).parent().parent().find('#goodsOrgPriceValue').val());
-            var discount = parseFloat($(this).parent().parent().find('#goodsDiscountValue').val());
+        $(document).on('change', '#goodsNumberValue', function (e) {
+            var number = $(this).val().replace(',', '');
+            $(this).val(formatNumberValue(number, 1));
+            $(this).parent().find('#goodsNumber').val(number);
+            var price = parseFloat($(this).parent().parent().find('#goodsOrgPrice').val());
+            var discount = parseFloat($(this).parent().parent().find('#goodsDiscount').val());
             var total = (price * number) - discount;
             var oldValue = parseFloat($(this).parent().parent().find('#goodsTotal').val());
             $(this).parent().parent().find('#goodsTotal').val(total);
-            $(this).parent().parent().find('#goodsTotalValue').html(total);
+            $(this).parent().parent().find('#goodsTotalValue').html(formatNumberValue(total, 1));
             totalPayment(oldValue, total);
         });
     }
 
     $(document).on('change', '#PayableValue', function (e) {
         var payable = parseFloat($(this).val().replace(',', ''));
-
-        var totalMoney = parseFloat($('#TotalMoney').val());
-        var discount = parseFloat($('#Discount').val());
+        var tmp = formatNumberValue($(this).val(), 1);
+        $(this).val(tmp);
+        var totalMoney = parseFloat($('#TotalMoney').val().replace(',', ''));
+        var discount = parseFloat($('#Discount').val().replace(',', ''));
         var dept = totalMoney - discount - payable;
         //
         $('#Payable').val(payable);
         $('#Dept').val(dept);
-        $('#DeptValue').val(dept);
-        declareFormat();
+        $('#DeptValue').val(formatNumberValue(dept, 1));
     });
 
     $(document).on('change', '#DiscountValue', function (e) {
         var discount = parseFloat($(this).val().replace(',', ''));
-
-        var totalMoney = parseFloat($('#TotalMoney').val());
-        var payable = parseFloat($('#Payable').val());
+        var tmp = formatNumberValue($(this).val(), 1);
+        $(this).val(tmp);
+        var totalMoney = parseFloat($('#TotalMoney').val().replace(',', ''));
+        var payable = parseFloat($('#Payable').val().replace(',', ''));
         var dept = totalMoney - discount - payable;
         //
         $('#Discount').val(discount);
         $('#Dept').val(dept);
-        $('#DeptValue').val(dept);
-        declareFormat();
+        $('#DeptValue').val(formatNumberValue(dept, 1));
     });
 
     function totalPayment(oldValue, newValue) {
@@ -383,17 +371,70 @@
         var discount = parseFloat($('#Discount').val());
         var payable = parseFloat($('#Payable').val());
         var dept = parseFloat($('#Dept').val());
-        debugger;
         if (oldValue > newValue) {
             totalMoney = totalMoney - (oldValue - newValue);
         } else {
             totalMoney = totalMoney + (newValue - oldValue);
         }
         $('#TotalMoney').val(totalMoney);
-        $('#TotalMoneyValue').empty();
-        $('#TotalMoneyValue').val(totalMoney);
+        $('#TotalMoneyValue').val(formatNumberValue(totalMoney, 1));
         $('#Dept').val(totalMoney - discount - payable);
-        $('#DeptValue').val(totalMoney - discount - payable);
-        declareFormat();
+        $('#DeptValue').val(formatNumberValue(totalMoney - discount - payable, 1));
+    }
+
+    function getItem(id, insert) {
+        console.log(insert);
+        if (insert === 'False') {
+            $('#loadingModel').modal('show');
+            $.ajax({
+                url: '/Warehouse/StockIn/GetItem',
+                type: 'get',
+                dataType: 'json',
+                contentType: 'application/json',
+                data: { id: id },
+                success: function (result) {
+                    $('#Code').val(result.Code);
+                    $('#EmployeeID').val(result.EmployeeID);
+                    $('#BranchID').val(result.BranchID);
+                    $('#SupplierID').val(result.SupplierID);
+                    $('#StockInDate').val(result.StockInDateString);
+                    $('#TotalMoneyValue').val(formatNumberValue(result.TotalMoney, 1));
+                    $('#TotalMoney').val(result.TotalMoney);
+                    $('#DiscountValue').val(formatNumberValue(result.Discount, 1));
+                    $('#Discount').val(result.Discount);
+                    $('#PayableValue').val(formatNumberValue(result.Payable, 1));
+                    $('#Payable').val(result.Payable);
+                    $('#DeptValue').val(formatNumberValue(result.Dept, 1));
+                    $('#Dept').val(result.Dept);
+                    $('#Reason').val(result.Reason);
+                    $('#Notes').val(result.Notes);
+                    $.each(result.details, function (idx, item) {
+                        listProduct.push(item.GoodsID);
+                        var row = $('<tr/>');
+                        var td1 = $('<td/>').attr('style', 'vertical-align: middle;').attr('width', '20px');
+                        td1.append($('<span/>').attr('class', 'removeItem color-red').html('x'));
+                        td1.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsId').attr('name', 'goodsId').attr('class', 'idItem').attr('value', item.GoodsID));
+                        var td2 = $('<td/>').attr('style', 'vertical-align: middle;').html(item.GoodsName);
+                        var td3 = $('<td/>');
+                        td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('class', 'number form-control').attr('value', formatNumberValue(item.Price, 1)));
+                        td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('value', item.Price));
+                        var td4 = $('<td/>');
+                        td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('class', 'number form-control').attr('value', formatNumberValue(item.Discount, 1)));
+                        td4.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsDiscount').attr('name', 'goodsDiscount').attr('value', item.Discount));
+                        var td5 = $('<td/>');
+                        td5.append($('<input/>').attr('type', 'text').attr('id', 'goodsNumberValue').attr('name', 'goodsNumberValue').attr('class', 'number form-control').attr('value', formatNumberValue(item.Number, 1)));
+                        td5.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsNumber').attr('name', 'goodsNumber').attr('value', item.Number));
+                        var td6 = $('<td/>');
+                        td6.append($('<label/>').attr('id', 'goodsTotalValue').attr('name', 'goodsTotalValue').attr('class', 'number').attr('style', 'float:right; margin-top:5px;').html(formatNumberValue(item.Total, 1)));
+                        td6.append($('<input/>').attr('id', 'goodsTotal').attr('name', 'goodsTotal').attr('type', 'hidden').val(item.Total));
+                        row.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
+                        $('#tableStockin tbody').append(row);
+                        declareValueChange();
+                        onlyInputNumber();
+                    });
+                    $('#loadingModel').modal('hide');
+                }
+            });
+        }
     }
 </script>

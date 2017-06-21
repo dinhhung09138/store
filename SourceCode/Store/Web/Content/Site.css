@@ -741,3 +741,7 @@ select.input-sm {
 }
 
 /*End Loading model*/
+
+.number {
+    text-align: right !important;
+}

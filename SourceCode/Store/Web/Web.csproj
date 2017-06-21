@@ -275,6 +275,7 @@
     <Content Include="app\config.js" />
     <Content Include="app\controllers.js" />
     <Content Include="app\services.js" />
+    <Content Include="Content\accounting.min.js" />
     <Content Include="Content\angularjs\angular-animate.min.js" />
     <Content Include="Content\angularjs\angular-cookies.min.js" />
     <Content Include="Content\angularjs\angular-loader.min.js" />
@@ -349,8 +350,6 @@
     <Content Include="Content\gritter\jquery.gritter.min.js" />
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.min.js" />
-    <Content Include="Content\jquery.priceformat.js" />
-    <Content Include="Content\jquery.priceformat.min.js" />
     <Content Include="Content\lobibox\lobibox.css" />
     <Content Include="Content\lobibox\lobibox.js" />
     <Content Include="Content\lobibox\lobibox.min.css" />

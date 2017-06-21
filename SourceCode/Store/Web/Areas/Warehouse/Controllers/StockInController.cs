@@ -135,10 +135,19 @@ namespace Web.Areas.Warehouse.Controllers
             ViewBag.employee = empl;
 
             StockInSrv _srvStockin = new StockInSrv();
-            StockInModel model = _srvStockin.Item(new Guid(id));
+            StockInModel model = new StockInModel();
             model.Insert = false;
+            model.ID = new Guid(id);
 
-            return View(model);
+            return PartialView(model);
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
+        public JsonResult GetItem(string id)
+        {
+            StockInSrv _srvStockin = new StockInSrv();
+            return this.Json(_srvStockin.Item(new Guid(id)), JsonRequestBehavior.AllowGet);
         }
 
         [AjaxAuthorize]
@@ -158,9 +167,9 @@ namespace Web.Areas.Warehouse.Controllers
             if(fc["goodsId"] != null && fc["goodsId"].ToString().Length > 0)
             {
                 string[] goodsIDs = fc["goodsId"].ToString().Split(',');
-                string[] orgPrices = fc["goodsOrgPriceValue"].ToString().Split(',');
-                string[] discounts = fc["goodsDiscountValue"].ToString().Split(',');
-                string[] numbers = fc["goodsNumberValue"].ToString().Split(',');
+                string[] orgPrices = fc["goodsOrgPrice"].ToString().Split(',');
+                string[] discounts = fc["goodsDiscount"].ToString().Split(',');
+                string[] numbers = fc["goodsNumber"].ToString().Split(',');
                 string[] totals = fc["goodsTotal"].ToString().Split(',');
                 for (int i = 0; i < goodsIDs.Count(); i++)
                 {
@@ -179,16 +188,35 @@ namespace Web.Areas.Warehouse.Controllers
         }
 
         /// <summary>
-        /// Find location by name
+        /// Find Goods by name and except selected goods's id
         /// </summary>
         /// <param name="name"></param>
+        /// <param name="productID">List of selected id</param>
         /// <returns></returns>
         [AjaxAuthorize]
         [HttpPost]
-        public JsonResult FindGoods(string name)
+        public JsonResult FindGoods(string name, string productID)
         {
             GoodsSrv _srvGoods = new GoodsSrv();
-            return this.Json(_srvGoods.FindGood(name.ToLower()), JsonRequestBehavior.AllowGet);
+            string[] _l = productID.Split(',');
+            List<GoodsModel> _model = _srvGoods.FindGood(name.ToLower());
+            if(_l.Count() > 0)
+            {
+                for (int i = 0; i < _l.Count(); i++)
+                {
+                    if(_l[i].Length == 0)
+                    {
+                        continue;
+                    }
+                    var it = _model.Find(m => m.ID == new Guid(_l[i]));
+                    if(it != null)
+                    {
+                        _model.Remove(it);
+                        continue;
+                    }
+                }
+            }
+            return this.Json(_model, JsonRequestBehavior.AllowGet);
         }
 
         private bool SaveAvatar(byte[] file, string fileName)
