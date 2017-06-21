@@ -12,17 +12,14 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class dish_type
+    public partial class ga_account
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public dish_type()
-        {
-            this.dishes = new HashSet<dish>();
-        }
-    
-        public System.Guid id { get; set; }
-        public string name { get; set; }
-        public string notes { get; set; }
+        public string view_id { get; set; }
+        public string view_name { get; set; }
+        public string property_id { get; set; }
+        public string property_name { get; set; }
+        public string acc_id { get; set; }
+        public string acc_name { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }
@@ -30,8 +27,5 @@ namespace DataAccess
         public bool deleted { get; set; }
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<dish> dishes { get; set; }
     }
 }

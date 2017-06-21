@@ -180,6 +180,7 @@ namespace DataAccess
                                     GroupName = g1.name,
                                     m.price,
                                     m.org_price,
+                                    m.sales_directive,
                                     m.weight,
                                     m.description,
                                     m.number_in_stock,
@@ -200,6 +201,7 @@ namespace DataAccess
                     _item.OrgPrice = item.org_price ?? 0;
                     _item.Weight = item.weight;
                     _item.Description = item.description;
+                    _item.AllowSaleDirect = item.sales_directive;
                     _item.NumInStock = item.number_in_stock ?? 0;
                     _item.MinInStock = item.min_in_stock ?? 0;
                     _item.MaxInStock = item.max_in_stock ?? 0;
@@ -239,6 +241,7 @@ namespace DataAccess
                         md.price = model.Price;
                         md.org_price = model.OrgPrice;
                         md.number_in_stock = model.NumInStock;
+                        md.sales_directive = model.AllowSaleDirect;
                         md.avatar = model.Avatar;
                         md.weight = model.Weight;
                         md.description = model.Description;
@@ -263,6 +266,7 @@ namespace DataAccess
                         md.number_in_stock = model.NumInStock;
                         md.avatar = model.Avatar;
                         md.weight = model.Weight;
+                        md.sales_directive = model.AllowSaleDirect;
                         md.description = model.Description;
                         md.min_in_stock = model.MinInStock;
                         md.max_in_stock = model.MaxInStock;

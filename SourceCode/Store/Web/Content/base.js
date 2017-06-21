@@ -1,6 +1,6 @@
 ﻿function notification(mesage, type) {
 
-    if (type.toLowerCase() == "error") {
+    if (type.toLowerCase() === "error") {
         Lobibox.notify('error', {
             sound: true,
             delay: false,
@@ -11,7 +11,7 @@
         });
         return;
     }
-    if (type.toLowerCase() == "warning") {
+    if (type.toLowerCase() === "warning") {
         Lobibox.notify('warning', {
             sound: true,
             delay: false,
@@ -22,7 +22,7 @@
         });
         return;
     }
-    if (type.toLowerCase() == "success") {
+    if (type.toLowerCase() === "success") {
         Lobibox.notify('success', {
             sound: true,
             delay: 3000,
@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
     adjustMenu();
     selectPicker();
-    fullScreenModel();
+    fullScreenModal();
 })
 
 $(window).bind('resize orientationchange', function () {
@@ -95,7 +95,7 @@ var adjustMenu = function () {
 
 /*Set full screen model*/
 
-function fullScreenModel() {
+function fullScreenModal() {
     $(".dropdown-menu .panel-body").slimscroll({
         height: "150px",
         alwaysVisible: false,
@@ -139,7 +139,7 @@ window.onload = stopLoading;
 
 /*End Loading model*/
 
-function scrollBodyModel() {
+function scrollBodyModal(focusID) {
     var h = window.innerHeight - 120;
     $(".modal-body .container-fluid").slimscroll({
         height: h + "px",
@@ -147,8 +147,17 @@ function scrollBodyModel() {
         size: "3px"
     }).css("width", "100%");
     $('#inputModel').modal('show');
+    if (focusID.length > 0) {
+        $(focusID).focus();
+    }
 }
 
 window.onresize = function (event) {
-    scrollBodyModel();
+    scrollBodyModal();
 };
+
+function clearInputModal() {
+    $('#inputModel').modal('hide');
+    $('.modal-backdrop').remove();
+    $('#divContainer').empty();
+}

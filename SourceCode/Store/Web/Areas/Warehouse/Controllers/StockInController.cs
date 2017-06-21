@@ -80,27 +80,6 @@ namespace Web.Areas.Warehouse.Controllers
             }
             ViewBag.employee = empl;
 
-            //GoodsGroupSrv _srvGroup = new GoodsGroupSrv();
-            //var _lGroup = _srvGroup.GetListForDisplay();
-            //List<SelectListItem> group = new List<SelectListItem>();
-            //group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm hàng hóa" });
-            //foreach (var item in _lGroup)
-            //{
-            //    group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
-            //}
-            //ViewBag.group = group;
-            //GoodsModel model = new GoodsModel()
-            //{
-            //    Code = GoodsSrv.GetCode(),
-            //    Insert = true,
-            //    Avatar = "",
-            //    ImageFileName = "",
-            //    NumInStock = 0,
-            //    MaxInStock = 0,
-            //    MinInStock = 0,
-            //    Weight = 0
-            //};
-            //
             StockInModel model = new StockInModel();
             model.Insert = true;
             model.Code = StockInSrv.GetCode();
@@ -109,8 +88,6 @@ namespace Web.Areas.Warehouse.Controllers
             model.IsFinish = false;
             model.CreateBy = user.ID;
 
-            StockInSrv _srvStockin = new StockInSrv();
-           //_srvStockin.Save(model);
 
             return PartialView(model);
         }
@@ -119,30 +96,49 @@ namespace Web.Areas.Warehouse.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            UnitSrv _srvUnit = new UnitSrv();
-            var _lUnit = _srvUnit.GetListForDisplay();
-            List<SelectListItem> groupUnit = new List<SelectListItem>();
-            groupUnit.Add(new SelectListItem() { Value = "", Text = "Chọn đơn vị tính" });
-            foreach (var item in _lUnit)
-            {
-                groupUnit.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
-            }
-            ViewBag.unit = groupUnit;
+            Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
 
-            GoodsGroupSrv _srvGroup = new GoodsGroupSrv();
-            var _lGroup = _srvGroup.GetListForDisplay();
-            List<SelectListItem> group = new List<SelectListItem>();
-            group.Add(new SelectListItem() { Value = "", Text = "Chọn nhóm hàng hóa" });
-            foreach (var item in _lGroup)
+            BranchSrv _srvBranch = new BranchSrv();
+            var _lBranch = _srvBranch.GetListForDisplay();
+            List<SelectListItem> branch = new List<SelectListItem>();
+            branch.Add(new SelectListItem() { Value = "", Text = "Chọn chi nhánh" });
+            foreach (var item in _lBranch)
             {
-                group.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
+                branch.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
             }
-            ViewBag.group = group;
+            ViewBag.branch = branch;
+            //
+            SupplierSrv _srvSupplier = new SupplierSrv();
+            var _lSupplier = _srvSupplier.GetListForDisplay();
+            List<SelectListItem> supplier = new List<SelectListItem>();
+            supplier.Add(new SelectListItem() { Value = "", Text = "Chọn nhà cung cấp" });
+            foreach (var item in _lSupplier)
+            {
+                supplier.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
+            }
+            ViewBag.supplier = supplier;
+            //
+            EmployeeSrv _srvEmpl = new EmployeeSrv();
+            var _lEmpl = _srvEmpl.GetListForDisplay();
+            List<SelectListItem> empl = new List<SelectListItem>();
+            foreach (var item in _lEmpl)
+            {
+                if (item.ID == user.ID)
+                {
+                    empl.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name, Selected = true });
+                }
+                else
+                {
+                    empl.Add(new SelectListItem() { Value = item.ID.ToString(), Text = item.Name });
+                }
+            }
+            ViewBag.employee = empl;
 
-            GoodsSrv _serGoods = new GoodsSrv();
-            GoodsModel model = _serGoods.Item(new Guid(id));
+            StockInSrv _srvStockin = new StockInSrv();
+            StockInModel model = _srvStockin.Item(new Guid(id));
             model.Insert = false;
-            return PartialView(model);
+
+            return View(model);
         }
 
         [AjaxAuthorize]
@@ -170,7 +166,7 @@ namespace Web.Areas.Warehouse.Controllers
                 {
                     model.details.Add(new StockInDetailModel()
                     {
-                        ID = new Guid(goodsIDs[i]),
+                        GoodsID = new Guid(goodsIDs[i]),
                         Price = decimal.Parse(orgPrices[i]),
                         Number = decimal.Parse(numbers[i]),
                         Discount = decimal.Parse(discounts[i]),

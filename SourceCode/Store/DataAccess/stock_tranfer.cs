@@ -38,8 +38,8 @@ namespace DataAccess
     
         public virtual branch branch { get; set; }
         public virtual branch branch1 { get; set; }
+        public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_tranfer_detail> stock_tranfer_detail { get; set; }
-        public virtual user user { get; set; }
     }
 }

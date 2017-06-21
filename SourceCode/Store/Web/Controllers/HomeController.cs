@@ -141,21 +141,17 @@ namespace Web.Controllers
         #endregion
 
         #region " [Log out] "
-        [AllowAnonymous]
 
-        public ActionResult Logout(UserLoginModel u)
+        [AllowAnonymous]
+        public ActionResult Logout()
         {
-            Session.Clear();
-            Session.Abandon();
             Session.Remove("user");
-            Session.Remove("pass");
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
-            Response.Cache.SetNoStore();
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Login", true);
+            Session.Abandon();
+            return RedirectToAction("login", "home");
         }
+
         #endregion
+
         #region " [ For got password ] "
 
         /// <summary>

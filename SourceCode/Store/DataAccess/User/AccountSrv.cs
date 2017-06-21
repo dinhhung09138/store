@@ -20,7 +20,7 @@ namespace DataAccess.User
                 }
                 UserLoginModel item = new UserLoginModel();
                 item.ID = it.id;
-                item.UserName = item.UserName;
+                item.UserName = it.user_name;
                 item.Token = "";
                 item.DeviceID = "";
                 return item;

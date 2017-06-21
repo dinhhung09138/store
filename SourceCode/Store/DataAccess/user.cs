@@ -19,13 +19,10 @@ namespace DataAccess
         {
             this.leaves = new HashSet<leave>();
             this.leaves1 = new HashSet<leave>();
+            this.reset_password_history = new HashSet<reset_password_history>();
+            this.tokens = new HashSet<token>();
             this.orders = new HashSet<order>();
             this.orders1 = new HashSet<order>();
-            this.reset_password_history = new HashSet<reset_password_history>();
-            this.stock_out = new HashSet<stock_out>();
-            this.stock_tranfer = new HashSet<stock_tranfer>();
-            this.tokens = new HashSet<token>();
-            this.stock_in = new HashSet<stock_in>();
         }
     
         public System.Guid id { get; set; }
@@ -47,19 +44,13 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<leave> leaves1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<order> orders1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<reset_password_history> reset_password_history { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_out> stock_out { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_tranfer> stock_tranfer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<token> tokens { get; set; }
         public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<stock_in> stock_in { get; set; }
+        public virtual ICollection<order> orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> orders1 { get; set; }
     }
 }

@@ -40,8 +40,8 @@ namespace DataAccess
         public Nullable<System.DateTime> delete_date { get; set; }
     
         public virtual branch branch { get; set; }
+        public virtual employee employee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_out_detail> stock_out_detail { get; set; }
-        public virtual user user { get; set; }
     }
 }

@@ -33,9 +33,6 @@ namespace DataAccess
         public virtual DbSet<deliver_group> deliver_group { get; set; }
         public virtual DbSet<delivery_status> delivery_status { get; set; }
         public virtual DbSet<department> departments { get; set; }
-        public virtual DbSet<dish> dishes { get; set; }
-        public virtual DbSet<dish_group> dish_group { get; set; }
-        public virtual DbSet<dish_type> dish_type { get; set; }
         public virtual DbSet<employee_contract_history> employee_contract_history { get; set; }
         public virtual DbSet<function> functions { get; set; }
         public virtual DbSet<goods_group> goods_group { get; set; }
@@ -44,15 +41,12 @@ namespace DataAccess
         public virtual DbSet<leave> leaves { get; set; }
         public virtual DbSet<leave_type> leave_type { get; set; }
         public virtual DbSet<location> locations { get; set; }
-        public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<order_detail> order_detail { get; set; }
         public virtual DbSet<position> positions { get; set; }
         public virtual DbSet<reset_password_history> reset_password_history { get; set; }
         public virtual DbSet<role> roles { get; set; }
         public virtual DbSet<role_detail> role_detail { get; set; }
-        public virtual DbSet<stock_out> stock_out { get; set; }
         public virtual DbSet<stock_out_detail> stock_out_detail { get; set; }
-        public virtual DbSet<stock_tranfer> stock_tranfer { get; set; }
         public virtual DbSet<stock_tranfer_detail> stock_tranfer_detail { get; set; }
         public virtual DbSet<supplier> suppliers { get; set; }
         public virtual DbSet<supplier_group> supplier_group { get; set; }
@@ -63,7 +57,15 @@ namespace DataAccess
         public virtual DbSet<customer_group> customer_group { get; set; }
         public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<good> goods { get; set; }
-        public virtual DbSet<stock_in> stock_in { get; set; }
         public virtual DbSet<stock_in_detail> stock_in_detail { get; set; }
+        public virtual DbSet<ga_account> ga_account { get; set; }
+        public virtual DbSet<ga_user_city> ga_user_city { get; set; }
+        public virtual DbSet<ga_user_type> ga_user_type { get; set; }
+        public virtual DbSet<order_status> order_status { get; set; }
+        public virtual DbSet<order_type> order_type { get; set; }
+        public virtual DbSet<order> orders { get; set; }
+        public virtual DbSet<stock_in> stock_in { get; set; }
+        public virtual DbSet<stock_out> stock_out { get; set; }
+        public virtual DbSet<stock_tranfer> stock_tranfer { get; set; }
     }
 }

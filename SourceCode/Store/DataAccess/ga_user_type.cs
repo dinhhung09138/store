@@ -12,15 +12,20 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class stock_out_detail
+    public partial class ga_user_type
     {
         public System.Guid id { get; set; }
-        public System.Guid stock_out_id { get; set; }
-        public System.Guid goods_id { get; set; }
-        public decimal number { get; set; }
-        public decimal price { get; set; }
-    
-        public virtual good good { get; set; }
-        public virtual stock_out stock_out { get; set; }
+        public string ga_id { get; set; }
+        public byte day { get; set; }
+        public byte month { get; set; }
+        public short year { get; set; }
+        public int new_user { get; set; }
+        public int return_user { get; set; }
+        public int user { get; set; }
+        public int sessions { get; set; }
+        public double bounces { get; set; }
+        public double bounce_rate { get; set; }
+        public double entrances { get; set; }
+        public double pageviews { get; set; }
     }
 }

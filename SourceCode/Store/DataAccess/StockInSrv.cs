@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -71,6 +70,7 @@ namespace DataAccess
                             EmployeeName = item.employee_name,
                             BranchName = item.branch_name,
                             StockInDate = item.stock_in_date,
+                            StockInDateString = item.stock_in_date.ToShortDateString(),
                             TotalMoney = item.total_money,
                             Dept = item.dept,
                             SupplierName = item.supplier_name
@@ -91,8 +91,8 @@ namespace DataAccess
                             case "BranchName":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.BranchName) : _sortList.Sort(col.Dir, m => m.BranchName);
                                 break;
-                            case "StockInDate":
-                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.StockInDate) : _sortList.Sort(col.Dir, m => m.StockInDate);
+                            case "StockInDateString":
+                                _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.StockInDateString) : _sortList.Sort(col.Dir, m => m.StockInDateString);
                                 break;
                             case "TotalMoney":
                                 _sortList = _sortList == null ? _list.Sort(col.Dir, m => m.TotalMoney) : _sortList.Sort(col.Dir, m => m.TotalMoney);
@@ -154,6 +154,7 @@ namespace DataAccess
                 {
                     var item = (from m in context.stock_in
                                 join b in context.branches on m.branch_id equals b.id
+                                join s in context.suppliers on m.supplier_id equals s.id
                                 join e in context.employees on m.empl_id equals e.id
                                 where m.id == id
                                 select new
@@ -164,12 +165,15 @@ namespace DataAccess
                                     branch_name = b.name,
                                     m.stock_in_date,
                                     m.total_money,
+                                    m.supplier_id,
+                                    supplier_name = s.name,
                                     m.discount,
                                     m.payable,
                                     m.dept,
                                     m.empl_id,
                                     empl_name = e.name,
                                     m.reason,
+                                    m.is_finish,
                                     m.notes
                                 }).First();
                     _item.ID = item.id;
@@ -177,6 +181,8 @@ namespace DataAccess
                     _item.BranchID = item.branch_id;
                     _item.BranchName = item.branch_name;
                     _item.StockInDate = item.stock_in_date;
+                    _item.SupplierID = item.supplier_id;
+                    _item.SupplierName = item.supplier_name;
                     _item.TotalMoney = item.total_money;
                     _item.Discount = item.discount;
                     _item.Payable = item.payable;
@@ -185,6 +191,8 @@ namespace DataAccess
                     _item.EmployeeName = item.empl_name;
                     _item.Reason = item.reason;
                     _item.Notes = item.notes;
+                    _item.IsFinish = item.is_finish;
+                    _item.Insert = false;
 
                     var details = (from m in context.stock_in_detail
                                    join p in context.goods on m.goods_id equals p.id
@@ -195,7 +203,8 @@ namespace DataAccess
                                        m.goods_id,
                                        goods_name = p.name,
                                        m.number,
-                                       m.price
+                                       m.price,
+                                       m.discount
                                    }).ToList();
                     foreach (var it in details)
                     {
@@ -205,7 +214,8 @@ namespace DataAccess
                             GoodsID = it.goods_id,
                             GoodsName = it.goods_name,
                             Number = it.number,
-                            Price = it.price
+                            Price = it.price,
+                            Discount = it.discount
                         });
                     }
                 }
@@ -247,7 +257,6 @@ namespace DataAccess
                             md.discount = model.Discount;
                             md.payable = model.Payable;
                             md.dept = model.Dept;
-                            md.empl_id = model.EmployeeID;
                             md.reason = model.Reason;
                             md.notes = model.Notes;
                             md.is_finish = model.IsFinish;
@@ -256,6 +265,7 @@ namespace DataAccess
                             md.deleted = false;
                             context.stock_in.Add(md);
                             context.Entry(md).State = System.Data.Entity.EntityState.Added;
+                            context.SaveChanges();
                             foreach (var item in model.details)
                             {
                                 stock_in_detail dt = new stock_in_detail();
@@ -264,6 +274,7 @@ namespace DataAccess
                                 dt.goods_id = item.GoodsID;
                                 dt.number = item.Number;
                                 dt.price = item.Price;
+                                dt.discount = item.Discount;
                                 context.stock_in_detail.Add(dt);
                                 context.Entry(dt).State = System.Data.Entity.EntityState.Added;
                             }
@@ -288,6 +299,7 @@ namespace DataAccess
                             md.update_date = DateTime.Now;
                             context.stock_in.Attach(md);
                             context.Entry(md).State = System.Data.Entity.EntityState.Modified;
+                            context.SaveChanges();
                             foreach (var item in model.details)
                             {
                                 var listDt = context.stock_in_detail.Where(m => m.stock_in_id == md.id).ToList();
@@ -300,6 +312,7 @@ namespace DataAccess
                                 dt.goods_id = item.GoodsID;
                                 dt.number = item.Number;
                                 dt.price = item.Price;
+                                dt.discount = item.Discount;
                                 context.stock_in_detail.Add(dt);
                                 context.Entry(dt).State = System.Data.Entity.EntityState.Added;
                             }

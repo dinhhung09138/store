@@ -126,7 +126,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue" style="float: right;">' + String(data.OriPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
+                            return '<span class="priceValue" style="float: right;">' + String(data.OrgPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
                         }
                     },
                     {
@@ -149,8 +149,10 @@
                         orderable: false,
                         width: '40px',
                         render: function (obj, type, data, meta) {
-                            return '<a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
-                                    <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>';
+                            return '<div class="ctn-center">\
+                                        <a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                        <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
+                                    </div>';
                         }
                     }
                 ]

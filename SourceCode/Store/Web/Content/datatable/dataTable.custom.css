@@ -101,7 +101,7 @@ a.dt-button:hover:not(.disabled) {
 /*Table*/
 
 .table thead > tr > th {
-    background: rgb(0, 150, 136);
+    background: rgb(21, 161, 177);
     color:white;
     font-weight:bold;
 }

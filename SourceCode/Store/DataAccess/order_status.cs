@@ -12,15 +12,10 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class stock_out_detail
+    public partial class order_status
     {
-        public System.Guid id { get; set; }
-        public System.Guid stock_out_id { get; set; }
-        public System.Guid goods_id { get; set; }
-        public decimal number { get; set; }
-        public decimal price { get; set; }
-    
-        public virtual good good { get; set; }
-        public virtual stock_out stock_out { get; set; }
+        public string code { get; set; }
+        public string name { get; set; }
+        public byte ordering { get; set; }
     }
 }
