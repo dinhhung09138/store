@@ -44,6 +44,7 @@ namespace DataAccess
         public bool deleted { get; set; }
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
+        public bool sales_directive { get; set; }
     
         public virtual goods_group goods_group { get; set; }
         public virtual unit unit { get; set; }

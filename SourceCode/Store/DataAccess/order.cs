@@ -32,7 +32,7 @@ namespace DataAccess
         public Nullable<System.DateTime> deliver_receive_time { get; set; }
         public Nullable<System.DateTime> deliver_finish_time { get; set; }
         public Nullable<byte> delivery_status { get; set; }
-        public byte order_status { get; set; }
+        public string order_status { get; set; }
         public string order_resason { get; set; }
         public System.Guid branch_id { get; set; }
         public System.Guid create_by { get; set; }
@@ -42,6 +42,8 @@ namespace DataAccess
         public bool deleted { get; set; }
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
+        public decimal dept { get; set; }
+        public decimal payable { get; set; }
     
         public virtual branch branch { get; set; }
         public virtual delivery_status delivery_status1 { get; set; }

@@ -51,6 +51,8 @@ namespace Model
         [Required(ErrorMessage = "Ngày nhập kho không được rỗng")]
         public DateTime StockInDate { get; set; }
 
+        public string StockInDateString { get; set; }
+
         /// <summary>
         /// Total money
         /// </summary>

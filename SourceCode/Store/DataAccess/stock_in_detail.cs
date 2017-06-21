@@ -19,6 +19,7 @@ namespace DataAccess
         public System.Guid goods_id { get; set; }
         public decimal number { get; set; }
         public decimal price { get; set; }
+        public decimal discount { get; set; }
     
         public virtual good good { get; set; }
         public virtual stock_in stock_in { get; set; }

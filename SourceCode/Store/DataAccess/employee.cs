@@ -20,6 +20,9 @@ namespace DataAccess
             this.branch_employee = new HashSet<branch_employee>();
             this.employee_contract_history = new HashSet<employee_contract_history>();
             this.users = new HashSet<user>();
+            this.stock_in = new HashSet<stock_in>();
+            this.stock_out = new HashSet<stock_out>();
+            this.stock_tranfer = new HashSet<stock_tranfer>();
         }
     
         public System.Guid id { get; set; }
@@ -50,5 +53,11 @@ namespace DataAccess
         public virtual ICollection<employee_contract_history> employee_contract_history { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock_in> stock_in { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock_out> stock_out { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<stock_tranfer> stock_tranfer { get; set; }
     }
 }

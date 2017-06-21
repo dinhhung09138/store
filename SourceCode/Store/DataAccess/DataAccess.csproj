@@ -89,15 +89,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DepartmentSrv.cs" />
-    <Compile Include="dish.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dish_group.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="dish_type.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="employee.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -109,6 +100,15 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="FunctionSrv.cs" />
+    <Compile Include="ga_account.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_user_city.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_user_type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="good.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -152,6 +152,12 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="order_detail.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_status.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="order_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="position.cs">
