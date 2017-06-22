@@ -43,17 +43,6 @@
         var table;
         $(document).ready(function () {
 
-            $('.priceValue').priceFormat({
-                prefix: '',
-                limit: 11,
-                centsLimit: 0
-            });
-            $('.numberValue').priceFormat({
-                prefix: '',
-                limit: 11,
-                centsLimit: 1
-            });
-
             table = $('#table').DataTable({
                 responsive: true,
                 processing: true,
@@ -126,7 +115,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue" style="float: right;">' + String(data.OrgPrice).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
+                            return '<span class="priceValue" style="float: right;">' + formatNumberValue(data.OrgPrice, 1) + '</span>';
                         }
                     },
                     {
@@ -134,7 +123,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="priceValue" style="float: right;">' + String(data.Price).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
+                            return '<span class="priceValue" style="float: right; color: Blue;">' + formatNumberValue(data.Price, 1) + '</span>';
                         }
                     },
                     {
@@ -142,7 +131,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span class="numberValue" style="float: right;">' + String(data.NumInStock).replace(/(.)(?=(\d{3})+$)/g, '$1,') + '</span>';
+                            return '<span class="numberValue" style="float: right;">' + formatNumberValue(data.NumInStock, 1) + '</span>';
                         }
                     },
                     {

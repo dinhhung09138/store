@@ -72,5 +72,19 @@ namespace Web.Areas.Warehouse.Controllers
             return this.Json(_srvUnit.Save(model), JsonRequestBehavior.AllowGet);
         }
 
+        [AjaxAuthorize]
+        [HttpGet]
+        public JsonResult CheckDelete(string id)
+        {
+            return this.Json(UnitSrv.CheckDelete(new Guid(id)), JsonRequestBehavior.AllowGet);
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
+        public JsonResult Delete(string id)
+        {
+            Model.User.UserLoginModel user = Session["user"] as Model.User.UserLoginModel;
+            return this.Json(UnitSrv.Delete(new Guid(id), user.ID), JsonRequestBehavior.AllowGet);
+        }
     }
 }

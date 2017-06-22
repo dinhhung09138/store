@@ -98,8 +98,8 @@
                         width: '40px',
                         render: function (obj, type, data, meta) {
                             return '<div class="ctn-center">\
-                                        <a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
-                                        <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
+                                        <a href="javascript:;" title="Cập nhật" onclick="updateItem(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                        <a href="javascript:;" title="Xóa" onclick="deleteItem(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
                                     </div>';
                         }
                     }
@@ -108,7 +108,7 @@
 
         });
 
-        function update(id) {
+        function updateItem(id) {
             $('#loadingModel').modal('show');
             $.ajax({
                 url: '/warehouse/goodsgroup/edit',
@@ -146,6 +146,73 @@
                 }
             });
         });
+
+        function deleteItem(id) {
+            $.ajax({
+                url: '/warehouse/goodsgroup/checkdelete',
+                type: 'get',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: { id: id },
+                success: function (result) {
+                    if (result === true) {
+                        Lobibox.confirm({
+                            iconClass: false,
+                            title: 'Xác nhận',
+                            msg: 'Bạn có muốn xóa nhóm sản phẩm đang chọn?',
+                            buttons: {
+                                yes: {
+                                    'class': 'btn btn-success',
+                                    closeOnClick: true
+                                },
+                                no: {
+                                    'class': 'btn btn-warning',
+                                    closeOnClick: true
+                                }
+                            },
+                            callback: function (lobibox, type) {
+                                if (type === 'yes') {
+                                    $.ajax({
+                                        url: '/warehouse/goodsgroup/delete',
+                                        type: 'get',
+                                        contentType: 'application/json',
+                                        dataType: 'json',
+                                        data: { id: id },
+                                        success: function (result) {
+                                            if (result.status === 1) {
+                                                notification(result.message, '@Resources.Notification.TypeSuccess');
+                                                table.ajax.reload();
+                                            } else {
+                                                notification(result.message, '@Resources.Notification.TypeError');
+                                            }
+                                        },
+                                        error: function (xhr, ajaxOptions, thrownError) {
+                                            if (xhr.status == 401 || xhr.status == 530) {
+                                                window.location.href = '/home/login';
+                                            }
+                                            notification('Lỗi khi thực thi xóa nhóm sản phẩm', '@Resources.Notification.TypeError');
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    } else {
+                        Lobibox.alert("warning",
+                        {
+                            title: 'Thông báo',
+                            msg: "Nhóm sản phẩm này đang được sử dụng, không thể xóa!"
+                        });
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 401 || xhr.status == 530) {
+                        window.location.href = '/home/login';
+                    }
+                    notification('Lỗi khi thực hiện kiểm tra xóa nhóm sản phẩm', '@Resources.Notification.TypeError');
+                }
+            });
+        };
+
 
     </script>
 }

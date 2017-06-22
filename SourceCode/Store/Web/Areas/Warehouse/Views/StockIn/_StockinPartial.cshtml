@@ -262,12 +262,12 @@
             event.preventDefault();
             listProduct.push(ui.item.id);
             var row = $('<tr/>');
-            var td1 = $('<td/>').attr('style', 'vertical-align: middle;').attr('width', '20px');
+            var td1 = $('<td/>').attr('style', 'vertical-align: middle; text-align: center;').attr('width', '20px');
             td1.append($('<span/>').attr('class', 'removeItem color-red').html('x'));
             td1.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsId').attr('name', 'goodsId').attr('class', 'idItem').attr('value', ui.item.id));
             var td2 = $('<td/>').attr('style', 'vertical-align: middle;').html(ui.item.label);
             var td3 = $('<td/>');
-            td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('class', 'number form-control').attr('value', ui.item.orgPrice));
+            td3.append($('<input/>').attr('type', 'text').attr('id', 'goodsOrgPriceValue').attr('name', 'goodsOrgPriceValue').attr('class', 'number form-control').attr('value', formatNumberValue(ui.item.orgPrice, 1)));
             td3.append($('<input/>').attr('type', 'hidden').attr('id', 'goodsOrgPrice').attr('name', 'goodsOrgPrice').attr('value', ui.item.orgPrice));
             var td4 = $('<td/>');
             td4.append($('<input/>').attr('type', 'text').attr('id', 'goodsDiscountValue').attr('name', 'goodsDiscountValue').attr('class', 'number form-control').attr('value', 0));

@@ -70,7 +70,7 @@ namespace DataAccess
                             EmployeeName = item.employee_name,
                             BranchName = item.branch_name,
                             StockInDate = item.stock_in_date,
-                            StockInDateString = item.stock_in_date.ToShortDateString(),
+                            StockInDateString = item.stock_in_date.ToShortDateString() + " " + item.stock_in_date.ToShortTimeString(),
                             TotalMoney = item.total_money,
                             Dept = item.dept,
                             SupplierName = item.supplier_name

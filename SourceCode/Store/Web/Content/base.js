@@ -147,7 +147,7 @@ function scrollBodyModal(focusID) {
         size: "3px"
     }).css("width", "100%");
     $('#inputModel').modal('show');
-    if (focusID.length > 0) {
+    if (focusID != '') {
         $(focusID).focus();
     }
 }
