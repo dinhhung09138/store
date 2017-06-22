@@ -263,7 +263,7 @@ namespace DataAccess
                         md.group_id = model.GroupID;
                         md.price = model.Price;
                         md.org_price = model.OrgPrice;
-                        md.number_in_stock = model.NumInStock;
+                        //md.number_in_stock = model.NumInStock;
                         md.avatar = model.Avatar;
                         md.weight = model.Weight;
                         md.sales_directive = model.AllowSaleDirect;

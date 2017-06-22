@@ -161,7 +161,7 @@ namespace DataAccess
         /// <param name="id">id of item</param>
         /// <param name="userID">User deleted item</param>
         /// <returns></returns>
-        public Dictionary<string, object> Delete(Guid id, Guid userID)
+        public static Dictionary<string, object> Delete(Guid id, Guid userID)
         {
             Dictionary<string, object> _return = new Dictionary<string, object>();
             try
@@ -206,5 +206,19 @@ namespace DataAccess
             return _return;
         }
 
+        /// <summary>
+        /// Check delete unit
+        /// </summary>
+        /// <param name="id">The identify of unit</param>
+        /// <returns></returns>
+        public static bool CheckDelete(Guid id)
+        {
+            using (var context = new StoreEntities())
+            {
+                if (context.goods.Where(m => m.unit_id == id).Any())
+                    return false;
+            }
+            return true;
+        }
     }
 }

@@ -97,7 +97,12 @@
                     {
                         data: 'StockInDateString',
                         orderable: true,
-                        searchable: true
+                        searchable: true,
+                        render: function (obj, type, data, meta) {
+                            return '<div class="ctn-center">\
+                                        ' + data.StockInDateString + '\
+                                    </div>';
+                        }
                     },
                     {
                         data: 'EmployeeName',
@@ -119,7 +124,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span style="float: right;">' + formatNumberValue(data.TotalMoney, 1) + '</span>';
+                            return '<span style="float: right; color: blue;">' + formatNumberValue(data.TotalMoney, 1) + '</span>';
                         }
                     },
                     {
@@ -127,7 +132,7 @@
                         orderable: true,
                         searchable: true,
                         render: function (obj, type, data, meta) {
-                            return '<span style="float:right;">' + formatNumberValue(data.Dept, 1) + '</span>';
+                            return '<span style="float:right; color: red;">' + formatNumberValue(data.Dept, 1) + '</span>';
                         }
                     },
                     {
