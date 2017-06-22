@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.OrgPrice, "{0:#,###}", new { @class = "form-control priceValue", @maxlength = 12 })
+                                        @Html.TextBoxFor(m => m.OrgPrice, "{0:#,###}", new { @class = "form-control number", @maxlength = 12 })
                                         @Html.ValidationMessageFor(m => m.OrgPrice)
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.Price, "{0:#,###}", new { @class = "form-control priceValue", @maxlength = 12 })
+                                        @Html.TextBoxFor(m => m.Price, "{0:#,###}", new { @class = "form-control number", @maxlength = 12 })
                                         @Html.ValidationMessageFor(m => m.Price)
                                     </div>
                                 </div>
@@ -85,14 +85,14 @@
                                                                        new { @class = "form-control selectpicker" })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-5 col-sm-5 col-xs-12">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Cho phép bán trực tiếp</label>
                                         @Html.CheckBoxFor(m => m.AllowSaleDirect)
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-5 col-sm-5 col-xs-12">
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12">
                                         <label>Trọng lượng</label>
@@ -100,7 +100,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.Weight, new { @maxlength = 11, @class = "form-control numberValue" })
+                                        @Html.TextBox("WeightValue", Model.Weight, new { @id = "WeightValue", @name = "WeightValue", @maxlength = 11, @class = "form-control number" })
+                                        @Html.HiddenFor(m => m.Weight)
                                         @Html.ValidationMessageFor(m => m.Weight)
                                     </div>
                                 </div>
@@ -111,7 +112,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.NumInStock, new { @maxlength = 11, @class = "form-control numberValue" })
+                                        @Html.TextBox("NumInStockValue", Model.NumInStock, new { @id = "NumInStockValue", @readonly = true, @name = "NumInStockValue", @maxlength = 11, @class = "form-control number" })
+                                        @Html.HiddenFor(m => m.NumInStock)
                                         @Html.ValidationMessageFor(m => m.NumInStock)
                                     </div>
                                 </div>
@@ -122,7 +124,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.MinInStock, new { @maxlength = 11, @class = "form-control numberValue" })
+                                        @Html.TextBox("MinInStockValue", Model.MinInStock, new { @id = "MinInStockValue", @name = "MinInStockValue", @maxlength = 11, @class = "form-control number" })
+                                        @Html.HiddenFor(m => m.MinInStock)
                                         @Html.ValidationMessageFor(m => m.MinInStock)
                                     </div>
                                 </div>
@@ -133,7 +136,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                        @Html.TextBoxFor(m => m.MaxInStock, new { @maxlength = 11, @class = "form-control numberValue" })
+                                        @Html.TextBox("MaxInStockValue", Model.MaxInStock, new { @id = "MaxInStockValue", @name = "MaxInStockValue", @maxlength = 11, @class = "form-control number" })
+                                        @Html.HiddenFor(m => m.MaxInStock)
                                         @Html.ValidationMessageFor(m => m.MaxInStock)
                                     </div>
                                 </div>
@@ -186,26 +190,14 @@
         </div>
     </div>
 </div>
-<script src="~/Content/jquery.priceformat.min.js"></script>
+<script src="~/Content/accounting.min.js"></script>
 <script type="text/javascript" language=javascript>
     $.validator.unobtrusive.parse(document);
 </script>
 <script>
     $(document).ready(function () {
         scrollBodyModal('#Name');
-
-        $('.priceValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 0
-        });
-        $('.numberValue').priceFormat({
-            prefix: '',
-            limit: 11,
-            centsLimit: 1
-        });
-
-        $('#inputModel').modal('show');
+        onlyInputNumber();
         //
         $('.selectpicker').selectpicker();
         //
@@ -257,5 +249,11 @@
                 console.log('Can not render file: ', error);
             };
         }
+
+        $(document).on('change', '.number', function (e) {
+            var num = parseFloat($(this).val().replace(',', ''));
+            $(this).val(formatNumberValue(num, 1));
+            $(this).next().val(num);
+        });
     });
 </script>
