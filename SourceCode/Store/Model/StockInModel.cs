@@ -102,6 +102,12 @@ namespace Model
         public bool IsFinish { get; set; } = false;
 
         /// <summary>
+        /// Is finish name
+        /// Phiếu tạm, Đã nhập hàng
+        /// </summary>
+        public string IsFinishName { get; set; }
+
+        /// <summary>
         /// List of detail
         /// </summary>
         public List<StockInDetailModel> details { get; set; } = new List<StockInDetailModel>();
