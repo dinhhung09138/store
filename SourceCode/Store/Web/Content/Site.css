@@ -3,6 +3,13 @@
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 
+@media screen and (min-width: 768px) {
+    body{
+        font-size:13px;
+    }
+
+}
+
 .bg-gray {
     background: #eee;
 }
@@ -40,6 +47,9 @@ label{
     margin-bottom: 10px;
 }
 
+.label {
+    font-size: 13px;
+}
 
 .basic-bg-color {
     background: rgb(0, 150, 136) !important;
@@ -708,6 +718,10 @@ select.input-sm {
 
 .glyphicon-edit {
     font-weight:bold;
+}
+
+.glyphicon-info-sign {
+    color: #4CAF50!important;
 }
 
 /*Loading model*/
