@@ -12,13 +12,14 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class ga_user_type
+    public partial class ga_device_category
     {
         public System.Guid id { get; set; }
         public string table_id { get; set; }
         public byte day { get; set; }
         public byte month { get; set; }
         public short year { get; set; }
+        public string device { get; set; }
         public int new_user { get; set; }
         public int return_user { get; set; }
         public int user { get; set; }

@@ -12,20 +12,14 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class ga_user_type
+    public partial class supplier_dept_history
     {
         public System.Guid id { get; set; }
-        public string table_id { get; set; }
-        public byte day { get; set; }
-        public byte month { get; set; }
-        public short year { get; set; }
-        public int new_user { get; set; }
-        public int return_user { get; set; }
-        public int user { get; set; }
-        public int sessions { get; set; }
-        public double bounces { get; set; }
-        public double bounce_rate { get; set; }
-        public double entrances { get; set; }
-        public double pageviews { get; set; }
+        public string code { get; set; }
+        public string type { get; set; }
+        public System.Guid supplier_id { get; set; }
+        public decimal money_pay { get; set; }
+        public System.DateTime date { get; set; }
+        public decimal money_left { get; set; }
     }
 }

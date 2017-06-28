@@ -103,6 +103,33 @@
     <Compile Include="ga_account.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ga_browser.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_device_category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_keyword.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_medium.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_operation_system.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_page_path.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_region.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_social_network.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ga_source.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ga_user_city.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -197,6 +224,9 @@
     </Compile>
     <Compile Include="SupplierGroupSrv.cs" />
     <Compile Include="SupplierSrv.cs" />
+    <Compile Include="supplier_dept_history.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="supplier_group.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

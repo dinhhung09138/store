@@ -66,9 +66,6 @@
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_goods" />
         <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="16.5" PointY="30.625" />
         <AssociationConnector Association="StoreModel.FK_stock_in_detail_goods" />
-        <EntityTypeShape EntityType="StoreModel.ga_account" Width="1.5" PointX="7.375" PointY="0.75" />
-        <EntityTypeShape EntityType="StoreModel.ga_user_city" Width="1.5" PointX="7.375" PointY="5.75" />
-        <EntityTypeShape EntityType="StoreModel.ga_user_type" Width="1.5" PointX="3.375" PointY="8.75" />
         <EntityTypeShape EntityType="StoreModel.order_status" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="StoreModel.order_type" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="StoreModel.order" Width="1.5" PointX="13.5" PointY="32" />
@@ -91,6 +88,19 @@
         <AssociationConnector Association="StoreModel.FK_stock_in_supplier" />
         <AssociationConnector Association="StoreModel.FK_stock_out_detail_stock_out" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_stock_tranfer" />
+        <EntityTypeShape EntityType="StoreModel.ga_account" Width="1.5" PointX="7.75" PointY="6.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_browser" Width="1.5" PointX="3.75" PointY="8.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_device_category" Width="1.5" PointX="9.75" PointY="6.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_keyword" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_medium" Width="1.5" PointX="11.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_operation_system" Width="1.5" PointX="11.75" PointY="5.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_page_path" Width="1.5" PointX="5.75" PointY="11.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_region" Width="1.5" PointX="7.75" PointY="11.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_social_network" Width="1.5" PointX="9.75" PointY="11.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_source" Width="1.5" PointX="11.75" PointY="10.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_user_city" Width="1.5" PointX="13.75" PointY="0.75" />
+        <EntityTypeShape EntityType="StoreModel.ga_user_type" Width="1.5" PointX="2.75" PointY="13.75" />
+        <EntityTypeShape EntityType="StoreModel.supplier_dept_history" Width="1.5" PointX="13.75" PointY="5.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
