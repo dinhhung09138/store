@@ -144,6 +144,8 @@
     <Compile Include="goods_group.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GoogleAnalyst.cs" />
+    <Compile Include="GoogleAnalystReport.cs" />
     <Compile Include="inventory_goods.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
