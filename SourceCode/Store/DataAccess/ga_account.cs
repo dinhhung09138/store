@@ -20,6 +20,7 @@ namespace DataAccess
         public string property_name { get; set; }
         public string acc_id { get; set; }
         public string acc_name { get; set; }
+        public string table_id { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }

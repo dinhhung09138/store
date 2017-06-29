@@ -137,11 +137,12 @@
                     },
                     {
                         orderable: false,
-                        width: '40px',
+                        width: '50px',
                         render: function (obj, type, data, meta) {
                             return '<div class="ctn-center">\
-                                        <a href="javascript:;" title="Cập nhật" onclick="update(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
-                                        <a href="javascript:;" title="Xóa" onclick="delete(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
+                                        <a href="javascript:;" title="Xem chi tiết" onclick="infoItem(\'' + data.ID + '\');"><i class="glyphicon glyphicon-info-sign" aria-hidden="true"></i></a>\
+                                        <a href="javascript:;" title="Cập nhật" onclick="updateItem(\'' + data.ID + '\');"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i></a> \
+                                        <a href="javascript:;" title="Xóa" onclick="deleteItem(\'' + data.ID + '\');"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>\
                                     </div>';
                         }
                     }
@@ -150,7 +151,7 @@
 
         });
 
-        function update(id) {
+        function updateItem(id) {
             $('#loadingModel').modal('show');
             $.ajax({
                 url: '/warehouse/stockin/edit',
@@ -190,6 +191,27 @@
                 }
             });
         });
+
+        function infoItem(id) {
+            $('#loadingModel').modal('show');
+            $.ajax({
+                url: '/warehouse/stockin/info',
+                type: 'get',
+                dataType: 'html',
+                async: false,
+                data: { id: id },
+                success: function (result) {
+                    $('#divContainer').html(result);
+                    $('#loadingModel').modal('hide');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (xhr.status == 401 || xhr.status == 530) {
+                        window.location.href = '/home/login';
+                    }
+                }
+            });
+        }
 
     </script>
 }

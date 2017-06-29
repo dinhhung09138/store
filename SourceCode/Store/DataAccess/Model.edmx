@@ -225,6 +225,7 @@
           <Property Name="property_name" Type="nvarchar" MaxLength="50" />
           <Property Name="acc_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="acc_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="update_by" Type="uniqueidentifier" />
@@ -233,12 +234,184 @@
           <Property Name="delete_by" Type="uniqueidentifier" />
           <Property Name="delete_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="ga_browser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="browser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="browser_version" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_device_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="device" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_keyword">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="keywords" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_medium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="medium" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_operation_system">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="operation_system" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_page_path">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="page_path" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="region" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_social_network">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="social_network" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="day" Type="tinyint" Nullable="false" />
+          <Property Name="month" Type="tinyint" Nullable="false" />
+          <Property Name="year" Type="smallint" Nullable="false" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="new_user" Type="int" Nullable="false" />
+          <Property Name="return_user" Type="int" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="sessions" Type="int" Nullable="false" />
+          <Property Name="bounces" Type="float" Nullable="false" />
+          <Property Name="bounce_rate" Type="float" Nullable="false" />
+          <Property Name="entrances" Type="float" Nullable="false" />
+          <Property Name="pageviews" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="ga_user_city">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ga_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="day" Type="tinyint" Nullable="false" />
           <Property Name="month" Type="tinyint" Nullable="false" />
           <Property Name="year" Type="smallint" Nullable="false" />
@@ -257,7 +430,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ga_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="day" Type="tinyint" Nullable="false" />
           <Property Name="month" Type="tinyint" Nullable="false" />
           <Property Name="year" Type="smallint" Nullable="false" />
@@ -586,6 +759,18 @@
           <Property Name="deleted" Type="bit" Nullable="false" />
           <Property Name="delete_by" Type="uniqueidentifier" />
           <Property Name="delete_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="supplier_dept_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="supplier_id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="money_pay" Type="money" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="money_left" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="supplier_group">
           <Key>
@@ -1200,6 +1385,15 @@
           <EntitySet Name="employee_contract_history" EntityType="Self.employee_contract_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="function" EntityType="Self.function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ga_account" EntityType="Self.ga_account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_browser" EntityType="Self.ga_browser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_device_category" EntityType="Self.ga_device_category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_keyword" EntityType="Self.ga_keyword" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_medium" EntityType="Self.ga_medium" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_operation_system" EntityType="Self.ga_operation_system" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_page_path" EntityType="Self.ga_page_path" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_region" EntityType="Self.ga_region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_social_network" EntityType="Self.ga_social_network" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ga_source" EntityType="Self.ga_source" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ga_user_city" EntityType="Self.ga_user_city" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ga_user_type" EntityType="Self.ga_user_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
@@ -1224,6 +1418,7 @@
           <EntitySet Name="stock_tranfer" EntityType="Self.stock_tranfer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="stock_tranfer_detail" EntityType="Self.stock_tranfer_detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier_dept_history" EntityType="Self.supplier_dept_history" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="supplier_group" EntityType="Self.supplier_group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="token" EntityType="Self.token" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="unit" EntityType="Self.unit" Schema="dbo" store:Type="Tables" />
@@ -1555,9 +1750,6 @@
             <End Role="good" EntitySet="goods" />
             <End Role="stock_in_detail" EntitySet="stock_in_detail" />
           </AssociationSet>
-          <EntitySet Name="ga_account" EntityType="StoreModel.ga_account" />
-          <EntitySet Name="ga_user_city" EntityType="StoreModel.ga_user_city" />
-          <EntitySet Name="ga_user_type" EntityType="StoreModel.ga_user_type" />
           <EntitySet Name="order_status" EntityType="StoreModel.order_status" />
           <EntitySet Name="order_type" EntityType="StoreModel.order_type" />
           <EntitySet Name="orders" EntityType="StoreModel.order" />
@@ -1628,6 +1820,19 @@
             <End Role="stock_tranfer" EntitySet="stock_tranfer" />
             <End Role="stock_tranfer_detail" EntitySet="stock_tranfer_detail" />
           </AssociationSet>
+          <EntitySet Name="ga_account" EntityType="StoreModel.ga_account" />
+          <EntitySet Name="ga_browser" EntityType="StoreModel.ga_browser" />
+          <EntitySet Name="ga_device_category" EntityType="StoreModel.ga_device_category" />
+          <EntitySet Name="ga_keyword" EntityType="StoreModel.ga_keyword" />
+          <EntitySet Name="ga_medium" EntityType="StoreModel.ga_medium" />
+          <EntitySet Name="ga_operation_system" EntityType="StoreModel.ga_operation_system" />
+          <EntitySet Name="ga_page_path" EntityType="StoreModel.ga_page_path" />
+          <EntitySet Name="ga_region" EntityType="StoreModel.ga_region" />
+          <EntitySet Name="ga_social_network" EntityType="StoreModel.ga_social_network" />
+          <EntitySet Name="ga_source" EntityType="StoreModel.ga_source" />
+          <EntitySet Name="ga_user_city" EntityType="StoreModel.ga_user_city" />
+          <EntitySet Name="ga_user_type" EntityType="StoreModel.ga_user_type" />
+          <EntitySet Name="supplier_dept_history" EntityType="StoreModel.supplier_dept_history" />
           </EntityContainer>
         <EntityType Name="branch">
           <Key>
@@ -2514,61 +2719,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ga_account">
-          <Key>
-            <PropertyRef Name="view_id" />
-          </Key>
-          <Property Name="view_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="view_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="property_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="property_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="acc_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="acc_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="create_by" Type="Guid" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="update_by" Type="Guid" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="delete_by" Type="Guid" />
-          <Property Name="delete_date" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="ga_user_city">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="ga_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="day" Type="Byte" Nullable="false" />
-          <Property Name="month" Type="Byte" Nullable="false" />
-          <Property Name="year" Type="Int16" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="new_user" Type="Int32" Nullable="false" />
-          <Property Name="return_user" Type="Int32" Nullable="false" />
-          <Property Name="user" Type="Int32" Nullable="false" />
-          <Property Name="sessions" Type="Int32" Nullable="false" />
-          <Property Name="bounces" Type="Double" Nullable="false" />
-          <Property Name="bounce_rate" Type="Double" Nullable="false" />
-          <Property Name="entrances" Type="Double" Nullable="false" />
-          <Property Name="pageviews" Type="Double" Nullable="false" />
-        </EntityType>
-        <EntityType Name="ga_user_type">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="ga_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="day" Type="Byte" Nullable="false" />
-          <Property Name="month" Type="Byte" Nullable="false" />
-          <Property Name="year" Type="Int16" Nullable="false" />
-          <Property Name="new_user" Type="Int32" Nullable="false" />
-          <Property Name="return_user" Type="Int32" Nullable="false" />
-          <Property Name="user" Type="Int32" Nullable="false" />
-          <Property Name="sessions" Type="Int32" Nullable="false" />
-          <Property Name="bounces" Type="Double" Nullable="false" />
-          <Property Name="bounce_rate" Type="Double" Nullable="false" />
-          <Property Name="entrances" Type="Double" Nullable="false" />
-          <Property Name="pageviews" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityType Name="order_status">
           <Key>
             <PropertyRef Name="code" />
@@ -2897,6 +3047,246 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ga_account">
+          <Key>
+            <PropertyRef Name="view_id" />
+          </Key>
+          <Property Name="view_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="view_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="property_id" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="property_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="acc_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="acc_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ga_browser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="browser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="browser_version" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_device_category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="device" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_keyword">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="keywords" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_medium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="medium" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_operation_system">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="operation_system" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_page_path">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="page_path" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_region">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="region" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_social_network">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="social_network" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_source">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_user_city">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ga_user_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="table_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="day" Type="Byte" Nullable="false" />
+          <Property Name="month" Type="Byte" Nullable="false" />
+          <Property Name="year" Type="Int16" Nullable="false" />
+          <Property Name="new_user" Type="Int32" Nullable="false" />
+          <Property Name="return_user" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="sessions" Type="Int32" Nullable="false" />
+          <Property Name="bounces" Type="Double" Nullable="false" />
+          <Property Name="bounce_rate" Type="Double" Nullable="false" />
+          <Property Name="entrances" Type="Double" Nullable="false" />
+          <Property Name="pageviews" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supplier_dept_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="supplier_id" Type="Guid" Nullable="false" />
+          <Property Name="money_pay" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="money_left" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3409,64 +3799,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ga_account">
-            <EntityTypeMapping TypeName="StoreModel.ga_account">
-              <MappingFragment StoreEntitySet="ga_account">
-                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
-                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="acc_name" ColumnName="acc_name" />
-                <ScalarProperty Name="acc_id" ColumnName="acc_id" />
-                <ScalarProperty Name="property_name" ColumnName="property_name" />
-                <ScalarProperty Name="property_id" ColumnName="property_id" />
-                <ScalarProperty Name="view_name" ColumnName="view_name" />
-                <ScalarProperty Name="view_id" ColumnName="view_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ga_user_city">
-            <EntityTypeMapping TypeName="StoreModel.ga_user_city">
-              <MappingFragment StoreEntitySet="ga_user_city">
-                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
-                <ScalarProperty Name="entrances" ColumnName="entrances" />
-                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
-                <ScalarProperty Name="bounces" ColumnName="bounces" />
-                <ScalarProperty Name="sessions" ColumnName="sessions" />
-                <ScalarProperty Name="user" ColumnName="user" />
-                <ScalarProperty Name="return_user" ColumnName="return_user" />
-                <ScalarProperty Name="new_user" ColumnName="new_user" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="month" ColumnName="month" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="ga_id" ColumnName="ga_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ga_user_type">
-            <EntityTypeMapping TypeName="StoreModel.ga_user_type">
-              <MappingFragment StoreEntitySet="ga_user_type">
-                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
-                <ScalarProperty Name="entrances" ColumnName="entrances" />
-                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
-                <ScalarProperty Name="bounces" ColumnName="bounces" />
-                <ScalarProperty Name="sessions" ColumnName="sessions" />
-                <ScalarProperty Name="user" ColumnName="user" />
-                <ScalarProperty Name="return_user" ColumnName="return_user" />
-                <ScalarProperty Name="new_user" ColumnName="new_user" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="month" ColumnName="month" />
-                <ScalarProperty Name="day" ColumnName="day" />
-                <ScalarProperty Name="ga_id" ColumnName="ga_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="order_status">
             <EntityTypeMapping TypeName="StoreModel.order_status">
               <MappingFragment StoreEntitySet="order_status">
@@ -3580,6 +3912,259 @@
                 <ScalarProperty Name="empl_id" ColumnName="empl_id" />
                 <ScalarProperty Name="branch_to" ColumnName="branch_to" />
                 <ScalarProperty Name="branch_from" ColumnName="branch_from" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_account">
+            <EntityTypeMapping TypeName="StoreModel.ga_account">
+              <MappingFragment StoreEntitySet="ga_account">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="acc_name" ColumnName="acc_name" />
+                <ScalarProperty Name="acc_id" ColumnName="acc_id" />
+                <ScalarProperty Name="property_name" ColumnName="property_name" />
+                <ScalarProperty Name="property_id" ColumnName="property_id" />
+                <ScalarProperty Name="view_name" ColumnName="view_name" />
+                <ScalarProperty Name="view_id" ColumnName="view_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_browser">
+            <EntityTypeMapping TypeName="StoreModel.ga_browser">
+              <MappingFragment StoreEntitySet="ga_browser">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="browser_version" ColumnName="browser_version" />
+                <ScalarProperty Name="browser" ColumnName="browser" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_device_category">
+            <EntityTypeMapping TypeName="StoreModel.ga_device_category">
+              <MappingFragment StoreEntitySet="ga_device_category">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="device" ColumnName="device" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_keyword">
+            <EntityTypeMapping TypeName="StoreModel.ga_keyword">
+              <MappingFragment StoreEntitySet="ga_keyword">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_medium">
+            <EntityTypeMapping TypeName="StoreModel.ga_medium">
+              <MappingFragment StoreEntitySet="ga_medium">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="medium" ColumnName="medium" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_operation_system">
+            <EntityTypeMapping TypeName="StoreModel.ga_operation_system">
+              <MappingFragment StoreEntitySet="ga_operation_system">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="operation_system" ColumnName="operation_system" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_page_path">
+            <EntityTypeMapping TypeName="StoreModel.ga_page_path">
+              <MappingFragment StoreEntitySet="ga_page_path">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="page_path" ColumnName="page_path" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_region">
+            <EntityTypeMapping TypeName="StoreModel.ga_region">
+              <MappingFragment StoreEntitySet="ga_region">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="region" ColumnName="region" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_social_network">
+            <EntityTypeMapping TypeName="StoreModel.ga_social_network">
+              <MappingFragment StoreEntitySet="ga_social_network">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="social_network" ColumnName="social_network" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_source">
+            <EntityTypeMapping TypeName="StoreModel.ga_source">
+              <MappingFragment StoreEntitySet="ga_source">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_user_city">
+            <EntityTypeMapping TypeName="StoreModel.ga_user_city">
+              <MappingFragment StoreEntitySet="ga_user_city">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ga_user_type">
+            <EntityTypeMapping TypeName="StoreModel.ga_user_type">
+              <MappingFragment StoreEntitySet="ga_user_type">
+                <ScalarProperty Name="pageviews" ColumnName="pageviews" />
+                <ScalarProperty Name="entrances" ColumnName="entrances" />
+                <ScalarProperty Name="bounce_rate" ColumnName="bounce_rate" />
+                <ScalarProperty Name="bounces" ColumnName="bounces" />
+                <ScalarProperty Name="sessions" ColumnName="sessions" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="return_user" ColumnName="return_user" />
+                <ScalarProperty Name="new_user" ColumnName="new_user" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="day" ColumnName="day" />
+                <ScalarProperty Name="table_id" ColumnName="table_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplier_dept_history">
+            <EntityTypeMapping TypeName="StoreModel.supplier_dept_history">
+              <MappingFragment StoreEntitySet="supplier_dept_history">
+                <ScalarProperty Name="money_left" ColumnName="money_left" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="money_pay" ColumnName="money_pay" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

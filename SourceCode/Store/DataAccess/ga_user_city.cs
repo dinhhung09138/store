@@ -15,7 +15,7 @@ namespace DataAccess
     public partial class ga_user_city
     {
         public System.Guid id { get; set; }
-        public string ga_id { get; set; }
+        public string table_id { get; set; }
         public byte day { get; set; }
         public byte month { get; set; }
         public short year { get; set; }

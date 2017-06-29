@@ -193,6 +193,7 @@ namespace DataAccess
                     _item.Reason = item.reason;
                     _item.Notes = item.notes;
                     _item.IsFinish = item.is_finish;
+                    _item.IsFinishName = item.is_finish == true ? "Đã nhập hàng" : "Phiếu tạm";
                     _item.Insert = false;
 
                     var details = (from m in context.stock_in_detail

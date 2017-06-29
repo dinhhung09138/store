@@ -144,6 +144,14 @@ namespace Web.Areas.Warehouse.Controllers
 
         [AjaxAuthorize]
         [HttpGet]
+        public ActionResult Info(string id)
+        {
+            ViewBag.id = id;
+            return PartialView();
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
         public JsonResult GetItem(string id)
         {
             StockInSrv _srvStockin = new StockInSrv();

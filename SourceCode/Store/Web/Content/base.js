@@ -42,7 +42,7 @@
 var ww = document.body.clientWidth;
 
 $(document).ready(function () {
-
+    startLoading();
     $(".nav li a").each(function () {
         if ($(this).next().length > 0) {
             $(this).addClass("parent");

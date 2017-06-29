@@ -58,14 +58,24 @@ namespace DataAccess
         public virtual DbSet<employee> employees { get; set; }
         public virtual DbSet<good> goods { get; set; }
         public virtual DbSet<stock_in_detail> stock_in_detail { get; set; }
-        public virtual DbSet<ga_account> ga_account { get; set; }
-        public virtual DbSet<ga_user_city> ga_user_city { get; set; }
-        public virtual DbSet<ga_user_type> ga_user_type { get; set; }
         public virtual DbSet<order_status> order_status { get; set; }
         public virtual DbSet<order_type> order_type { get; set; }
         public virtual DbSet<order> orders { get; set; }
         public virtual DbSet<stock_in> stock_in { get; set; }
         public virtual DbSet<stock_out> stock_out { get; set; }
         public virtual DbSet<stock_tranfer> stock_tranfer { get; set; }
+        public virtual DbSet<ga_account> ga_account { get; set; }
+        public virtual DbSet<ga_browser> ga_browser { get; set; }
+        public virtual DbSet<ga_device_category> ga_device_category { get; set; }
+        public virtual DbSet<ga_keyword> ga_keyword { get; set; }
+        public virtual DbSet<ga_medium> ga_medium { get; set; }
+        public virtual DbSet<ga_operation_system> ga_operation_system { get; set; }
+        public virtual DbSet<ga_page_path> ga_page_path { get; set; }
+        public virtual DbSet<ga_region> ga_region { get; set; }
+        public virtual DbSet<ga_social_network> ga_social_network { get; set; }
+        public virtual DbSet<ga_source> ga_source { get; set; }
+        public virtual DbSet<ga_user_city> ga_user_city { get; set; }
+        public virtual DbSet<ga_user_type> ga_user_type { get; set; }
+        public virtual DbSet<supplier_dept_history> supplier_dept_history { get; set; }
     }
 }
