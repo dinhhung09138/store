@@ -474,6 +474,7 @@
     <Content Include="Areas\Warehouse\Views\Shared\_WarehouseLayout.cshtml" />
     <Content Include="Areas\Warehouse\Views\Unit\Info.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\Info.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\Info.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
