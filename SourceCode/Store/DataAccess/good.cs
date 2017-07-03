@@ -17,10 +17,10 @@ namespace DataAccess
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public good()
         {
-            this.inventory_goods = new HashSet<inventory_goods>();
             this.stock_out_detail = new HashSet<stock_out_detail>();
             this.stock_tranfer_detail = new HashSet<stock_tranfer_detail>();
             this.stock_in_detail = new HashSet<stock_in_detail>();
+            this.inventory_goods = new HashSet<inventory_goods>();
         }
     
         public System.Guid id { get; set; }
@@ -49,12 +49,12 @@ namespace DataAccess
         public virtual goods_group goods_group { get; set; }
         public virtual unit unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inventory_goods> inventory_goods { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_out_detail> stock_out_detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_tranfer_detail> stock_tranfer_detail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<stock_in_detail> stock_in_detail { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<inventory_goods> inventory_goods { get; set; }
     }
 }

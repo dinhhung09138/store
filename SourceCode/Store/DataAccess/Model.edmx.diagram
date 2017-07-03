@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="StoreModel.employee_contract_history" Width="1.5" PointX="11.25" PointY="35.875" />
         <EntityTypeShape EntityType="StoreModel.function" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="StoreModel.goods_group" Width="1.5" PointX="3.75" PointY="26.25" />
-        <EntityTypeShape EntityType="StoreModel.inventory_goods" Width="1.5" PointX="8.25" PointY="44.625" />
         <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="StoreModel.leave" Width="1.5" PointX="13.5" PointY="26" />
         <EntityTypeShape EntityType="StoreModel.leave_type" Width="1.5" PointX="11.25" PointY="22" />
@@ -35,7 +34,6 @@
         <EntityTypeShape EntityType="StoreModel.user" Width="1.5" PointX="8.25" PointY="25.125" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_branch_employee" />
         <AssociationConnector Association="StoreModel.FK_branch_location" />
-        <AssociationConnector Association="StoreModel.FK_inventory_branch" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_department" />
         <AssociationConnector Association="StoreModel.FK_branch_employee_position" />
         <AssociationConnector Association="StoreModel.FK_employee_contract_history_contract_type" />
@@ -61,7 +59,6 @@
         <AssociationConnector Association="StoreModel.FK_user_employee" />
         <AssociationConnector Association="StoreModel.FK_goods_goods_group" />
         <AssociationConnector Association="StoreModel.FK_goods_unit" />
-        <AssociationConnector Association="StoreModel.FK_inventory_goods" />
         <AssociationConnector Association="StoreModel.FK_stock_out_detail_goods" />
         <AssociationConnector Association="StoreModel.FK_stock_tranfer_detail_goods" />
         <EntityTypeShape EntityType="StoreModel.stock_in_detail" Width="1.5" PointX="16.5" PointY="30.625" />
@@ -101,6 +98,9 @@
         <EntityTypeShape EntityType="StoreModel.ga_user_city" Width="1.5" PointX="13.75" PointY="0.75" />
         <EntityTypeShape EntityType="StoreModel.ga_user_type" Width="1.5" PointX="2.75" PointY="13.75" />
         <EntityTypeShape EntityType="StoreModel.supplier_dept_history" Width="1.5" PointX="13.75" PointY="5.75" />
+        <EntityTypeShape EntityType="StoreModel.inventory_goods" Width="1.5" PointX="16.5" PointY="35" />
+        <AssociationConnector Association="StoreModel.FK_inventory_branch" />
+        <AssociationConnector Association="StoreModel.FK_inventory_goods" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

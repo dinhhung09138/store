@@ -36,7 +36,6 @@ namespace DataAccess
         public virtual DbSet<employee_contract_history> employee_contract_history { get; set; }
         public virtual DbSet<function> functions { get; set; }
         public virtual DbSet<goods_group> goods_group { get; set; }
-        public virtual DbSet<inventory_goods> inventory_goods { get; set; }
         public virtual DbSet<invoice> invoices { get; set; }
         public virtual DbSet<leave> leaves { get; set; }
         public virtual DbSet<leave_type> leave_type { get; set; }
@@ -77,5 +76,6 @@ namespace DataAccess
         public virtual DbSet<ga_user_city> ga_user_city { get; set; }
         public virtual DbSet<ga_user_type> ga_user_type { get; set; }
         public virtual DbSet<supplier_dept_history> supplier_dept_history { get; set; }
+        public virtual DbSet<inventory_goods> inventory_goods { get; set; }
     }
 }
