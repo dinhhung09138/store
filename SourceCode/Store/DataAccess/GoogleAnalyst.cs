@@ -81,13 +81,12 @@ namespace DataAccess
                     foreach (var item in model)
                     {
                         ga_user_city md = new ga_user_city();
-                        md = context.ga_user_city.FirstOrDefault(m => m.ga_id == item.TableID && m.day == item.Day && m.month == item.Month && m.year == item.Year);
+                        md = context.ga_user_city.FirstOrDefault(m => m.table_id == item.TableID && m.day == item.Day && m.month == item.Month && m.year == item.Year);
                         if(md == null)
                         {
                             md = new ga_user_city();
                             md.id = Guid.NewGuid();
-                            md.ga_id = item.TableID;
-                            md.
+                            md.table_id = item.TableID;
 
                         }
                     }
