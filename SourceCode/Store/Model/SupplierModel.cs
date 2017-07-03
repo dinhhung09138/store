@@ -89,5 +89,7 @@ namespace Model
         /// </summary>
         [StringLength(255, ErrorMessage = "Ghi chú không vượt quá 255 ký tự")]
         public string Notes { get; set; }
+
+        public List<StockInModel> StockIn { get; set; }
     }
 }

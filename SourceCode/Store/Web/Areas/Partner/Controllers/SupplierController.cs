@@ -42,8 +42,7 @@ namespace Web.Areas.Partner.Controllers
             }
             return this.Json(new JqueryDataTableResponse<SupplierModel>(), JsonRequestBehavior.AllowGet);
         }
-
-
+        
         [AjaxAuthorize]
         [HttpGet]
         public ActionResult Add()
@@ -85,6 +84,28 @@ namespace Web.Areas.Partner.Controllers
             SupplierModel model = _srvSupplier.Item(new Guid(id));
             model.Insert = false;
             return PartialView(model);
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
+        public ActionResult Info(string id)
+        {
+            ViewBag.id = id;
+            return PartialView();
+        }
+
+        [AjaxAuthorize]
+        [HttpGet]
+        public JsonResult GetItem(string id)
+        {
+            SupplierSrv _srvSupplier = new SupplierSrv();
+            SupplierModel model = _srvSupplier.Item(new Guid(id));
+            if(model != null && model.ID.ToString().Length > 0)
+            {
+                StockInSrv _srvStockIn = new StockInSrv();
+                model.StockIn = _srvStockIn.GetBySupplier(model.ID);
+            }
+            return this.Json(model, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
