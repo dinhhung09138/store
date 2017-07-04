@@ -186,6 +186,29 @@ namespace Web.Controllers
 
         #endregion
 
+        #region " [ Child view ] "
+
+        [ChildActionOnly]
+        public ActionResult Header()
+        {
+            return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Navigation()
+        {
+            return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Footer()
+        {
+            return PartialView();
+        }
+
+        #endregion
+
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult RequiredLogin()

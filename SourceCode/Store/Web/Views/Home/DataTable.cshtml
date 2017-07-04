@@ -72,89 +72,35 @@
 }
 
 
+<div class="modal fade custom-model" id="inputModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Header</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        sdfsfs
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" onclick="clearInputModal()" class="btn btn-default">Đóng</a>
+                <button class="btn btn-primary primary-button">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section script{
     
-<script src="~/Content/datatable/jquery.dataTables.min.js"></script>
-<script src="~/Content/datatable/dataTables.bootstrap.min.js"></script>
-<script src="~/Content/datatable/dataTables.responsive.min.js"></script>
-<script src="~/Content/datatable/responsive.bootstrap.min.js"></script>
-    <!---button show or hide column-->
-<script src="~/Content/datatable/dataTables.buttons.min.js"></script>
-<script src="~/Content/datatable/buttons.colVis.min.js"></script>
     <script>
         document.getElementById("txtFocus").focus();
         var selected = [];
         $(document).ready(function () {
-
-            $('#example').DataTable({
-                responsive: true,
-                //For button
-                //dom: 'Bfrtip',
-                buttons: [
-                    'colvis'
-                ],
-                //lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                processing: true,
-                serverSide: false,
-                searching: true,
-                ordering: true,
-                paging: true,
-                pageLength: 10,
-                pagingType: 'full_numbers',
-                info: true,
-                initComplete: function (settings, json) {
-                    //Do something after finish
-                },
-                language: {
-                    lengthMenu: 'Hiển thị _MENU_ dòng mỗi trang',
-                    zeroRecords: 'Dữ liệu không tồn tại',
-                    info: 'Trang _PAGE_/_PAGES_',
-                    infoEmpty: '',//'Không tìm thấy kết quả',
-                    infoFiltered: '',//'(Tìm kiếm trên _MAX_ dòng)',
-                    search: 'Tìm kiếm',
-                    processing: 'Đang xử lý',
-                    paginate: {
-                        first: '<<',
-                        previous: '<',
-                        next: '>',
-                        last: '>>'
-                    }
-                },
-                order: [[1, "asc"]],
-                //ajax: {
-                //    url: '/home/getdata',
-                //    type: 'post',
-                //    data: function (d) {
-                //        //d.ModuleCode = $('#moduleCode').val()
-                //    }
-                //},
-                columns: [
-                    {
-                    orderable: false,
-                    width: '40px',
-                    render: function (obj, type, data, meta) {
-                            var index = meta.row + meta.settings._iDisplayStart + 1;
-                            return '<div class="ctn-center text-bold">' + index + '<div/>';
-                        }
-                    },
-                    {
-                        data: 'Name',
-                        orderable: true,
-                        searchable: true,
-                    },
-                    {
-                        data: 'Address',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'Phone',
-                        orderable: true,
-                        searchable: true
-                    }
-                ]
-            });
+            
+            $('#inputModel').modal('show');
         });
 
         $('#example tbody').on('click', 'tr', function () {
