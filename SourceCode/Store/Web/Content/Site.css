@@ -779,3 +779,45 @@ select.input-sm {
 .number {
     text-align: right !important;
 }
+
+/*Normal model*/
+.custom-model {
+
+}
+
+.custom-model .modal-dialog {
+    height: auto;
+    position:unset;
+    width:100%;
+}
+
+.custom-model .modal-header {
+    position:unset;
+
+}
+
+.custom-model .modal-body {
+    position:unset;
+    background-color: White;
+    padding: 5px;
+}
+
+.custom-model .modal-footer {
+    position:unset;
+}
+
+@media screen and (min-width: 1024px){
+    .custom-model .modal-dialog {
+        width: 1300px;
+        margin: 30px auto;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .custom-model .modal-dialog {
+        width: 900px;
+        margin: 30px auto;
+    }
+}
+/*End normal model*/
+
