@@ -492,7 +492,7 @@
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="branch_id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="goods_id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="total" Type="float" Nullable="false" />
+          <Property Name="total" Type="decimal" Precision="7" Scale="1" Nullable="false" />
           <Property Name="last_update" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="invoice">
@@ -1616,7 +1616,6 @@
           <EntitySet Name="employee_contract_history" EntityType="StoreModel.employee_contract_history" />
           <EntitySet Name="functions" EntityType="StoreModel.function" />
           <EntitySet Name="goods_group" EntityType="StoreModel.goods_group" />
-          <EntitySet Name="inventory_goods" EntityType="StoreModel.inventory_goods" />
           <EntitySet Name="invoices" EntityType="StoreModel.invoice" />
           <EntitySet Name="leaves" EntityType="StoreModel.leave" />
           <EntitySet Name="leave_type" EntityType="StoreModel.leave_type" />
@@ -1640,10 +1639,6 @@
           <AssociationSet Name="FK_branch_location" Association="StoreModel.FK_branch_location">
             <End Role="location" EntitySet="locations" />
             <End Role="branch" EntitySet="branches" />
-          </AssociationSet>
-          <AssociationSet Name="FK_inventory_branch" Association="StoreModel.FK_inventory_branch">
-            <End Role="branch" EntitySet="branches" />
-            <End Role="inventory_goods" EntitySet="inventory_goods" />
           </AssociationSet>
           <AssociationSet Name="FK_branch_employee_department" Association="StoreModel.FK_branch_employee_department">
             <End Role="department" EntitySet="departments" />
@@ -1732,10 +1727,6 @@
           <AssociationSet Name="FK_goods_unit" Association="StoreModel.FK_goods_unit">
             <End Role="unit" EntitySet="units" />
             <End Role="good" EntitySet="goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_inventory_goods" Association="StoreModel.FK_inventory_goods">
-            <End Role="good" EntitySet="goods" />
-            <End Role="inventory_goods" EntitySet="inventory_goods" />
           </AssociationSet>
           <AssociationSet Name="FK_stock_out_detail_goods" Association="StoreModel.FK_stock_out_detail_goods">
             <End Role="good" EntitySet="goods" />
@@ -1833,6 +1824,15 @@
           <EntitySet Name="ga_user_city" EntityType="StoreModel.ga_user_city" />
           <EntitySet Name="ga_user_type" EntityType="StoreModel.ga_user_type" />
           <EntitySet Name="supplier_dept_history" EntityType="StoreModel.supplier_dept_history" />
+          <EntitySet Name="inventory_goods" EntityType="StoreModel.inventory_goods" />
+          <AssociationSet Name="FK_inventory_branch" Association="StoreModel.FK_inventory_branch">
+            <End Role="branch" EntitySet="branches" />
+            <End Role="inventory_goods" EntitySet="inventory_goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_inventory_goods" Association="StoreModel.FK_inventory_goods">
+            <End Role="good" EntitySet="goods" />
+            <End Role="inventory_goods" EntitySet="inventory_goods" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="branch">
           <Key>
@@ -1856,12 +1856,12 @@
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="branch_employee" Relationship="StoreModel.FK_branch_employee_branch_employee" FromRole="branch" ToRole="branch_employee" />
           <NavigationProperty Name="location" Relationship="StoreModel.FK_branch_location" FromRole="branch" ToRole="location" />
-          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_branch" FromRole="branch" ToRole="inventory_goods" />
           <NavigationProperty Name="orders" Relationship="StoreModel.FK_order_branch" FromRole="branch" ToRole="order" />
           <NavigationProperty Name="stock_in" Relationship="StoreModel.FK_stock_in_branch" FromRole="branch" ToRole="stock_in" />
           <NavigationProperty Name="stock_out" Relationship="StoreModel.FK_stock_out_branch" FromRole="branch" ToRole="stock_out" />
           <NavigationProperty Name="stock_tranfer" Relationship="StoreModel.FK_stock_tranfer_branch_from" FromRole="branch" ToRole="stock_tranfer" />
           <NavigationProperty Name="stock_tranfer1" Relationship="StoreModel.FK_stock_tranfer_branch_to" FromRole="branch" ToRole="stock_tranfer" />
+          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_branch" FromRole="branch" ToRole="inventory_goods" />
         </EntityType>
         <EntityType Name="branch_employee">
           <Key>
@@ -2032,18 +2032,6 @@
           <Property Name="delete_by" Type="Guid" />
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="goods" Relationship="StoreModel.FK_goods_goods_group" FromRole="goods_group" ToRole="good" />
-        </EntityType>
-        <EntityType Name="inventory_goods">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="branch_id" Type="Guid" Nullable="false" />
-          <Property Name="goods_id" Type="Guid" Nullable="false" />
-          <Property Name="total" Type="Double" Nullable="false" />
-          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="branch" Relationship="StoreModel.FK_inventory_branch" FromRole="inventory_goods" ToRole="branch" />
-          <NavigationProperty Name="good" Relationship="StoreModel.FK_inventory_goods" FromRole="inventory_goods" ToRole="good" />
         </EntityType>
         <EntityType Name="invoice">
           <Key>
@@ -2295,18 +2283,6 @@
             </Principal>
             <Dependent Role="branch">
               <PropertyRef Name="location_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_inventory_branch">
-          <End Type="StoreModel.branch" Role="branch" Multiplicity="1" />
-          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="branch">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="inventory_goods">
-              <PropertyRef Name="branch_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2568,11 +2544,11 @@
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="goods_group" Relationship="StoreModel.FK_goods_goods_group" FromRole="good" ToRole="goods_group" />
           <NavigationProperty Name="unit" Relationship="StoreModel.FK_goods_unit" FromRole="good" ToRole="unit" />
-          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_goods" FromRole="good" ToRole="inventory_goods" />
           <NavigationProperty Name="stock_out_detail" Relationship="StoreModel.FK_stock_out_detail_goods" FromRole="good" ToRole="stock_out_detail" />
           <NavigationProperty Name="stock_tranfer_detail" Relationship="StoreModel.FK_stock_tranfer_detail_goods" FromRole="good" ToRole="stock_tranfer_detail" />
           <NavigationProperty Name="stock_in_detail" Relationship="StoreModel.FK_stock_in_detail_goods" FromRole="good" ToRole="stock_in_detail" />
           <Property Name="sales_directive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="inventory_goods" Relationship="StoreModel.FK_inventory_goods" FromRole="good" ToRole="inventory_goods" />
         </EntityType>
         <Association Name="FK_branch_employee_employee">
           <End Type="StoreModel.employee" Role="employee" Multiplicity="1" />
@@ -2655,18 +2631,6 @@
             </Principal>
             <Dependent Role="good">
               <PropertyRef Name="unit_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_inventory_goods">
-          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
-          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="good">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="inventory_goods">
-              <PropertyRef Name="goods_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3287,6 +3251,42 @@
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="money_left" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
         </EntityType>
+        <EntityType Name="inventory_goods">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="branch_id" Type="Guid" Nullable="false" />
+          <Property Name="goods_id" Type="Guid" Nullable="false" />
+          <Property Name="total" Type="Decimal" Nullable="false" Precision="7" Scale="1" />
+          <Property Name="last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="branch" Relationship="StoreModel.FK_inventory_branch" FromRole="inventory_goods" ToRole="branch" />
+          <NavigationProperty Name="good" Relationship="StoreModel.FK_inventory_goods" FromRole="inventory_goods" ToRole="good" />
+        </EntityType>
+        <Association Name="FK_inventory_branch">
+          <End Type="StoreModel.branch" Role="branch" Multiplicity="1" />
+          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="branch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inventory_goods">
+              <PropertyRef Name="branch_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_inventory_goods">
+          <End Type="StoreModel.good" Role="good" Multiplicity="1" />
+          <End Type="StoreModel.inventory_goods" Role="inventory_goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="good">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="inventory_goods">
+              <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3474,17 +3474,6 @@
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="inventory_goods">
-            <EntityTypeMapping TypeName="StoreModel.inventory_goods">
-              <MappingFragment StoreEntitySet="inventory_goods">
-                <ScalarProperty Name="last_update" ColumnName="last_update" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="goods_id" ColumnName="goods_id" />
-                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4166,6 +4155,17 @@
                 <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventory_goods">
+            <EntityTypeMapping TypeName="StoreModel.inventory_goods">
+              <MappingFragment StoreEntitySet="inventory_goods">
+                <ScalarProperty Name="last_update" ColumnName="last_update" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="goods_id" ColumnName="goods_id" />
+                <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

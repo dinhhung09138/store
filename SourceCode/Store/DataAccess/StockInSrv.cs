@@ -280,6 +280,43 @@ namespace DataAccess
                                 dt.discount = item.Discount;
                                 context.stock_in_detail.Add(dt);
                                 context.Entry(dt).State = System.Data.Entity.EntityState.Added;
+                                context.SaveChanges();
+
+                                #region " [ Update to inventory ] "
+
+                                var inv = (from a in context.inventory_goods where a.goods_id == item.GoodsID && a.branch_id == model.BranchID select a).FirstOrDefault();
+                                if(inv == null)
+                                {
+                                    inventory_goods n = new inventory_goods();
+                                    n.id = Guid.NewGuid();
+                                    n.branch_id = model.BranchID;
+                                    n.goods_id = item.GoodsID;
+                                    n.total = item.Number;
+                                    n.last_update = DateTime.Now;
+                                    context.inventory_goods.Add(n);
+                                    context.Entry(n).State = System.Data.Entity.EntityState.Added;
+                                }
+                                else
+                                {
+                                    inv.total = inv.total + item.Number;
+                                    inv.last_update = DateTime.Now;
+                                    context.inventory_goods.Attach(inv);
+                                    context.Entry(inv).State = System.Data.Entity.EntityState.Modified;
+                                }
+                                context.SaveChanges();
+
+                                #endregion
+
+                                #region " [ Update goods ] "
+
+                                var goods = (from m in context.goods where m.id == item.GoodsID select m).FirstOrDefault();
+                                goods.number_in_stock += item.Number;
+                                context.goods.Attach(goods);
+                                context.Entry(goods).State = System.Data.Entity.EntityState.Modified;
+                                context.SaveChanges();
+
+                                #endregion
+
                             }
                         }
                         else
@@ -305,12 +342,32 @@ namespace DataAccess
                             context.SaveChanges();
                             //
                             var listDt = context.stock_in_detail.Where(m => m.stock_in_id == md.id).ToList();
+
+                            #region " [ Update inventory ] "
+
+                            foreach (var item in listDt)
+                            {
+                                var inv = (from m in context.inventory_goods where m.goods_id == item.goods_id && m.branch_id == model.BranchID select m).FirstOrDefault();
+                                inv.total -= item.number;
+                                context.inventory_goods.Attach(inv);
+                                context.Entry(inv).State = System.Data.Entity.EntityState.Modified;
+                                context.SaveChanges();
+                                //
+                                var goods = context.goods.FirstOrDefault(m => m.id == item.goods_id);
+                                goods.number_in_stock -= item.number;
+                                context.goods.Attach(goods);
+                                context.Entry(goods).State = System.Data.Entity.EntityState.Modified;
+                                context.SaveChanges();
+                            }
+
+                            #endregion
+
                             context.stock_in_detail.RemoveRange(listDt);
-                            //context.Entry(listDt).State = System.Data.Entity.EntityState.Deleted;
-                            //
+                            context.SaveChanges();
+
+
                             foreach (var item in model.details)
                             {
-                                //
                                 stock_in_detail dt = new stock_in_detail();
                                 dt.id = Guid.NewGuid();
                                 dt.stock_in_id = md.id;
@@ -320,9 +377,44 @@ namespace DataAccess
                                 dt.discount = item.Discount;
                                 context.stock_in_detail.Add(dt);
                                 context.Entry(dt).State = System.Data.Entity.EntityState.Added;
+                                context.SaveChanges();
+
+                                #region " [ Update to inventory ] "
+
+                                var inv = (from a in context.inventory_goods where a.goods_id == item.GoodsID && a.branch_id == model.BranchID select a).FirstOrDefault();
+                                if (inv == null)
+                                {
+                                    inventory_goods n = new inventory_goods();
+                                    n.id = Guid.NewGuid();
+                                    n.branch_id = model.BranchID;
+                                    n.goods_id = item.GoodsID;
+                                    n.total = item.Number;
+                                    n.last_update = DateTime.Now;
+                                    context.inventory_goods.Add(n);
+                                    context.Entry(n).State = System.Data.Entity.EntityState.Added;
+                                }
+                                else
+                                {
+                                    inv.total = inv.total + item.Number;
+                                    inv.last_update = DateTime.Now;
+                                    context.inventory_goods.Attach(inv);
+                                    context.Entry(inv).State = System.Data.Entity.EntityState.Modified;
+                                }
+                                context.SaveChanges();
+
+                                #endregion
+
+                                #region " [ Update goods ] "
+
+                                var goods = (from m in context.goods where m.id == item.GoodsID select m).FirstOrDefault();
+                                goods.number_in_stock += item.Number;
+                                context.goods.Attach(goods);
+                                context.Entry(goods).State = System.Data.Entity.EntityState.Modified;
+                                context.SaveChanges();
+
+                                #endregion
                             }
                         }
-                        context.SaveChanges();
                         trans.Commit();
                     }
                     
@@ -331,7 +423,7 @@ namespace DataAccess
                 _return.Add("message", DatabaseMessage.SAVE_SUCCESS);
             }
             catch (Exception ex)
-            {
+            {                
                 _return.Add("status", DatabaseExecute.Error);
                 _return.Add("systemMessage", ex.Message);
                 _return.Add("message", DatabaseMessage.SAVE_ERROR);
@@ -371,6 +463,40 @@ namespace DataAccess
                 _return.Add("message", DatabaseMessage.DELETE_ERROR);
             }
 
+            return _return;
+        }
+
+        /// <summary>
+        /// Get list stock-in by supplier id
+        /// </summary>
+        /// <param name="supplierID">The identify of supplier</param>
+        /// <returns></returns>
+        public List<StockInModel> GetBySupplier(Guid supplierID)
+        {
+            List<StockInModel> _return = new List<StockInModel>();
+            try
+            {
+                using (var context = new StoreEntities())
+                {
+                    var list = (from m in context.stock_in
+                                join e in context.employees on m.empl_id equals e.id
+                                where m.supplier_id == supplierID
+                                select new { m.id, m.code, m.stock_in_date, m.total_money, e.name }).ToList();
+                    foreach (var item in list)
+                    {
+                        _return.Add(new StockInModel()
+                        {
+                            ID = item.id,
+                            Code = item.code,
+                            StockInDateString = item.stock_in_date.ToString(),
+                            EmployeeName = item.name,
+                            TotalMoney = item.total_money
+                        });
+                    }
+                    return _return;
+                }
+            }
+            catch { }
             return _return;
         }
     }
