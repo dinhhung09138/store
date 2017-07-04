@@ -236,6 +236,14 @@
     <Compile Include="Areas\Internal\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Internal\InternalAreaRegistration.cs" />
     <Compile Include="Areas\Location\LocationAreaRegistration.cs" />
+    <Compile Include="Areas\Marketing\Controllers\FacebookController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\GoogleAnalystController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\GooglePlusController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\InstargramController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\LinkedInController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\TwitterController.cs" />
+    <Compile Include="Areas\Marketing\Controllers\YoutubeController.cs" />
+    <Compile Include="Areas\Marketing\MarketingAreaRegistration.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Partner\Controllers\CustomerGroupController.cs" />
     <Compile Include="Areas\Partner\Controllers\DeliverController.cs" />
@@ -474,7 +482,8 @@
     <Content Include="Areas\Warehouse\Views\Shared\_WarehouseLayout.cshtml" />
     <Content Include="Areas\Warehouse\Views\Unit\Info.cshtml" />
     <Content Include="Areas\Warehouse\Views\StockIn\Info.cshtml" />
-    <Content Include="Areas\Partner\Views\Supplier\Info.cshtml" />
+    <Content Include="Areas\Partner\Views\Supplier\Info.cshtml" 
+    <Content Include="Areas\Marketing\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -542,6 +551,9 @@
     <Content Include="Views\Home\RequiredLogin.cshtml" />
     <Content Include="Views\Home\Calendar.cshtml" />
     <Content Include="Views\Home\Editor.cshtml" />
+    <Content Include="Views\Home\Header.cshtml" />
+    <Content Include="Views\Home\Navigation.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -559,6 +571,15 @@
     <Folder Include="Areas\Location\Controllers\" />
     <Folder Include="Areas\Location\Models\" />
     <Folder Include="Areas\Location\Views\Shared\" />
+    <Folder Include="Areas\Marketing\Models\" />
+    <Folder Include="Areas\Marketing\Views\Facebook\" />
+    <Folder Include="Areas\Marketing\Views\GoogleAnalyst\" />
+    <Folder Include="Areas\Marketing\Views\GooglePlus\" />
+    <Folder Include="Areas\Marketing\Views\Instargram\" />
+    <Folder Include="Areas\Marketing\Views\LinkedIn\" />
+    <Folder Include="Areas\Marketing\Views\Shared\" />
+    <Folder Include="Areas\Marketing\Views\Twitter\" />
+    <Folder Include="Areas\Marketing\Views\Youtube\" />
     <Folder Include="Areas\Partner\Models\" />
     <Folder Include="Areas\Report\Controllers\" />
     <Folder Include="Areas\Report\Models\" />
