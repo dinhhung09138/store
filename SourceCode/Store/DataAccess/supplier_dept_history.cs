@@ -21,5 +21,6 @@ namespace DataAccess
         public decimal money_pay { get; set; }
         public System.DateTime date { get; set; }
         public decimal money_left { get; set; }
+        public bool status { get; set; }
     }
 }
