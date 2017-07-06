@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="StoreModel.employee_contract_history" Width="1.5" PointX="11.25" PointY="35.875" />
         <EntityTypeShape EntityType="StoreModel.function" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="StoreModel.goods_group" Width="1.5" PointX="3.75" PointY="26.25" />
-        <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="StoreModel.leave" Width="1.5" PointX="13.5" PointY="26" />
         <EntityTypeShape EntityType="StoreModel.leave_type" Width="1.5" PointX="11.25" PointY="22" />
         <EntityTypeShape EntityType="StoreModel.location" Width="1.5" PointX="0.75" PointY="36.75" />
@@ -101,6 +100,24 @@
         <EntityTypeShape EntityType="StoreModel.inventory_goods" Width="1.5" PointX="16.5" PointY="35" />
         <AssociationConnector Association="StoreModel.FK_inventory_branch" />
         <AssociationConnector Association="StoreModel.FK_inventory_goods" />
+        <EntityTypeShape EntityType="StoreModel.bank_account" Width="1.5" PointX="0.75" PointY="24" />
+        <EntityTypeShape EntityType="StoreModel.facebook_post_type" Width="1.5" PointX="19.75" PointY="8.75" />
+        <EntityTypeShape EntityType="StoreModel.fanpage" Width="1.5" PointX="16.75" PointY="6.75" />
+        <EntityTypeShape EntityType="StoreModel.fanpage_analyst" Width="1.5" PointX="19" PointY="18.5" />
+        <EntityTypeShape EntityType="StoreModel.fanpage_post" Width="1.5" PointX="19" PointY="15" />
+        <EntityTypeShape EntityType="StoreModel.fanpage_post_schedule" Width="1.5" PointX="22" PointY="7" />
+        <EntityTypeShape EntityType="StoreModel.fanpage_user_management" Width="1.5" PointX="19" PointY="4.75" />
+        <EntityTypeShape EntityType="StoreModel.invoice" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="StoreModel.invoice_receiver_group" Width="1.5" PointX="0.75" PointY="20.875" />
+        <EntityTypeShape EntityType="StoreModel.invoice_type" Width="1.5" PointX="0.75" PointY="15.5" />
+        <AssociationConnector Association="StoreModel.FK_invoice_bank_account" />
+        <AssociationConnector Association="StoreModel.FK_fanpage_post_schedule_facebook_post_type" />
+        <AssociationConnector Association="StoreModel.FK_fanpage_analyst_fanpage" />
+        <AssociationConnector Association="StoreModel.FK_fanpage_post_fanpage" />
+        <AssociationConnector Association="StoreModel.FK_fanpage_post_schedule_fanpage" />
+        <AssociationConnector Association="StoreModel.FK_fanpage_user_management_fanpage" />
+        <AssociationConnector Association="StoreModel.FK_invoice_invoice" />
+        <AssociationConnector Association="StoreModel.FK_invoice_invoice_receiver_group" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

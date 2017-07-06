@@ -12,20 +12,20 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class invoice
+    public partial class invoice_type
     {
-        public System.Guid id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public invoice_type()
+        {
+            this.invoices = new HashSet<invoice>();
+        }
+    
         public string code { get; set; }
-        public System.DateTime invoice_date { get; set; }
-        public string invoice_type_code { get; set; }
-        public string reference_form_code { get; set; }
-        public string receiver_group_code { get; set; }
-        public Nullable<System.Guid> receiver_id { get; set; }
-        public decimal money { get; set; }
+        public string name { get; set; }
         public string notes { get; set; }
-        public bool is_cash { get; set; }
-        public Nullable<System.Guid> bank_account_id { get; set; }
+        public bool is_receipt { get; set; }
         public bool is_business_result { get; set; }
+        public bool @fixed { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }
@@ -34,8 +34,7 @@ namespace DataAccess
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
     
-        public virtual bank_account bank_account { get; set; }
-        public virtual invoice_type invoice_type { get; set; }
-        public virtual invoice_receiver_group invoice_receiver_group { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<invoice> invoices { get; set; }
     }
 }

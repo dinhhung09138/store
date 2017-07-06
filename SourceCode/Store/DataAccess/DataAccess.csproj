@@ -149,9 +149,6 @@
     <Compile Include="inventory_goods.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="invoice.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="leave.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

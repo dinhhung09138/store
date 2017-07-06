@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="StoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="account" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="branch">
           <Key>
             <PropertyRef Name="id" />
@@ -204,6 +213,106 @@
           <Property Name="delete_by" Type="uniqueidentifier" />
           <Property Name="delete_date" Type="datetime" />
         </EntityType>
+        <EntityType Name="facebook_post_type">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="fanpage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="display_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="category" Type="nvarchar" MaxLength="50" />
+          <Property Name="avatar_picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="wall_picture" Type="nvarchar" MaxLength="100" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="introduction" Type="nvarchar(max)" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+          <Property Name="likes" Type="int" Nullable="false" />
+          <Property Name="follows" Type="int" Nullable="false" />
+          <Property Name="reactions" Type="int" Nullable="false" />
+          <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="update_by" Type="uniqueidentifier" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="delete_by" Type="uniqueidentifier" />
+          <Property Name="delete_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="fanpage_analyst">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="fanpage_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="likes" Type="int" Nullable="false" />
+          <Property Name="follows" Type="int" Nullable="false" />
+          <Property Name="reactions" Type="int" Nullable="false" />
+          <Property Name="datetime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fanpage_post">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="fanpage_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="post_date" Type="datetime" Nullable="false" />
+          <Property Name="likes" Type="int" Nullable="false" />
+          <Property Name="reaction_viewer" Type="int" Nullable="false" />
+          <Property Name="reaction_total" Type="int" Nullable="false" />
+          <Property Name="comment" Type="int" Nullable="false" />
+          <Property Name="sharepost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fanpage_post_schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="fanpage_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="post_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="is_published" Type="bit" Nullable="false" />
+          <Property Name="publish_time" Type="datetime" />
+          <Property Name="message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="source" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="link" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="caption" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="picture" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="time_to_post" Type="datetime" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="update_by" Type="uniqueidentifier" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="delete_by" Type="uniqueidentifier" />
+          <Property Name="delete_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="fanpage_user_management">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="user_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fan_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="role" Type="nvarchar" MaxLength="50" />
+          <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="update_by" Type="uniqueidentifier" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="delete_by" Type="uniqueidentifier" />
+          <Property Name="delete_date" Type="datetime" />
+        </EntityType>
         <EntityType Name="function">
           <Key>
             <PropertyRef Name="code" />
@@ -226,6 +335,9 @@
           <Property Name="acc_id" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="acc_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="table_id" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="api_key" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="client_id" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="secret_id" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="update_by" Type="uniqueidentifier" />
@@ -501,7 +613,41 @@
           </Key>
           <Property Name="id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="code" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="invoice_date" Type="datetime" Nullable="false" />
+          <Property Name="invoice_type_code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="reference_form_code" Type="varchar" MaxLength="20" />
+          <Property Name="receiver_group_code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="receiver_id" Type="uniqueidentifier" />
+          <Property Name="money" Type="money" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_cash" Type="bit" Nullable="false" />
+          <Property Name="bank_account_id" Type="uniqueidentifier" />
           <Property Name="is_business_result" Type="bit" Nullable="false" />
+          <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="update_by" Type="uniqueidentifier" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="delete_by" Type="uniqueidentifier" />
+          <Property Name="delete_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="invoice_receiver_group">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="invoice_type">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="is_receipt" Type="bit" Nullable="false" />
+          <Property Name="is_business_result" Type="bit" Nullable="false" />
+          <Property Name="fixed" Type="bit" Nullable="false" />
           <Property Name="create_by" Type="uniqueidentifier" Nullable="false" />
           <Property Name="create_date" Type="datetime" Nullable="false" />
           <Property Name="update_by" Type="uniqueidentifier" />
@@ -771,6 +917,7 @@
           <Property Name="money_pay" Type="money" Nullable="false" />
           <Property Name="date" Type="datetime" Nullable="false" />
           <Property Name="money_left" Type="money" Nullable="false" />
+          <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="supplier_group">
           <Key>
@@ -974,6 +1121,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_fanpage_analyst_fanpage">
+          <End Role="fanpage" Type="Self.fanpage" Multiplicity="1" />
+          <End Role="fanpage_analyst" Type="Self.fanpage_analyst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_analyst">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_fanpage">
+          <End Role="fanpage" Type="Self.fanpage" Multiplicity="1" />
+          <End Role="fanpage_post" Type="Self.fanpage_post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_post">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_schedule_facebook_post_type">
+          <End Role="facebook_post_type" Type="Self.facebook_post_type" Multiplicity="1" />
+          <End Role="fanpage_post_schedule" Type="Self.fanpage_post_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facebook_post_type">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="fanpage_post_schedule">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_schedule_fanpage">
+          <End Role="fanpage" Type="Self.fanpage" Multiplicity="1" />
+          <End Role="fanpage_post_schedule" Type="Self.fanpage_post_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_post_schedule">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_user_management_fanpage">
+          <End Role="fanpage" Type="Self.fanpage" Multiplicity="1" />
+          <End Role="fanpage_user_management" Type="Self.fanpage_user_management" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_user_management">
+              <PropertyRef Name="fan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_goods_goods_group">
           <End Role="goods_group" Type="Self.goods_group" Multiplicity="0..1" />
           <End Role="goods" Type="Self.goods" Multiplicity="*" />
@@ -1019,6 +1226,42 @@
             </Principal>
             <Dependent Role="inventory_goods">
               <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_bank_account">
+          <End Role="bank_account" Type="Self.bank_account" Multiplicity="0..1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank_account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="bank_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_invoice">
+          <End Role="invoice_type" Type="Self.invoice_type" Multiplicity="1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice_type">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="invoice_type_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_invoice_receiver_group">
+          <End Role="invoice_receiver_group" Type="Self.invoice_receiver_group" Multiplicity="1" />
+          <End Role="invoice" Type="Self.invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice_receiver_group">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="receiver_group_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1371,6 +1614,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="StoreModelStoreContainer">
+          <EntitySet Name="bank_account" EntityType="Self.bank_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="branch" EntityType="Self.branch" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="branch_employee" EntityType="Self.branch_employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="config" EntityType="Self.config" Schema="dbo" store:Type="Tables" />
@@ -1383,6 +1627,12 @@
           <EntitySet Name="department" EntityType="Self.department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="employee_contract_history" EntityType="Self.employee_contract_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="facebook_post_type" EntityType="Self.facebook_post_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fanpage" EntityType="Self.fanpage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fanpage_analyst" EntityType="Self.fanpage_analyst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fanpage_post" EntityType="Self.fanpage_post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fanpage_post_schedule" EntityType="Self.fanpage_post_schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fanpage_user_management" EntityType="Self.fanpage_user_management" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="function" EntityType="Self.function" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ga_account" EntityType="Self.ga_account" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ga_browser" EntityType="Self.ga_browser" Schema="dbo" store:Type="Tables" />
@@ -1400,6 +1650,8 @@
           <EntitySet Name="goods_group" EntityType="Self.goods_group" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="inventory_goods" EntityType="Self.inventory_goods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="invoice" EntityType="Self.invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice_receiver_group" EntityType="Self.invoice_receiver_group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoice_type" EntityType="Self.invoice_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="leave" EntityType="Self.leave" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="leave_type" EntityType="Self.leave_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="location" EntityType="Self.location" Schema="dbo" store:Type="Tables" />
@@ -1471,6 +1723,26 @@
             <End Role="contract_type" EntitySet="contract_type" />
             <End Role="employee" EntitySet="employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_fanpage_analyst_fanpage" Association="Self.FK_fanpage_analyst_fanpage">
+            <End Role="fanpage" EntitySet="fanpage" />
+            <End Role="fanpage_analyst" EntitySet="fanpage_analyst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_fanpage" Association="Self.FK_fanpage_post_fanpage">
+            <End Role="fanpage" EntitySet="fanpage" />
+            <End Role="fanpage_post" EntitySet="fanpage_post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_schedule_facebook_post_type" Association="Self.FK_fanpage_post_schedule_facebook_post_type">
+            <End Role="facebook_post_type" EntitySet="facebook_post_type" />
+            <End Role="fanpage_post_schedule" EntitySet="fanpage_post_schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_schedule_fanpage" Association="Self.FK_fanpage_post_schedule_fanpage">
+            <End Role="fanpage" EntitySet="fanpage" />
+            <End Role="fanpage_post_schedule" EntitySet="fanpage_post_schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_user_management_fanpage" Association="Self.FK_fanpage_user_management_fanpage">
+            <End Role="fanpage" EntitySet="fanpage" />
+            <End Role="fanpage_user_management" EntitySet="fanpage_user_management" />
+          </AssociationSet>
           <AssociationSet Name="FK_goods_goods_group" Association="Self.FK_goods_goods_group">
             <End Role="goods_group" EntitySet="goods_group" />
             <End Role="goods" EntitySet="goods" />
@@ -1486,6 +1758,18 @@
           <AssociationSet Name="FK_inventory_goods" Association="Self.FK_inventory_goods">
             <End Role="goods" EntitySet="goods" />
             <End Role="inventory_goods" EntitySet="inventory_goods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_bank_account" Association="Self.FK_invoice_bank_account">
+            <End Role="bank_account" EntitySet="bank_account" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_invoice" Association="Self.FK_invoice_invoice">
+            <End Role="invoice_type" EntitySet="invoice_type" />
+            <End Role="invoice" EntitySet="invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_invoice_receiver_group" Association="Self.FK_invoice_invoice_receiver_group">
+            <End Role="invoice_receiver_group" EntitySet="invoice_receiver_group" />
+            <End Role="invoice" EntitySet="invoice" />
           </AssociationSet>
           <AssociationSet Name="FK_leave_leave_type" Association="Self.FK_leave_leave_type">
             <End Role="leave_type" EntitySet="leave_type" />
@@ -1616,7 +1900,6 @@
           <EntitySet Name="employee_contract_history" EntityType="StoreModel.employee_contract_history" />
           <EntitySet Name="functions" EntityType="StoreModel.function" />
           <EntitySet Name="goods_group" EntityType="StoreModel.goods_group" />
-          <EntitySet Name="invoices" EntityType="StoreModel.invoice" />
           <EntitySet Name="leaves" EntityType="StoreModel.leave" />
           <EntitySet Name="leave_type" EntityType="StoreModel.leave_type" />
           <EntitySet Name="locations" EntityType="StoreModel.location" />
@@ -1833,6 +2116,48 @@
             <End Role="good" EntitySet="goods" />
             <End Role="inventory_goods" EntitySet="inventory_goods" />
           </AssociationSet>
+          <EntitySet Name="bank_account" EntityType="StoreModel.bank_account" />
+          <EntitySet Name="facebook_post_type" EntityType="StoreModel.facebook_post_type" />
+          <EntitySet Name="fanpages" EntityType="StoreModel.fanpage" />
+          <EntitySet Name="fanpage_analyst" EntityType="StoreModel.fanpage_analyst" />
+          <EntitySet Name="fanpage_post" EntityType="StoreModel.fanpage_post" />
+          <EntitySet Name="fanpage_post_schedule" EntityType="StoreModel.fanpage_post_schedule" />
+          <EntitySet Name="fanpage_user_management" EntityType="StoreModel.fanpage_user_management" />
+          <EntitySet Name="invoices" EntityType="StoreModel.invoice" />
+          <EntitySet Name="invoice_receiver_group" EntityType="StoreModel.invoice_receiver_group" />
+          <EntitySet Name="invoice_type" EntityType="StoreModel.invoice_type" />
+          <AssociationSet Name="FK_invoice_bank_account" Association="StoreModel.FK_invoice_bank_account">
+            <End Role="bank_account" EntitySet="bank_account" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_schedule_facebook_post_type" Association="StoreModel.FK_fanpage_post_schedule_facebook_post_type">
+            <End Role="facebook_post_type" EntitySet="facebook_post_type" />
+            <End Role="fanpage_post_schedule" EntitySet="fanpage_post_schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_analyst_fanpage" Association="StoreModel.FK_fanpage_analyst_fanpage">
+            <End Role="fanpage" EntitySet="fanpages" />
+            <End Role="fanpage_analyst" EntitySet="fanpage_analyst" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_fanpage" Association="StoreModel.FK_fanpage_post_fanpage">
+            <End Role="fanpage" EntitySet="fanpages" />
+            <End Role="fanpage_post" EntitySet="fanpage_post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_post_schedule_fanpage" Association="StoreModel.FK_fanpage_post_schedule_fanpage">
+            <End Role="fanpage" EntitySet="fanpages" />
+            <End Role="fanpage_post_schedule" EntitySet="fanpage_post_schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fanpage_user_management_fanpage" Association="StoreModel.FK_fanpage_user_management_fanpage">
+            <End Role="fanpage" EntitySet="fanpages" />
+            <End Role="fanpage_user_management" EntitySet="fanpage_user_management" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_invoice" Association="StoreModel.FK_invoice_invoice">
+            <End Role="invoice_type" EntitySet="invoice_type" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_invoice_invoice_receiver_group" Association="StoreModel.FK_invoice_invoice_receiver_group">
+            <End Role="invoice_receiver_group" EntitySet="invoice_receiver_group" />
+            <End Role="invoice" EntitySet="invoices" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="branch">
           <Key>
@@ -2032,21 +2357,6 @@
           <Property Name="delete_by" Type="Guid" />
           <Property Name="delete_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="goods" Relationship="StoreModel.FK_goods_goods_group" FromRole="goods_group" ToRole="good" />
-        </EntityType>
-        <EntityType Name="invoice">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Guid" Nullable="false" />
-          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="is_business_result" Type="Boolean" Nullable="false" />
-          <Property Name="create_by" Type="Guid" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="update_by" Type="Guid" />
-          <Property Name="update_date" Type="DateTime" Precision="3" />
-          <Property Name="deleted" Type="Boolean" Nullable="false" />
-          <Property Name="delete_by" Type="Guid" />
-          <Property Name="delete_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="leave">
           <Key>
@@ -3029,6 +3339,9 @@
           <Property Name="deleted" Type="Boolean" Nullable="false" />
           <Property Name="delete_by" Type="Guid" />
           <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <Property Name="api_key" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="client_id" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="secret_id" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ga_browser">
           <Key>
@@ -3250,6 +3563,7 @@
           <Property Name="money_pay" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="money_left" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="inventory_goods">
           <Key>
@@ -3284,6 +3598,276 @@
             </Principal>
             <Dependent Role="inventory_goods">
               <PropertyRef Name="goods_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="bank_account">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="invoices" Relationship="StoreModel.FK_invoice_bank_account" FromRole="bank_account" ToRole="invoice" />
+        </EntityType>
+        <EntityType Name="facebook_post_type">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="fanpage_post_schedule" Relationship="StoreModel.FK_fanpage_post_schedule_facebook_post_type" FromRole="facebook_post_type" ToRole="fanpage_post_schedule" />
+        </EntityType>
+        <EntityType Name="fanpage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="display_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="avatar_picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="wall_picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="likes" Type="Int32" Nullable="false" />
+          <Property Name="follows" Type="Int32" Nullable="false" />
+          <Property Name="reactions" Type="Int32" Nullable="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="fanpage_analyst" Relationship="StoreModel.FK_fanpage_analyst_fanpage" FromRole="fanpage" ToRole="fanpage_analyst" />
+          <NavigationProperty Name="fanpage_post" Relationship="StoreModel.FK_fanpage_post_fanpage" FromRole="fanpage" ToRole="fanpage_post" />
+          <NavigationProperty Name="fanpage_post_schedule" Relationship="StoreModel.FK_fanpage_post_schedule_fanpage" FromRole="fanpage" ToRole="fanpage_post_schedule" />
+          <NavigationProperty Name="fanpage_user_management" Relationship="StoreModel.FK_fanpage_user_management_fanpage" FromRole="fanpage" ToRole="fanpage_user_management" />
+        </EntityType>
+        <EntityType Name="fanpage_analyst">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="fanpage_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="likes" Type="Int32" Nullable="false" />
+          <Property Name="follows" Type="Int32" Nullable="false" />
+          <Property Name="reactions" Type="Int32" Nullable="false" />
+          <Property Name="datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="fanpage" Relationship="StoreModel.FK_fanpage_analyst_fanpage" FromRole="fanpage_analyst" ToRole="fanpage" />
+        </EntityType>
+        <EntityType Name="fanpage_post">
+          <Key>
+            <PropertyRef Name="post_id" />
+          </Key>
+          <Property Name="post_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fanpage_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="post_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="likes" Type="Int32" Nullable="false" />
+          <Property Name="reaction_viewer" Type="Int32" Nullable="false" />
+          <Property Name="reaction_total" Type="Int32" Nullable="false" />
+          <Property Name="comment" Type="Int32" Nullable="false" />
+          <Property Name="sharepost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="fanpage" Relationship="StoreModel.FK_fanpage_post_fanpage" FromRole="fanpage_post" ToRole="fanpage" />
+        </EntityType>
+        <EntityType Name="fanpage_post_schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="fanpage_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="post_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="is_published" Type="Boolean" Nullable="false" />
+          <Property Name="publish_time" Type="DateTime" Precision="3" />
+          <Property Name="message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="source" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="link" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="caption" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="picture" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="time_to_post" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="facebook_post_type" Relationship="StoreModel.FK_fanpage_post_schedule_facebook_post_type" FromRole="fanpage_post_schedule" ToRole="facebook_post_type" />
+          <NavigationProperty Name="fanpage" Relationship="StoreModel.FK_fanpage_post_schedule_fanpage" FromRole="fanpage_post_schedule" ToRole="fanpage" />
+        </EntityType>
+        <EntityType Name="fanpage_user_management">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="user_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fan_id" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="fanpage" Relationship="StoreModel.FK_fanpage_user_management_fanpage" FromRole="fanpage_user_management" ToRole="fanpage" />
+        </EntityType>
+        <EntityType Name="invoice">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="invoice_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="invoice_type_code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reference_form_code" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="receiver_group_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="receiver_id" Type="Guid" />
+          <Property Name="money" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_cash" Type="Boolean" Nullable="false" />
+          <Property Name="bank_account_id" Type="Guid" />
+          <Property Name="is_business_result" Type="Boolean" Nullable="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="bank_account" Relationship="StoreModel.FK_invoice_bank_account" FromRole="invoice" ToRole="bank_account" />
+          <NavigationProperty Name="invoice_type" Relationship="StoreModel.FK_invoice_invoice" FromRole="invoice" ToRole="invoice_type" />
+          <NavigationProperty Name="invoice_receiver_group" Relationship="StoreModel.FK_invoice_invoice_receiver_group" FromRole="invoice" ToRole="invoice_receiver_group" />
+        </EntityType>
+        <EntityType Name="invoice_receiver_group">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="invoices" Relationship="StoreModel.FK_invoice_invoice_receiver_group" FromRole="invoice_receiver_group" ToRole="invoice" />
+        </EntityType>
+        <EntityType Name="invoice_type">
+          <Key>
+            <PropertyRef Name="code" />
+          </Key>
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="is_receipt" Type="Boolean" Nullable="false" />
+          <Property Name="is_business_result" Type="Boolean" Nullable="false" />
+          <Property Name="fixed" Type="Boolean" Nullable="false" />
+          <Property Name="create_by" Type="Guid" Nullable="false" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="update_by" Type="Guid" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="delete_by" Type="Guid" />
+          <Property Name="delete_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="invoices" Relationship="StoreModel.FK_invoice_invoice" FromRole="invoice_type" ToRole="invoice" />
+        </EntityType>
+        <Association Name="FK_invoice_bank_account">
+          <End Type="StoreModel.bank_account" Role="bank_account" Multiplicity="0..1" />
+          <End Type="StoreModel.invoice" Role="invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bank_account">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="bank_account_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_schedule_facebook_post_type">
+          <End Type="StoreModel.facebook_post_type" Role="facebook_post_type" Multiplicity="1" />
+          <End Type="StoreModel.fanpage_post_schedule" Role="fanpage_post_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="facebook_post_type">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="fanpage_post_schedule">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_analyst_fanpage">
+          <End Type="StoreModel.fanpage" Role="fanpage" Multiplicity="1" />
+          <End Type="StoreModel.fanpage_analyst" Role="fanpage_analyst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_analyst">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_fanpage">
+          <End Type="StoreModel.fanpage" Role="fanpage" Multiplicity="1" />
+          <End Type="StoreModel.fanpage_post" Role="fanpage_post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_post">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_post_schedule_fanpage">
+          <End Type="StoreModel.fanpage" Role="fanpage" Multiplicity="1" />
+          <End Type="StoreModel.fanpage_post_schedule" Role="fanpage_post_schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_post_schedule">
+              <PropertyRef Name="fanpage_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fanpage_user_management_fanpage">
+          <End Type="StoreModel.fanpage" Role="fanpage" Multiplicity="1" />
+          <End Type="StoreModel.fanpage_user_management" Role="fanpage_user_management" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fanpage">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fanpage_user_management">
+              <PropertyRef Name="fan_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_invoice">
+          <End Type="StoreModel.invoice_type" Role="invoice_type" Multiplicity="1" />
+          <End Type="StoreModel.invoice" Role="invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice_type">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="invoice_type_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_invoice_invoice_receiver_group">
+          <End Type="StoreModel.invoice_receiver_group" Role="invoice_receiver_group" Multiplicity="1" />
+          <End Type="StoreModel.invoice" Role="invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoice_receiver_group">
+              <PropertyRef Name="code" />
+            </Principal>
+            <Dependent Role="invoice">
+              <PropertyRef Name="receiver_group_code" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3474,22 +4058,6 @@
                 <ScalarProperty Name="create_by" ColumnName="create_by" />
                 <ScalarProperty Name="notes" ColumnName="notes" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="invoices">
-            <EntityTypeMapping TypeName="StoreModel.invoice">
-              <MappingFragment StoreEntitySet="invoice">
-                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
-                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
-                <ScalarProperty Name="deleted" ColumnName="deleted" />
-                <ScalarProperty Name="update_date" ColumnName="update_date" />
-                <ScalarProperty Name="update_by" ColumnName="update_by" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="create_by" ColumnName="create_by" />
-                <ScalarProperty Name="is_business_result" ColumnName="is_business_result" />
-                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3909,6 +4477,9 @@
           <EntitySetMapping Name="ga_account">
             <EntityTypeMapping TypeName="StoreModel.ga_account">
               <MappingFragment StoreEntitySet="ga_account">
+                <ScalarProperty Name="secret_id" ColumnName="secret_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="api_key" ColumnName="api_key" />
                 <ScalarProperty Name="delete_date" ColumnName="delete_date" />
                 <ScalarProperty Name="delete_by" ColumnName="delete_by" />
                 <ScalarProperty Name="deleted" ColumnName="deleted" />
@@ -4149,6 +4720,7 @@
           <EntitySetMapping Name="supplier_dept_history">
             <EntityTypeMapping TypeName="StoreModel.supplier_dept_history">
               <MappingFragment StoreEntitySet="supplier_dept_history">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="money_left" ColumnName="money_left" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="money_pay" ColumnName="money_pay" />
@@ -4167,6 +4739,174 @@
                 <ScalarProperty Name="goods_id" ColumnName="goods_id" />
                 <ScalarProperty Name="branch_id" ColumnName="branch_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bank_account">
+            <EntityTypeMapping TypeName="StoreModel.bank_account">
+              <MappingFragment StoreEntitySet="bank_account">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="facebook_post_type">
+            <EntityTypeMapping TypeName="StoreModel.facebook_post_type">
+              <MappingFragment StoreEntitySet="facebook_post_type">
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fanpages">
+            <EntityTypeMapping TypeName="StoreModel.fanpage">
+              <MappingFragment StoreEntitySet="fanpage">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="reactions" ColumnName="reactions" />
+                <ScalarProperty Name="follows" ColumnName="follows" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="introduction" ColumnName="introduction" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="wall_picture" ColumnName="wall_picture" />
+                <ScalarProperty Name="avatar_picture" ColumnName="avatar_picture" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="display_name" ColumnName="display_name" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fanpage_analyst">
+            <EntityTypeMapping TypeName="StoreModel.fanpage_analyst">
+              <MappingFragment StoreEntitySet="fanpage_analyst">
+                <ScalarProperty Name="datetime" ColumnName="datetime" />
+                <ScalarProperty Name="reactions" ColumnName="reactions" />
+                <ScalarProperty Name="follows" ColumnName="follows" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="fanpage_id" ColumnName="fanpage_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fanpage_post">
+            <EntityTypeMapping TypeName="StoreModel.fanpage_post">
+              <MappingFragment StoreEntitySet="fanpage_post">
+                <ScalarProperty Name="sharepost" ColumnName="sharepost" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="reaction_total" ColumnName="reaction_total" />
+                <ScalarProperty Name="reaction_viewer" ColumnName="reaction_viewer" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="post_date" ColumnName="post_date" />
+                <ScalarProperty Name="fanpage_id" ColumnName="fanpage_id" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fanpage_post_schedule">
+            <EntityTypeMapping TypeName="StoreModel.fanpage_post_schedule">
+              <MappingFragment StoreEntitySet="fanpage_post_schedule">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="time_to_post" ColumnName="time_to_post" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+                <ScalarProperty Name="caption" ColumnName="caption" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="publish_time" ColumnName="publish_time" />
+                <ScalarProperty Name="is_published" ColumnName="is_published" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="fanpage_id" ColumnName="fanpage_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fanpage_user_management">
+            <EntityTypeMapping TypeName="StoreModel.fanpage_user_management">
+              <MappingFragment StoreEntitySet="fanpage_user_management">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="fan_id" ColumnName="fan_id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoices">
+            <EntityTypeMapping TypeName="StoreModel.invoice">
+              <MappingFragment StoreEntitySet="invoice">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="is_business_result" ColumnName="is_business_result" />
+                <ScalarProperty Name="bank_account_id" ColumnName="bank_account_id" />
+                <ScalarProperty Name="is_cash" ColumnName="is_cash" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="receiver_id" ColumnName="receiver_id" />
+                <ScalarProperty Name="receiver_group_code" ColumnName="receiver_group_code" />
+                <ScalarProperty Name="reference_form_code" ColumnName="reference_form_code" />
+                <ScalarProperty Name="invoice_type_code" ColumnName="invoice_type_code" />
+                <ScalarProperty Name="invoice_date" ColumnName="invoice_date" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice_receiver_group">
+            <EntityTypeMapping TypeName="StoreModel.invoice_receiver_group">
+              <MappingFragment StoreEntitySet="invoice_receiver_group">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="invoice_type">
+            <EntityTypeMapping TypeName="StoreModel.invoice_type">
+              <MappingFragment StoreEntitySet="invoice_type">
+                <ScalarProperty Name="delete_date" ColumnName="delete_date" />
+                <ScalarProperty Name="delete_by" ColumnName="delete_by" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="update_by" ColumnName="update_by" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="create_by" ColumnName="create_by" />
+                <ScalarProperty Name="fixed" ColumnName="fixed" />
+                <ScalarProperty Name="is_business_result" ColumnName="is_business_result" />
+                <ScalarProperty Name="is_receipt" ColumnName="is_receipt" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

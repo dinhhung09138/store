@@ -28,5 +28,8 @@ namespace DataAccess
         public bool deleted { get; set; }
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
+        public string api_key { get; set; }
+        public string client_id { get; set; }
+        public string secret_id { get; set; }
     }
 }

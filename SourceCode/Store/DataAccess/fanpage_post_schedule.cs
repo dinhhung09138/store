@@ -12,20 +12,22 @@ namespace DataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class invoice
+    public partial class fanpage_post_schedule
     {
         public System.Guid id { get; set; }
-        public string code { get; set; }
-        public System.DateTime invoice_date { get; set; }
-        public string invoice_type_code { get; set; }
-        public string reference_form_code { get; set; }
-        public string receiver_group_code { get; set; }
-        public Nullable<System.Guid> receiver_id { get; set; }
-        public decimal money { get; set; }
-        public string notes { get; set; }
-        public bool is_cash { get; set; }
-        public Nullable<System.Guid> bank_account_id { get; set; }
-        public bool is_business_result { get; set; }
+        public string fanpage_id { get; set; }
+        public string post_id { get; set; }
+        public bool is_published { get; set; }
+        public Nullable<System.DateTime> publish_time { get; set; }
+        public string message { get; set; }
+        public string source { get; set; }
+        public string link { get; set; }
+        public string description { get; set; }
+        public string caption { get; set; }
+        public string picture { get; set; }
+        public string type { get; set; }
+        public System.DateTime time_to_post { get; set; }
+        public bool status { get; set; }
         public System.Guid create_by { get; set; }
         public System.DateTime create_date { get; set; }
         public Nullable<System.Guid> update_by { get; set; }
@@ -34,8 +36,7 @@ namespace DataAccess
         public Nullable<System.Guid> delete_by { get; set; }
         public Nullable<System.DateTime> delete_date { get; set; }
     
-        public virtual bank_account bank_account { get; set; }
-        public virtual invoice_type invoice_type { get; set; }
-        public virtual invoice_receiver_group invoice_receiver_group { get; set; }
+        public virtual facebook_post_type facebook_post_type { get; set; }
+        public virtual fanpage fanpage { get; set; }
     }
 }
