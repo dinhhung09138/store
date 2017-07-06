@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bank_account.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="branch.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -94,6 +97,24 @@
     </Compile>
     <Compile Include="EmployeeSrv.cs" />
     <Compile Include="employee_contract_history.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="facebook_post_type.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fanpage.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fanpage_analyst.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fanpage_post.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fanpage_post_schedule.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="fanpage_user_management.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="function.cs">
@@ -147,6 +168,15 @@
     <Compile Include="GoogleAnalyst.cs" />
     <Compile Include="GoogleAnalystReport.cs" />
     <Compile Include="inventory_goods.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="invoice.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="invoice_receiver_group.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="invoice_type.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="leave.cs">

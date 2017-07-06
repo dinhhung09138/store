@@ -179,6 +179,13 @@ namespace Web.Areas.Warehouse.Controllers
                 string[] discounts = fc["goodsDiscount"].ToString().Split(',');
                 string[] numbers = fc["goodsNumber"].ToString().Split(',');
                 string[] totals = fc["goodsTotal"].ToString().Split(',');
+                if(goodsIDs.Count() == 0)
+                {
+                    Dictionary<string, object> _return = new Dictionary<string, object>();
+                    _return.Add("status", DatabaseExecute.Error);
+                    _return.Add("message", "Chưa có thông tin sản phẩm");
+                    return this.Json(_return, JsonRequestBehavior.AllowGet);
+                }
                 for (int i = 0; i < goodsIDs.Count(); i++)
                 {
                     model.details.Add(new StockInDetailModel()
@@ -190,6 +197,13 @@ namespace Web.Areas.Warehouse.Controllers
                         Total = decimal.Parse(totals[i])
                     });
                 }
+            }
+            else
+            {
+                Dictionary<string, object> _return = new Dictionary<string, object>();
+                _return.Add("status", DatabaseExecute.Error);
+                _return.Add("message", "Chưa có thông tin sản phẩm");
+                return this.Json(_return, JsonRequestBehavior.AllowGet);
             }
             StockInSrv _srvStockIn = new StockInSrv();
             return this.Json(_srvStockIn.Save(model), JsonRequestBehavior.AllowGet);
